@@ -10,8 +10,6 @@
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=yes" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<h:outputStylesheet name="./css/default.css" />
-	<h:outputStylesheet name="./css/cssLayout.css" />
 	<link rel="stylesheet" type="text/css"
 		href="/SAFC/BOOTSTRAP/bootstrap.css" />
 
@@ -20,37 +18,43 @@
 </h:head>
 
 <h:body>
-
+	<style>
+		.ui-dock-container-top .ui-widget-header{
+			background-color: white;
+		}
+	</style>
 	<div id="top" class="top">
 		<ui:insert name="top">
 			<h:form>
-				<p:dock position="top" itemWidth="50">
-					<p:menuitem value="Insertar Clientes" icon="/TEMPLATE/clientes.png"
-						onclick="PF('popClient').show();" />
-					<p:menuitem value="Consultar Clientes" id="searchCl"
-						icon="/TEMPLATE/searchClient.png" />
-					<p:menuitem value="Consultar Platos" icon="/TEMPLATE/food1.png"
-						url="#" />
-					<p:menuitem value="Consultar Productos" icon="/TEMPLATE/soda.png"
-						url="#" />
-					<p:menuitem value="Consultar Facturas"
-						icon="/TEMPLATE/searchbill.png" url="#" />
+				<div class="row">
+					<p:dock position="top" itemWidth="80"  >
+						<p:menuitem value="Insertar Clientes"
+							icon="/TEMPLATE/clientes.png" onclick="PF('popClient').show();" />
+						<p:menuitem value="Consultar Clientes" id="searchCl"
+							icon="/TEMPLATE/searchClient.png" />
+						<p:menuitem value="Consultar Platos" icon="/TEMPLATE/food1.png"
+							url="#" />
+						<p:menuitem value="Consultar Productos" icon="/TEMPLATE/soda.png"
+							url="#" />
+						<p:menuitem value="Consultar Facturas"
+							icon="/TEMPLATE/searchbill.png" url="#" />
 
-				</p:dock>
+					</p:dock>
+				</div>
 				<div class="row">
 					<div class="col-md-4 col-sm-0 col-xs-0"></div>
 					<div class="col-md-4 col-sm-12- col-xs-12">
-						<p:dialog header="Crear Cliente" widgetVar="popClient"
-							position="left" showEffect="explode" hideEffect="bounce">
+						<p:confirmDialog widgetVar="popClient" global="true"
+							showEffect="fade" hideEffect="fade">
 							<h:panelGrid columns="2">
-								<h:outputLabel value="Nombres:" for="nombres" />
-								<p:inputText id="nombres" styleClass="form-control" />
+								<h:outputLabel value="Cedula:" for="cedula" />
+								<p:inputText id="cedula" styleClass="form-control" />
 								<h:outputLabel value="Nombres:" for="nombres" />
 								<p:inputText id="nombres" styleClass="form-control" />
 								<h:outputLabel value="Apellidos:" for="apellidos" />
 								<p:inputText id="apellidos" styleClass="form-control" />
 							</h:panelGrid>
-						</p:dialog>
+						</p:confirmDialog>
 					</div>
 					<div class="col-md-4 col-sm-0 col-xs-0"></div>
 				</div>
