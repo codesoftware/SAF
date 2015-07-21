@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:outputStylesheet name="./css/default.css" />
+	<h:outputStylesheet name="./css/cssLayout.css" />
+	<title>Template</title>
+	<!--  <f:event listener="#{sessionInterceptor.viewSession()}" type="preRenderView"></f:event>-->
+</h:head>
+
+<h:body>
+
+	<div id="top" class="top">
+		<ui:insert name="top">
+			<h:form>
+				<p:dock position="top" itemWidth="50">
+					<p:menuitem value="Clientes" icon="/TEMPLATE/clientes.png"
+						onclick="PF('popClient').show();" />
+					<p:menuitem value="Consultas" id="searchCl"
+						icon="/TEMPLATE/search.png" />
+					<p:menuitem value="Facturacion" icon="/TEMPLATE/fact.png" url="#" />
+
+				</p:dock>
+				<p:dialog header="Crear Cliente" widgetVar="popClient"
+					showEffect="explode" hideEffect="bounce" height="50">
+					<h:panelGrid columns="2" cellpadding="5">
+						<h:outputText value="Nombres:" />
+					</h:panelGrid>
+				</p:dialog>
+				<p:overlayPanel id="searchClient" for="searchCl" hideEffect="fade"
+					dynamic="true" style="width:600px">
+					<p:dataTable var="listClient" value="#{topBean.clientes}" rows="5"
+						widgetVar="clienteTable" paginator="true"
+						emptyMessage="No hay clientes que coincidan con la busqueda"
+						filteredValue="#{topBean.clientesFilter}">
+						<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText value="Busqueda de clientes:" />
+								<p:inputText id="globalFilter"
+									onkeyup="PF('clienteTable').filter()" style="width:150px"
+									placeholder="Ingrese palabra" />
+							</p:outputPanel>
+						</f:facet>
+						<p:column headerText="Id">
+							<h:outputText value="#{listClient.id}" />
+						</p:column>
+
+						<p:column filterBy="#{listClient.cedula}" headerText="Cedula"
+							footerText="contains" filterMatchMode="contains">
+							<h:outputText value="#{listClient.cedula}" />
+						</p:column>
+
+						<p:column headerText="Nombres">
+							<h:outputText value="#{listClient.nombres}" />
+						</p:column>
+
+						<p:column headerText="Apellidos">
+							<h:outputText value="#{listClient.apellidos}" />
+						</p:column>
+
+						<p:column headerText="Dirección">
+							<h:outputText value="#{listClient.correo}" />
+						</p:column>
+
+						<p:column headerText="Telefono">
+							<h:outputText value="#{listClient.telefono}" />
+						</p:column>
+					</p:dataTable>
+				</p:overlayPanel>
+			</h:form>
+		</ui:insert>
+	</div>
+
+	<div id="content" class="center_content">
+		<ui:insert name="content">Content</ui:insert>
+	</div>
+
+</h:body>
+
+</html>

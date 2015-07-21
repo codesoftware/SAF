@@ -1,0 +1,28 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<h:form>
+	<div class="ui-fluid" align="center">
+		<p:growl id="message" sticky="true" showDetail="true" life="3000" />
+		<h:panelGrid  columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">
+			<h:outputLabel for="user" value="Usuario:" />
+			<p:inputText id="user" value="#{loginBean.user}" required="true" requiredMessage="Ingrese Usuario." label="user" />
+			<h:outputLabel for="user" value="Contraseña:" />
+			<p:password id="password" value="#{loginBean.password}" required="true" label="password" requiredMessage="Ingrese Contraseña"/>
+			<f:facet name="footer">
+				<p:commandButton value="Ingresar"
+					action="#{loginBean.getMessageLogin()}" 
+					update="message"></p:commandButton>
+			</f:facet>
+		</h:panelGrid>
+		</div>
+	</h:form>
+</body>
+</html>
