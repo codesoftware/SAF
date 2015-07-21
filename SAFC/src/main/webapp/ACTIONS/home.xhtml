@@ -8,15 +8,24 @@
 
 <h:head></h:head>
 
-    <body>
+<body>
 
-        <ui:composition template="/TEMPLATE/template.xhtml">
+	<ui:composition template="/TEMPLATE/template.xhtml">
 
-            <ui:define name="content">
-                Hola
-            </ui:define>
+		<ui:define name="content">
+		<div align="center">
+			<h:form>
+				<h:panelGrid columns="2" cellpadding="10" layout="grid">
+				<p:spacer width="20" height="20" />
+				<p:spacer width="20" height="20" />
+				<p:outputLabel value="Cliente:"/>
+				<p:inputText id="clienteName" value="Cliente" disabled="true"/>
+				</h:panelGrid>
+			</h:form>
+			</div>
+		</ui:define>
 
-        </ui:composition>
+	</ui:composition>
 
-    </body>
+</body>
 </html>

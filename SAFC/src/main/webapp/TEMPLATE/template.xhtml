@@ -20,11 +20,16 @@
 		<ui:insert name="top">
 			<h:form>
 				<p:dock position="top" itemWidth="50">
-					<p:menuitem value="Clientes" icon="/TEMPLATE/clientes.png"
+					<p:menuitem value="Insertar Clientes" icon="/TEMPLATE/clientes.png"
 						onclick="PF('popClient').show();" />
-					<p:menuitem value="Consultas" id="searchCl"
-						icon="/TEMPLATE/search.png" />
-					<p:menuitem value="Facturacion" icon="/TEMPLATE/fact.png" url="#" />
+					<p:menuitem value="Consultar Clientes" id="searchCl"
+						icon="/TEMPLATE/searchClient.png" />
+					<p:menuitem value="Consultar Platos" icon="/TEMPLATE/food1.png"
+						url="#" />
+					<p:menuitem value="Consultar Productos" icon="/TEMPLATE/soda.png"
+						url="#" />
+					<p:menuitem value="Consultar Facturas"
+						icon="/TEMPLATE/searchbill.png" url="#" />
 
 				</p:dock>
 				<p:dialog header="Crear Cliente" widgetVar="popClient"
@@ -38,7 +43,7 @@
 					<p:dataTable var="listClient" value="#{topBean.clientes}" rows="5"
 						widgetVar="clienteTable" paginator="true"
 						emptyMessage="No hay clientes que coincidan con la busqueda"
-						filteredValue="#{topBean.clientesFilter}">
+						filteredValue="#{topBean.clientesFilter}" binding="#{topBean.usersDataTable}">
 						<f:facet name="header">
 							<p:outputPanel>
 								<h:outputText value="Busqueda de clientes:" />
@@ -70,6 +75,12 @@
 
 						<p:column headerText="Telefono">
 							<h:outputText value="#{listClient.telefono}" />
+						</p:column>
+						<p:column headerText="Agregar">
+							<p:commandButton value="+" actionListener="#{topBean.getClient}" icon="ui-icon-check"  >
+							 <f:param name="idClient" value="#{listClient.id}" />
+							     <f:ajax  render="@form"/>
+							 </p:commandButton>    
 						</p:column>
 					</p:dataTable>
 				</p:overlayPanel>

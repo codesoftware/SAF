@@ -14,4 +14,13 @@ public class SearchTopLogic {
         List<Cliente> listResponse = port.getClientes();
         return listResponse;
 	}
+	
+	public Cliente getLogicClient(Long param){
+		SAFWSService service = new SAFWSService();
+        SAFWS port = service.getSAFWSPort();
+        Cliente response = new Cliente();
+        response.setCedula(new Long(1012));
+        response.setNombres("John");
+        return response;
+	}
 }
