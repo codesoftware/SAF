@@ -6,22 +6,41 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head></h:head>
+<h:head>
+<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=yes" />
+	<link rel="stylesheet" type="text/css"
+		href="/SAFC/BOOTSTRAP/bootstrap.css" />
+</h:head>
 <body>
 	<h:form>
-	<div class="ui-fluid" align="center">
-		<p:growl id="message" sticky="true" showDetail="true" life="3000" />
-		<h:panelGrid  columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">
-			<h:outputLabel for="user" value="Usuario:" />
-			<p:inputText id="user" value="#{loginBean.user}" required="true" requiredMessage="Ingrese Usuario." label="user" />
-			<h:outputLabel for="user" value="Contraseña:" />
-			<p:password id="password" value="#{loginBean.password}" required="true" label="password" requiredMessage="Ingrese Contraseña"/>
-			<f:facet name="footer">
-				<p:commandButton value="Ingresar"
-					action="#{loginBean.getMessageLogin()}" 
-					update="message"></p:commandButton>
-			</f:facet>
-		</h:panelGrid>
+		<div class="row">
+			<div class="col-md-4 col-sm-0 col-xs-0"></div>
+			<div class="col-md-4 col-sm-12- col-xs-12">
+				<p:growl id="message" sticky="true" showDetail="true" life="3000" />
+				<h:panelGrid layout="grid" border="1"
+					styleClass="table table-bordered table-responsive" columns="2"
+					headerClass="alert alert-success text-center">
+					<f:facet name="header">
+						<h:outputLabel>
+							<h3>Ingreso de usuario</h3>
+						</h:outputLabel>
+					</f:facet>
+					<h:outputLabel for="user" value="Usuario:" />
+					<p:inputText id="user" value="#{loginBean.user}" required="true"
+						requiredMessage="Ingrese Usuario." label="user"
+						styleClass="form-control" />
+					<h:outputLabel for="user" value="Contraseña:" />
+					<p:password id="password" value="#{loginBean.password}"
+						required="true" label="password"
+						requiredMessage="Ingrese Contraseña" styleClass="form-control" />
+					<f:facet name="footer">
+						<p:commandButton value="Ingresar" styleClass="btn btn-primary"
+							action="#{loginBean.getMessageLogin()}" update="message"></p:commandButton>
+					</f:facet>
+				</h:panelGrid>
+			</div>
+			<div class="col-md-4 col-sm-0 col-xs-0"></div>
 		</div>
 	</h:form>
 </body>

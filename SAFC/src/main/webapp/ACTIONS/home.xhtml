@@ -6,22 +6,43 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head></h:head>
+<h:head>
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=yes" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css"
+		href="/SAFC/BOOTSTRAP/bootstrap.css" />
+</h:head>
 
 <body>
 
 	<ui:composition template="/TEMPLATE/template.xhtml">
 
 		<ui:define name="content">
-		<div align="center">
-			<h:form>
-				<h:panelGrid columns="2" cellpadding="10" layout="grid">
-				<p:spacer width="20" height="20" />
-				<p:spacer width="20" height="20" />
-				<p:outputLabel value="Cliente:"/>
-				<p:inputText id="clienteName" value="Cliente" disabled="true"/>
-				</h:panelGrid>
-			</h:form>
+			<div align="center">
+				<h:form>
+					<div class="row">
+						<div class="col-md-4 col-sm-0 col-xs-0"></div>
+						<div class="col-md-4 col-sm-12- col-xs-12">
+							<h:panelGrid columns="2" cellpadding="10" layout="grid">
+								<p:outputLabel value="Cliente:" />
+								<p:inputText id="clienteName1" value="Cliente" disabled="true" />
+								<p:outputLabel value="Cliente:" />
+								<p:inputText id="clienteNam2e" value="Cliente" disabled="true" />
+								<p:outputLabel value="Cliente:" />
+								<p:inputText id="clienteNa2me" value="Cliente" disabled="true" />
+								<p:outputLabel value="Cliente:" />
+								<p:inputText id="cliente3Name" value="Cliente" disabled="true" />
+								<p:outputLabel value="Cliente:" />
+								<p:inputText id="client4eName" value="Cliente" disabled="true" />
+								<p:outputLabel value="Cliente:" />
+								<p:inputText id="cliente4Name" value="Cliente" disabled="true" />
+								
+							</h:panelGrid>
+						</div>
+						<div class="col-md-4 col-sm-0 col-xs-0"></div>
+					</div>
+				</h:form>
 			</div>
 		</ui:define>
 

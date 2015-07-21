@@ -7,9 +7,14 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=yes" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<h:outputStylesheet name="./css/default.css" />
 	<h:outputStylesheet name="./css/cssLayout.css" />
+	<link rel="stylesheet" type="text/css"
+		href="/SAFC/BOOTSTRAP/bootstrap.css" />
+
 	<title>Template</title>
 	<!--  <f:event listener="#{sessionInterceptor.viewSession()}" type="preRenderView"></f:event>-->
 </h:head>
@@ -32,23 +37,36 @@
 						icon="/TEMPLATE/searchbill.png" url="#" />
 
 				</p:dock>
-				<p:dialog header="Crear Cliente" widgetVar="popClient"
-					showEffect="explode" hideEffect="bounce" height="50">
-					<h:panelGrid columns="2" cellpadding="5">
-						<h:outputText value="Nombres:" />
-					</h:panelGrid>
-				</p:dialog>
+				<div class="row">
+					<div class="col-md-4 col-sm-0 col-xs-0"></div>
+					<div class="col-md-4 col-sm-12- col-xs-12">
+						<p:dialog header="Crear Cliente" widgetVar="popClient"
+							position="left" showEffect="explode" hideEffect="bounce">
+							<h:panelGrid columns="2">
+								<h:outputLabel value="Nombres:" for="nombres" />
+								<p:inputText id="nombres" styleClass="form-control" />
+								<h:outputLabel value="Nombres:" for="nombres" />
+								<p:inputText id="nombres" styleClass="form-control" />
+								<h:outputLabel value="Apellidos:" for="apellidos" />
+								<p:inputText id="apellidos" styleClass="form-control" />
+							</h:panelGrid>
+						</p:dialog>
+					</div>
+					<div class="col-md-4 col-sm-0 col-xs-0"></div>
+				</div>
+
 				<p:overlayPanel id="searchClient" for="searchCl" hideEffect="fade"
-					dynamic="true" style="width:600px">
+					dynamic="true" styleClass="col-md-12 col-sm-12 col-xs-12">
 					<p:dataTable var="listClient" value="#{topBean.clientes}" rows="5"
-						widgetVar="clienteTable" paginator="true"
+						widgetVar="clienteTable" paginator="true" reflow="true"
 						emptyMessage="No hay clientes que coincidan con la busqueda"
-						filteredValue="#{topBean.clientesFilter}" binding="#{topBean.usersDataTable}">
+						filteredValue="#{topBean.clientesFilter}"
+						binding="#{topBean.usersDataTable}">
 						<f:facet name="header">
 							<p:outputPanel>
 								<h:outputText value="Busqueda de clientes:" />
 								<p:inputText id="globalFilter"
-									onkeyup="PF('clienteTable').filter()" style="width:150px"
+									onkeyup="PF('clienteTable').filter()"
 									placeholder="Ingrese palabra" />
 							</p:outputPanel>
 						</f:facet>
@@ -77,10 +95,11 @@
 							<h:outputText value="#{listClient.telefono}" />
 						</p:column>
 						<p:column headerText="Agregar">
-							<p:commandButton value="+" actionListener="#{topBean.getClient}" icon="ui-icon-check"  >
-							 <f:param name="idClient" value="#{listClient.id}" />
-							     <f:ajax  render="@form"/>
-							 </p:commandButton>    
+							<p:commandButton value="+" actionListener="#{topBean.getClient}"
+								icon="ui-icon-check">
+								<f:param name="idClient" value="#{listClient.id}" />
+								<f:ajax render="@form" />
+							</p:commandButton>
 						</p:column>
 					</p:dataTable>
 				</p:overlayPanel>
