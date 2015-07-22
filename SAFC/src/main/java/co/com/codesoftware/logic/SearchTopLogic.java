@@ -23,4 +23,10 @@ public class SearchTopLogic {
         response.setNombres("John");
         return response;
 	}
+	
+	public boolean getLogicAddClient(Cliente cliente){
+		SAFWSService service = new SAFWSService();
+        SAFWS port = service.getSAFWSPort();
+        return port.addCliente(cliente);
+	}
 }

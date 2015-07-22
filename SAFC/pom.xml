@@ -5,6 +5,7 @@
 	<artifactId>SAFC</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
+
 	<repositories>
 		<repository>
 			<id>codelds</id>
@@ -53,6 +54,19 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>4.3.9.Final</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>cupertino</artifactId>
+			<version>1.0.10</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>all-themes</artifactId>
+			<version>1.0.10</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.hibernate</groupId>

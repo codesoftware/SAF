@@ -29,7 +29,7 @@
 				<div class="row">
 					<p:dock position="top" itemWidth="80"  >
 						<p:menuitem value="Insertar Clientes"
-							icon="/TEMPLATE/clientes.png" onclick="PF('popClient').show();" />
+							icon="/TEMPLATE/clientes.png" onclick="PF('popClient').show();" ><p:confirm header="Insertar Cliente" message="Campos Obligatorios (*)" icon="ui-icon-alert" /></p:menuitem>
 						<p:menuitem value="Consultar Clientes" id="searchCl"
 							icon="/TEMPLATE/searchClient.png" />
 						<p:menuitem value="Consultar Platos" icon="/TEMPLATE/food1.png"
@@ -45,14 +45,19 @@
 					<div class="col-md-4 col-sm-0 col-xs-0"></div>
 					<div class="col-md-4 col-sm-12- col-xs-12">
 						<p:confirmDialog widgetVar="popClient" global="true"
-							showEffect="fade" hideEffect="fade">
+							showEffect="fade" hideEffect="fade" >
 							<h:panelGrid columns="2">
-								<h:outputLabel value="Cedula:" for="cedula" />
-								<p:inputText id="cedula" styleClass="form-control" />
+								<h:outputLabel value="Cedula*:" for="cedula" />
+								<p:inputText id="cedula" styleClass="form-control" value="#{topBean.cliente.cedula}" required="true"/>
 								<h:outputLabel value="Nombres:" for="nombres" />
-								<p:inputText id="nombres" styleClass="form-control" />
+								<p:inputText id="nombres" styleClass="form-control" value="#{topBean.cliente.nombres}" />
 								<h:outputLabel value="Apellidos:" for="apellidos" />
-								<p:inputText id="apellidos" styleClass="form-control" />
+								<p:inputText id="apellidos" styleClass="form-control" value="#{topBean.cliente.apellidos}"/>
+								<h:outputLabel value="Telefono:" for="telefono" />
+								<p:inputText id="telefono" styleClass="form-control" value="#{topBean.cliente.telefono}" />
+								<h:outputLabel value="Correo:" for="correo" />
+								<p:inputText id="correo" styleClass="form-control" value="#{topBean.cliente.correo}"/>
+								<p:commandButton id="botonInsertar" value="Insertar" action="#{topBean.addClient}"/>
 							</h:panelGrid>
 						</p:confirmDialog>
 					</div>

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIData;
@@ -75,6 +76,16 @@ public class TopBean implements Serializable{
 		System.out.println("User selected " + ((Cliente) usersDataTable.getRowData()));
 	}
 	
+	public void addClient(ActionEvent actionEvent){
+		SearchTopLogic logic = new SearchTopLogic();
+		if(logic.getLogicAddClient(this.cliente)){
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Inserto Correctamente", "OK");
+	        FacesContext.getCurrentInstance().addMessage(null, message);	
+		}else{
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "No Inserto Correctamente", "Error");
+	        FacesContext.getCurrentInstance().addMessage(null, message);
+		}
+	}
 	
 
 }
