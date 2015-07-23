@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-<meta name="viewport"
+	<meta name="viewport"
 		content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=yes" />
 	<link rel="stylesheet" type="text/css"
 		href="/SAFC/BOOTSTRAP/bootstrap.css" />
@@ -16,8 +16,15 @@
 	<h:form>
 		<div class="row">
 			<div class="col-md-4 col-sm-0 col-xs-0"></div>
-			<div class="col-md-4 col-sm-12- col-xs-12">
-			<p:spacer height="200" width="20"/>
+			<div class="col-md-4 col-sm-0 col-xs-">
+				<p:spacer height="200" width="20" />
+			</div>
+			<div class="col-md-4 col-sm-0 col-xs-0"></div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4 col-sm-0 col-xs-0"></div>
+			<div class="col-md-4 col-sm-12 col-xs-12">
 				<p:growl id="message" sticky="true" showDetail="true" life="3000" />
 				<h:panelGrid layout="grid" border="1"
 					styleClass="table table-bordered table-responsive" columns="2"

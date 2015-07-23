@@ -47,12 +47,15 @@
 		<h:form id="searchClients">
 			<p:dialog header="Consulta de clientes" widgetVar="searchCl"
 				modal="true" position="center">
-				<p:dataTable var="listClient" value="#{clienteBean.clientes}" reflow="true"
-					rows="5" widgetVar="clienteTable" paginator="true"
+				<p:dataTable var="listClient" value="#{clienteBean.clientes}"
+					reflow="true" rows="5" widgetVar="clienteTable" paginator="true"
 					emptyMessage="No hay clientes que coincidan con la busqueda"
 					filteredValue="#{clienteBean.clientesFilter}" id="tablaClientes">
 					<f:facet name="header">
 						<p:outputPanel>
+							<p:commandButton id="toggler" type="button" value="Columns"
+								style="float:right" icon="ui-icon-calculator" />
+							<p:columnToggler datasource="tablaClientes" trigger="toggler" />
 							<h:outputText value="Busqueda de clientes:" />
 							<p:inputText id="globalFilter"
 								onkeyup="PF('clienteTable').filter()" style="width:150px"
@@ -84,8 +87,9 @@
 					</p:column>
 					<p:column headerText="Adicionar"
 						style="width:100px;text-align: center">
-						<p:commandButton icon="ui-icon-search" title="Seleccion" ajax="true"
-							oncomplete="PF('searchCl').hide()" update=":formInicio:tablaClienteComprador"
+						<p:commandButton icon="ui-icon-search" title="Seleccion"
+							ajax="true" oncomplete="PF('searchCl').hide()"
+							update=":formInicio:tablaClienteComprador"
 							actionListener="#{clienteBean.seleccionarCliente(listClient)}">
 						</p:commandButton>
 					</p:column>
