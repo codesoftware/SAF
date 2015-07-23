@@ -28,17 +28,17 @@ public class ClienteBean implements Serializable {
 	private List<Cliente> clientesFilter;
 	private Long clienteId;
 
+	public ClienteBean() {
+		super();
+		cliente = new ClienteEntity();		
+	}
+
 	public Long getClienteId() {
 		return clienteId;
 	}
 
 	public void setClienteId(Long clienteId) {
 		this.clienteId = clienteId;
-	}
-
-	public ClienteBean() {
-		super();
-		cliente = new ClienteEntity();
 	}
 
 	public ClienteEntity getCliente() {
@@ -90,6 +90,17 @@ public class ClienteBean implements Serializable {
 		cliente.setTelefono(entity.getTelefono());
 		return cliente;
 	}
+	
+	public ClienteEntity setDataEntity(Cliente entity) {
+		ClienteEntity cliente = new ClienteEntity();
+		cliente.setId(entity.getId());
+		cliente.setApellido(entity.getApellidos());
+		cliente.setCedula(entity.getCedula());
+		cliente.setCorreo(entity.getCorreo());
+		cliente.setNombre(entity.getNombres());
+		cliente.setTelefono(entity.getTelefono());
+		return cliente;
+	}
 
 	/**
 	 * Funcion encargada de Buscar los cliente del sistema
@@ -106,4 +117,14 @@ public class ClienteBean implements Serializable {
 		}
 	}
 
+	/**
+	 * Funcion con la cual selecciono un cliente
+	 */
+	public void seleccionarCliente(Cliente cliente) {
+		try {
+			this.cliente = setDataEntity(cliente);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

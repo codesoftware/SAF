@@ -20,23 +20,23 @@
 			<h:form id="formInicio">
 				<h:inputHidden value="#{clienteBean.clienteId}" id="idCliente" />
 				<div class="row">
-					<div class="col-md-4 col-sm-0 col-xs-0"></div>
-					<div class="col-md-4 col-sm-12- col-xs-12">
+					<div class="col-md-2 col-sm-0 col-xs-0"></div>
+					<div class="col-md-8 col-sm-12- col-xs-12">
 						<p:spacer width="60" height="60" />
-						<h:panelGrid layout="grid" border="1"
+						<h:panelGrid layout="grid" border="1" id="tablaClienteComprador"
 							styleClass="table table-bordered table-responsive" columns="6"
 							headerClass="alert alert-success text-center">
-							<p:outputLabel value="Cliente:" />
-							<p:outputLabel value="#{clienteBean.clienteId}" />
+							<p:outputLabel value="Cedula:" />
+							<p:outputLabel value="#{clienteBean.cliente.cedula}" />
 							<p:outputLabel value="Nombres:" />
-							<p:outputLabel value="#{clienteBean.clienteId}" />
+							<p:outputLabel value="#{clienteBean.cliente.nombre}" />
 							<p:outputLabel value="Telefono:" />
-							<p:outputLabel value="#{clienteBean.clienteId}" />
+							<p:outputLabel value="#{clienteBean.cliente.telefono}" />
 						</h:panelGrid>
 						<h:panelGrid layout="grid" border="1"
 							styleClass="table table-bordered table-responsive" columns="6"
 							headerClass="alert alert-success text-center">
-							<p:outputLabel value="Cedula:" />
+							<p:outputLabel value="Cliente:" />
 							<p:outputLabel value="#{clienteBean.clienteId}" />
 							<p:outputLabel value="Nombres:" />
 							<p:outputLabel value="#{clienteBean.clienteId}" />
@@ -67,7 +67,7 @@
 							<p:outputLabel value="#{clienteBean.clienteId}" />
 						</h:panelGrid>
 					</div>
-					<div class="col-md-4 col-sm-0 col-xs-0"></div>
+					<div class="col-md-2 col-sm-0 col-xs-0"></div>
 				</div>
 			</h:form>
 		</ui:define>
