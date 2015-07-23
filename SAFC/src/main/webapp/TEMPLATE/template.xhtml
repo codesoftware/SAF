@@ -1,125 +1,37 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=yes" />
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link rel="stylesheet" type="text/css"
-		href="/SAFC/BOOTSTRAP/bootstrap.css" />
-
-	<title>Template</title>
-	<!--  <f:event listener="#{sessionInterceptor.viewSession()}" type="preRenderView"></f:event>-->
+	<h:outputStylesheet name="common-style.css" library="css" />
 </h:head>
 
 <h:body>
-	<style>
-		.ui-dock-container-top .ui-widget-header{
-			background-color: white;
-		}
-	</style>
-	<div id="top" class="top">
-		<ui:insert name="top">
-			<h:form>
-				<div class="row">
-					<p:dock position="top" itemWidth="80"  >
-						<p:menuitem value="Insertar Clientes"
-							icon="/TEMPLATE/clientes.png" onclick="PF('popClient').show();" ><p:confirm header="Insertar Cliente" message="Campos Obligatorios (*)" icon="ui-icon-alert" /></p:menuitem>
-						<p:menuitem value="Consultar Clientes" id="searchCl"
-							icon="/TEMPLATE/searchClient.png" />
-						<p:menuitem value="Consultar Platos" icon="/TEMPLATE/food1.png"
-							url="#" />
-						<p:menuitem value="Consultar Productos" icon="/TEMPLATE/soda.png"
-							url="#" />
-						<p:menuitem value="Consultar Facturas"
-							icon="/TEMPLATE/searchbill.png" url="#" />
 
-					</p:dock>
-				</div>
-				<div class="row">
-					<div class="col-md-4 col-sm-0 col-xs-0"></div>
-					<div class="col-md-4 col-sm-12- col-xs-12">
-						<p:confirmDialog widgetVar="popClient" global="true"
-							showEffect="fade" hideEffect="fade" >
-							<h:panelGrid columns="2">
-								<h:outputLabel value="Cedula*:" for="cedula" />
-								<p:inputText id="cedula" styleClass="form-control" value="#{topBean.cliente.cedula}" required="true"/>
-								<h:outputLabel value="Nombres:" for="nombres" />
-								<p:inputText id="nombres" styleClass="form-control" value="#{topBean.cliente.nombres}" />
-								<h:outputLabel value="Apellidos:" for="apellidos" />
-								<p:inputText id="apellidos" styleClass="form-control" value="#{topBean.cliente.apellidos}"/>
-								<h:outputLabel value="Telefono:" for="telefono" />
-								<p:inputText id="telefono" styleClass="form-control" value="#{topBean.cliente.telefono}" />
-								<h:outputLabel value="Correo:" for="correo" />
-								<p:inputText id="correo" styleClass="form-control" value="#{topBean.cliente.correo}"/>
-								<p:commandButton id="botonInsertar" value="Insertar" action="#{topBean.addClient}"/>
-							</h:panelGrid>
-						</p:confirmDialog>
-					</div>
-					<div class="col-md-4 col-sm-0 col-xs-0"></div>
-				</div>
+	<div id="page">
 
-				<p:overlayPanel id="searchClient" for="searchCl" hideEffect="fade"
-					dynamic="true" styleClass="col-md-12 col-sm-12 col-xs-12">
-					<p:dataTable var="listClient" value="#{topBean.clientes}" rows="5"
-						widgetVar="clienteTable" paginator="true" reflow="true"
-						emptyMessage="No hay clientes que coincidan con la busqueda"
-						filteredValue="#{topBean.clientesFilter}"
-						binding="#{topBean.usersDataTable}">
-						<f:facet name="header">
-							<p:outputPanel>
-								<h:outputText value="Busqueda de clientes:" />
-								<p:inputText id="globalFilter"
-									onkeyup="PF('clienteTable').filter()"
-									placeholder="Ingrese palabra" />
-							</p:outputPanel>
-						</f:facet>
-						<p:column headerText="Id">
-							<h:outputText value="#{listClient.id}" />
-						</p:column>
+		<div id="header">
+			<ui:insert name="header">
+				<ui:include src="/TEMPLATE/common/header.xhtml"></ui:include>
+			</ui:insert>
+		</div>
 
-						<p:column filterBy="#{listClient.cedula}" headerText="Cedula"
-							footerText="contains" filterMatchMode="contains">
-							<h:outputText value="#{listClient.cedula}" />
-						</p:column>
+		<div id="content" class="center_content">
+			<ui:insert name="">Content</ui:insert>
+		</div>
 
-						<p:column headerText="Nombres">
-							<h:outputText value="#{listClient.nombres}" />
-						</p:column>
+		<div id="footer">
+			<ui:insert name="footer">
+				<ui:include src="/TEMPLATE/common/footer.xhtml"></ui:include>
+			</ui:insert>
+		</div>
 
-						<p:column headerText="Apellidos">
-							<h:outputText value="#{listClient.apellidos}" />
-						</p:column>
-
-						<p:column headerText="Dirección">
-							<h:outputText value="#{listClient.correo}" />
-						</p:column>
-
-						<p:column headerText="Telefono">
-							<h:outputText value="#{listClient.telefono}" />
-						</p:column>
-						<p:column headerText="Agregar">
-							<p:commandButton value="+" actionListener="#{topBean.getClient}"
-								icon="ui-icon-check">
-								<f:param name="idClient" value="#{listClient.id}" />
-								<f:ajax render="@form" />
-							</p:commandButton>
-						</p:column>
-					</p:dataTable>
-				</p:overlayPanel>
-			</h:form>
-		</ui:insert>
-	</div>
-
-	<div id="content" class="center_content">
-		<ui:insert name="content">Content</ui:insert>
 	</div>
 
 </h:body>
-
 </html>
