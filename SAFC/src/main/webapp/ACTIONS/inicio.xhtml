@@ -10,14 +10,65 @@
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=yes" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link rel="stylesheet" type="text/css" href="/SAFC/BOOTSTRAP/bootstrap.css" />
+	<link rel="stylesheet" type="text/css"
+		href="/SAFC/BOOTSTRAP/bootstrap.css" />
 </h:head>
 
 <body>
 	<ui:composition template="/TEMPLATE/template.xhtml">
 		<ui:define name="content">
 			<h:form id="formInicio">
-				<h:outputLabel value="#{clienteBean.clienteId}" id="idCliente" />
+				<h:inputHidden value="#{clienteBean.clienteId}" id="idCliente" />
+				<div class="row">
+					<div class="col-md-4 col-sm-0 col-xs-0"></div>
+					<div class="col-md-4 col-sm-12- col-xs-12">
+						<p:spacer width="60" height="60" />
+						<h:panelGrid layout="grid" border="1"
+							styleClass="table table-bordered table-responsive" columns="6"
+							headerClass="alert alert-success text-center">
+							<p:outputLabel value="Cliente:" />
+							<p:outputLabel value="#{clienteBean.clienteId}" />
+							<p:outputLabel value="Nombres:" />
+							<p:outputLabel value="#{clienteBean.clienteId}" />
+							<p:outputLabel value="Telefono:" />
+							<p:outputLabel value="#{clienteBean.clienteId}" />
+						</h:panelGrid>
+						<h:panelGrid layout="grid" border="1"
+							styleClass="table table-bordered table-responsive" columns="6"
+							headerClass="alert alert-success text-center">
+							<p:outputLabel value="Cedula:" />
+							<p:outputLabel value="#{clienteBean.clienteId}" />
+							<p:outputLabel value="Nombres:" />
+							<p:outputLabel value="#{clienteBean.clienteId}" />
+							<p:outputLabel value="Telefono:" />
+							<p:outputLabel value="#{clienteBean.clienteId}" />
+						</h:panelGrid>
+						<h:panelGrid layout="grid" border="1"
+							styleClass="table table-bordered table-responsive" columns="6"
+							headerClass="alert alert-success text-center">
+							<p:outputLabel value="Cedula:" />
+							<p:outputLabel value="#{clienteBean.clienteId}" />
+							<p:outputLabel value="Nombres:" />
+							<p:outputLabel value="#{clienteBean.clienteId}" />
+							<p:outputLabel value="Telefono:" />
+							<p:outputLabel value="#{clienteBean.clienteId}" />
+						</h:panelGrid>
+						<h:panelGrid layout="grid" border="1"
+							styleClass="table table-bordered table-responsive" columns="6"
+							headerClass="alert alert-success text-center">
+							<f:facet name="header">
+								<h:outputLabel>Search</h:outputLabel>
+							</f:facet>
+							<p:outputLabel value="Cedula:" />
+							<p:outputLabel value="#{clienteBean.clienteId}" />
+							<p:outputLabel value="Nombres:" />
+							<p:outputLabel value="#{clienteBean.clienteId}" />
+							<p:outputLabel value="Telefono:" />
+							<p:outputLabel value="#{clienteBean.clienteId}" />
+						</h:panelGrid>
+					</div>
+					<div class="col-md-4 col-sm-0 col-xs-0"></div>
+				</div>
 			</h:form>
 		</ui:define>
 	</ui:composition>
