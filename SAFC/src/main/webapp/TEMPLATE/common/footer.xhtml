@@ -12,7 +12,7 @@
 			href="/SAFC/BOOTSTRAP/bootstrap.css" />
 		<h:form id="insertClient">
 			<p:dialog header="Insercion de Clientes" widgetVar="insertClient"
-				modal="true" position="center" width="500" >
+				modal="true" position="center" width="500">
 				<p:messages id="mess" />
 				<h:panelGrid columns="2" styleClass="table table-bordered">
 					<h:outputLabel value="Cedula*:" for="cedula" />
@@ -37,19 +37,54 @@
 					<!-- Boton para generar la accion -->
 					<p:commandButton id="botonInsertar" value="Insertar"
 						action="#{clienteBean.addCliente}"
-						update="mess,:formInicio:idCliente" ajax="true" >
+						update="mess,:formInicio:idCliente" ajax="true">
 					</p:commandButton>
 				</h:panelGrid>
 			</p:dialog>
 		</h:form>
 
 
+		<h:form id="searchClients">
+			<p:dialog header="Consulta de clientes" widgetVar="searchCl"
+				modal="true" position="center" >
+				<p:dataTable var="listClient" value="#{clienteBean.clientes}"
+					rows="5" widgetVar="clienteTable" paginator="true"
+					emptyMessage="No hay clientes que coincidan con la busqueda"
+					filteredValue="#{clienteBean.clientesFilter}" id="tablaClientes">
+					<f:facet name="header">
+						<p:outputPanel>
+							<h:outputText value="Busqueda de clientes:" />
+							<p:inputText id="globalFilter"
+								onkeyup="PF('clienteTable').filter()" style="width:150px"
+								placeholder="Ingrese palabra" />
+						</p:outputPanel>
+					</f:facet>
+					<!--  <p:column headerText="Id">
+						<h:outputText value="#{listClient.id}" />
+					</p:column>-->
 
-		<p:dialog header="Consulta de clientes" widgetVar="searchCl"
-			modal="true" height="100" position="300,100" width="500">
-			<h:outputText value="Aqui va la consulta de Cliente" />
-		</p:dialog>
+					<p:column filterBy="#{listClient.cedula}" headerText="Cedula">
+						<h:outputText value="#{listClient.cedula}" />
+					</p:column>
 
+					<p:column headerText="Nombres" filterBy="#{listClient.nombres}">
+						<h:outputText value="#{listClient.nombres}" />
+					</p:column>
+
+					<p:column headerText="Apellidos" filterBy="#{listClient.apellidos}">
+						<h:outputText value="#{listClient.apellidos}" />
+					</p:column>
+
+					<p:column headerText="Dirección" filterBy="#{listClient.correo}">
+						<h:outputText value="#{listClient.correo}" />
+					</p:column>
+
+					<p:column headerText="Telefono" filterBy="#{listClient.telefono}">
+						<h:outputText value="#{listClient.telefono}" />
+					</p:column>
+				</p:dataTable>
+			</p:dialog>
+		</h:form>
 	</ui:composition>
 </body>
 </html>

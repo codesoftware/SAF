@@ -17,7 +17,7 @@
 				</p:menuitem>
 				<p:menuitem value="Consultar Clientes"
 					icon="/resources/images/searchClient.png" 
-					onclick="PF('searchCl').show();"
+					onclick="PF('searchCl').show();" action="#{clienteBean.buscaClientes}" update=":searchClients:tablaClientes"
 					/>
 				<p:menuitem value="Consultar Facturas"
 					icon="/resources/images/searchbill.png" url="#" />
