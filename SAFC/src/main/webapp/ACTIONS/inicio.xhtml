@@ -10,14 +10,15 @@
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=yes" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link rel="stylesheet" type="text/css"
-		href="/SAFC/BOOTSTRAP/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="/SAFC/BOOTSTRAP/bootstrap.css" />
 </h:head>
 
 <body>
 	<ui:composition template="/TEMPLATE/template.xhtml">
 		<ui:define name="content">
-			Esto es una prueba
+			<h:form id="formInicio">
+				<h:outputLabel value="#{clienteBean.clienteId}" id="idCliente" />
+			</h:form>
 		</ui:define>
 	</ui:composition>
 </body>

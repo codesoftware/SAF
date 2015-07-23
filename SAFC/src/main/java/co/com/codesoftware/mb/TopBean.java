@@ -78,7 +78,7 @@ public class TopBean implements Serializable{
 	
 	public void addClient(ActionEvent actionEvent){
 		SearchTopLogic logic = new SearchTopLogic();
-		if(logic.getLogicAddClient(this.cliente)){
+		if(logic.getLogicAddClient(this.cliente)!=null){
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Inserto Correctamente", "OK");
 	        FacesContext.getCurrentInstance().addMessage(null, message);	
 		}else{

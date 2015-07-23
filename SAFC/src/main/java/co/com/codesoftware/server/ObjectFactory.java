@@ -25,21 +25,81 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _LoginResponse_QNAME = new QName("http://server.codesoftware.com.co/", "loginResponse");
+    private final static QName _GetRecetasResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getRecetasResponse");
+    private final static QName _UpdateClienteResponse_QNAME = new QName("http://server.codesoftware.com.co/", "updateClienteResponse");
+    private final static QName _Login_QNAME = new QName("http://server.codesoftware.com.co/", "login");
+    private final static QName _GetProductsResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getProductsResponse");
+    private final static QName _GetSedes_QNAME = new QName("http://server.codesoftware.com.co/", "getSedes");
+    private final static QName _GetClientesResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getClientesResponse");
+    private final static QName _GetRecetas_QNAME = new QName("http://server.codesoftware.com.co/", "getRecetas");
     private final static QName _AddCliente_QNAME = new QName("http://server.codesoftware.com.co/", "addCliente");
     private final static QName _AddClienteResponse_QNAME = new QName("http://server.codesoftware.com.co/", "addClienteResponse");
     private final static QName _GetClientes_QNAME = new QName("http://server.codesoftware.com.co/", "getClientes");
     private final static QName _UpdateCliente_QNAME = new QName("http://server.codesoftware.com.co/", "updateCliente");
-    private final static QName _UpdateClienteResponse_QNAME = new QName("http://server.codesoftware.com.co/", "updateClienteResponse");
-    private final static QName _Login_QNAME = new QName("http://server.codesoftware.com.co/", "login");
-    private final static QName _GetSedes_QNAME = new QName("http://server.codesoftware.com.co/", "getSedes");
+    private final static QName _GetProducts_QNAME = new QName("http://server.codesoftware.com.co/", "getProducts");
     private final static QName _GetSedesResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getSedesResponse");
-    private final static QName _GetClientesResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getClientesResponse");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: co.com.codesoftware.server
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link GetRecetasResponse }
+     * 
+     */
+    public GetRecetasResponse createGetRecetasResponse() {
+        return new GetRecetasResponse();
+    }
+
+    /**
+     * Create an instance of {@link LoginResponse }
+     * 
+     */
+    public LoginResponse createLoginResponse() {
+        return new LoginResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetClientesResponse }
+     * 
+     */
+    public GetClientesResponse createGetClientesResponse() {
+        return new GetClientesResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetProductsResponse }
+     * 
+     */
+    public GetProductsResponse createGetProductsResponse() {
+        return new GetProductsResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetSedes }
+     * 
+     */
+    public GetSedes createGetSedes() {
+        return new GetSedes();
+    }
+
+    /**
+     * Create an instance of {@link Login }
+     * 
+     */
+    public Login createLogin() {
+        return new Login();
+    }
+
+    /**
+     * Create an instance of {@link UpdateClienteResponse }
+     * 
+     */
+    public UpdateClienteResponse createUpdateClienteResponse() {
+        return new UpdateClienteResponse();
     }
 
     /**
@@ -75,27 +135,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link LoginResponse }
+     * Create an instance of {@link GetRecetas }
      * 
      */
-    public LoginResponse createLoginResponse() {
-        return new LoginResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetClientesResponse }
-     * 
-     */
-    public GetClientesResponse createGetClientesResponse() {
-        return new GetClientesResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetSedes }
-     * 
-     */
-    public GetSedes createGetSedes() {
-        return new GetSedes();
+    public GetRecetas createGetRecetas() {
+        return new GetRecetas();
     }
 
     /**
@@ -107,27 +151,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Login }
+     * Create an instance of {@link GetProducts }
      * 
      */
-    public Login createLogin() {
-        return new Login();
+    public GetProducts createGetProducts() {
+        return new GetProducts();
     }
 
     /**
-     * Create an instance of {@link UpdateClienteResponse }
+     * Create an instance of {@link ProductoTable }
      * 
      */
-    public UpdateClienteResponse createUpdateClienteResponse() {
-        return new UpdateClienteResponse();
-    }
-
-    /**
-     * Create an instance of {@link Cliente }
-     * 
-     */
-    public Cliente createCliente() {
-        return new Cliente();
+    public ProductoTable createProductoTable() {
+        return new ProductoTable();
     }
 
     /**
@@ -139,12 +175,99 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link PrecioRecetaTable }
+     * 
+     */
+    public PrecioRecetaTable createPrecioRecetaTable() {
+        return new PrecioRecetaTable();
+    }
+
+    /**
+     * Create an instance of {@link RecetaTable }
+     * 
+     */
+    public RecetaTable createRecetaTable() {
+        return new RecetaTable();
+    }
+
+    /**
+     * Create an instance of {@link Cliente }
+     * 
+     */
+    public Cliente createCliente() {
+        return new Cliente();
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link LoginResponse }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "loginResponse")
     public JAXBElement<LoginResponse> createLoginResponse(LoginResponse value) {
         return new JAXBElement<LoginResponse>(_LoginResponse_QNAME, LoginResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetRecetasResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getRecetasResponse")
+    public JAXBElement<GetRecetasResponse> createGetRecetasResponse(GetRecetasResponse value) {
+        return new JAXBElement<GetRecetasResponse>(_GetRecetasResponse_QNAME, GetRecetasResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UpdateClienteResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "updateClienteResponse")
+    public JAXBElement<UpdateClienteResponse> createUpdateClienteResponse(UpdateClienteResponse value) {
+        return new JAXBElement<UpdateClienteResponse>(_UpdateClienteResponse_QNAME, UpdateClienteResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Login }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "login")
+    public JAXBElement<Login> createLogin(Login value) {
+        return new JAXBElement<Login>(_Login_QNAME, Login.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetProductsResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getProductsResponse")
+    public JAXBElement<GetProductsResponse> createGetProductsResponse(GetProductsResponse value) {
+        return new JAXBElement<GetProductsResponse>(_GetProductsResponse_QNAME, GetProductsResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetSedes }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getSedes")
+    public JAXBElement<GetSedes> createGetSedes(GetSedes value) {
+        return new JAXBElement<GetSedes>(_GetSedes_QNAME, GetSedes.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetClientesResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getClientesResponse")
+    public JAXBElement<GetClientesResponse> createGetClientesResponse(GetClientesResponse value) {
+        return new JAXBElement<GetClientesResponse>(_GetClientesResponse_QNAME, GetClientesResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetRecetas }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getRecetas")
+    public JAXBElement<GetRecetas> createGetRecetas(GetRecetas value) {
+        return new JAXBElement<GetRecetas>(_GetRecetas_QNAME, GetRecetas.class, null, value);
     }
 
     /**
@@ -184,30 +307,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link UpdateClienteResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetProducts }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "updateClienteResponse")
-    public JAXBElement<UpdateClienteResponse> createUpdateClienteResponse(UpdateClienteResponse value) {
-        return new JAXBElement<UpdateClienteResponse>(_UpdateClienteResponse_QNAME, UpdateClienteResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Login }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "login")
-    public JAXBElement<Login> createLogin(Login value) {
-        return new JAXBElement<Login>(_Login_QNAME, Login.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetSedes }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getSedes")
-    public JAXBElement<GetSedes> createGetSedes(GetSedes value) {
-        return new JAXBElement<GetSedes>(_GetSedes_QNAME, GetSedes.class, null, value);
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getProducts")
+    public JAXBElement<GetProducts> createGetProducts(GetProducts value) {
+        return new JAXBElement<GetProducts>(_GetProducts_QNAME, GetProducts.class, null, value);
     }
 
     /**
@@ -217,15 +322,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getSedesResponse")
     public JAXBElement<GetSedesResponse> createGetSedesResponse(GetSedesResponse value) {
         return new JAXBElement<GetSedesResponse>(_GetSedesResponse_QNAME, GetSedesResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetClientesResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getClientesResponse")
-    public JAXBElement<GetClientesResponse> createGetClientesResponse(GetClientesResponse value) {
-        return new JAXBElement<GetClientesResponse>(_GetClientesResponse_QNAME, GetClientesResponse.class, null, value);
     }
 
 }

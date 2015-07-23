@@ -8,35 +8,23 @@
 	xmlns:p="http://primefaces.org/ui">
 <body>
 	<ui:composition>
-	<script type="text/javascript">
-	 function cierraDialog(xhr, status, args) {
-		 alert("hola");
-		 PF('insertClient').hide();
-// 	        if(args.validationFailed || !args.datosOK) {  
-
-// 	            PF('wdlgCuentaNueva').jq.effect("shake", { times:5 }, 100);  
-
-// 	        }   
-
-// 	        else {  
-
-// 	            PF('wdlgCuentaNueva').hide();          
-
-// 	        }  
-
-	    }  
-		
-	</script>
-		<h:form>
+		<link rel="stylesheet" type="text/css"
+			href="/SAFC/BOOTSTRAP/bootstrap.css" />
+		<h:form id="insertClient">
 			<p:dialog header="Insercion de Clientes" widgetVar="insertClient"
-				modal="true" position="300,100" width="500">
-				<h:panelGrid columns="2">
+				modal="true" position="center" width="500" >
+				<p:messages id="mess" />
+				<h:panelGrid columns="2" styleClass="table table-bordered">
 					<h:outputLabel value="Cedula*:" for="cedula" />
 					<p:inputText id="cedula" styleClass="form-control"
-						value="#{clienteBean.cliente.cedula}" />
-					<h:outputLabel value="Nombres:" for="nombres" />
+						value="#{clienteBean.cliente.cedula}" required="true"
+						requiredMessage="Cedula es obligatorio" label="cedula">
+					</p:inputText>
+
+					<h:outputLabel value="Nombres*:" for="nombres" />
 					<p:inputText id="nombres" styleClass="form-control"
-						value="#{clienteBean.cliente.nombre}" />
+						value="#{clienteBean.cliente.nombre}" required="true"
+						requiredMessage="Nombre es obligatorio" label="nombres" />
 					<h:outputLabel value="Apellidos:" for="apellidos" />
 					<p:inputText id="apellidos" styleClass="form-control"
 						value="#{clienteBean.cliente.apellido}" />
@@ -48,8 +36,9 @@
 						value="#{clienteBean.cliente.telefono}" />
 					<!-- Boton para generar la accion -->
 					<p:commandButton id="botonInsertar" value="Insertar"
-						styleClass="btn btn-primary" oncomplete="cierraDialog(xhr, status, args)"
-						action="#{clienteBean.insertarCliente}" />
+						action="#{clienteBean.addCliente}"
+						update="mess,:formInicio:idCliente" ajax="true" >
+					</p:commandButton>
 				</h:panelGrid>
 			</p:dialog>
 		</h:form>

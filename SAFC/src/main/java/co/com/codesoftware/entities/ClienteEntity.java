@@ -2,17 +2,18 @@ package co.com.codesoftware.entities;
 
 public class ClienteEntity {
 
-	private Integer cedula;
+	private Long cedula;
 	private String nombre;
 	private String apellido;
 	private String correo;
-	private Integer telefono;
+	private String telefono;
+	private Long id;
 
-	public Integer getCedula() {
+	public Long getCedula() {
 		return cedula;
 	}
 
-	public void setCedula(Integer cedula) {
+	public void setCedula(Long cedula) {
 		this.cedula = cedula;
 	}
 
@@ -40,12 +41,20 @@ public class ClienteEntity {
 		this.correo = correo;
 	}
 
-	public Integer getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
 
-	public void setTelefono(Integer telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }

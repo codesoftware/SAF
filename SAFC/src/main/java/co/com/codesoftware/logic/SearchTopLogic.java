@@ -24,7 +24,7 @@ public class SearchTopLogic {
         return response;
 	}
 	
-	public boolean getLogicAddClient(Cliente cliente){
+	public Long getLogicAddClient(Cliente cliente){
 		SAFWSService service = new SAFWSService();
         SAFWS port = service.getSAFWSPort();
         return port.addCliente(cliente);

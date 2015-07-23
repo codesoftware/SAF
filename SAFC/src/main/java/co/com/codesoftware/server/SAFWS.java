@@ -71,14 +71,14 @@ public interface SAFWS {
      * 
      * @param cliente
      * @return
-     *     returns boolean
+     *     returns java.lang.Long
      */
     @WebMethod
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "addCliente", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.AddCliente")
     @ResponseWrapper(localName = "addClienteResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.AddClienteResponse")
     @Action(input = "http://server.codesoftware.com.co/SAFWS/addClienteRequest", output = "http://server.codesoftware.com.co/SAFWS/addClienteResponse")
-    public boolean addCliente(
+    public Long addCliente(
         @WebParam(name = "Cliente", targetNamespace = "")
         Cliente cliente);
 
@@ -96,5 +96,32 @@ public interface SAFWS {
     public boolean updateCliente(
         @WebParam(name = "Cliente", targetNamespace = "")
         Cliente cliente);
+
+    /**
+     * 
+     * @param sedeSede
+     * @return
+     *     returns java.util.List<co.com.codesoftware.server.RecetaTable>
+     */
+    @WebMethod
+    @WebResult(name = "RecetaTable", targetNamespace = "")
+    @RequestWrapper(localName = "getRecetas", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetRecetas")
+    @ResponseWrapper(localName = "getRecetasResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetRecetasResponse")
+    @Action(input = "http://server.codesoftware.com.co/SAFWS/getRecetasRequest", output = "http://server.codesoftware.com.co/SAFWS/getRecetasResponse")
+    public List<RecetaTable> getRecetas(
+        @WebParam(name = "sede_sede", targetNamespace = "")
+        Integer sedeSede);
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<co.com.codesoftware.server.ProductoTable>
+     */
+    @WebMethod
+    @WebResult(name = "ProductoTable", targetNamespace = "")
+    @RequestWrapper(localName = "getProducts", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetProducts")
+    @ResponseWrapper(localName = "getProductsResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetProductsResponse")
+    @Action(input = "http://server.codesoftware.com.co/SAFWS/getProductsRequest", output = "http://server.codesoftware.com.co/SAFWS/getProductsResponse")
+    public List<ProductoTable> getProducts();
 
 }

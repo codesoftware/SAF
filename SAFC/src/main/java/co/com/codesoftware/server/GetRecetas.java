@@ -8,16 +8,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para addClienteResponse complex type.
+ * <p>Clase Java para getRecetas complex type.
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
- * &lt;complexType name="addClienteResponse">
+ * &lt;complexType name="getRecetas">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
+ *         &lt;element name="sede_sede" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,36 +27,36 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "addClienteResponse", propOrder = {
-    "_return"
+@XmlType(name = "getRecetas", propOrder = {
+    "sedeSede"
 })
-public class AddClienteResponse {
+public class GetRecetas {
 
-    @XmlElement(name = "return")
-    protected Long _return;
+    @XmlElement(name = "sede_sede")
+    protected Integer sedeSede;
 
     /**
-     * Obtiene el valor de la propiedad return.
+     * Obtiene el valor de la propiedad sedeSede.
      * 
      * @return
      *     possible object is
-     *     {@link Long }
+     *     {@link Integer }
      *     
      */
-    public Long getReturn() {
-        return _return;
+    public Integer getSedeSede() {
+        return sedeSede;
     }
 
     /**
-     * Define el valor de la propiedad return.
+     * Define el valor de la propiedad sedeSede.
      * 
      * @param value
      *     allowed object is
-     *     {@link Long }
+     *     {@link Integer }
      *     
      */
-    public void setReturn(Long value) {
-        this._return = value;
+    public void setSedeSede(Integer value) {
+        this.sedeSede = value;
     }
 
 }
