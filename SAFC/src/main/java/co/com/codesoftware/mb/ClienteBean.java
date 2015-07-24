@@ -30,7 +30,7 @@ public class ClienteBean implements Serializable {
 
 	public ClienteBean() {
 		super();
-		cliente = new ClienteEntity();		
+		cliente = new ClienteEntity();
 	}
 
 	public Long getClienteId() {
@@ -65,16 +65,17 @@ public class ClienteBean implements Serializable {
 		this.clientesFilter = clientesFilter;
 	}
 
+	/**
+	 * Funcion encargada de insertar un cliente en la base de datos del sistema
+	 */
 	public void addCliente() {
 		SearchTopLogic logic = new SearchTopLogic();
 		this.clienteId = logic.getLogicAddClient(setData(cliente));
 		if (this.clienteId != null) {
-			RequestContext.getCurrentInstance().execute(
-					"PF('insertClient').hide()");
+			this.cliente.setId(clienteId);
+			RequestContext.getCurrentInstance().execute("PF('insertClient').hide()");
 		} else {
-			FacesMessage message = new FacesMessage(
-					FacesMessage.SEVERITY_ERROR, "No Inserto Correctamente",
-					"Error");
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "No Inserto Correctamente", "Error");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
 
@@ -90,7 +91,7 @@ public class ClienteBean implements Serializable {
 		cliente.setTelefono(entity.getTelefono());
 		return cliente;
 	}
-	
+
 	public ClienteEntity setDataEntity(Cliente entity) {
 		ClienteEntity cliente = new ClienteEntity();
 		cliente.setId(entity.getId());
