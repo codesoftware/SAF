@@ -53,21 +53,34 @@
 							<p:outputLabel value="Telefono:" />
 							<p:outputLabel value="#{clienteBean.clienteId}" />
 						</h:panelGrid>
+					</div>
+					<div class="col-md-2 col-sm-0 col-xs-0"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-1 col-sm-0 col-xs-0"></div>
+					<div class="col-md-10 col-sm-12 col-xs-12">
 						<h:panelGrid layout="grid" border="1"
 							styleClass="table table-bordered table-responsive" columns="6"
 							headerClass="alert alert-success text-center">
 							<f:facet name="header">
-								<h:outputLabel>Search</h:outputLabel>
+								<h:outputLabel>Busqueda de Productos</h:outputLabel>
 							</f:facet>
-							<p:outputLabel value="Cedula:" />
-							<p:outputLabel value="#{clienteBean.clienteId}" />
-							<p:outputLabel value="Nombres:" />
-							<p:outputLabel value="#{clienteBean.clienteId}" />
-							<p:outputLabel value="Telefono:" />
-							<p:outputLabel value="#{clienteBean.clienteId}" />
+							<p:outputLabel value="Codigo:" />
+							<p:inputText value="#{clienteBean.clienteId}"
+								styleClass="form-control" onkeyup="" />
+							<p:outputLabel value="Cantidad:" />
+							<p:inputText value="#{clienteBean.clienteId}"
+								styleClass="form-control" />
+							<p:commandButton value="Consultar" styleClass="btn btn-primary"></p:commandButton>
+							<p:commandButton value="Insertar" styleClass="btn btn-danger"></p:commandButton>
 						</h:panelGrid>
 					</div>
-					<div class="col-md-2 col-sm-0 col-xs-0"></div>
+					<div class="col-md-1 col-sm-0 col-xs-0"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-1 col-sm-0 col-xs-0"></div>
+					<div class="col-md-10 col-sm-12 col-xs-12"></div>
+					<div class="col-md-1 col-sm-0 col-xs-0"></div>
 				</div>
 			</h:form>
 		</ui:define>

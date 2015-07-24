@@ -10,6 +10,11 @@
 	<ui:composition>
 		<link rel="stylesheet" type="text/css"
 			href="/SAFC/BOOTSTRAP/bootstrap.css" />
+		<script type="text/javascript">
+			function limpiarForm() {
+				document.getElementById("insertClient").reset();
+			}
+		</script>
 		<h:form id="insertClient">
 			<p:dialog header="Insercion de Clientes" widgetVar="insertClient"
 				modal="true" position="center" width="500">
@@ -35,7 +40,7 @@
 					<p:inputText id="telefono" styleClass="form-control"
 						value="#{clienteBean.cliente.telefono}" />
 					<!-- Boton para generar la accion -->
-					<p:commandButton id="botonInsertar" value="Insertar"
+					<p:commandButton id="botonInsertar" value="Insertar" oncomplete="limpiarForm()"
 						action="#{clienteBean.addCliente}"
 						update="mess,:formInicio:tablaClienteComprador" ajax="true">
 					</p:commandButton>
