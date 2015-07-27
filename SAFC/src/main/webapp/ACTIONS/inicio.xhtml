@@ -18,70 +18,76 @@
 	<ui:composition template="/TEMPLATE/template.xhtml">
 		<ui:define name="content">
 			<h:form id="formInicio">
-				<h:inputHidden value="#{clienteBean.clienteId}" id="idCliente" />
-				<div class="row">
-					<div class="col-md-2 col-sm-0 col-xs-0"></div>
-					<div class="col-md-8 col-sm-12- col-xs-12">
-						<p:spacer width="60" height="60" />
-						<h:panelGrid layout="grid" border="1" id="tablaClienteComprador"
-							styleClass="table table-bordered table-responsive" columns="6"
-							headerClass="alert alert-success text-center">
-							<p:outputLabel value="Cedula:" />
-							<p:outputLabel value="#{clienteBean.cliente.cedula}" />
-							<p:outputLabel value="Nombres:" />
-							<p:outputLabel value="#{clienteBean.cliente.nombre}" />
-							<p:outputLabel value="Telefono:" />
-							<p:outputLabel value="#{clienteBean.cliente.telefono}" />
-						</h:panelGrid>
-						<h:panelGrid layout="grid" border="1"
-							styleClass="table table-bordered table-responsive" columns="6"
-							headerClass="alert alert-success text-center">
-							<p:outputLabel value="Cliente:" />
-							<p:outputLabel value="#{clienteBean.clienteId}" />
-							<p:outputLabel value="Nombres:" />
-							<p:outputLabel value="#{clienteBean.clienteId}" />
-							<p:outputLabel value="Telefono:" />
-							<p:outputLabel value="#{clienteBean.clienteId}" />
-						</h:panelGrid>
-						<h:panelGrid layout="grid" border="1"
-							styleClass="table table-bordered table-responsive" columns="6"
-							headerClass="alert alert-success text-center">
-							<p:outputLabel value="Cedula:" />
-							<p:outputLabel value="#{clienteBean.clienteId}" />
-							<p:outputLabel value="Nombres:" />
-							<p:outputLabel value="#{clienteBean.clienteId}" />
-							<p:outputLabel value="Telefono:" />
-							<p:outputLabel value="#{clienteBean.clienteId}" />
-						</h:panelGrid>
-					</div>
-					<div class="col-md-2 col-sm-0 col-xs-0"></div>
-				</div>
-				<div class="row">
-					<div class="col-md-1 col-sm-0 col-xs-0"></div>
-					<div class="col-md-10 col-sm-12 col-xs-12">
-						<h:panelGrid layout="grid" border="1"
-							styleClass="table table-bordered table-responsive" columns="6"
-							headerClass="alert alert-success text-center">
-							<f:facet name="header">
-								<h:outputLabel>Busqueda de Productos</h:outputLabel>
-							</f:facet>
-							<p:outputLabel value="Codigo:" />
-							<p:inputText value="#{clienteBean.clienteId}"
-								styleClass="form-control" onkeyup="" />
-							<p:outputLabel value="Cantidad:" />
-							<p:inputText value="#{clienteBean.clienteId}"
-								styleClass="form-control" />
-							<p:commandButton value="Consultar" styleClass="btn btn-primary"></p:commandButton>
-							<p:commandButton value="Insertar" styleClass="btn btn-danger"></p:commandButton>
-						</h:panelGrid>
-					</div>
-					<div class="col-md-1 col-sm-0 col-xs-0"></div>
-				</div>
-				<div class="row">
-					<div class="col-md-1 col-sm-0 col-xs-0"></div>
-					<div class="col-md-10 col-sm-12 col-xs-12"></div>
-					<div class="col-md-1 col-sm-0 col-xs-0"></div>
-				</div>
+				<!-- 				<h:inputHidden value="#{clienteBean.clienteId}" id="idCliente" /> -->
+
+
+
+				<p:layout>
+					<p:layoutUnit position="west">
+						<div class="row">
+							<p:dataGrid var="receta" value="#{clienteBean.recetas}"
+								columns="7" layout="grid" rows="1" paginator="false" id="rec">
+
+								<f:facet name="header">Platos(Recetas)</f:facet>
+
+								<p:panel header="#{receta.nombre}" style="text-align:center;">
+									<h:panelGrid columns="1" style="width:50%">
+										<p:graphicImage library="images/products" name="taco.png" />
+										<h:outputText value="#{receta.nombre}" />
+									</h:panelGrid>
+								</p:panel>
+							</p:dataGrid>
+							<p:dataGrid var="producto" value="#{clienteBean.productos}"
+								columns="7" layout="grid" rows="1" paginator="false" id="prod">
+
+								<f:facet name="header">Productos(Fruteria)</f:facet>
+
+								<p:panel header="#{producto.nombre}" style="text-align:center">
+									<h:panelGrid columns="1" style="width:50%">
+										<p:graphicImage library="images/products" name="banana.png" />
+										<h:outputText value="#{producto.nombre}" />
+									</h:panelGrid>
+								</p:panel>
+							</p:dataGrid>
+							<h:panelGrid layout="grid" border="1"
+								styleClass="table table-bordered table-responsive" columns="6"
+								headerClass="alert alert-success text-center">
+								<f:facet name="header">
+									<h:outputLabel>Busqueda de Productos</h:outputLabel>
+								</f:facet>
+								<p:outputLabel value="Codigo:" />
+								<p:inputText value="#{clienteBean.clienteId}"
+									styleClass="form-control" onkeyup="" />
+								<p:outputLabel value="Cantidad:" />
+								<p:inputText value="#{clienteBean.clienteId}"
+									styleClass="form-control" />
+								<p:commandButton value="Consultar" onclick="PF('searchRec').show();" actionListener="#{clienteBean.setDataDishes}" update=":searchDishes:tablaDishes" styleClass="btn btn-primary"></p:commandButton>
+								<p:commandButton value="Insertar" styleClass="btn btn-danger"></p:commandButton>
+							</h:panelGrid>
+						</div>
+					</p:layoutUnit>
+
+					<p:layoutUnit position="center" resizable="true" size="40%">
+					<p:commandButton value="Registrar"/>
+					<p:commandButton value="Facturar"/>
+						<div class="row">
+							<p:panel header="Factura">
+								<p:dataTable var="factura">
+									<p:column headerText="Cod">
+									</p:column>
+									<p:column headerText="Nombre">
+									</p:column>
+									<p:column headerText="Cantidad">
+									</p:column>
+									<p:column headerText="Valor">
+									</p:column>
+									<p:column headerText="Eliminar">
+									</p:column>
+								</p:dataTable>
+							</p:panel>
+						</div>
+					</p:layoutUnit>
+				</p:layout>
 			</h:form>
 		</ui:define>
 	</ui:composition>

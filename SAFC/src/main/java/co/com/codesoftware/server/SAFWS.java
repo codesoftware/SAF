@@ -27,6 +27,45 @@ public interface SAFWS {
 
     /**
      * 
+     * @param dskaCod
+     * @return
+     *     returns co.com.codesoftware.server.ProductoTable
+     */
+    @WebMethod
+    @WebResult(name = "ProductoTable", targetNamespace = "")
+    @RequestWrapper(localName = "getProductForCode", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetProductForCode")
+    @ResponseWrapper(localName = "getProductForCodeResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetProductForCodeResponse")
+    @Action(input = "http://server.codesoftware.com.co/SAFWS/getProductForCodeRequest", output = "http://server.codesoftware.com.co/SAFWS/getProductForCodeResponse")
+    public ProductoTable getProductForCode(
+        @WebParam(name = "dska_cod", targetNamespace = "")
+        String dskaCod);
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<co.com.codesoftware.server.PantallaPrincipalFacTable>
+     */
+    @WebMethod
+    @WebResult(name = "PantallaPrincipalFactTable", targetNamespace = "")
+    @RequestWrapper(localName = "getProductPrincipalScreen", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetProductPrincipalScreen")
+    @ResponseWrapper(localName = "getProductPrincipalScreenResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetProductPrincipalScreenResponse")
+    @Action(input = "http://server.codesoftware.com.co/SAFWS/getProductPrincipalScreenRequest", output = "http://server.codesoftware.com.co/SAFWS/getProductPrincipalScreenResponse")
+    public List<PantallaPrincipalFacTable> getProductPrincipalScreen();
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<co.com.codesoftware.server.PantallaPrincipalFacTable>
+     */
+    @WebMethod
+    @WebResult(name = "PantallaPrincipalFactTable", targetNamespace = "")
+    @RequestWrapper(localName = "getDishesPrincipalScreen", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetDishesPrincipalScreen")
+    @ResponseWrapper(localName = "getDishesPrincipalScreenResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetDishesPrincipalScreenResponse")
+    @Action(input = "http://server.codesoftware.com.co/SAFWS/getDishesPrincipalScreenRequest", output = "http://server.codesoftware.com.co/SAFWS/getDishesPrincipalScreenResponse")
+    public List<PantallaPrincipalFacTable> getDishesPrincipalScreen();
+
+    /**
+     * 
      * @param password
      * @param nombre
      * @return

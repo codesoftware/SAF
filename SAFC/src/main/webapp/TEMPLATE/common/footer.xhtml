@@ -40,9 +40,9 @@
 					<p:inputText id="telefono" styleClass="form-control"
 						value="#{clienteBean.cliente.telefono}" />
 					<!-- Boton para generar la accion -->
-					<p:commandButton id="botonInsertar" value="Insertar" oncomplete="limpiarForm()"
-						action="#{clienteBean.addCliente}"
-						update="mess,:formInicio:tablaClienteComprador" ajax="true">
+					<p:commandButton id="botonInsertar" value="Insertar"
+						oncomplete="limpiarForm()" action="#{clienteBean.addCliente}"
+						update="mess,:formHeader:tablaClienteComprador" ajax="true">
 					</p:commandButton>
 				</h:panelGrid>
 			</p:dialog>
@@ -58,9 +58,6 @@
 					filteredValue="#{clienteBean.clientesFilter}" id="tablaClientes">
 					<f:facet name="header">
 						<p:outputPanel>
-							<p:commandButton id="toggler" type="button" value="Columns"
-								style="float:right" icon="ui-icon-calculator" />
-							<p:columnToggler datasource="tablaClientes" trigger="toggler" />
 							<h:outputText value="Busqueda de clientes:" />
 							<p:inputText id="globalFilter"
 								onkeyup="PF('clienteTable').filter()" style="width:150px"
@@ -94,10 +91,60 @@
 						style="width:100px;text-align: center">
 						<p:commandButton icon="ui-icon-search" title="Seleccion"
 							ajax="true" oncomplete="PF('searchCl').hide()"
-							update=":formInicio:tablaClienteComprador"
+							update=":formHeader:tablaClienteComprador"
 							actionListener="#{clienteBean.seleccionarCliente(listClient)}">
 						</p:commandButton>
 					</p:column>
+				</p:dataTable>
+			</p:dialog>
+		</h:form>
+
+		<h:form id="searchDishes">
+			<p:dialog header="Consulta de Recetas" widgetVar="searchRec"
+				modal="true" position="center">
+				<p:dataTable var="listDishes" value="#{clienteBean.dishes}"
+					reflow="true" rows="5" widgetVar="dishesTable" paginator="true"
+					emptyMessage="No hay recetas que coincidan con la busqueda"
+					filteredValue="#{clienteBean.dishesFilter}" id="tablaDishes">
+					<f:facet name="header">
+						<p:outputPanel>
+							<p:commandButton id="toggler" type="button" value="Columns"
+								style="float:right" icon="ui-icon-calculator" />
+							<p:columnToggler datasource="tablaDishes" trigger="toggler" />
+							<h:outputText value="Busqueda de recetas:" />
+							<p:inputText id="globalFilter"
+								onkeyup="PF('dishesTable').filter()" style="width:150px"
+								placeholder="Ingrese palabra" />
+						</p:outputPanel>
+					</f:facet>
+					<!--  <p:column headerText="Id">
+						<h:outputText value="#{listDishes.id}" />
+					</p:column>-->
+
+					<p:column filterBy="#{listDishes.codigo}" headerText="Codigo">
+						<h:outputText value="#{listDishes.codigo}" />
+					</p:column>
+
+					<p:column headerText="Nombre" filterBy="#{listDishes.nombre}">
+						<h:outputText value="#{listDishes.nombre}" />
+					</p:column>
+
+					<p:column headerText="Precio"
+						filterBy="#{listDishes.precios.precio}">
+						<h:outputText value="#{listDishes.precios.precio}">
+							<f:convertNumber maxFractionDigits="15" minFractionDigits="15"
+								groupingUsed="false" />
+						</h:outputText>
+					</p:column>
+
+					<!-- 					<p:column headerText="Adicionar" -->
+					<!-- 						style="width:100px;text-align: center"> -->
+					<!-- 						<p:commandButton icon="ui-icon-search" title="Seleccion" -->
+					<!-- 							ajax="true" oncomplete="PF('searchRec').hide()" -->
+					<!-- 							update=":formHeader:tablaClienteComprador" -->
+					<!-- 							actionListener="#{clienteBean.seleccionarCliente(listClient)}"> -->
+					<!-- 						</p:commandButton> -->
+					<!-- 					</p:column> -->
 				</p:dataTable>
 			</p:dialog>
 		</h:form>

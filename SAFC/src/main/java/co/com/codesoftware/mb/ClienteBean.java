@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -12,8 +13,12 @@ import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
 
 import co.com.codesoftware.entities.ClienteEntity;
+import co.com.codesoftware.logic.ProductsLogic;
+import co.com.codesoftware.logic.RecetasLogic;
 import co.com.codesoftware.logic.SearchTopLogic;
 import co.com.codesoftware.server.Cliente;
+import co.com.codesoftware.server.ProductoTable;
+import co.com.codesoftware.server.RecetaTable;
 
 @ManagedBean
 @ViewScoped
@@ -27,6 +32,56 @@ public class ClienteBean implements Serializable {
 	private List<Cliente> clientes;
 	private List<Cliente> clientesFilter;
 	private Long clienteId;
+	private List<RecetaTable> recetas;
+	private List<ProductoTable> productos;
+	private List<RecetaTable> dishes;
+	private List<RecetaTable> dishesFilter;
+
+	@PostConstruct
+	/*
+	 * Metodo en el cual carga todo lo que se necesita al inicio
+	 */
+	public void init() {
+		RecetasLogic logic = new RecetasLogic();
+		ProductsLogic logicPrd = new ProductsLogic();
+		this.productos = logicPrd.getEspecialProduct();
+		this.recetas = logic.getEspecialReceta();
+	}
+	
+
+	public List<RecetaTable> getDishesFilter() {
+		return dishesFilter;
+	}
+
+
+	public void setDishesFilter(List<RecetaTable> dishesFilter) {
+		this.dishesFilter = dishesFilter;
+	}
+
+
+	public List<RecetaTable> getDishes() {
+		return dishes;
+	}
+
+	public void setDishes(List<RecetaTable> dishes) {
+		this.dishes = dishes;
+	}
+
+	public List<ProductoTable> getProductos() {
+		return productos;
+	}
+
+	public void setProductos(List<ProductoTable> productos) {
+		this.productos = productos;
+	}
+
+	public List<RecetaTable> getRecetas() {
+		return recetas;
+	}
+
+	public void setRecetas(List<RecetaTable> recetas) {
+		this.recetas = recetas;
+	}
 
 	public ClienteBean() {
 		super();
@@ -73,9 +128,12 @@ public class ClienteBean implements Serializable {
 		this.clienteId = logic.getLogicAddClient(setData(cliente));
 		if (this.clienteId != null) {
 			this.cliente.setId(clienteId);
-			RequestContext.getCurrentInstance().execute("PF('insertClient').hide()");
+			RequestContext.getCurrentInstance().execute(
+					"PF('insertClient').hide()");
 		} else {
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "No Inserto Correctamente", "Error");
+			FacesMessage message = new FacesMessage(
+					FacesMessage.SEVERITY_ERROR, "No Inserto Correctamente",
+					"Error");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
 
@@ -124,6 +182,15 @@ public class ClienteBean implements Serializable {
 	public void seleccionarCliente(Cliente cliente) {
 		try {
 			this.cliente = setDataEntity(cliente);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void setDataDishes() {
+		try {
+			RecetasLogic logic = new RecetasLogic();
+			this.dishes = logic.getReceta();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -24,17 +24,23 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _GetDishesPrincipalScreenResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getDishesPrincipalScreenResponse");
     private final static QName _LoginResponse_QNAME = new QName("http://server.codesoftware.com.co/", "loginResponse");
+    private final static QName _GetProductPrincipalScreen_QNAME = new QName("http://server.codesoftware.com.co/", "getProductPrincipalScreen");
     private final static QName _GetRecetasResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getRecetasResponse");
+    private final static QName _GetProductPrincipalScreenResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getProductPrincipalScreenResponse");
     private final static QName _UpdateClienteResponse_QNAME = new QName("http://server.codesoftware.com.co/", "updateClienteResponse");
     private final static QName _Login_QNAME = new QName("http://server.codesoftware.com.co/", "login");
     private final static QName _GetProductsResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getProductsResponse");
     private final static QName _GetSedes_QNAME = new QName("http://server.codesoftware.com.co/", "getSedes");
     private final static QName _GetClientesResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getClientesResponse");
+    private final static QName _GetProductForCode_QNAME = new QName("http://server.codesoftware.com.co/", "getProductForCode");
+    private final static QName _GetProductForCodeResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getProductForCodeResponse");
     private final static QName _GetRecetas_QNAME = new QName("http://server.codesoftware.com.co/", "getRecetas");
     private final static QName _AddCliente_QNAME = new QName("http://server.codesoftware.com.co/", "addCliente");
     private final static QName _AddClienteResponse_QNAME = new QName("http://server.codesoftware.com.co/", "addClienteResponse");
     private final static QName _GetClientes_QNAME = new QName("http://server.codesoftware.com.co/", "getClientes");
+    private final static QName _GetDishesPrincipalScreen_QNAME = new QName("http://server.codesoftware.com.co/", "getDishesPrincipalScreen");
     private final static QName _UpdateCliente_QNAME = new QName("http://server.codesoftware.com.co/", "updateCliente");
     private final static QName _GetProducts_QNAME = new QName("http://server.codesoftware.com.co/", "getProducts");
     private final static QName _GetSedesResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getSedesResponse");
@@ -55,11 +61,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetProductPrincipalScreen }
+     * 
+     */
+    public GetProductPrincipalScreen createGetProductPrincipalScreen() {
+        return new GetProductPrincipalScreen();
+    }
+
+    /**
      * Create an instance of {@link LoginResponse }
      * 
      */
     public LoginResponse createLoginResponse() {
         return new LoginResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetDishesPrincipalScreenResponse }
+     * 
+     */
+    public GetDishesPrincipalScreenResponse createGetDishesPrincipalScreenResponse() {
+        return new GetDishesPrincipalScreenResponse();
     }
 
     /**
@@ -103,11 +125,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetProductPrincipalScreenResponse }
+     * 
+     */
+    public GetProductPrincipalScreenResponse createGetProductPrincipalScreenResponse() {
+        return new GetProductPrincipalScreenResponse();
+    }
+
+    /**
      * Create an instance of {@link GetClientes }
      * 
      */
     public GetClientes createGetClientes() {
         return new GetClientes();
+    }
+
+    /**
+     * Create an instance of {@link GetDishesPrincipalScreen }
+     * 
+     */
+    public GetDishesPrincipalScreen createGetDishesPrincipalScreen() {
+        return new GetDishesPrincipalScreen();
     }
 
     /**
@@ -143,6 +181,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetProductForCodeResponse }
+     * 
+     */
+    public GetProductForCodeResponse createGetProductForCodeResponse() {
+        return new GetProductForCodeResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetProductForCode }
+     * 
+     */
+    public GetProductForCode createGetProductForCode() {
+        return new GetProductForCode();
+    }
+
+    /**
      * Create an instance of {@link GetSedesResponse }
      * 
      */
@@ -156,6 +210,14 @@ public class ObjectFactory {
      */
     public GetProducts createGetProducts() {
         return new GetProducts();
+    }
+
+    /**
+     * Create an instance of {@link PrecioRecetaTable }
+     * 
+     */
+    public PrecioRecetaTable createPrecioRecetaTable() {
+        return new PrecioRecetaTable();
     }
 
     /**
@@ -175,14 +237,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link PrecioRecetaTable }
-     * 
-     */
-    public PrecioRecetaTable createPrecioRecetaTable() {
-        return new PrecioRecetaTable();
-    }
-
-    /**
      * Create an instance of {@link RecetaTable }
      * 
      */
@@ -199,6 +253,23 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link PantallaPrincipalFacTable }
+     * 
+     */
+    public PantallaPrincipalFacTable createPantallaPrincipalFacTable() {
+        return new PantallaPrincipalFacTable();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetDishesPrincipalScreenResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getDishesPrincipalScreenResponse")
+    public JAXBElement<GetDishesPrincipalScreenResponse> createGetDishesPrincipalScreenResponse(GetDishesPrincipalScreenResponse value) {
+        return new JAXBElement<GetDishesPrincipalScreenResponse>(_GetDishesPrincipalScreenResponse_QNAME, GetDishesPrincipalScreenResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link LoginResponse }{@code >}}
      * 
      */
@@ -208,12 +279,30 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetProductPrincipalScreen }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getProductPrincipalScreen")
+    public JAXBElement<GetProductPrincipalScreen> createGetProductPrincipalScreen(GetProductPrincipalScreen value) {
+        return new JAXBElement<GetProductPrincipalScreen>(_GetProductPrincipalScreen_QNAME, GetProductPrincipalScreen.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetRecetasResponse }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getRecetasResponse")
     public JAXBElement<GetRecetasResponse> createGetRecetasResponse(GetRecetasResponse value) {
         return new JAXBElement<GetRecetasResponse>(_GetRecetasResponse_QNAME, GetRecetasResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetProductPrincipalScreenResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getProductPrincipalScreenResponse")
+    public JAXBElement<GetProductPrincipalScreenResponse> createGetProductPrincipalScreenResponse(GetProductPrincipalScreenResponse value) {
+        return new JAXBElement<GetProductPrincipalScreenResponse>(_GetProductPrincipalScreenResponse_QNAME, GetProductPrincipalScreenResponse.class, null, value);
     }
 
     /**
@@ -262,6 +351,24 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetProductForCode }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getProductForCode")
+    public JAXBElement<GetProductForCode> createGetProductForCode(GetProductForCode value) {
+        return new JAXBElement<GetProductForCode>(_GetProductForCode_QNAME, GetProductForCode.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetProductForCodeResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getProductForCodeResponse")
+    public JAXBElement<GetProductForCodeResponse> createGetProductForCodeResponse(GetProductForCodeResponse value) {
+        return new JAXBElement<GetProductForCodeResponse>(_GetProductForCodeResponse_QNAME, GetProductForCodeResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetRecetas }{@code >}}
      * 
      */
@@ -295,6 +402,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getClientes")
     public JAXBElement<GetClientes> createGetClientes(GetClientes value) {
         return new JAXBElement<GetClientes>(_GetClientes_QNAME, GetClientes.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetDishesPrincipalScreen }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getDishesPrincipalScreen")
+    public JAXBElement<GetDishesPrincipalScreen> createGetDishesPrincipalScreen(GetDishesPrincipalScreen value) {
+        return new JAXBElement<GetDishesPrincipalScreen>(_GetDishesPrincipalScreen_QNAME, GetDishesPrincipalScreen.class, null, value);
     }
 
     /**
