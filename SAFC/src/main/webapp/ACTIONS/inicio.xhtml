@@ -17,28 +17,81 @@
 <body>
 	<ui:composition template="/TEMPLATE/template.xhtml">
 		<ui:define name="content">
+			<script type="text/javascript">
+			function mostrarPanelProd(a,b,c)
+				{
+				document.getElementsByClassName("oculto")[0].style.display = '';
+				document.getElementsByClassName("oculto")[1].style.display = '';
+				document.getElementsByClassName("oculto")[2].style.display = '';
+				
+				}
+			</script>
 			<h:form id="formInicio">
-				<!-- 				<h:inputHidden value="#{clienteBean.clienteId}" id="idCliente" /> -->
+				<p:remoteCommand name="test"
+					actionListener="#{facturacionBean.searchProdId}" update="product"
+					oncomplete="mostrarPanelProd();"
+					onsuccess="document.getElementById('formInicio:cantidadProductos').focus(); " />
+				<p:remoteCommand name="addProdFac"
+					actionListener="#{facturacionBean.addProductFact}" update="listFact" />
+				<div class="col-md-8 col-sm-12 col-xs-12">
+					<h:panelGroup layout="block" id="product" styleClass="panel">
+						<div class="col-md-12 col-xs-12 col-sm-12 alert-info text-center"
+							style="padding: 2px;">
+							<h4>Busqueda de Productos</h4>
+						</div>
+						<div class="col-md-6 col-xs-12 col-sm-12">
+							<div class="form-group">
+								<p:outputLabel value="Codigo:" />
+								<p:inputText value="#{facturacionBean.codigoAdd}"
+									styleClass="form-control" onkeyup=""
+									onkeypress="if (event.keyCode == 13){test(); return false;}" />
+							</div>
+						</div>
+						<div class="col-md-6 col-xs-12 col-sm-12">
+							<div class="form-group">
+								<p:outputLabel value="Cantidad:" />
+								<p:inputText value="#{facturacionBean.cantidad}"
+									id="cantidadProductos" styleClass="form-control" onkeypress="if (event.keyCode == 13){addProdFac(); return false;}" />
+							</div>
+						</div>
+						<div class="col-md-2 col-xs-12 col-sm-12 oculto"
+							style="display: none;">
+							<div class="form-group">
+								<p:outputLabel value="#{facturacionBean.product.code}" />
 
-
-
-				<p:layout>
-					<p:layoutUnit position="west">
-						<div class="row">
+							</div>
+						</div>
+						<div class="col-md-5 col-xs-12 col-sm-12 oculto"
+							style="display: none;">
+							<div class="form-group">
+								<p:outputLabel value="#{facturacionBean.product.name}" />
+							</div>
+						</div>
+						<div class="col-md-5 col-xs-12 col-sm-12 oculto"
+							style="display: none;">
+							<div class="form-group">
+								<p:outputLabel value="#{facturacionBean.product.price}" />
+							</div>
+						</div>
+					</h:panelGroup>
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
 							<p:dataGrid var="receta" value="#{clienteBean.recetas}"
-								columns="7" layout="grid" rows="1" paginator="false" id="rec">
+								columns="6" layout="grid" rows="1" paginator="false" id="rec"
+								styleClass="table-responsive">
 
 								<f:facet name="header">Platos(Recetas)</f:facet>
 
 								<p:panel header="#{receta.nombre}" style="text-align:center;">
-									<h:panelGrid columns="1" style="width:50%">
+									<h:panelGrid columns="1">
 										<p:graphicImage library="images/products" name="taco.png" />
 										<h:outputText value="#{receta.nombre}" />
 									</h:panelGrid>
 								</p:panel>
 							</p:dataGrid>
+							<br />
 							<p:dataGrid var="producto" value="#{clienteBean.productos}"
-								columns="7" layout="grid" rows="1" paginator="false" id="prod">
+								columns="6" layout="grid" rows="1" paginator="false" id="prod">
 
 								<f:facet name="header">Productos(Fruteria)</f:facet>
 
@@ -49,45 +102,34 @@
 									</h:panelGrid>
 								</p:panel>
 							</p:dataGrid>
-							<h:panelGrid layout="grid" border="1"
-								styleClass="table table-bordered table-responsive" columns="6"
-								headerClass="alert alert-success text-center">
-								<f:facet name="header">
-									<h:outputLabel>Busqueda de Productos</h:outputLabel>
-								</f:facet>
-								<p:outputLabel value="Codigo:" />
-								<p:inputText value="#{clienteBean.clienteId}"
-									styleClass="form-control" onkeyup="" />
-								<p:outputLabel value="Cantidad:" />
-								<p:inputText value="#{clienteBean.clienteId}"
-									styleClass="form-control" />
-								<p:commandButton value="Consultar" onclick="PF('searchRec').show();" actionListener="#{clienteBean.setDataDishes}" update=":searchDishes:tablaDishes" styleClass="btn btn-primary"></p:commandButton>
-								<p:commandButton value="Insertar" styleClass="btn btn-danger"></p:commandButton>
-							</h:panelGrid>
-						</div>
-					</p:layoutUnit>
 
-					<p:layoutUnit position="center" resizable="true" size="40%">
-					<p:commandButton value="Registrar"/>
-					<p:commandButton value="Facturar"/>
-						<div class="row">
-							<p:panel header="Factura">
-								<p:dataTable var="factura">
-									<p:column headerText="Cod">
-									</p:column>
-									<p:column headerText="Nombre">
-									</p:column>
-									<p:column headerText="Cantidad">
-									</p:column>
-									<p:column headerText="Valor">
-									</p:column>
-									<p:column headerText="Eliminar">
-									</p:column>
-								</p:dataTable>
-							</p:panel>
 						</div>
-					</p:layoutUnit>
-				</p:layout>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-12 col-xs-12">
+					<p:panel header="Factura">
+						<p:commandButton value="Registrar" />
+						<p:commandButton value="Facturar" />
+						<p:dataTable var="factura" style="pading:0px;" id="listFact"
+							value="#{facturacionBean.listProd}">
+							<p:column headerText="Cod">
+								<h:outputText value="#{factura.code}"/>
+							</p:column>
+							<p:column headerText="Nombre">
+								<h:outputText value="#{factura.name}"/>
+							</p:column>
+							<p:column headerText="Cantidad">
+								<h:outputText value="#{factura.amount}"/>
+							</p:column>
+							<p:column headerText="Valor">
+								<h:outputText value="#{factura.price}"/>
+							</p:column>
+							<p:column headerText="Eliminar">
+							</p:column>
+						</p:dataTable>
+					</p:panel>
+
+				</div>
 			</h:form>
 		</ui:define>
 	</ui:composition>

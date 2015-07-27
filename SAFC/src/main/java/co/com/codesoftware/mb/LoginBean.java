@@ -1,17 +1,19 @@
 package co.com.codesoftware.mb;
 
+import java.io.Serializable;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 
 import org.primefaces.context.RequestContext;
 
 import co.com.codesoftware.logic.LoginLogic;
 
 @ManagedBean
-public class LoginBean {
+public class LoginBean implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private String user;
 	private String password;
 

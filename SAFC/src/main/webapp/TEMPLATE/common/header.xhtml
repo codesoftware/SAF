@@ -18,44 +18,58 @@
 
 		<h:form id="formHeader">
 			<div class="row">
-				<div class="col-md-0 col-sm-0 col-xs-0"></div>
-				<div class="col-md-10 col-sm-12 col-xs-12">
-					<h:panelGrid layout="grid" border="1" id="tablaClienteComprador"
-						styleClass="table table-bordered table-responsive" columns="9"
-						headerClass="alert alert-success text-center">
-						<p:dock position="top" itemWidth="50">
-							<p:menuitem title="inserta clientes" value="Insertar Clientes"
-								icon="/resources/images/clientes.png"
-								onclick="PF('insertClient').show();">
-							</p:menuitem>
-							<p:menuitem value="Consultar Clientes"
-								icon="/resources/images/searchClient.png"
-								onclick="PF('searchCl').show();"
-								actionListener="#{clienteBean.buscaClientes}"
-								update=":searchClients:tablaClientes" />
-							<p:menuitem value="Consultar Facturas"
-								icon="/resources/images/searchbill.png" url="#" />
-						</p:dock>
-						<p:outputLabel value="Cliente" />
-						<p:outputLabel value="Cedula:" />
-						<p:outputLabel value="#{clienteBean.cliente.cedula}" />
-						<p:outputLabel value="Nombres:" />
-						<p:outputLabel value="#{clienteBean.cliente.nombre}" />
-						<p:outputLabel value="Telefono:" />
-						<p:outputLabel value="#{clienteBean.cliente.telefono}" />
-						<p:panel style="text-align:center">
-							<h:outputText value="$100.000"
-								style="font-size:28px;font-weight: bold;" />
-						</p:panel>
-					</h:panelGrid>
-
+				<div class="col-md-3 col-sm-12 col-xs-12">
+					<p:dock position="top" itemWidth="50">
+						<p:menuitem title="inserta clientes" value="Insertar Clientes"
+							icon="/resources/images/clientes.png"
+							onclick="PF('insertClient').show();">
+						</p:menuitem>
+						<p:menuitem value="Consultar Clientes"
+							icon="/resources/images/searchClient.png"
+							onclick="PF('searchCl').show();"
+							actionListener="#{clienteBean.buscaClientes}"
+							update=":searchClients:tablaClientes" />
+						<p:menuitem value="Consultar Facturas"
+							icon="/resources/images/searchbill.png" url="#" />
+					</p:dock>
 				</div>
-				<div class="col-md-1 col-sm-0 col-xs-0"></div>
-			</div>
-			<div class="row">
-				<div class="col-md-1 col-sm-0 col-xs-0"></div>
-				<div class="col-md-10 col-sm-12 col-xs-12"></div>
-				<div class="col-md-1 col-sm-0 col-xs-0"></div>
+				<div class="col-md-7 col-sm-12 col-xs-12">
+					<h:panelGroup layout="block" id="tablaClienteComprador"
+						styleClass="panel">
+						<div
+							class="col-md-12 col-xs-12 col-sm-12 alert-success text-center"
+							style="padding: 2px;">
+							<h4>DATOS CLIENTE</h4>
+						</div>
+						<div class="col-md-4 col-xs-12 col-sm-12">
+							<div class="form-group">
+								<p:outputLabel value="Cedula:" />
+								<p:outputLabel value="#{clienteBean.cliente.cedula}"
+									styleClass="form-control" />
+							</div>
+						</div>
+						<div class="col-md-4 col-xs-12 col-sm-12">
+							<div class="form-group">
+								<p:outputLabel value="Nombres:" />
+								<p:outputLabel value="#{clienteBean.cliente.nombre}"
+									styleClass="form-control" />
+							</div>
+						</div>
+						<div class="col-md-4 col-xs-12 col-sm-12">
+							<div class="form-group">
+								<p:outputLabel value="Telefono:" />
+								<p:outputLabel value="#{clienteBean.cliente.telefono}"
+									styleClass="form-control"  	/>
+							</div>
+						</div>
+					</h:panelGroup>
+				</div>
+				<div class="col-md-2 col-sm-12 col-xs-12">
+					<p:panel style="text-align:center">
+						<h:outputText value="$100.000"
+							style="font-size:28px;font-weight: bold;" />
+					</p:panel>
+				</div>
 			</div>
 		</h:form>
 	</ui:composition>

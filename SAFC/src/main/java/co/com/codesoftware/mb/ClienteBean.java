@@ -195,4 +195,8 @@ public class ClienteBean implements Serializable {
 			e.printStackTrace();
 		}
 	}
+	
+	public void searchProdId(){
+		
+	}
 }
