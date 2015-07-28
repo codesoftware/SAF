@@ -13,11 +13,12 @@ import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
 
 import co.com.codesoftware.entities.ClienteEntity;
+import co.com.codesoftware.entities.GenericProductEntity;
 import co.com.codesoftware.logic.ProductsLogic;
 import co.com.codesoftware.logic.RecetasLogic;
 import co.com.codesoftware.logic.SearchTopLogic;
 import co.com.codesoftware.server.Cliente;
-import co.com.codesoftware.server.ProductoTable;
+import co.com.codesoftware.server.PantallaPrincipalFacTable;
 import co.com.codesoftware.server.RecetaTable;
 
 @ManagedBean
@@ -32,10 +33,11 @@ public class ClienteBean implements Serializable {
 	private List<Cliente> clientes;
 	private List<Cliente> clientesFilter;
 	private Long clienteId;
-	private List<RecetaTable> recetas;
-	private List<ProductoTable> productos;
+	private List<PantallaPrincipalFacTable> recetas;
+	private List<PantallaPrincipalFacTable> productos;
 	private List<RecetaTable> dishes;
 	private List<RecetaTable> dishesFilter;
+	private GenericProductEntity prod ;
 
 	@PostConstruct
 	/*
@@ -67,21 +69,28 @@ public class ClienteBean implements Serializable {
 		this.dishes = dishes;
 	}
 
-	public List<ProductoTable> getProductos() {
+
+
+
+	public List<PantallaPrincipalFacTable> getProductos() {
 		return productos;
 	}
 
-	public void setProductos(List<ProductoTable> productos) {
+
+	public void setProductos(List<PantallaPrincipalFacTable> productos) {
 		this.productos = productos;
 	}
 
-	public List<RecetaTable> getRecetas() {
+
+	public List<PantallaPrincipalFacTable> getRecetas() {
 		return recetas;
 	}
 
-	public void setRecetas(List<RecetaTable> recetas) {
+
+	public void setRecetas(List<PantallaPrincipalFacTable> recetas) {
 		this.recetas = recetas;
 	}
+
 
 	public ClienteBean() {
 		super();
@@ -119,6 +128,17 @@ public class ClienteBean implements Serializable {
 	public void setClientesFilter(List<Cliente> clientesFilter) {
 		this.clientesFilter = clientesFilter;
 	}
+	
+
+	public GenericProductEntity getProd() {
+		return prod;
+	}
+
+
+	public void setProd(GenericProductEntity prod) {
+		this.prod = prod;
+	}
+
 
 	/**
 	 * Funcion encargada de insertar un cliente en la base de datos del sistema

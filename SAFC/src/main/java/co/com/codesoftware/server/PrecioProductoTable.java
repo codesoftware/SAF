@@ -1,30 +1,27 @@
 
 package co.com.codesoftware.server;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>Java class for precioRecetaTable complex type.
+ * <p>Java class for precioProductoTable complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="precioRecetaTable">
+ * &lt;complexType name="precioProductoTable">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="estado" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="fecha" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
- *         &lt;element name="idReceta" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="idProducto" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="idSede" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
- *         &lt;element name="precio" type="{http://www.w3.org/2001/XMLSchema}decimal" minOccurs="0"/>
+ *         &lt;element name="precio" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="usuarioCrea" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -34,23 +31,22 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "precioRecetaTable", propOrder = {
+@XmlType(name = "precioProductoTable", propOrder = {
     "estado",
-    "fecha",
     "id",
-    "idReceta",
+    "idProducto",
     "idSede",
-    "precio"
+    "precio",
+    "usuarioCrea"
 })
-public class PrecioRecetaTable {
+public class PrecioProductoTable {
 
     protected String estado;
-    @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar fecha;
     protected Integer id;
-    protected Integer idReceta;
+    protected Integer idProducto;
     protected Integer idSede;
-    protected BigDecimal precio;
+    protected String precio;
+    protected Integer usuarioCrea;
 
     /**
      * Gets the value of the estado property.
@@ -74,30 +70,6 @@ public class PrecioRecetaTable {
      */
     public void setEstado(String value) {
         this.estado = value;
-    }
-
-    /**
-     * Gets the value of the fecha property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public XMLGregorianCalendar getFecha() {
-        return fecha;
-    }
-
-    /**
-     * Sets the value of the fecha property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public void setFecha(XMLGregorianCalendar value) {
-        this.fecha = value;
     }
 
     /**
@@ -125,27 +97,27 @@ public class PrecioRecetaTable {
     }
 
     /**
-     * Gets the value of the idReceta property.
+     * Gets the value of the idProducto property.
      * 
      * @return
      *     possible object is
      *     {@link Integer }
      *     
      */
-    public Integer getIdReceta() {
-        return idReceta;
+    public Integer getIdProducto() {
+        return idProducto;
     }
 
     /**
-     * Sets the value of the idReceta property.
+     * Sets the value of the idProducto property.
      * 
      * @param value
      *     allowed object is
      *     {@link Integer }
      *     
      */
-    public void setIdReceta(Integer value) {
-        this.idReceta = value;
+    public void setIdProducto(Integer value) {
+        this.idProducto = value;
     }
 
     /**
@@ -177,10 +149,10 @@ public class PrecioRecetaTable {
      * 
      * @return
      *     possible object is
-     *     {@link BigDecimal }
+     *     {@link String }
      *     
      */
-    public BigDecimal getPrecio() {
+    public String getPrecio() {
         return precio;
     }
 
@@ -189,11 +161,35 @@ public class PrecioRecetaTable {
      * 
      * @param value
      *     allowed object is
-     *     {@link BigDecimal }
+     *     {@link String }
      *     
      */
-    public void setPrecio(BigDecimal value) {
+    public void setPrecio(String value) {
         this.precio = value;
+    }
+
+    /**
+     * Gets the value of the usuarioCrea property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getUsuarioCrea() {
+        return usuarioCrea;
+    }
+
+    /**
+     * Sets the value of the usuarioCrea property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setUsuarioCrea(Integer value) {
+        this.usuarioCrea = value;
     }
 
 }

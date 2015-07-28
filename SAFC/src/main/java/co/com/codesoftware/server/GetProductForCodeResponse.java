@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para getProductForCodeResponse complex type.
+ * <p>Java class for getProductForCodeResponse complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="getProductForCodeResponse">
@@ -36,7 +36,7 @@ public class GetProductForCodeResponse {
     protected ProductoTable productoTable;
 
     /**
-     * Obtiene el valor de la propiedad productoTable.
+     * Gets the value of the productoTable property.
      * 
      * @return
      *     possible object is
@@ -48,7 +48,7 @@ public class GetProductForCodeResponse {
     }
 
     /**
-     * Define el valor de la propiedad productoTable.
+     * Sets the value of the productoTable property.
      * 
      * @param value
      *     allowed object is

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.com.codesoftware.entities.GenericProductEntity;
+import co.com.codesoftware.server.PantallaPrincipalFacTable;
 import co.com.codesoftware.server.ProductoTable;
 import co.com.codesoftware.server.SAFWS;
 import co.com.codesoftware.server.SAFWSService;
@@ -13,14 +14,11 @@ public class ProductsLogic {
 	 * Funcion que consulta los productos que apareceran en el home
 	 * @return
 	 */	
-	public List<ProductoTable> getEspecialProduct(){
-		List<ProductoTable> list = new ArrayList<ProductoTable>();
-		for(int i=1 ; i<= 10; i++){
-			ProductoTable obj = new ProductoTable();
-			obj.setNombre("nombre"+i);
-			list.add(obj);
-		}
-
+	public List<PantallaPrincipalFacTable> getEspecialProduct(){
+		List<PantallaPrincipalFacTable> list = new ArrayList<PantallaPrincipalFacTable>();
+		SAFWSService service = new SAFWSService();
+		SAFWS port = service.getSAFWSPort();
+		list = port.getProductPrincipalScreen();
 		return list;
 	}
 	/**
@@ -36,7 +34,7 @@ public class ProductsLogic {
 			product = new ProductoTable();
 			SAFWSService service = new SAFWSService();
 			SAFWS port = service.getSAFWSPort();
-			product = port.getProductForCode(code);
+			product = port.getProductForCode(code,1);
 			result = setGenericProduct(result, product,cantidad);
 		} catch (Exception e) {
 			e.printStackTrace();

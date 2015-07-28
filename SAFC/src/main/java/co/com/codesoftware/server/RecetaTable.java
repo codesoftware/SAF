@@ -13,9 +13,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>Clase Java para recetaTable complex type.
+ * <p>Java class for recetaTable complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="recetaTable">
@@ -66,7 +66,7 @@ public class RecetaTable {
     protected BigDecimal promedio;
 
     /**
-     * Obtiene el valor de la propiedad codigo.
+     * Gets the value of the codigo property.
      * 
      * @return
      *     possible object is
@@ -78,7 +78,7 @@ public class RecetaTable {
     }
 
     /**
-     * Define el valor de la propiedad codigo.
+     * Sets the value of the codigo property.
      * 
      * @param value
      *     allowed object is
@@ -90,7 +90,7 @@ public class RecetaTable {
     }
 
     /**
-     * Obtiene el valor de la propiedad descripcion.
+     * Gets the value of the descripcion property.
      * 
      * @return
      *     possible object is
@@ -102,7 +102,7 @@ public class RecetaTable {
     }
 
     /**
-     * Define el valor de la propiedad descripcion.
+     * Sets the value of the descripcion property.
      * 
      * @param value
      *     allowed object is
@@ -114,7 +114,7 @@ public class RecetaTable {
     }
 
     /**
-     * Obtiene el valor de la propiedad estado.
+     * Gets the value of the estado property.
      * 
      * @return
      *     possible object is
@@ -126,7 +126,7 @@ public class RecetaTable {
     }
 
     /**
-     * Define el valor de la propiedad estado.
+     * Sets the value of the estado property.
      * 
      * @param value
      *     allowed object is
@@ -138,7 +138,7 @@ public class RecetaTable {
     }
 
     /**
-     * Obtiene el valor de la propiedad fechaIngreso.
+     * Gets the value of the fechaIngreso property.
      * 
      * @return
      *     possible object is
@@ -150,7 +150,7 @@ public class RecetaTable {
     }
 
     /**
-     * Define el valor de la propiedad fechaIngreso.
+     * Sets the value of the fechaIngreso property.
      * 
      * @param value
      *     allowed object is
@@ -162,7 +162,7 @@ public class RecetaTable {
     }
 
     /**
-     * Obtiene el valor de la propiedad id.
+     * Gets the value of the id property.
      * 
      * @return
      *     possible object is
@@ -174,7 +174,7 @@ public class RecetaTable {
     }
 
     /**
-     * Define el valor de la propiedad id.
+     * Sets the value of the id property.
      * 
      * @param value
      *     allowed object is
@@ -186,7 +186,7 @@ public class RecetaTable {
     }
 
     /**
-     * Obtiene el valor de la propiedad iva.
+     * Gets the value of the iva property.
      * 
      * @return
      *     possible object is
@@ -198,7 +198,7 @@ public class RecetaTable {
     }
 
     /**
-     * Define el valor de la propiedad iva.
+     * Sets the value of the iva property.
      * 
      * @param value
      *     allowed object is
@@ -210,7 +210,7 @@ public class RecetaTable {
     }
 
     /**
-     * Obtiene el valor de la propiedad nombre.
+     * Gets the value of the nombre property.
      * 
      * @return
      *     possible object is
@@ -222,7 +222,7 @@ public class RecetaTable {
     }
 
     /**
-     * Define el valor de la propiedad nombre.
+     * Sets the value of the nombre property.
      * 
      * @param value
      *     allowed object is
@@ -263,7 +263,7 @@ public class RecetaTable {
     }
 
     /**
-     * Obtiene el valor de la propiedad promedio.
+     * Gets the value of the promedio property.
      * 
      * @return
      *     possible object is
@@ -275,7 +275,7 @@ public class RecetaTable {
     }
 
     /**
-     * Define el valor de la propiedad promedio.
+     * Sets the value of the promedio property.
      * 
      * @param value
      *     allowed object is

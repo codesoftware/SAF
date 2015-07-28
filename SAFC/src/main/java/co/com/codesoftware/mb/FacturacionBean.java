@@ -11,6 +11,7 @@ import javax.faces.bean.ViewScoped;
 import co.com.codesoftware.entities.ClienteEntity;
 import co.com.codesoftware.entities.GenericProductEntity;
 import co.com.codesoftware.logic.ProductsLogic;
+import co.com.codesoftware.server.PantallaPrincipalFacTable;
 
 @ManagedBean(name = "facturacionBean")
 @ViewScoped
@@ -20,6 +21,7 @@ public class FacturacionBean implements Serializable {
 
 	private ClienteEntity cliente;
 	private GenericProductEntity product;
+	private PantallaPrincipalFacTable prod;
 	@ManagedProperty(value = "#{clienteBean}")
 	private ClienteBean clientebean;
 	private String codigoProducto;
@@ -34,6 +36,14 @@ public class FacturacionBean implements Serializable {
 
 	public List<GenericProductEntity> getListProd() {
 		return listProd;
+	}
+
+	public PantallaPrincipalFacTable getProd() {
+		return prod;
+	}
+
+	public void setProd(PantallaPrincipalFacTable prod) {
+		this.prod = prod;
 	}
 
 	public void setListProd(List<GenericProductEntity> listProd) {
@@ -79,7 +89,7 @@ public class FacturacionBean implements Serializable {
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
-	
+
 	public String getCodigoAdd() {
 		return codigoAdd;
 	}
@@ -122,6 +132,23 @@ public class FacturacionBean implements Serializable {
 	}
 
 	/**
+	 * Funcion que añade un producto al darle clic en el panel
+	 */
+	public void addProductPanel(PantallaPrincipalFacTable table) {
+		if (this.listProd == null) {
+			this.listProd = new ArrayList<GenericProductEntity>();
+		}
+		setData(table);
+		int exist = existProduct();
+		if (exist > -1) {
+			this.listProd.get(exist).setAmount(
+					this.listProd.get(exist).getAmount() + cantidad);
+		} else {
+			this.listProd.add(product);
+		}
+	}
+
+	/**
 	 * Funcion que valida si el producto ya existe
 	 * 
 	 * @return
@@ -138,6 +165,16 @@ public class FacturacionBean implements Serializable {
 
 		}
 		return result;
+	}
+
+	public void setData(PantallaPrincipalFacTable table) {
+		this.product.setAmount(1);
+		this.product.setCode(table.getCodigo());
+		this.product.setName(table.getNombre());
+	}
+	
+	public void deleteRow(GenericProductEntity prod){
+		this.listProd.remove(prod);
 	}
 
 }

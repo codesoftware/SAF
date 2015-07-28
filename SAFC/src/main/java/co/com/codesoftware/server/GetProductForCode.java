@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para getProductForCode complex type.
+ * <p>Java class for getProductForCode complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="getProductForCode">
@@ -18,6 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="dska_cod" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="sede_sede" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -28,15 +29,18 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "getProductForCode", propOrder = {
-    "dskaCod"
+    "dskaCod",
+    "sedeSede"
 })
 public class GetProductForCode {
 
     @XmlElement(name = "dska_cod")
     protected String dskaCod;
+    @XmlElement(name = "sede_sede")
+    protected Integer sedeSede;
 
     /**
-     * Obtiene el valor de la propiedad dskaCod.
+     * Gets the value of the dskaCod property.
      * 
      * @return
      *     possible object is
@@ -48,7 +52,7 @@ public class GetProductForCode {
     }
 
     /**
-     * Define el valor de la propiedad dskaCod.
+     * Sets the value of the dskaCod property.
      * 
      * @param value
      *     allowed object is
@@ -57,6 +61,30 @@ public class GetProductForCode {
      */
     public void setDskaCod(String value) {
         this.dskaCod = value;
+    }
+
+    /**
+     * Gets the value of the sedeSede property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getSedeSede() {
+        return sedeSede;
+    }
+
+    /**
+     * Sets the value of the sedeSede property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setSedeSede(Integer value) {
+        this.sedeSede = value;
     }
 
 }

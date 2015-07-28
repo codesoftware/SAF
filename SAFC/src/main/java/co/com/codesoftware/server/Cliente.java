@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para cliente complex type.
+ * <p>Java class for cliente complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="cliente">
@@ -49,7 +49,7 @@ public class Cliente {
     protected String telefono;
 
     /**
-     * Obtiene el valor de la propiedad apellidos.
+     * Gets the value of the apellidos property.
      * 
      * @return
      *     possible object is
@@ -61,7 +61,7 @@ public class Cliente {
     }
 
     /**
-     * Define el valor de la propiedad apellidos.
+     * Sets the value of the apellidos property.
      * 
      * @param value
      *     allowed object is
@@ -73,7 +73,7 @@ public class Cliente {
     }
 
     /**
-     * Obtiene el valor de la propiedad cedula.
+     * Gets the value of the cedula property.
      * 
      * @return
      *     possible object is
@@ -85,7 +85,7 @@ public class Cliente {
     }
 
     /**
-     * Define el valor de la propiedad cedula.
+     * Sets the value of the cedula property.
      * 
      * @param value
      *     allowed object is
@@ -97,7 +97,7 @@ public class Cliente {
     }
 
     /**
-     * Obtiene el valor de la propiedad correo.
+     * Gets the value of the correo property.
      * 
      * @return
      *     possible object is
@@ -109,7 +109,7 @@ public class Cliente {
     }
 
     /**
-     * Define el valor de la propiedad correo.
+     * Sets the value of the correo property.
      * 
      * @param value
      *     allowed object is
@@ -121,7 +121,7 @@ public class Cliente {
     }
 
     /**
-     * Obtiene el valor de la propiedad id.
+     * Gets the value of the id property.
      * 
      * @return
      *     possible object is
@@ -133,7 +133,7 @@ public class Cliente {
     }
 
     /**
-     * Define el valor de la propiedad id.
+     * Sets the value of the id property.
      * 
      * @param value
      *     allowed object is
@@ -145,7 +145,7 @@ public class Cliente {
     }
 
     /**
-     * Obtiene el valor de la propiedad nombres.
+     * Gets the value of the nombres property.
      * 
      * @return
      *     possible object is
@@ -157,7 +157,7 @@ public class Cliente {
     }
 
     /**
-     * Define el valor de la propiedad nombres.
+     * Sets the value of the nombres property.
      * 
      * @param value
      *     allowed object is
@@ -169,7 +169,7 @@ public class Cliente {
     }
 
     /**
-     * Obtiene el valor de la propiedad telefono.
+     * Gets the value of the telefono property.
      * 
      * @return
      *     possible object is
@@ -181,7 +181,7 @@ public class Cliente {
     }
 
     /**
-     * Define el valor de la propiedad telefono.
+     * Sets the value of the telefono property.
      * 
      * @param value
      *     allowed object is

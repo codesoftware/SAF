@@ -11,6 +11,7 @@ public class GenericProductEntity implements Serializable{
 	private String price;
 	private int id;
 	private int type;
+	private String routImage;
 	public String getCode() {
 		return code;
 	}
@@ -48,6 +49,13 @@ public class GenericProductEntity implements Serializable{
 	public void setType(int type) {
 		this.type = type;
 	}
+	public String getRoutImage() {
+		return routImage;
+	}
+	public void setRoutImage(String routImage) {
+		this.routImage = routImage;
+	}
+	
 	
 	
 	

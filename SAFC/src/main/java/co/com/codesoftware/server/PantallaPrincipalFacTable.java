@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para pantallaPrincipalFacTable complex type.
+ * <p>Java class for pantallaPrincipalFacTable complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="pantallaPrincipalFacTable">
@@ -55,7 +55,7 @@ public class PantallaPrincipalFacTable {
     protected String tipo;
 
     /**
-     * Obtiene el valor de la propiedad codigo.
+     * Gets the value of the codigo property.
      * 
      * @return
      *     possible object is
@@ -67,7 +67,7 @@ public class PantallaPrincipalFacTable {
     }
 
     /**
-     * Define el valor de la propiedad codigo.
+     * Sets the value of the codigo property.
      * 
      * @param value
      *     allowed object is
@@ -79,7 +79,7 @@ public class PantallaPrincipalFacTable {
     }
 
     /**
-     * Obtiene el valor de la propiedad extension.
+     * Gets the value of the extension property.
      * 
      * @return
      *     possible object is
@@ -91,7 +91,7 @@ public class PantallaPrincipalFacTable {
     }
 
     /**
-     * Define el valor de la propiedad extension.
+     * Sets the value of the extension property.
      * 
      * @param value
      *     allowed object is
@@ -103,7 +103,7 @@ public class PantallaPrincipalFacTable {
     }
 
     /**
-     * Obtiene el valor de la propiedad id.
+     * Gets the value of the id property.
      * 
      * @return
      *     possible object is
@@ -115,7 +115,7 @@ public class PantallaPrincipalFacTable {
     }
 
     /**
-     * Define el valor de la propiedad id.
+     * Sets the value of the id property.
      * 
      * @param value
      *     allowed object is
@@ -127,7 +127,7 @@ public class PantallaPrincipalFacTable {
     }
 
     /**
-     * Obtiene el valor de la propiedad imagen.
+     * Gets the value of the imagen property.
      * 
      * @return
      *     possible object is
@@ -139,7 +139,7 @@ public class PantallaPrincipalFacTable {
     }
 
     /**
-     * Define el valor de la propiedad imagen.
+     * Sets the value of the imagen property.
      * 
      * @param value
      *     allowed object is
@@ -151,7 +151,7 @@ public class PantallaPrincipalFacTable {
     }
 
     /**
-     * Obtiene el valor de la propiedad nombre.
+     * Gets the value of the nombre property.
      * 
      * @return
      *     possible object is
@@ -163,7 +163,7 @@ public class PantallaPrincipalFacTable {
     }
 
     /**
-     * Define el valor de la propiedad nombre.
+     * Sets the value of the nombre property.
      * 
      * @param value
      *     allowed object is
@@ -175,7 +175,7 @@ public class PantallaPrincipalFacTable {
     }
 
     /**
-     * Obtiene el valor de la propiedad posicion.
+     * Gets the value of the posicion property.
      * 
      * @return
      *     possible object is
@@ -187,7 +187,7 @@ public class PantallaPrincipalFacTable {
     }
 
     /**
-     * Define el valor de la propiedad posicion.
+     * Sets the value of the posicion property.
      * 
      * @param value
      *     allowed object is
@@ -199,7 +199,7 @@ public class PantallaPrincipalFacTable {
     }
 
     /**
-     * Obtiene el valor de la propiedad ruta.
+     * Gets the value of the ruta property.
      * 
      * @return
      *     possible object is
@@ -211,7 +211,7 @@ public class PantallaPrincipalFacTable {
     }
 
     /**
-     * Define el valor de la propiedad ruta.
+     * Sets the value of the ruta property.
      * 
      * @param value
      *     allowed object is
@@ -223,7 +223,7 @@ public class PantallaPrincipalFacTable {
     }
 
     /**
-     * Obtiene el valor de la propiedad tipo.
+     * Gets the value of the tipo property.
      * 
      * @return
      *     possible object is
@@ -235,7 +235,7 @@ public class PantallaPrincipalFacTable {
     }
 
     /**
-     * Define el valor de la propiedad tipo.
+     * Sets the value of the tipo property.
      * 
      * @param value
      *     allowed object is

@@ -32,7 +32,11 @@
 					oncomplete="mostrarPanelProd();"
 					onsuccess="document.getElementById('formInicio:cantidadProductos').focus(); " />
 				<p:remoteCommand name="addProdFac"
-					actionListener="#{facturacionBean.addProductFact}" update="listFact" />
+					actionListener="#{facturacionBean.addProductFact}"
+					update="listFact" />
+				<p:remoteCommand name="addProdPan"
+					actionListener="#{facturacionBean.addProductPanel(receta)}"
+					update="listFact" />
 				<div class="col-md-8 col-sm-12 col-xs-12">
 					<h:panelGroup layout="block" id="product" styleClass="panel">
 						<div class="col-md-12 col-xs-12 col-sm-12 alert-info text-center"
@@ -51,7 +55,8 @@
 							<div class="form-group">
 								<p:outputLabel value="Cantidad:" />
 								<p:inputText value="#{facturacionBean.cantidad}"
-									id="cantidadProductos" styleClass="form-control" onkeypress="if (event.keyCode == 13){addProdFac(); return false;}" />
+									id="cantidadProductos" styleClass="form-control"
+									onkeypress="if (event.keyCode == 13){addProdFac(); return false;}" />
 							</div>
 						</div>
 						<div class="col-md-2 col-xs-12 col-sm-12 oculto"
@@ -82,8 +87,8 @@
 
 								<f:facet name="header">Platos(Recetas)</f:facet>
 
-								<p:panel header="#{receta.nombre}" style="text-align:center;">
-									<h:panelGrid columns="1">
+								<p:panel header="#{receta.codigo}" style="text-align:center;">
+									<h:panelGrid columns="1" onclick="addProdPan();">
 										<p:graphicImage library="images/products" name="taco.png" />
 										<h:outputText value="#{receta.nombre}" />
 									</h:panelGrid>
@@ -95,7 +100,7 @@
 
 								<f:facet name="header">Productos(Fruteria)</f:facet>
 
-								<p:panel header="#{producto.nombre}" style="text-align:center">
+								<p:panel header="#{producto.codigo}" style="text-align:center">
 									<h:panelGrid columns="1" style="width:50%">
 										<p:graphicImage library="images/products" name="banana.png" />
 										<h:outputText value="#{producto.nombre}" />
@@ -112,19 +117,24 @@
 						<p:commandButton value="Facturar" />
 						<p:dataTable var="factura" style="pading:0px;" id="listFact"
 							value="#{facturacionBean.listProd}">
-							<p:column headerText="Cod">
-								<h:outputText value="#{factura.code}"/>
+							<p:column headerText="Cod" sortBy="#{factura.code}">
+								<h:outputText value="#{factura.code}" />
 							</p:column>
 							<p:column headerText="Nombre">
-								<h:outputText value="#{factura.name}"/>
+								<h:outputText value="#{factura.name}" />
 							</p:column>
 							<p:column headerText="Cantidad">
-								<h:outputText value="#{factura.amount}"/>
+								<h:outputText value="#{factura.amount}" />
 							</p:column>
 							<p:column headerText="Valor">
-								<h:outputText value="#{factura.price}"/>
+								<h:outputText value="#{factura.price}" />
 							</p:column>
 							<p:column headerText="Eliminar">
+								<p:commandButton icon="fa-close" title="Eliminar"
+									ajax="true" 
+									update="listFact"
+									actionListener="#{facturacionBean.deleteRow(factura)}">
+								</p:commandButton>
 							</p:column>
 						</p:dataTable>
 					</p:panel>
