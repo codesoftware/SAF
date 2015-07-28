@@ -10,6 +10,7 @@ import javax.faces.bean.ViewScoped;
 
 import co.com.codesoftware.entities.ClienteEntity;
 import co.com.codesoftware.entities.GenericProductEntity;
+import co.com.codesoftware.logic.FacturacionLogic;
 import co.com.codesoftware.logic.ProductsLogic;
 import co.com.codesoftware.server.PantallaPrincipalFacTable;
 
@@ -28,11 +29,23 @@ public class FacturacionBean implements Serializable {
 	private int cantidad = 1;
 	private List<GenericProductEntity> listProd;
 	private String codigoAdd;
+	private String total;
 
 	public FacturacionBean() {
 		super();
 		this.product = new GenericProductEntity();
 	}
+	
+
+	public String getTotal() {
+		return total;
+	}
+
+
+	public void setTotal(String total) {
+		this.total = total;
+	}
+
 
 	public List<GenericProductEntity> getListProd() {
 		return listProd;
@@ -124,11 +137,14 @@ public class FacturacionBean implements Serializable {
 		}
 		int exist = existProduct();
 		if (exist > -1) {
+			FacturacionLogic log = new FacturacionLogic();
 			this.listProd.get(exist).setAmount(
 					this.listProd.get(exist).getAmount() + cantidad);
+			this.listProd.get(exist).setTotalPrice(log.updatePrice(this.listProd.get(exist).getPrice(),this.listProd.get(exist).getAmount()));
 		} else {
 			this.listProd.add(product);
 		}
+		addTotal();
 	}
 
 	/**
@@ -146,6 +162,7 @@ public class FacturacionBean implements Serializable {
 		} else {
 			this.listProd.add(product);
 		}
+		addTotal();
 	}
 
 	/**
@@ -166,15 +183,49 @@ public class FacturacionBean implements Serializable {
 		}
 		return result;
 	}
+	/**
+	 * Funcion que setea al objeto generico de factura
+	 * @param table
+	 */
 
 	public void setData(PantallaPrincipalFacTable table) {
+		this.product = new GenericProductEntity();
 		this.product.setAmount(1);
 		this.product.setCode(table.getCodigo());
 		this.product.setName(table.getNombre());
 	}
 	
+	/**
+	 * Funcion que elimina una fila de la factura
+	 * @param prod
+	 */
 	public void deleteRow(GenericProductEntity prod){
 		this.listProd.remove(prod);
+		addTotal();
 	}
+	/**
+	 * funcion que actualiza la cantidad de productos 
+	 * @param prod
+	 */
+	public void updateRow(GenericProductEntity prod){
+		if(prod.getAmount()<2){
+			this.listProd.remove(prod);
+		}else{
+			FacturacionLogic log = new FacturacionLogic();
+			prod.setAmount(prod.getAmount()-1);
+			prod.setTotalPrice(log.updatePrice(prod.getPrice(),prod.getAmount()));
+		}
+		addTotal();
+	}
+	
+	public void addTotal(){
+		Double result = 0.0;
+		for(int i= 0;i<this.listProd.size();i++){
+			FacturacionLogic log = new FacturacionLogic();
+			result+=Double.parseDouble(log.updatePrice(this.listProd.get(i).getPrice(),this.listProd.get(i).getAmount()));
+		}
+		this.total = result.toString();
+	}
+	
 
 }

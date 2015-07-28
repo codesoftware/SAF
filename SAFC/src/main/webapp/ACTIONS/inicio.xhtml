@@ -33,10 +33,10 @@
 					onsuccess="document.getElementById('formInicio:cantidadProductos').focus(); " />
 				<p:remoteCommand name="addProdFac"
 					actionListener="#{facturacionBean.addProductFact}"
-					update="listFact" />
+					update="listFact,formHeader:total" />
 				<p:remoteCommand name="addProdPan"
 					actionListener="#{facturacionBean.addProductPanel(receta)}"
-					update="listFact" />
+					update="listFact,formHeader:total" />
 				<div class="col-md-8 col-sm-12 col-xs-12">
 					<h:panelGroup layout="block" id="product" styleClass="panel">
 						<div class="col-md-12 col-xs-12 col-sm-12 alert-info text-center"
@@ -88,10 +88,16 @@
 								<f:facet name="header">Platos(Recetas)</f:facet>
 
 								<p:panel header="#{receta.codigo}" style="text-align:center;">
-									<h:panelGrid columns="1" onclick="addProdPan();">
-										<p:graphicImage library="images/products" name="taco.png" />
-										<h:outputText value="#{receta.nombre}" />
-									</h:panelGrid>
+
+									<p:commandLink
+										actionListener="#{facturacionBean.addProductPanel(receta)}"
+										ajax="true" update="formInicio:listFact">
+										<h:panelGrid columns="1">
+											<p:graphicImage library="images/products" name="taco.png" />
+											<h:outputText value="#{receta.nombre}" />
+										</h:panelGrid>
+									</p:commandLink>
+
 								</p:panel>
 							</p:dataGrid>
 							<br />
@@ -129,12 +135,20 @@
 							<p:column headerText="Valor">
 								<h:outputText value="#{factura.price}" />
 							</p:column>
+							<p:column headerText="Valor">
+								<h:outputText value="#{factura.totalPrice}" />
+							</p:column>
 							<p:column headerText="Eliminar">
-								<p:commandButton icon="fa-close" title="Eliminar"
-									ajax="true" 
-									update="listFact"
+
+								<p:commandButton icon="ui-icon-closethick" title="Borrar"
+									ajax="true" update="listFact,formHeader:total"
 									actionListener="#{facturacionBean.deleteRow(factura)}">
 								</p:commandButton>
+								<p:commandButton icon="ui-icon-minus" title="Descontar"
+									ajax="true" update="listFact,formHeader:total"
+									actionListener="#{facturacionBean.updateRow(factura)}">
+								</p:commandButton>
+
 							</p:column>
 						</p:dataTable>
 					</p:panel>

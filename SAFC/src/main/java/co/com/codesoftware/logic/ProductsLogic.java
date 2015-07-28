@@ -47,6 +47,7 @@ public class ProductsLogic {
 		result.setId(product.getId());
 		result.setName(product.getNombre());	
 		result.setAmount(cantidad);
+		result.setPrice(String.valueOf(product.getPrecios().get(0).getPrecio()));
 		return result;
 	}
 	

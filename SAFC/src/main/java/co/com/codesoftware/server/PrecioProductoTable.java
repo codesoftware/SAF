@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for precioProductoTable complex type.
+ * <p>Clase Java para precioProductoTable complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
  * &lt;complexType name="precioProductoTable">
@@ -49,7 +49,7 @@ public class PrecioProductoTable {
     protected Integer usuarioCrea;
 
     /**
-     * Gets the value of the estado property.
+     * Obtiene el valor de la propiedad estado.
      * 
      * @return
      *     possible object is
@@ -61,7 +61,7 @@ public class PrecioProductoTable {
     }
 
     /**
-     * Sets the value of the estado property.
+     * Define el valor de la propiedad estado.
      * 
      * @param value
      *     allowed object is
@@ -73,7 +73,7 @@ public class PrecioProductoTable {
     }
 
     /**
-     * Gets the value of the id property.
+     * Obtiene el valor de la propiedad id.
      * 
      * @return
      *     possible object is
@@ -85,7 +85,7 @@ public class PrecioProductoTable {
     }
 
     /**
-     * Sets the value of the id property.
+     * Define el valor de la propiedad id.
      * 
      * @param value
      *     allowed object is
@@ -97,7 +97,7 @@ public class PrecioProductoTable {
     }
 
     /**
-     * Gets the value of the idProducto property.
+     * Obtiene el valor de la propiedad idProducto.
      * 
      * @return
      *     possible object is
@@ -109,7 +109,7 @@ public class PrecioProductoTable {
     }
 
     /**
-     * Sets the value of the idProducto property.
+     * Define el valor de la propiedad idProducto.
      * 
      * @param value
      *     allowed object is
@@ -121,7 +121,7 @@ public class PrecioProductoTable {
     }
 
     /**
-     * Gets the value of the idSede property.
+     * Obtiene el valor de la propiedad idSede.
      * 
      * @return
      *     possible object is
@@ -133,7 +133,7 @@ public class PrecioProductoTable {
     }
 
     /**
-     * Sets the value of the idSede property.
+     * Define el valor de la propiedad idSede.
      * 
      * @param value
      *     allowed object is
@@ -145,7 +145,7 @@ public class PrecioProductoTable {
     }
 
     /**
-     * Gets the value of the precio property.
+     * Obtiene el valor de la propiedad precio.
      * 
      * @return
      *     possible object is
@@ -157,7 +157,7 @@ public class PrecioProductoTable {
     }
 
     /**
-     * Sets the value of the precio property.
+     * Define el valor de la propiedad precio.
      * 
      * @param value
      *     allowed object is
@@ -169,7 +169,7 @@ public class PrecioProductoTable {
     }
 
     /**
-     * Gets the value of the usuarioCrea property.
+     * Obtiene el valor de la propiedad usuarioCrea.
      * 
      * @return
      *     possible object is
@@ -181,7 +181,7 @@ public class PrecioProductoTable {
     }
 
     /**
-     * Sets the value of the usuarioCrea property.
+     * Define el valor de la propiedad usuarioCrea.
      * 
      * @param value
      *     allowed object is

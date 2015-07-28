@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for getRecetas complex type.
+ * <p>Clase Java para getRecetas complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
  * &lt;complexType name="getRecetas">
@@ -36,7 +36,7 @@ public class GetRecetas {
     protected Integer sedeSede;
 
     /**
-     * Gets the value of the sedeSede property.
+     * Obtiene el valor de la propiedad sedeSede.
      * 
      * @return
      *     possible object is
@@ -48,7 +48,7 @@ public class GetRecetas {
     }
 
     /**
-     * Sets the value of the sedeSede property.
+     * Define el valor de la propiedad sedeSede.
      * 
      * @param value
      *     allowed object is

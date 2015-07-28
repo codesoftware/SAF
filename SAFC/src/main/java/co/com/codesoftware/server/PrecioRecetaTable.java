@@ -10,9 +10,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>Java class for precioRecetaTable complex type.
+ * <p>Clase Java para precioRecetaTable complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
  * &lt;complexType name="precioRecetaTable">
@@ -53,7 +53,7 @@ public class PrecioRecetaTable {
     protected BigDecimal precio;
 
     /**
-     * Gets the value of the estado property.
+     * Obtiene el valor de la propiedad estado.
      * 
      * @return
      *     possible object is
@@ -65,7 +65,7 @@ public class PrecioRecetaTable {
     }
 
     /**
-     * Sets the value of the estado property.
+     * Define el valor de la propiedad estado.
      * 
      * @param value
      *     allowed object is
@@ -77,7 +77,7 @@ public class PrecioRecetaTable {
     }
 
     /**
-     * Gets the value of the fecha property.
+     * Obtiene el valor de la propiedad fecha.
      * 
      * @return
      *     possible object is
@@ -89,7 +89,7 @@ public class PrecioRecetaTable {
     }
 
     /**
-     * Sets the value of the fecha property.
+     * Define el valor de la propiedad fecha.
      * 
      * @param value
      *     allowed object is
@@ -101,7 +101,7 @@ public class PrecioRecetaTable {
     }
 
     /**
-     * Gets the value of the id property.
+     * Obtiene el valor de la propiedad id.
      * 
      * @return
      *     possible object is
@@ -113,7 +113,7 @@ public class PrecioRecetaTable {
     }
 
     /**
-     * Sets the value of the id property.
+     * Define el valor de la propiedad id.
      * 
      * @param value
      *     allowed object is
@@ -125,7 +125,7 @@ public class PrecioRecetaTable {
     }
 
     /**
-     * Gets the value of the idReceta property.
+     * Obtiene el valor de la propiedad idReceta.
      * 
      * @return
      *     possible object is
@@ -137,7 +137,7 @@ public class PrecioRecetaTable {
     }
 
     /**
-     * Sets the value of the idReceta property.
+     * Define el valor de la propiedad idReceta.
      * 
      * @param value
      *     allowed object is
@@ -149,7 +149,7 @@ public class PrecioRecetaTable {
     }
 
     /**
-     * Gets the value of the idSede property.
+     * Obtiene el valor de la propiedad idSede.
      * 
      * @return
      *     possible object is
@@ -161,7 +161,7 @@ public class PrecioRecetaTable {
     }
 
     /**
-     * Sets the value of the idSede property.
+     * Define el valor de la propiedad idSede.
      * 
      * @param value
      *     allowed object is
@@ -173,7 +173,7 @@ public class PrecioRecetaTable {
     }
 
     /**
-     * Gets the value of the precio property.
+     * Obtiene el valor de la propiedad precio.
      * 
      * @return
      *     possible object is
@@ -185,7 +185,7 @@ public class PrecioRecetaTable {
     }
 
     /**
-     * Sets the value of the precio property.
+     * Define el valor de la propiedad precio.
      * 
      * @param value
      *     allowed object is

@@ -10,9 +10,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for productoTable complex type.
+ * <p>Clase Java para productoTable complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
  * &lt;complexType name="productoTable">
@@ -56,7 +56,7 @@ public class ProductoTable {
     protected Integer referenciaId;
 
     /**
-     * Gets the value of the codigo property.
+     * Obtiene el valor de la propiedad codigo.
      * 
      * @return
      *     possible object is
@@ -68,7 +68,7 @@ public class ProductoTable {
     }
 
     /**
-     * Sets the value of the codigo property.
+     * Define el valor de la propiedad codigo.
      * 
      * @param value
      *     allowed object is
@@ -80,7 +80,7 @@ public class ProductoTable {
     }
 
     /**
-     * Gets the value of the descripcion property.
+     * Obtiene el valor de la propiedad descripcion.
      * 
      * @return
      *     possible object is
@@ -92,7 +92,7 @@ public class ProductoTable {
     }
 
     /**
-     * Sets the value of the descripcion property.
+     * Define el valor de la propiedad descripcion.
      * 
      * @param value
      *     allowed object is
@@ -104,7 +104,7 @@ public class ProductoTable {
     }
 
     /**
-     * Gets the value of the estado property.
+     * Obtiene el valor de la propiedad estado.
      * 
      * @return
      *     possible object is
@@ -116,7 +116,7 @@ public class ProductoTable {
     }
 
     /**
-     * Sets the value of the estado property.
+     * Define el valor de la propiedad estado.
      * 
      * @param value
      *     allowed object is
@@ -128,7 +128,7 @@ public class ProductoTable {
     }
 
     /**
-     * Gets the value of the id property.
+     * Obtiene el valor de la propiedad id.
      * 
      * @return
      *     possible object is
@@ -140,7 +140,7 @@ public class ProductoTable {
     }
 
     /**
-     * Sets the value of the id property.
+     * Define el valor de la propiedad id.
      * 
      * @param value
      *     allowed object is
@@ -152,7 +152,7 @@ public class ProductoTable {
     }
 
     /**
-     * Gets the value of the nombre property.
+     * Obtiene el valor de la propiedad nombre.
      * 
      * @return
      *     possible object is
@@ -164,7 +164,7 @@ public class ProductoTable {
     }
 
     /**
-     * Sets the value of the nombre property.
+     * Define el valor de la propiedad nombre.
      * 
      * @param value
      *     allowed object is
@@ -205,7 +205,7 @@ public class ProductoTable {
     }
 
     /**
-     * Gets the value of the referenciaId property.
+     * Obtiene el valor de la propiedad referenciaId.
      * 
      * @return
      *     possible object is
@@ -217,7 +217,7 @@ public class ProductoTable {
     }
 
     /**
-     * Sets the value of the referenciaId property.
+     * Define el valor de la propiedad referenciaId.
      * 
      * @param value
      *     allowed object is

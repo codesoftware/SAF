@@ -9,6 +9,7 @@ public class GenericProductEntity implements Serializable{
 	private int amount;
 	private String name;
 	private String price;
+	private String totalPrice;
 	private int id;
 	private int type;
 	private String routImage;
@@ -54,6 +55,12 @@ public class GenericProductEntity implements Serializable{
 	}
 	public void setRoutImage(String routImage) {
 		this.routImage = routImage;
+	}
+	public String getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(String totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 	
 	
