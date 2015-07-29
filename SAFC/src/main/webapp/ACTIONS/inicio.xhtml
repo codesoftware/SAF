@@ -93,7 +93,7 @@
 										actionListener="#{facturacionBean.addProductPanel(receta)}"
 										ajax="true" update="formInicio:listFact">
 										<h:panelGrid columns="1">
-											<p:graphicImage library="images/products" name="taco.png" />
+											<p:graphicImage library="images/products" name="#{receta.nombre}.jpeg" />
 											<h:outputText value="#{receta.nombre}" />
 										</h:panelGrid>
 									</p:commandLink>
