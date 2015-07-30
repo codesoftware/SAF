@@ -22,6 +22,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="imagen" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="nombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="posicion" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="precio" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="ruta" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="tipo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
@@ -40,6 +41,7 @@ import javax.xml.bind.annotation.XmlType;
     "imagen",
     "nombre",
     "posicion",
+    "precio",
     "ruta",
     "tipo"
 })
@@ -51,6 +53,7 @@ public class PantallaPrincipalFacTable {
     protected String imagen;
     protected String nombre;
     protected Integer posicion;
+    protected String precio;
     protected String ruta;
     protected String tipo;
 
@@ -196,6 +199,30 @@ public class PantallaPrincipalFacTable {
      */
     public void setPosicion(Integer value) {
         this.posicion = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad precio.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getPrecio() {
+        return precio;
+    }
+
+    /**
+     * Define el valor de la propiedad precio.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setPrecio(String value) {
+        this.precio = value;
     }
 
     /**

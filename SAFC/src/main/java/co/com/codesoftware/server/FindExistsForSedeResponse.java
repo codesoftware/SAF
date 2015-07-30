@@ -3,21 +3,20 @@ package co.com.codesoftware.server;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para getProductPrincipalScreen complex type.
+ * <p>Clase Java para findExistsForSedeResponse complex type.
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
- * &lt;complexType name="getProductPrincipalScreen">
+ * &lt;complexType name="findExistsForSedeResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="sede_sede" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="existencia" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,36 +26,35 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getProductPrincipalScreen", propOrder = {
-    "sedeSede"
+@XmlType(name = "findExistsForSedeResponse", propOrder = {
+    "existencia"
 })
-public class GetProductPrincipalScreen {
+public class FindExistsForSedeResponse {
 
-    @XmlElement(name = "sede_sede")
-    protected Integer sedeSede;
+    protected String existencia;
 
     /**
-     * Obtiene el valor de la propiedad sedeSede.
+     * Obtiene el valor de la propiedad existencia.
      * 
      * @return
      *     possible object is
-     *     {@link Integer }
+     *     {@link String }
      *     
      */
-    public Integer getSedeSede() {
-        return sedeSede;
+    public String getExistencia() {
+        return existencia;
     }
 
     /**
-     * Define el valor de la propiedad sedeSede.
+     * Define el valor de la propiedad existencia.
      * 
      * @param value
      *     allowed object is
-     *     {@link Integer }
+     *     {@link String }
      *     
      */
-    public void setSedeSede(Integer value) {
-        this.sedeSede = value;
+    public void setExistencia(String value) {
+        this.existencia = value;
     }
 
 }

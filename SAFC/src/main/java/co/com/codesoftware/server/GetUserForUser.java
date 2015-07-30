@@ -8,16 +8,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para getProductPrincipalScreen complex type.
+ * <p>Clase Java para getUserForUser complex type.
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
- * &lt;complexType name="getProductPrincipalScreen">
+ * &lt;complexType name="getUserForUser">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="sede_sede" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="tius_usuario" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,36 +27,36 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getProductPrincipalScreen", propOrder = {
-    "sedeSede"
+@XmlType(name = "getUserForUser", propOrder = {
+    "tiusUsuario"
 })
-public class GetProductPrincipalScreen {
+public class GetUserForUser {
 
-    @XmlElement(name = "sede_sede")
-    protected Integer sedeSede;
+    @XmlElement(name = "tius_usuario", required = true)
+    protected String tiusUsuario;
 
     /**
-     * Obtiene el valor de la propiedad sedeSede.
+     * Obtiene el valor de la propiedad tiusUsuario.
      * 
      * @return
      *     possible object is
-     *     {@link Integer }
+     *     {@link String }
      *     
      */
-    public Integer getSedeSede() {
-        return sedeSede;
+    public String getTiusUsuario() {
+        return tiusUsuario;
     }
 
     /**
-     * Define el valor de la propiedad sedeSede.
+     * Define el valor de la propiedad tiusUsuario.
      * 
      * @param value
      *     allowed object is
-     *     {@link Integer }
+     *     {@link String }
      *     
      */
-    public void setSedeSede(Integer value) {
-        this.sedeSede = value;
+    public void setTiusUsuario(String value) {
+        this.tiusUsuario = value;
     }
 
 }

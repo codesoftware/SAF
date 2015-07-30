@@ -191,7 +191,6 @@ public class ClienteBean implements Serializable {
 			SearchTopLogic logic = new SearchTopLogic();
 			clientes = logic.searchClient();
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}

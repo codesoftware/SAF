@@ -8,16 +8,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para getProductPrincipalScreen complex type.
+ * <p>Clase Java para getUserForUserResponse complex type.
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
- * &lt;complexType name="getProductPrincipalScreen">
+ * &lt;complexType name="getUserForUserResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="sede_sede" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="UsuarioTable" type="{http://server.codesoftware.com.co/}usuarioTable" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,36 +27,36 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getProductPrincipalScreen", propOrder = {
-    "sedeSede"
+@XmlType(name = "getUserForUserResponse", propOrder = {
+    "usuarioTable"
 })
-public class GetProductPrincipalScreen {
+public class GetUserForUserResponse {
 
-    @XmlElement(name = "sede_sede")
-    protected Integer sedeSede;
+    @XmlElement(name = "UsuarioTable")
+    protected UsuarioTable usuarioTable;
 
     /**
-     * Obtiene el valor de la propiedad sedeSede.
+     * Obtiene el valor de la propiedad usuarioTable.
      * 
      * @return
      *     possible object is
-     *     {@link Integer }
+     *     {@link UsuarioTable }
      *     
      */
-    public Integer getSedeSede() {
-        return sedeSede;
+    public UsuarioTable getUsuarioTable() {
+        return usuarioTable;
     }
 
     /**
-     * Define el valor de la propiedad sedeSede.
+     * Define el valor de la propiedad usuarioTable.
      * 
      * @param value
      *     allowed object is
-     *     {@link Integer }
+     *     {@link UsuarioTable }
      *     
      */
-    public void setSedeSede(Integer value) {
-        this.sedeSede = value;
+    public void setUsuarioTable(UsuarioTable value) {
+        this.usuarioTable = value;
     }
 
 }

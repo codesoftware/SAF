@@ -121,7 +121,7 @@ public class FacturacionBean implements Serializable {
 			product = prod.getProductXCode(codigoAdd, cantidad);
 
 		} else if (product.getCode().startsWith("3-")) {
-
+			
 		} else {
 			// Mensaje error;
 		}
@@ -191,6 +191,7 @@ public class FacturacionBean implements Serializable {
 	public void setData(PantallaPrincipalFacTable table) {
 		this.product = new GenericProductEntity();
 		this.product.setAmount(1);
+		this.product.setPrice(table.getPrecio());
 		this.product.setCode(table.getCodigo());
 		this.product.setName(table.getNombre());
 	}

@@ -91,9 +91,10 @@
 
 									<p:commandLink
 										actionListener="#{facturacionBean.addProductPanel(receta)}"
-										ajax="true" update="formInicio:listFact">
+										ajax="true" update="formInicio:listFact,formHeader:total">
 										<h:panelGrid columns="1">
-											<p:graphicImage library="images/products" name="#{receta.nombre}.jpeg" />
+											<p:graphicImage library="images/products"
+												name="#{receta.nombre}.jpeg" width="50" height="50" />
 											<h:outputText value="#{receta.nombre}" />
 										</h:panelGrid>
 									</p:commandLink>
@@ -107,10 +108,15 @@
 								<f:facet name="header">Productos(Fruteria)</f:facet>
 
 								<p:panel header="#{producto.codigo}" style="text-align:center">
-									<h:panelGrid columns="1" style="width:50%">
-										<p:graphicImage library="images/products" name="banana.png" />
-										<h:outputText value="#{producto.nombre}" />
-									</h:panelGrid>
+									<p:commandLink
+										actionListener="#{facturacionBean.addProductPanel(producto)}"
+										ajax="true" update="formInicio:listFact,formHeader:total">
+										<h:panelGrid columns="1">
+											<p:graphicImage library="images/products"
+												name="#{producto.nombre}.jpeg" width="50" height="50" />
+											<h:outputText value="#{producto.nombre}" />
+										</h:panelGrid>
+									</p:commandLink>
 								</p:panel>
 							</p:dataGrid>
 

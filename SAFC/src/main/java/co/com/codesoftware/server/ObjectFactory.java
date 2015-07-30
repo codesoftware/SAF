@@ -24,26 +24,32 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _GetDishesPrincipalScreenResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getDishesPrincipalScreenResponse");
     private final static QName _LoginResponse_QNAME = new QName("http://server.codesoftware.com.co/", "loginResponse");
-    private final static QName _GetProductPrincipalScreen_QNAME = new QName("http://server.codesoftware.com.co/", "getProductPrincipalScreen");
-    private final static QName _GetRecetasResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getRecetasResponse");
-    private final static QName _GetProductPrincipalScreenResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getProductPrincipalScreenResponse");
+    private final static QName _FindExistsForSedeResponse_QNAME = new QName("http://server.codesoftware.com.co/", "findExistsForSedeResponse");
     private final static QName _UpdateClienteResponse_QNAME = new QName("http://server.codesoftware.com.co/", "updateClienteResponse");
-    private final static QName _Login_QNAME = new QName("http://server.codesoftware.com.co/", "login");
-    private final static QName _GetProductsResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getProductsResponse");
     private final static QName _GetSedes_QNAME = new QName("http://server.codesoftware.com.co/", "getSedes");
     private final static QName _GetClientesResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getClientesResponse");
     private final static QName _GetProductForCode_QNAME = new QName("http://server.codesoftware.com.co/", "getProductForCode");
     private final static QName _GetProductForCodeResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getProductForCodeResponse");
     private final static QName _GetRecetas_QNAME = new QName("http://server.codesoftware.com.co/", "getRecetas");
-    private final static QName _AddCliente_QNAME = new QName("http://server.codesoftware.com.co/", "addCliente");
     private final static QName _AddClienteResponse_QNAME = new QName("http://server.codesoftware.com.co/", "addClienteResponse");
+    private final static QName _GetUsersResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getUsersResponse");
+    private final static QName _GetDishesPrincipalScreenResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getDishesPrincipalScreenResponse");
+    private final static QName _FindExistsForSede_QNAME = new QName("http://server.codesoftware.com.co/", "findExistsForSede");
+    private final static QName _GetProductPrincipalScreen_QNAME = new QName("http://server.codesoftware.com.co/", "getProductPrincipalScreen");
+    private final static QName _GetRecetasResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getRecetasResponse");
+    private final static QName _GetProductPrincipalScreenResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getProductPrincipalScreenResponse");
+    private final static QName _Login_QNAME = new QName("http://server.codesoftware.com.co/", "login");
+    private final static QName _GetProductsResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getProductsResponse");
+    private final static QName _GetUsers_QNAME = new QName("http://server.codesoftware.com.co/", "getUsers");
+    private final static QName _AddCliente_QNAME = new QName("http://server.codesoftware.com.co/", "addCliente");
     private final static QName _GetClientes_QNAME = new QName("http://server.codesoftware.com.co/", "getClientes");
     private final static QName _GetDishesPrincipalScreen_QNAME = new QName("http://server.codesoftware.com.co/", "getDishesPrincipalScreen");
     private final static QName _UpdateCliente_QNAME = new QName("http://server.codesoftware.com.co/", "updateCliente");
+    private final static QName _GetUserForUser_QNAME = new QName("http://server.codesoftware.com.co/", "getUserForUser");
     private final static QName _GetProducts_QNAME = new QName("http://server.codesoftware.com.co/", "getProducts");
     private final static QName _GetSedesResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getSedesResponse");
+    private final static QName _GetUserForUserResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getUserForUserResponse");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: co.com.codesoftware.server
@@ -69,11 +75,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link LoginResponse }
+     * Create an instance of {@link FindExistsForSede }
      * 
      */
-    public LoginResponse createLoginResponse() {
-        return new LoginResponse();
+    public FindExistsForSede createFindExistsForSede() {
+        return new FindExistsForSede();
     }
 
     /**
@@ -85,14 +91,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetClientesResponse }
-     * 
-     */
-    public GetClientesResponse createGetClientesResponse() {
-        return new GetClientesResponse();
-    }
-
-    /**
      * Create an instance of {@link GetProductsResponse }
      * 
      */
@@ -101,27 +99,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetSedes }
-     * 
-     */
-    public GetSedes createGetSedes() {
-        return new GetSedes();
-    }
-
-    /**
      * Create an instance of {@link Login }
      * 
      */
     public Login createLogin() {
         return new Login();
-    }
-
-    /**
-     * Create an instance of {@link UpdateClienteResponse }
-     * 
-     */
-    public UpdateClienteResponse createUpdateClienteResponse() {
-        return new UpdateClienteResponse();
     }
 
     /**
@@ -165,6 +147,86 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetUsers }
+     * 
+     */
+    public GetUsers createGetUsers() {
+        return new GetUsers();
+    }
+
+    /**
+     * Create an instance of {@link GetSedesResponse }
+     * 
+     */
+    public GetSedesResponse createGetSedesResponse() {
+        return new GetSedesResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetUserForUserResponse }
+     * 
+     */
+    public GetUserForUserResponse createGetUserForUserResponse() {
+        return new GetUserForUserResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetProducts }
+     * 
+     */
+    public GetProducts createGetProducts() {
+        return new GetProducts();
+    }
+
+    /**
+     * Create an instance of {@link GetUserForUser }
+     * 
+     */
+    public GetUserForUser createGetUserForUser() {
+        return new GetUserForUser();
+    }
+
+    /**
+     * Create an instance of {@link LoginResponse }
+     * 
+     */
+    public LoginResponse createLoginResponse() {
+        return new LoginResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetClientesResponse }
+     * 
+     */
+    public GetClientesResponse createGetClientesResponse() {
+        return new GetClientesResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetSedes }
+     * 
+     */
+    public GetSedes createGetSedes() {
+        return new GetSedes();
+    }
+
+    /**
+     * Create an instance of {@link UpdateClienteResponse }
+     * 
+     */
+    public UpdateClienteResponse createUpdateClienteResponse() {
+        return new UpdateClienteResponse();
+    }
+
+    /**
+     * Create an instance of {@link FindExistsForSedeResponse }
+     * 
+     */
+    public FindExistsForSedeResponse createFindExistsForSedeResponse() {
+        return new FindExistsForSedeResponse();
+    }
+
+    /**
      * Create an instance of {@link AddClienteResponse }
      * 
      */
@@ -197,19 +259,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetSedesResponse }
+     * Create an instance of {@link GetUsersResponse }
      * 
      */
-    public GetSedesResponse createGetSedesResponse() {
-        return new GetSedesResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetProducts }
-     * 
-     */
-    public GetProducts createGetProducts() {
-        return new GetProducts();
+    public GetUsersResponse createGetUsersResponse() {
+        return new GetUsersResponse();
     }
 
     /**
@@ -226,6 +280,14 @@ public class ObjectFactory {
      */
     public PrecioProductoTable createPrecioProductoTable() {
         return new PrecioProductoTable();
+    }
+
+    /**
+     * Create an instance of {@link UsuarioTable }
+     * 
+     */
+    public UsuarioTable createUsuarioTable() {
+        return new UsuarioTable();
     }
 
     /**
@@ -253,6 +315,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link PersonaUsuarioTable }
+     * 
+     */
+    public PersonaUsuarioTable createPersonaUsuarioTable() {
+        return new PersonaUsuarioTable();
+    }
+
+    /**
      * Create an instance of {@link Cliente }
      * 
      */
@@ -269,15 +339,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetDishesPrincipalScreenResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getDishesPrincipalScreenResponse")
-    public JAXBElement<GetDishesPrincipalScreenResponse> createGetDishesPrincipalScreenResponse(GetDishesPrincipalScreenResponse value) {
-        return new JAXBElement<GetDishesPrincipalScreenResponse>(_GetDishesPrincipalScreenResponse_QNAME, GetDishesPrincipalScreenResponse.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link LoginResponse }{@code >}}
      * 
      */
@@ -287,30 +348,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetProductPrincipalScreen }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link FindExistsForSedeResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getProductPrincipalScreen")
-    public JAXBElement<GetProductPrincipalScreen> createGetProductPrincipalScreen(GetProductPrincipalScreen value) {
-        return new JAXBElement<GetProductPrincipalScreen>(_GetProductPrincipalScreen_QNAME, GetProductPrincipalScreen.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetRecetasResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getRecetasResponse")
-    public JAXBElement<GetRecetasResponse> createGetRecetasResponse(GetRecetasResponse value) {
-        return new JAXBElement<GetRecetasResponse>(_GetRecetasResponse_QNAME, GetRecetasResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetProductPrincipalScreenResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getProductPrincipalScreenResponse")
-    public JAXBElement<GetProductPrincipalScreenResponse> createGetProductPrincipalScreenResponse(GetProductPrincipalScreenResponse value) {
-        return new JAXBElement<GetProductPrincipalScreenResponse>(_GetProductPrincipalScreenResponse_QNAME, GetProductPrincipalScreenResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "findExistsForSedeResponse")
+    public JAXBElement<FindExistsForSedeResponse> createFindExistsForSedeResponse(FindExistsForSedeResponse value) {
+        return new JAXBElement<FindExistsForSedeResponse>(_FindExistsForSedeResponse_QNAME, FindExistsForSedeResponse.class, null, value);
     }
 
     /**
@@ -320,24 +363,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "updateClienteResponse")
     public JAXBElement<UpdateClienteResponse> createUpdateClienteResponse(UpdateClienteResponse value) {
         return new JAXBElement<UpdateClienteResponse>(_UpdateClienteResponse_QNAME, UpdateClienteResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Login }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "login")
-    public JAXBElement<Login> createLogin(Login value) {
-        return new JAXBElement<Login>(_Login_QNAME, Login.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetProductsResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getProductsResponse")
-    public JAXBElement<GetProductsResponse> createGetProductsResponse(GetProductsResponse value) {
-        return new JAXBElement<GetProductsResponse>(_GetProductsResponse_QNAME, GetProductsResponse.class, null, value);
     }
 
     /**
@@ -386,21 +411,102 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link AddCliente }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "addCliente")
-    public JAXBElement<AddCliente> createAddCliente(AddCliente value) {
-        return new JAXBElement<AddCliente>(_AddCliente_QNAME, AddCliente.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link AddClienteResponse }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "addClienteResponse")
     public JAXBElement<AddClienteResponse> createAddClienteResponse(AddClienteResponse value) {
         return new JAXBElement<AddClienteResponse>(_AddClienteResponse_QNAME, AddClienteResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetUsersResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getUsersResponse")
+    public JAXBElement<GetUsersResponse> createGetUsersResponse(GetUsersResponse value) {
+        return new JAXBElement<GetUsersResponse>(_GetUsersResponse_QNAME, GetUsersResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetDishesPrincipalScreenResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getDishesPrincipalScreenResponse")
+    public JAXBElement<GetDishesPrincipalScreenResponse> createGetDishesPrincipalScreenResponse(GetDishesPrincipalScreenResponse value) {
+        return new JAXBElement<GetDishesPrincipalScreenResponse>(_GetDishesPrincipalScreenResponse_QNAME, GetDishesPrincipalScreenResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link FindExistsForSede }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "findExistsForSede")
+    public JAXBElement<FindExistsForSede> createFindExistsForSede(FindExistsForSede value) {
+        return new JAXBElement<FindExistsForSede>(_FindExistsForSede_QNAME, FindExistsForSede.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetProductPrincipalScreen }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getProductPrincipalScreen")
+    public JAXBElement<GetProductPrincipalScreen> createGetProductPrincipalScreen(GetProductPrincipalScreen value) {
+        return new JAXBElement<GetProductPrincipalScreen>(_GetProductPrincipalScreen_QNAME, GetProductPrincipalScreen.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetRecetasResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getRecetasResponse")
+    public JAXBElement<GetRecetasResponse> createGetRecetasResponse(GetRecetasResponse value) {
+        return new JAXBElement<GetRecetasResponse>(_GetRecetasResponse_QNAME, GetRecetasResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetProductPrincipalScreenResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getProductPrincipalScreenResponse")
+    public JAXBElement<GetProductPrincipalScreenResponse> createGetProductPrincipalScreenResponse(GetProductPrincipalScreenResponse value) {
+        return new JAXBElement<GetProductPrincipalScreenResponse>(_GetProductPrincipalScreenResponse_QNAME, GetProductPrincipalScreenResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Login }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "login")
+    public JAXBElement<Login> createLogin(Login value) {
+        return new JAXBElement<Login>(_Login_QNAME, Login.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetProductsResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getProductsResponse")
+    public JAXBElement<GetProductsResponse> createGetProductsResponse(GetProductsResponse value) {
+        return new JAXBElement<GetProductsResponse>(_GetProductsResponse_QNAME, GetProductsResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetUsers }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getUsers")
+    public JAXBElement<GetUsers> createGetUsers(GetUsers value) {
+        return new JAXBElement<GetUsers>(_GetUsers_QNAME, GetUsers.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link AddCliente }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "addCliente")
+    public JAXBElement<AddCliente> createAddCliente(AddCliente value) {
+        return new JAXBElement<AddCliente>(_AddCliente_QNAME, AddCliente.class, null, value);
     }
 
     /**
@@ -431,6 +537,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetUserForUser }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getUserForUser")
+    public JAXBElement<GetUserForUser> createGetUserForUser(GetUserForUser value) {
+        return new JAXBElement<GetUserForUser>(_GetUserForUser_QNAME, GetUserForUser.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetProducts }{@code >}}
      * 
      */
@@ -446,6 +561,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getSedesResponse")
     public JAXBElement<GetSedesResponse> createGetSedesResponse(GetSedesResponse value) {
         return new JAXBElement<GetSedesResponse>(_GetSedesResponse_QNAME, GetSedesResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetUserForUserResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getUserForUserResponse")
+    public JAXBElement<GetUserForUserResponse> createGetUserForUserResponse(GetUserForUserResponse value) {
+        return new JAXBElement<GetUserForUserResponse>(_GetUserForUserResponse_QNAME, GetUserForUserResponse.class, null, value);
     }
 
 }
