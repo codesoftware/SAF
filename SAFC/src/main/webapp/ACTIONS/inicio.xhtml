@@ -26,7 +26,7 @@
 				
 				}
 			</script>
-			<h:form id="formInicio">
+			<h:form id="formInicio">			
 				<p:remoteCommand name="test"
 					actionListener="#{facturacionBean.searchProdId}" update="product"
 					oncomplete="mostrarPanelProd();"
@@ -34,8 +34,48 @@
 				<p:remoteCommand name="addProdFac"
 					actionListener="#{facturacionBean.addProductFact}"
 					update="listFact,formHeader:total" />
-				<div class="col-md-8 col-sm-12 col-xs-12">
-					<h:panelGroup layout="block" id="product" styleClass="panel">
+				<div class="col-md-6 col-sm-12 col-xs-12">
+
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<p:dataGrid var="panelRec" columns="7" layout="grid"
+								value="#{clienteBean.recetas}">
+								<f:facet name="header">Platos(Recetas)</f:facet>
+								<p:panel header="#{panelRec.codigo}" style="text-align:center">
+									<p:commandLink
+										actionListener="#{facturacionBean.addProductPanel(panelRec)}"
+										ajax="true" update="formInicio:listFact,formHeader:total">
+										<p:graphicImage library="images/products"
+											name="#{panelRec.nombre}.#{panelRec.extension}" width="50"
+											height="50" />
+											<p:outputLabel value="#{panelRec.nombre}"/>
+									</p:commandLink>
+								</p:panel>
+							</p:dataGrid>
+							<br />
+							<p:dataGrid var="panelProd" columns="7" layout="grid"
+								style="width:100%" value="#{clienteBean.productos}">
+								<f:facet name="header">
+									Productos 
+								</f:facet>
+								<p:panel header="#{panelProd.codigo}" style="text-align:center">
+									<h:panelGrid columns="1">
+										<p:commandLink
+											actionListener="#{facturacionBean.addProductPanel(panelProd)}"
+											ajax="true" update="formInicio:listFact,formHeader:total">
+											<p:graphicImage library="images/products"
+												name="#{panelProd.nombre}.#{panelProd.extension}" width="50"
+												height="50" />
+											<p:outputLabel value="#{panelProd.nombre}"/>	
+										</p:commandLink>
+									</h:panelGrid>
+								</p:panel>
+							</p:dataGrid>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-12 col-xs-12">
+									<h:panelGroup layout="block" id="product" styleClass="panel">
 						<div class="col-md-12 col-xs-12 col-sm-12 alert-info text-center"
 							style="padding: 2px;">
 							<h4>Busqueda de Productos</h4>
@@ -76,43 +116,6 @@
 							</div>
 						</div>
 					</h:panelGroup>
-					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12">
-							<p:dataGrid var="panelRec" columns="7" layout="grid"
-								value="#{clienteBean.recetas}">
-								<f:facet name="header">Platos(Recetas)</f:facet>
-								<p:panel header="#{panelRec.codigo}" style="text-align:center">
-									<p:commandLink
-										actionListener="#{facturacionBean.addProductPanel(panelRec)}"
-										ajax="true" update="formInicio:listFact,formHeader:total">
-										<p:graphicImage library="images/products"
-											name="#{panelRec.nombre}.#{panelRec.extension}" width="50"
-											height="50" />
-									</p:commandLink>
-								</p:panel>
-							</p:dataGrid>
-							<br />
-							<p:dataGrid var="panelProd" columns="7" layout="grid"
-								style="width:100%" value="#{clienteBean.productos}">
-								<f:facet name="header">
-									Productos 
-								</f:facet>
-								<p:panel header="#{panelProd.codigo}" style="text-align:center">
-									<h:panelGrid columns="1">
-										<p:commandLink
-											actionListener="#{facturacionBean.addProductPanel(panelProd)}"
-											ajax="true" update="formInicio:listFact,formHeader:total">
-											<p:graphicImage library="images/products"
-												name="#{panelProd.nombre}.#{panelProd.extension}" width="50"
-												height="50" />
-										</p:commandLink>
-									</h:panelGrid>
-								</p:panel>
-							</p:dataGrid>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 col-sm-12 col-xs-12">
 					<p:panel header="Factura">
 						<p:commandButton value="Registrar" />
 						<p:commandButton value="Facturar" />
@@ -120,26 +123,23 @@
 							value="#{facturacionBean.listProd}">
 							<f:facet name="header">
 								Lista de Pedidos
-								<p:commandButton id="toggler" type="button" value="Columns"
-									style="float:right" icon="ui-icon-calculator" />
-								<p:columnToggler datasource="listFact" trigger="toggler" />
 							</f:facet>
-							<p:column headerText="Cod" sortBy="#{factura.code}" width="50%">
-								<h:outputText value="#{factura.code}" />
+							<p:column headerText="Cod" sortBy="#{factura.code}" width="10%">
+								<h:outputText value="#{factura.code}"  />
 							</p:column>
-							<p:column headerText="Nombre">
+							<p:column headerText="Nombre" width="45%" >
 								<h:outputText value="#{factura.name}" />
 							</p:column>
-							<p:column headerText="Cantidad">
-								<h:outputText value="#{factura.amount}" />
+							<p:column headerText="#" width="5%">
+								<h:outputText value="#{factura.amount}"  />
 							</p:column>
-							<p:column headerText="Valor">
-								<h:outputText value="#{factura.price}" />
+							<p:column headerText="Valor" width="20%">
+								<h:outputText value="$#{factura.price}" />
 							</p:column>
-							<p:column headerText="Valor">
-								<h:outputText value="#{factura.totalPrice}" />
+							<p:column headerText="Valor total" width="20%">
+								<h:outputText value="$#{factura.totalPrice}" />
 							</p:column>
-							<p:column headerText="Eliminar">
+							<p:column headerText="Eliminar" width="10%">
 
 								<p:commandButton icon="ui-icon-closethick" title="Borrar"
 									ajax="true" update="listFact,formHeader:total"
