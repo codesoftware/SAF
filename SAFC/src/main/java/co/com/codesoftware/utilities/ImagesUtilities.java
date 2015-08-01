@@ -26,6 +26,7 @@ public class ImagesUtilities {
 			FileOutputStream osf = new FileOutputStream(new File(realPath,name));
 			osf.write(imgBytes);
 			osf.flush();
+			osf.close();
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();

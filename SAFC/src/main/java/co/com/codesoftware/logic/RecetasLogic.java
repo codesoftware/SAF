@@ -64,8 +64,8 @@ public class RecetasLogic {
 		ImagesUtilities ut = new ImagesUtilities();
 	
 		for(int i=0;i<list.size();i++){
-			if(ut.encodeB64ToImage(list.get(i).getImagen(),list.get(i).getNombre()+".jpeg")){
-				list.get(i).setRuta(list.get(i).getCodigo()+".jpeg");
+			if(ut.encodeB64ToImage(list.get(i).getImagen(),list.get(i).getNombre()+"."+list.get(i).getExtension())){
+				list.get(i).setRuta(list.get(i).getCodigo()+"."+list.get(i).getExtension());
 			}
 		}
 		return list;

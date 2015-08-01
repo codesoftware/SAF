@@ -65,12 +65,11 @@ public class ProductsLogic {
 	
 	public  List<PantallaPrincipalFacTable> getImage(List<PantallaPrincipalFacTable> list){
 		ImagesUtilities ut = new ImagesUtilities();
-	
-		for(int i=0;i<list.size();i++){
-			if(ut.encodeB64ToImage(list.get(i).getImagen(),list.get(i).getNombre()+".jpeg")){
-				list.get(i).setRuta(list.get(i).getCodigo()+".jpeg");
+		for(PantallaPrincipalFacTable item: list){
+			if(ut.encodeB64ToImage(item.getImagen(),item.getNombre()+"." + item.getExtension())){
+				item.setRuta(item.getCodigo()+"." + item.getExtension());
 			}
-		}
+		}		
 		return list;
 	}
 	
