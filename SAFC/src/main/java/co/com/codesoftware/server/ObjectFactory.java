@@ -34,6 +34,7 @@ public class ObjectFactory {
     private final static QName _GetRecetas_QNAME = new QName("http://server.codesoftware.com.co/", "getRecetas");
     private final static QName _AddClienteResponse_QNAME = new QName("http://server.codesoftware.com.co/", "addClienteResponse");
     private final static QName _GetUsersResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getUsersResponse");
+    private final static QName _Facturar_QNAME = new QName("http://server.codesoftware.com.co/", "facturar");
     private final static QName _GetDishesPrincipalScreenResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getDishesPrincipalScreenResponse");
     private final static QName _FindExistsForSede_QNAME = new QName("http://server.codesoftware.com.co/", "findExistsForSede");
     private final static QName _GetProductPrincipalScreen_QNAME = new QName("http://server.codesoftware.com.co/", "getProductPrincipalScreen");
@@ -41,6 +42,7 @@ public class ObjectFactory {
     private final static QName _GetProductPrincipalScreenResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getProductPrincipalScreenResponse");
     private final static QName _Login_QNAME = new QName("http://server.codesoftware.com.co/", "login");
     private final static QName _GetProductsResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getProductsResponse");
+    private final static QName _FacturarResponse_QNAME = new QName("http://server.codesoftware.com.co/", "facturarResponse");
     private final static QName _GetUsers_QNAME = new QName("http://server.codesoftware.com.co/", "getUsers");
     private final static QName _AddCliente_QNAME = new QName("http://server.codesoftware.com.co/", "addCliente");
     private final static QName _GetClientes_QNAME = new QName("http://server.codesoftware.com.co/", "getClientes");
@@ -80,6 +82,14 @@ public class ObjectFactory {
      */
     public FindExistsForSede createFindExistsForSede() {
         return new FindExistsForSede();
+    }
+
+    /**
+     * Create an instance of {@link Facturar }
+     * 
+     */
+    public Facturar createFacturar() {
+        return new Facturar();
     }
 
     /**
@@ -152,6 +162,14 @@ public class ObjectFactory {
      */
     public GetUsers createGetUsers() {
         return new GetUsers();
+    }
+
+    /**
+     * Create an instance of {@link FacturarResponse }
+     * 
+     */
+    public FacturarResponse createFacturarResponse() {
+        return new FacturarResponse();
     }
 
     /**
@@ -267,6 +285,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link TemporalProdTable }
+     * 
+     */
+    public TemporalProdTable createTemporalProdTable() {
+        return new TemporalProdTable();
+    }
+
+    /**
+     * Create an instance of {@link Facturacion }
+     * 
+     */
+    public Facturacion createFacturacion() {
+        return new Facturacion();
+    }
+
+    /**
      * Create an instance of {@link PrecioRecetaTable }
      * 
      */
@@ -280,6 +314,22 @@ public class ObjectFactory {
      */
     public PrecioProductoTable createPrecioProductoTable() {
         return new PrecioProductoTable();
+    }
+
+    /**
+     * Create an instance of {@link TemporalRecTable }
+     * 
+     */
+    public TemporalRecTable createTemporalRecTable() {
+        return new TemporalRecTable();
+    }
+
+    /**
+     * Create an instance of {@link RespuestaFacturacion }
+     * 
+     */
+    public RespuestaFacturacion createRespuestaFacturacion() {
+        return new RespuestaFacturacion();
     }
 
     /**
@@ -429,6 +479,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Facturar }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "facturar")
+    public JAXBElement<Facturar> createFacturar(Facturar value) {
+        return new JAXBElement<Facturar>(_Facturar_QNAME, Facturar.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetDishesPrincipalScreenResponse }{@code >}}
      * 
      */
@@ -489,6 +548,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getProductsResponse")
     public JAXBElement<GetProductsResponse> createGetProductsResponse(GetProductsResponse value) {
         return new JAXBElement<GetProductsResponse>(_GetProductsResponse_QNAME, GetProductsResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link FacturarResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "facturarResponse")
+    public JAXBElement<FacturarResponse> createFacturarResponse(FacturarResponse value) {
+        return new JAXBElement<FacturarResponse>(_FacturarResponse_QNAME, FacturarResponse.class, null, value);
     }
 
     /**

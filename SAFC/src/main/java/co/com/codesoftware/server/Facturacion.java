@@ -1,0 +1,156 @@
+
+package co.com.codesoftware.server;
+
+import java.util.ArrayList;
+import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+
+
+/**
+ * <p>Clase Java para facturacion complex type.
+ * 
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * 
+ * <pre>
+ * &lt;complexType name="facturacion">
+ *   &lt;complexContent>
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;sequence>
+ *         &lt;element name="idCliente" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
+ *         &lt;element name="idTius" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
+ *         &lt;element name="productos" type="{http://server.codesoftware.com.co/}temporalProdTable" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="recetas" type="{http://server.codesoftware.com.co/}temporalRecTable" maxOccurs="unbounded" minOccurs="0"/>
+ *       &lt;/sequence>
+ *     &lt;/restriction>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
+ * 
+ * 
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "facturacion", propOrder = {
+    "idCliente",
+    "idTius",
+    "productos",
+    "recetas"
+})
+public class Facturacion {
+
+    protected Long idCliente;
+    protected Long idTius;
+    @XmlElement(nillable = true)
+    protected List<TemporalProdTable> productos;
+    @XmlElement(nillable = true)
+    protected List<TemporalRecTable> recetas;
+
+    /**
+     * Obtiene el valor de la propiedad idCliente.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *     
+     */
+    public Long getIdCliente() {
+        return idCliente;
+    }
+
+    /**
+     * Define el valor de la propiedad idCliente.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *     
+     */
+    public void setIdCliente(Long value) {
+        this.idCliente = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad idTius.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *     
+     */
+    public Long getIdTius() {
+        return idTius;
+    }
+
+    /**
+     * Define el valor de la propiedad idTius.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *     
+     */
+    public void setIdTius(Long value) {
+        this.idTius = value;
+    }
+
+    /**
+     * Gets the value of the productos property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the productos property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getProductos().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link TemporalProdTable }
+     * 
+     * 
+     */
+    public List<TemporalProdTable> getProductos() {
+        if (productos == null) {
+            productos = new ArrayList<TemporalProdTable>();
+        }
+        return this.productos;
+    }
+
+    /**
+     * Gets the value of the recetas property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the recetas property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getRecetas().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link TemporalRecTable }
+     * 
+     * 
+     */
+    public List<TemporalRecTable> getRecetas() {
+        if (recetas == null) {
+            recetas = new ArrayList<TemporalRecTable>();
+        }
+        return this.recetas;
+    }
+
+}

@@ -38,7 +38,12 @@ public class ProductsLogic {
 			SAFWSService service = new SAFWSService();
 			SAFWS port = service.getSAFWSPort();
 			product = port.getProductForCode(code,1);
-			result = setGenericProduct(result, product,cantidad);
+			if(product!=null){
+				result = setGenericProduct(result, product,cantidad);
+			}else{
+				result = null;
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -51,6 +56,7 @@ public class ProductsLogic {
 		result.setName(product.getNombre());	
 		result.setAmount(cantidad);
 		result.setPrice(String.valueOf(product.getPrecios().get(0).getPrecio()));
+		result.setTotalPrice(String.valueOf(product.getPrecios().get(0).getPrecio()));
 		return result;
 	}
 	
