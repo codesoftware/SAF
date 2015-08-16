@@ -1,12 +1,12 @@
 package co.com.codesoftware.mb;
 
-import java.awt.Desktop;
-import java.io.File;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -31,6 +31,8 @@ public class FacturacionBean implements Serializable {
 	private ClienteEntity cliente;
 	private GenericProductEntity product;
 	private PantallaPrincipalFacTable prod;
+	@ManagedProperty(value = "#{loginBean}")
+	private LoginBean loginBean;
 	@ManagedProperty(value = "#{clienteBean}")
 	private ClienteBean clientebean;
 	private String codigoProducto;
@@ -124,6 +126,14 @@ public class FacturacionBean implements Serializable {
 		this.codigoAdd = codigoAdd;
 	}
 
+	public LoginBean getLoginBean() {
+		return loginBean;
+	}
+
+	public void setLoginBean(LoginBean loginBean) {
+		this.loginBean = loginBean;
+	}
+
 	/**
 	 * Funcion que valida que tipo de producto es y asi poderlo mostrar
 	 */
@@ -157,17 +167,14 @@ public class FacturacionBean implements Serializable {
 			if (log.validateCantidad(cantidad)) {
 				int exist = existProduct();
 				if (exist > -1) {
-					this.listProd.get(exist).setAmount(
-							this.listProd.get(exist).getAmount() + cantidad);
+					this.listProd.get(exist).setAmount(this.listProd.get(exist).getAmount() + cantidad);
 					if (log.updatePrice(this.listProd.get(exist).getPrice(),
 							this.listProd.get(exist).getAmount()) == null) {
 						this.setEnumer(ErrorEnum.ERROR);
 						messageBean("Al producto no se le ha parametrizado el precio");
 					} else {
-						this.listProd.get(exist).setTotalPrice(
-								log.updatePrice(this.listProd.get(exist)
-										.getPrice(), this.listProd.get(exist)
-										.getAmount()));
+						this.listProd.get(exist).setTotalPrice(log.updatePrice(this.listProd.get(exist).getPrice(),
+								this.listProd.get(exist).getAmount()));
 					}
 				} else {
 					this.listProd.add(product);
@@ -199,11 +206,9 @@ public class FacturacionBean implements Serializable {
 			setData(table);
 			int exist = existProduct();
 			if (exist > -1) {
-				this.listProd.get(exist).setAmount(
-						this.listProd.get(exist).getAmount() + cantidad);
-				this.listProd.get(exist).setTotalPrice(
-						String.valueOf(Double.parseDouble(this.listProd.get(
-								exist).getPrice())
+				this.listProd.get(exist).setAmount(this.listProd.get(exist).getAmount() + cantidad);
+				this.listProd.get(exist)
+						.setTotalPrice(String.valueOf(Double.parseDouble(this.listProd.get(exist).getPrice())
 								* this.listProd.get(exist).getAmount()));
 			} else {
 				this.listProd.add(product);
@@ -224,8 +229,7 @@ public class FacturacionBean implements Serializable {
 			listProd = new ArrayList<GenericProductEntity>();
 		}
 		for (int i = 0; i < this.listProd.size(); i++) {
-			if (this.listProd.get(i).getCode()
-					.equalsIgnoreCase(product.getCode())) {
+			if (this.listProd.get(i).getCode().equalsIgnoreCase(product.getCode())) {
 				result = i;
 				i = this.listProd.size();
 			}
@@ -271,25 +275,28 @@ public class FacturacionBean implements Serializable {
 		} else {
 			FacturacionLogic log = new FacturacionLogic();
 			prod.setAmount(prod.getAmount() - 1);
-			prod.setTotalPrice(log.updatePrice(prod.getPrice(),
-					prod.getAmount()));
+			prod.setTotalPrice(log.updatePrice(prod.getPrice(), prod.getAmount()));
 		}
 		addTotal();
 	}
+
+	/**
+	 * Funcion que actualiza el total de la factura
+	 */
 
 	public void addTotal() {
 		Double result = 0.0;
 		for (int i = 0; i < this.listProd.size(); i++) {
 			FacturacionLogic log = new FacturacionLogic();
-			if (log.updatePrice(this.listProd.get(i).getPrice(), this.listProd
-					.get(i).getAmount()) == null) {
+			if (log.updatePrice(this.listProd.get(i).getPrice(), this.listProd.get(i).getAmount()) == null) {
 				this.setEnumer(ErrorEnum.ERROR);
 				messageBean("Producto sin parametrizar precio.");
 			} else {
-				result += Double.parseDouble(log.updatePrice(
-						this.listProd.get(i).getPrice(), this.listProd.get(i)
-								.getAmount()));
-				this.total = result.toString();
+				result += Double.parseDouble(
+						log.updatePrice(this.listProd.get(i).getPrice(), this.listProd.get(i).getAmount()));
+				Locale locale = new Locale("es", "CO");
+				NumberFormat nf = NumberFormat.getCurrencyInstance(locale);
+				this.total = nf.format(result);
 			}
 		}
 
@@ -300,94 +307,41 @@ public class FacturacionBean implements Serializable {
 	 * 
 	 * @param message
 	 */
+
+	public void checkProducts(String type) {
+		FacturacionLogic logic = new FacturacionLogic();
+		// valida si no hay productos o si el cliente esta nulo
+		String validate = logic.validaDatos(this.listProd, clientebean.getCliente());
+		if (!"OK".equalsIgnoreCase(validate)) {
+			this.setEnumer(ErrorEnum.ERROR);
+			messageBean(validate);
+		} else {
+			ExternalContext tmpEC;
+			tmpEC = FacesContext.getCurrentInstance().getExternalContext();
+			String realPath = tmpEC.getRealPath("/resources/images/products/");
+			String rta = logic.facturar(this.listProd, this.clientebean.getCliente(), realPath, this.loginBean.getDataSession(), type);
+
+		}
+	}
+	/**
+	 * Metodo generico para mostrar mensajes de error o advertencia
+	 * @param message
+	 */
+
 	public void messageBean(String message) {
 		switch (this.enumer) {
 		case ERROR:
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!",
-							message));
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", message));
 			break;
 		case FATAL:
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!",
-							"Error de sistema"));
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!", "Error de sistema"));
 			break;
 
 		default:
 			break;
 		}
-	}
-
-	/**
-	 * metodo para facturar la compra
-	 */
-	public void facturar() {
-		FacturacionLogic logic = new FacturacionLogic();
-		ExternalContext tmpEC;
-		tmpEC = FacesContext.getCurrentInstance().getExternalContext();
-		String realPath = tmpEC.getRealPath("/resources/images/products/");
-		logic.facturar(listProd, clientebean.getCliente(),realPath);
-	}
-
-	/**
-	 * Metodo que solo llama el proceso de facturar
-	 */
-	public void registrar() {
-		facturar();
-		openBox();
-	}
-
-	public void facturarFactura() {
-		facturar();
-		
-	}
-
-	/**
-	 * metodo que exporta a pdf la factura
-	 */
-	
-	public void exportFact() {
-		
-	}
-
-//	public void exportFact() {
-//		try {
-//			FacturacionLogic logic = new FacturacionLogic();
-//			ExternalContext tmpEC;
-//			tmpEC = FacesContext.getCurrentInstance().getExternalContext();
-//			String realPath = tmpEC.getRealPath("/resources/images/products/");
-//			String result = logic.createPDF(realPath);
-//			if (result != "error") {
-//				System.out.println("si lo creo");
-//				try {
-//					Desktop.getDesktop().open(new File(result));
-//				} catch (Exception e) {
-//					System.out.println(e);
-//				}
-//			}
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-
-	public void openBox() {
-
-	}
-
-	public Connection generarConexion() {
-		Connection con = null;
-		try {
-			Class.forName("org.postgresql.Driver");
-			String url = "jdbc:postgresql://127.0.0.1:5432/Sigemco";
-			con = DriverManager.getConnection(url, "postgres", "1234");
-		} catch (Exception e) {
-			System.out.println("Error al realizar la conexion...");
-			e.printStackTrace();
-		}
-		return con;
 	}
 
 }

@@ -15,21 +15,21 @@ import javax.print.SimpleDoc;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
 
+import com.lowagie.text.Document;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.Rectangle;
+import com.lowagie.text.pdf.PdfWriter;
+
 import co.com.codesoftware.entities.ClienteEntity;
+import co.com.codesoftware.entities.DatosSessionEntity;
 import co.com.codesoftware.entities.GenericProductEntity;
 import co.com.codesoftware.server.FacturaTable;
 import co.com.codesoftware.server.Facturacion;
-import co.com.codesoftware.server.ProductoTable;
 import co.com.codesoftware.server.RespuestaFacturacion;
 import co.com.codesoftware.server.SAFWS;
 import co.com.codesoftware.server.SAFWSService;
 import co.com.codesoftware.server.TemporalProdTable;
 import co.com.codesoftware.server.TemporalRecTable;
-
-import com.lowagie.text.Document;
-import com.lowagie.text.Paragraph;
-import com.lowagie.text.Rectangle;
-import com.lowagie.text.pdf.PdfWriter;
 
 public class FacturacionLogic {
 	private List<TemporalProdTable> products;
@@ -78,8 +78,7 @@ public class FacturacionLogic {
 	}
 
 	public boolean validateCodigo(String codigo) {
-		if ((codigo.startsWith("1-") || codigo.startsWith("3-"))
-				&& codigo != null && codigo != "")
+		if ((codigo.startsWith("1-") || codigo.startsWith("3-")) && codigo != null && codigo != "")
 			return true;
 		else
 			return false;
@@ -93,27 +92,32 @@ public class FacturacionLogic {
 	 * @return
 	 */
 
-	public String facturar(List<GenericProductEntity> list,
-			ClienteEntity cliente,String path) {
+	public String facturar(List<GenericProductEntity> list, ClienteEntity cliente, String path,
+			DatosSessionEntity session, String type) {
 		String rta = "";
 		Facturacion fact = new Facturacion();
 		RespuestaFacturacion res = new RespuestaFacturacion();
 		recorreLista(list);
 		try {
 			fact.setIdSede(new Long(1));
-			fact.setIdTius(new Long(1));
+			fact.setIdTius(session.getDataUser().getId());
 			fact.setIdCliente(cliente.getId());
 			fact.setProductos(this.products);
 			fact.setRecetas(this.receta);
 			SAFWSService service = new SAFWSService();
 			SAFWS port = service.getSAFWSPort();
 			res = port.facturar(fact);
-			if("error".equalsIgnoreCase(res.getRespuesta())){
+			if ("error".equalsIgnoreCase(res.getRespuesta())) {
 				rta = res.getTrazaExcepcion();
-			}else{
+			} else {
 				FacturaTable result = new FacturaTable();
 				result = getDataFact(res.getIdFacturacion());
-				createPDF(path,result);
+				if ("1".equalsIgnoreCase(type)) {
+					createPDF(path, result,cliente,session);
+					rta = "OK";
+				} else {
+					rta = "OK";
+				}
 			}
 
 		} catch (Exception e) {
@@ -121,13 +125,14 @@ public class FacturacionLogic {
 		}
 		return rta;
 	}
-	
-	 /**
-	  * Metodo que trae los datos de la factura para mostrarlos e imprimirlos
-	  * @return
-	  */
-	
-	public FacturaTable getDataFact(String idFactura){
+
+	/**
+	 * Metodo que trae los datos de la factura para mostrarlos e imprimirlos
+	 * 
+	 * @return
+	 */
+
+	public FacturaTable getDataFact(String idFactura) {
 		FacturaTable table = new FacturaTable();
 		try {
 			SAFWSService service = new SAFWSService();
@@ -146,21 +151,21 @@ public class FacturacionLogic {
 	 * @param list
 	 * @return
 	 */
-	public boolean recorreLista(List<GenericProductEntity> list) {		
-		for(GenericProductEntity productoGen : list){
-			if(productoGen.getCode().startsWith("1-")){
+	public boolean recorreLista(List<GenericProductEntity> list) {
+		for (GenericProductEntity productoGen : list) {
+			if (productoGen.getCode().startsWith("1-")) {
 				TemporalProdTable objAux = addProduct(productoGen);
-				if(this.products == null){
+				if (this.products == null) {
 					this.products = new ArrayList<TemporalProdTable>();
 				}
-				this.products.add(objAux); 
+				this.products.add(objAux);
 			}
-			if(productoGen.getCode().startsWith("3-")){
+			if (productoGen.getCode().startsWith("3-")) {
 				TemporalRecTable objAux = addReceta(productoGen);
-				if(this.receta == null){
+				if (this.receta == null) {
 					this.receta = new ArrayList<TemporalRecTable>();
 				}
-				this.receta.add(objAux); 
+				this.receta.add(objAux);
 			}
 		}
 		return true;
@@ -194,19 +199,19 @@ public class FacturacionLogic {
 		return prodTable;
 	}
 
-	public String createPDF(String path,FacturaTable factura) {
+	public String createPDF(String path, FacturaTable factura,ClienteEntity cliente,DatosSessionEntity session) {
 		Rectangle rec = new Rectangle(2.0F, 8.0F);
 		Document document = new Document();
 		path += "factura.pdf";
 		try {
-			
+
 			PdfWriter.getInstance(document, new FileOutputStream(path));
 			document.open();
-			document.add(new Paragraph("Fecha facturacion:"+factura.getFecha().toString()));
-			document.add(new Paragraph("Tipo Pago:"+factura.getTipoPago()));
-			for(int i= 0; i<factura.getDetalleProductos().size();i++){
-				document.add(new Paragraph("Cantidad:"+factura.getDetalleProductos().get(i).getCantidad()));
-				document.add(new Paragraph("Cantidad:"+factura.getDetalleProductos().get(i).getCantidad()));
+			document.add(new Paragraph("Fecha facturacion:" + factura.getFecha().toString()));
+			document.add(new Paragraph("Tipo Pago:" + factura.getTipoPago()));
+			for (int i = 0; i < factura.getDetalleProductos().size(); i++) {
+				document.add(new Paragraph("Cantidad:" + factura.getDetalleProductos().get(i).getCantidad()));
+				document.add(new Paragraph("Cantidad:" + factura.getDetalleProductos().get(i).getCantidad()));
 			}
 			document.close();
 			print(path);
@@ -217,45 +222,60 @@ public class FacturacionLogic {
 		}
 
 	}
-	
-	public boolean print(String path){
+
+	public boolean print(String path) {
 		try {
-			  FileInputStream inputStream = null;
-		        try {
-		            inputStream = new FileInputStream(path);
-		        } catch (FileNotFoundException e) {
-		            e.printStackTrace();
-		        }
-		        if (inputStream == null) {
-		            return false;
-		        }
-		        DocFlavor docFormat = DocFlavor.INPUT_STREAM.AUTOSENSE;
-		        Doc document = new SimpleDoc(inputStream, docFormat, null);
-		 
-		        PrintRequestAttributeSet attributeSet = new HashPrintRequestAttributeSet();
-		 
-		        PrintService defaultPrintService = PrintServiceLookup.lookupDefaultPrintService();
-		 
-		 
-		        if (defaultPrintService != null) {
-		            DocPrintJob printJob = defaultPrintService.createPrintJob();
-		            try {
-		                printJob.print(document, attributeSet);
-		 
-		            } catch (Exception e) {
-		                e.printStackTrace();
-		            }
-		        } else {
-		            System.err.println("No existen impresoras instaladas");
-		        }
-		 
-		        inputStream.close();
+			FileInputStream inputStream = null;
+			try {
+				inputStream = new FileInputStream(path);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			if (inputStream == null) {
+				return false;
+			}
+			DocFlavor docFormat = DocFlavor.INPUT_STREAM.AUTOSENSE;
+			Doc document = new SimpleDoc(inputStream, docFormat, null);
+
+			PrintRequestAttributeSet attributeSet = new HashPrintRequestAttributeSet();
+
+			PrintService defaultPrintService = PrintServiceLookup.lookupDefaultPrintService();
+
+			if (defaultPrintService != null) {
+				DocPrintJob printJob = defaultPrintService.createPrintJob();
+				try {
+					printJob.print(document, attributeSet);
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else {
+				System.err.println("No existen impresoras instaladas");
+			}
+
+			inputStream.close();
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
-		
+
+	}
+
+	public String validaDatos(List<GenericProductEntity> list, ClienteEntity cliente) {
+		String rta = "OK";
+		try {
+			if (list == null || list.size() <= 0) {
+				rta = "No puede facturar si no añade algún producto";
+			} else if (cliente.getNombre() == null) {
+				rta = "Debe añadir por lo menos un cliente";
+			}
+		} catch (Exception e) {
+			rta = "ERROR";
+
+		}
+		return rta;
+
 	}
 
 }
