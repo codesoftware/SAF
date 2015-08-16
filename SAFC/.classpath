@@ -33,13 +33,25 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry exported="true" kind="con" path="net.sf.jasperreports.JR_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="com.jaspersoft.server.JRS_CONTAINER"/>
+	<classpathentry kind="lib" path="D:/librerias/barbecue-1.5-beta1.jar"/>
+	<classpathentry kind="lib" path="D:/librerias/commons-beanutils-1.8.2.jar"/>
+	<classpathentry kind="lib" path="D:/librerias/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="D:/librerias/commons-digester-2.1.jar"/>
+	<classpathentry kind="lib" path="D:/librerias/commons-javaflow-20060411.jar"/>
+	<classpathentry kind="lib" path="D:/librerias/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="D:/librerias/groovy-all-1.7.5.jar"/>
+	<classpathentry kind="lib" path="D:/librerias/iText-2.1.7.jar"/>
+	<classpathentry kind="lib" path="D:/librerias/jasperreports-4.7.1.jar"/>
+	<classpathentry kind="lib" path="D:/librerias/jasperreports-javaflow-4.7.1.jar"/>
+	<classpathentry kind="lib" path="D:/librerias/png-encoder-1.5.jar"/>
+	<classpathentry kind="lib" path="D:/librerias/poi-3.7.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JSF 2.2 (Mojarra 2.2.0)">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 			<attribute name="owner.project.facets" value="jst.jsf"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="con" path="net.sf.jasperreports.JR_CONTAINER"/>
-	<classpathentry exported="true" kind="con" path="com.jaspersoft.server.JRS_CONTAINER"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

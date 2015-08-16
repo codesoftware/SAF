@@ -20,6 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="idCliente" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
+ *         &lt;element name="idSede" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
  *         &lt;element name="idTius" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
  *         &lt;element name="productos" type="{http://server.codesoftware.com.co/}temporalProdTable" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="recetas" type="{http://server.codesoftware.com.co/}temporalRecTable" maxOccurs="unbounded" minOccurs="0"/>
@@ -34,6 +35,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "facturacion", propOrder = {
     "idCliente",
+    "idSede",
     "idTius",
     "productos",
     "recetas"
@@ -41,6 +43,7 @@ import javax.xml.bind.annotation.XmlType;
 public class Facturacion {
 
     protected Long idCliente;
+    protected Long idSede;
     protected Long idTius;
     @XmlElement(nillable = true)
     protected List<TemporalProdTable> productos;
@@ -72,6 +75,39 @@ public class Facturacion {
     }
 
     /**
+     * Obtiene el valor de la propiedad idSede.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *     
+     */
+    public Long getIdSede() {
+        return idSede;
+    }
+
+    /**
+     * Define el valor de la propiedad idSede.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *     
+     */
+    public void setIdSede(Long value) {
+        this.idSede = value;
+    }
+    
+
+    public void setProductos(List<TemporalProdTable> productos) {
+		this.productos = productos;
+	}
+
+	public void setRecetas(List<TemporalRecTable> recetas) {
+		this.recetas = recetas;
+	}
+
+	/**
      * Obtiene el valor de la propiedad idTius.
      * 
      * @return

@@ -27,6 +27,72 @@ public interface SAFWS {
 
     /**
      * 
+     * @param sedeSede
+     * @param dskaCod
+     * @return
+     *     returns co.com.codesoftware.server.ProductoTable
+     */
+    @WebMethod
+    @WebResult(name = "ProductoTable", targetNamespace = "")
+    @RequestWrapper(localName = "getProductForCode", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetProductForCode")
+    @ResponseWrapper(localName = "getProductForCodeResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetProductForCodeResponse")
+    @Action(input = "http://server.codesoftware.com.co/SAFWS/getProductForCodeRequest", output = "http://server.codesoftware.com.co/SAFWS/getProductForCodeResponse")
+    public ProductoTable getProductForCode(
+        @WebParam(name = "dska_cod", targetNamespace = "")
+        String dskaCod,
+        @WebParam(name = "sede_sede", targetNamespace = "")
+        Integer sedeSede);
+
+    /**
+     * 
+     * @param sedeSede
+     * @return
+     *     returns java.util.List<co.com.codesoftware.server.PantallaPrincipalFacTable>
+     */
+    @WebMethod
+    @WebResult(name = "PantallaPrincipalFactTable", targetNamespace = "")
+    @RequestWrapper(localName = "getProductPrincipalScreen", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetProductPrincipalScreen")
+    @ResponseWrapper(localName = "getProductPrincipalScreenResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetProductPrincipalScreenResponse")
+    @Action(input = "http://server.codesoftware.com.co/SAFWS/getProductPrincipalScreenRequest", output = "http://server.codesoftware.com.co/SAFWS/getProductPrincipalScreenResponse")
+    public List<PantallaPrincipalFacTable> getProductPrincipalScreen(
+        @WebParam(name = "sede_sede", targetNamespace = "")
+        Integer sedeSede);
+
+    /**
+     * 
+     * @param sedeSede
+     * @return
+     *     returns java.util.List<co.com.codesoftware.server.PantallaPrincipalFacTable>
+     */
+    @WebMethod
+    @WebResult(name = "PantallaPrincipalFactTable", targetNamespace = "")
+    @RequestWrapper(localName = "getDishesPrincipalScreen", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetDishesPrincipalScreen")
+    @ResponseWrapper(localName = "getDishesPrincipalScreenResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetDishesPrincipalScreenResponse")
+    @Action(input = "http://server.codesoftware.com.co/SAFWS/getDishesPrincipalScreenRequest", output = "http://server.codesoftware.com.co/SAFWS/getDishesPrincipalScreenResponse")
+    public List<PantallaPrincipalFacTable> getDishesPrincipalScreen(
+        @WebParam(name = "sede_sede", targetNamespace = "")
+        Integer sedeSede);
+
+    /**
+     * 
+     * @param sedeSede
+     * @param dskaDska
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(name = "existencia", targetNamespace = "")
+    @RequestWrapper(localName = "findExistsForSede", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.FindExistsForSede")
+    @ResponseWrapper(localName = "findExistsForSedeResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.FindExistsForSedeResponse")
+    @Action(input = "http://server.codesoftware.com.co/SAFWS/findExistsForSedeRequest", output = "http://server.codesoftware.com.co/SAFWS/findExistsForSedeResponse")
+    public String findExistsForSede(
+        @WebParam(name = "sede_sede", targetNamespace = "")
+        String sedeSede,
+        @WebParam(name = "dska_dska", targetNamespace = "")
+        String dskaDska);
+
+    /**
+     * 
      * @param password
      * @param nombre
      * @return
@@ -115,72 +181,6 @@ public interface SAFWS {
     /**
      * 
      * @param sedeSede
-     * @param dskaCod
-     * @return
-     *     returns co.com.codesoftware.server.ProductoTable
-     */
-    @WebMethod
-    @WebResult(name = "ProductoTable", targetNamespace = "")
-    @RequestWrapper(localName = "getProductForCode", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetProductForCode")
-    @ResponseWrapper(localName = "getProductForCodeResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetProductForCodeResponse")
-    @Action(input = "http://server.codesoftware.com.co/SAFWS/getProductForCodeRequest", output = "http://server.codesoftware.com.co/SAFWS/getProductForCodeResponse")
-    public ProductoTable getProductForCode(
-        @WebParam(name = "dska_cod", targetNamespace = "")
-        String dskaCod,
-        @WebParam(name = "sede_sede", targetNamespace = "")
-        Integer sedeSede);
-
-    /**
-     * 
-     * @param sedeSede
-     * @return
-     *     returns java.util.List<co.com.codesoftware.server.PantallaPrincipalFacTable>
-     */
-    @WebMethod
-    @WebResult(name = "PantallaPrincipalFactTable", targetNamespace = "")
-    @RequestWrapper(localName = "getProductPrincipalScreen", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetProductPrincipalScreen")
-    @ResponseWrapper(localName = "getProductPrincipalScreenResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetProductPrincipalScreenResponse")
-    @Action(input = "http://server.codesoftware.com.co/SAFWS/getProductPrincipalScreenRequest", output = "http://server.codesoftware.com.co/SAFWS/getProductPrincipalScreenResponse")
-    public List<PantallaPrincipalFacTable> getProductPrincipalScreen(
-        @WebParam(name = "sede_sede", targetNamespace = "")
-        Integer sedeSede);
-
-    /**
-     * 
-     * @param sedeSede
-     * @return
-     *     returns java.util.List<co.com.codesoftware.server.PantallaPrincipalFacTable>
-     */
-    @WebMethod
-    @WebResult(name = "PantallaPrincipalFactTable", targetNamespace = "")
-    @RequestWrapper(localName = "getDishesPrincipalScreen", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetDishesPrincipalScreen")
-    @ResponseWrapper(localName = "getDishesPrincipalScreenResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetDishesPrincipalScreenResponse")
-    @Action(input = "http://server.codesoftware.com.co/SAFWS/getDishesPrincipalScreenRequest", output = "http://server.codesoftware.com.co/SAFWS/getDishesPrincipalScreenResponse")
-    public List<PantallaPrincipalFacTable> getDishesPrincipalScreen(
-        @WebParam(name = "sede_sede", targetNamespace = "")
-        Integer sedeSede);
-
-    /**
-     * 
-     * @param sedeSede
-     * @param dskaDska
-     * @return
-     *     returns java.lang.String
-     */
-    @WebMethod
-    @WebResult(name = "existencia", targetNamespace = "")
-    @RequestWrapper(localName = "findExistsForSede", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.FindExistsForSede")
-    @ResponseWrapper(localName = "findExistsForSedeResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.FindExistsForSedeResponse")
-    @Action(input = "http://server.codesoftware.com.co/SAFWS/findExistsForSedeRequest", output = "http://server.codesoftware.com.co/SAFWS/findExistsForSedeResponse")
-    public String findExistsForSede(
-        @WebParam(name = "sede_sede", targetNamespace = "")
-        String sedeSede,
-        @WebParam(name = "dska_dska", targetNamespace = "")
-        String dskaDska);
-
-    /**
-     * 
-     * @param sedeSede
      * @return
      *     returns java.util.List<co.com.codesoftware.server.ProductoTable>
      */
@@ -234,5 +234,44 @@ public interface SAFWS {
     public RespuestaFacturacion facturar(
         @WebParam(name = "Facturacion", targetNamespace = "")
         Facturacion facturacion);
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<co.com.codesoftware.server.FacturaTable>
+     */
+    @WebMethod
+    @WebResult(name = "listaFacturas", targetNamespace = "")
+    @RequestWrapper(localName = "getFacturas", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetFacturas")
+    @ResponseWrapper(localName = "getFacturasResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetFacturasResponse")
+    @Action(input = "http://server.codesoftware.com.co/SAFWS/getFacturasRequest", output = "http://server.codesoftware.com.co/SAFWS/getFacturasResponse")
+    public List<FacturaTable> getFacturas();
+
+    /**
+     * 
+     * @param idFactura
+     * @return
+     *     returns co.com.codesoftware.server.FacturaTable
+     */
+    @WebMethod
+    @WebResult(name = "FacturaTable", targetNamespace = "")
+    @RequestWrapper(localName = "getFacturaForId", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetFacturaForId")
+    @ResponseWrapper(localName = "getFacturaForIdResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetFacturaForIdResponse")
+    @Action(input = "http://server.codesoftware.com.co/SAFWS/getFacturaForIdRequest", output = "http://server.codesoftware.com.co/SAFWS/getFacturaForIdResponse")
+    public FacturaTable getFacturaForId(
+        @WebParam(name = "idFactura", targetNamespace = "")
+        int idFactura);
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<co.com.codesoftware.server.ParametrosEmpresaTable>
+     */
+    @WebMethod
+    @WebResult(name = "parametros", targetNamespace = "")
+    @RequestWrapper(localName = "getParamsEmpresa", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetParamsEmpresa")
+    @ResponseWrapper(localName = "getParamsEmpresaResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetParamsEmpresaResponse")
+    @Action(input = "http://server.codesoftware.com.co/SAFWS/getParamsEmpresaRequest", output = "http://server.codesoftware.com.co/SAFWS/getParamsEmpresaResponse")
+    public List<ParametrosEmpresaTable> getParamsEmpresa();
 
 }

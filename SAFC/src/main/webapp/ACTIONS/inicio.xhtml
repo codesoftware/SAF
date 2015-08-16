@@ -119,8 +119,8 @@
 						</div>
 					</h:panelGroup>
 					<p:panel header="Factura">
-						<p:commandButton value="Registrar" actionListener="#{facturacionBean.exportFact}" />
-						<p:commandButton value="Facturar" />
+						<p:commandButton value="Registrar" actionListener="#{facturacionBean.facturarFactura}" />
+						<p:commandButton value="Facturar" actionListener="#{facturacionBean.exportFact}" />
 						<p:dataTable var="factura" style="pading:0px;" id="listFact"
 							value="#{facturacionBean.listProd}">
 							<f:facet name="header">

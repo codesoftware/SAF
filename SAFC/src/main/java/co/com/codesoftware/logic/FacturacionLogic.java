@@ -1,21 +1,40 @@
 package co.com.codesoftware.logic;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.print.Doc;
+import javax.print.DocFlavor;
+import javax.print.DocPrintJob;
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
+import javax.print.SimpleDoc;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
 
 import co.com.codesoftware.entities.ClienteEntity;
 import co.com.codesoftware.entities.GenericProductEntity;
+import co.com.codesoftware.server.FacturaTable;
 import co.com.codesoftware.server.Facturacion;
+import co.com.codesoftware.server.ProductoTable;
+import co.com.codesoftware.server.RespuestaFacturacion;
 import co.com.codesoftware.server.SAFWS;
 import co.com.codesoftware.server.SAFWSService;
 import co.com.codesoftware.server.TemporalProdTable;
 import co.com.codesoftware.server.TemporalRecTable;
 
+import com.lowagie.text.Document;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.Rectangle;
+import com.lowagie.text.pdf.PdfWriter;
 
 public class FacturacionLogic {
 	private List<TemporalProdTable> products;
 	private List<TemporalRecTable> receta;
-	
-	
+
 	public List<TemporalProdTable> getProducts() {
 		return products;
 	}
@@ -42,11 +61,11 @@ public class FacturacionLogic {
 	 */
 	public String updatePrice(String price, int amount) {
 		String result = "";
-		if(price!=null){
-		Double total = Double.parseDouble(price) * amount;
-		result = String.valueOf(total);
-		}else{
-			result= null;
+		if (price != null) {
+			Double total = Double.parseDouble(price) * amount;
+			result = String.valueOf(total);
+		} else {
+			result = null;
 		}
 		return result;
 	}
@@ -57,81 +76,186 @@ public class FacturacionLogic {
 		else
 			return false;
 	}
-	public boolean validateCodigo(String codigo){
-		if((codigo.startsWith("1-") || codigo.startsWith("3-")) &&  codigo != null && codigo !="")
+
+	public boolean validateCodigo(String codigo) {
+		if ((codigo.startsWith("1-") || codigo.startsWith("3-"))
+				&& codigo != null && codigo != "")
 			return true;
 		else
 			return false;
-			
-		
+
 	}
+
 	/**
 	 * Funcion que genera toda la logica para facturar
+	 * 
 	 * @param list
 	 * @return
 	 */
-	
-	public String facturar(List<GenericProductEntity> list,ClienteEntity cliente){
-		String rta="";
+
+	public String facturar(List<GenericProductEntity> list,
+			ClienteEntity cliente,String path) {
+		String rta = "";
 		Facturacion fact = new Facturacion();
-		
+		RespuestaFacturacion res = new RespuestaFacturacion();
+		recorreLista(list);
 		try {
+			fact.setIdSede(new Long(1));
+			fact.setIdTius(new Long(1));
 			fact.setIdCliente(cliente.getId());
-			//Agregar las listas
+			fact.setProductos(this.products);
+			fact.setRecetas(this.receta);
 			SAFWSService service = new SAFWSService();
-	        SAFWS port = service.getSAFWSPort();
-	        
+			SAFWS port = service.getSAFWSPort();
+			res = port.facturar(fact);
+			if("error".equalsIgnoreCase(res.getRespuesta())){
+				rta = res.getTrazaExcepcion();
+			}else{
+				FacturaTable result = new FacturaTable();
+				result = getDataFact(res.getIdFacturacion());
+				createPDF(path,result);
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return rta;
 	}
 	
+	 /**
+	  * Metodo que trae los datos de la factura para mostrarlos e imprimirlos
+	  * @return
+	  */
+	
+	public FacturaTable getDataFact(String idFactura){
+		FacturaTable table = new FacturaTable();
+		try {
+			SAFWSService service = new SAFWSService();
+			SAFWS port = service.getSAFWSPort();
+			table = port.getFacturaForId(Integer.parseInt(idFactura));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return table;
+	}
+
 	/**
-	 * Funcion que recorre el listado de productos y recetas y dependendiendo del codigo lo setea
+	 * Funcion que recorre el listado de productos y recetas y dependendiendo
+	 * del codigo lo setea
+	 * 
 	 * @param list
 	 * @return
 	 */
-	public boolean recorreLista(List<GenericProductEntity> list){
-		for(int i = 0;i < list.size();i++){
-			if(list.get(i).getCode().startsWith("1-")){
-				this.products.add(addProduct(list.get(i)));
+	public boolean recorreLista(List<GenericProductEntity> list) {		
+		for(GenericProductEntity productoGen : list){
+			if(productoGen.getCode().startsWith("1-")){
+				TemporalProdTable objAux = addProduct(productoGen);
+				if(this.products == null){
+					this.products = new ArrayList<TemporalProdTable>();
+				}
+				this.products.add(objAux); 
 			}
-			if(list.get(i).getCode().startsWith("3-")){
-				this.receta.add(addReceta(list.get(i)));
+			if(productoGen.getCode().startsWith("3-")){
+				TemporalRecTable objAux = addReceta(productoGen);
+				if(this.receta == null){
+					this.receta = new ArrayList<TemporalRecTable>();
+				}
+				this.receta.add(objAux); 
 			}
-			
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Funcion que setea el objeto si es un producto lo que viene en la lista
+	 * 
 	 * @param product
 	 * @return
 	 */
-	public TemporalProdTable addProduct(GenericProductEntity product){
+	public TemporalProdTable addProduct(GenericProductEntity product) {
 		TemporalProdTable prodTable = new TemporalProdTable();
 		prodTable.setCantidad(product.getAmount());
 		prodTable.setDescuento(0);
 		prodTable.setIdDska(product.getId());
-		//no se cuales son los campos que tengo que enviar
+		prodTable.setId(null);
 		return prodTable;
 	}
+
 	/**
 	 * Funcion que setea la receta en el nuevo objeto
+	 * 
 	 * @param product
 	 * @return
 	 */
-	
-	public TemporalRecTable addReceta(GenericProductEntity product){
+
+	public TemporalRecTable addReceta(GenericProductEntity product) {
 		TemporalRecTable prodTable = new TemporalRecTable();
-		//Falta descripcion de recetas
+		// Falta descripcion de recetas
 		return prodTable;
 	}
+
+	public String createPDF(String path,FacturaTable factura) {
+		Rectangle rec = new Rectangle(2.0F, 8.0F);
+		Document document = new Document();
+		path += "factura.pdf";
+		try {
+			
+			PdfWriter.getInstance(document, new FileOutputStream(path));
+			document.open();
+			document.add(new Paragraph("Fecha facturacion:"+factura.getFecha().toString()));
+			document.add(new Paragraph("Tipo Pago:"+factura.getTipoPago()));
+			for(int i= 0; i<factura.getDetalleProductos().size();i++){
+				document.add(new Paragraph("Cantidad:"+factura.getDetalleProductos().get(i).getCantidad()));
+				document.add(new Paragraph("Cantidad:"+factura.getDetalleProductos().get(i).getCantidad()));
+			}
+			document.close();
+			print(path);
+			return path;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+
+	}
 	
-	
-	
-	
+	public boolean print(String path){
+		try {
+			  FileInputStream inputStream = null;
+		        try {
+		            inputStream = new FileInputStream(path);
+		        } catch (FileNotFoundException e) {
+		            e.printStackTrace();
+		        }
+		        if (inputStream == null) {
+		            return false;
+		        }
+		        DocFlavor docFormat = DocFlavor.INPUT_STREAM.AUTOSENSE;
+		        Doc document = new SimpleDoc(inputStream, docFormat, null);
+		 
+		        PrintRequestAttributeSet attributeSet = new HashPrintRequestAttributeSet();
+		 
+		        PrintService defaultPrintService = PrintServiceLookup.lookupDefaultPrintService();
+		 
+		 
+		        if (defaultPrintService != null) {
+		            DocPrintJob printJob = defaultPrintService.createPrintJob();
+		            try {
+		                printJob.print(document, attributeSet);
+		 
+		            } catch (Exception e) {
+		                e.printStackTrace();
+		            }
+		        } else {
+		            System.err.println("No existen impresoras instaladas");
+		        }
+		 
+		        inputStream.close();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
 
 }

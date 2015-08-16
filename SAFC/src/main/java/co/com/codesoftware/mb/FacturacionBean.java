@@ -1,7 +1,10 @@
 package co.com.codesoftware.mb;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,13 +12,9 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
 
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
 import co.com.codesoftware.entities.ClienteEntity;
 import co.com.codesoftware.entities.GenericProductEntity;
 import co.com.codesoftware.logic.FacturacionLogic;
@@ -115,7 +114,6 @@ public class FacturacionBean implements Serializable {
 	}
 
 	public void setCantidad(int cantidad) {
-		this.cantidad = cantidad;
 	}
 
 	public String getCodigoAdd() {
@@ -222,7 +220,7 @@ public class FacturacionBean implements Serializable {
 
 	public int existProduct() {
 		int result = -1;
-		if(listProd==null){
+		if (listProd == null) {
 			listProd = new ArrayList<GenericProductEntity>();
 		}
 		for (int i = 0; i < this.listProd.size(); i++) {
@@ -242,12 +240,14 @@ public class FacturacionBean implements Serializable {
 	 */
 
 	public void setData(PantallaPrincipalFacTable table) {
+		System.out.println(table.getId());
 		this.product = new GenericProductEntity();
 		this.product.setAmount(1);
 		this.product.setPrice(table.getPrecio());
 		this.product.setCode(table.getCodigo());
 		this.product.setName(table.getNombre());
 		this.product.setTotalPrice(table.getPrecio());
+		this.product.setId(table.getId());
 	}
 
 	/**
@@ -295,9 +295,9 @@ public class FacturacionBean implements Serializable {
 
 	}
 
-	
 	/**
 	 * Metodo que toma el tipo de mensaje que se quiere mostrar
+	 * 
 	 * @param message
 	 */
 	public void messageBean(String message) {
@@ -319,32 +319,75 @@ public class FacturacionBean implements Serializable {
 			break;
 		}
 	}
+
 	/**
 	 * metodo para facturar la compra
 	 */
-	public void facturar(){
-	FacturacionLogic logic = new FacturacionLogic();
-	logic.facturar(listProd, cliente);
+	public void facturar() {
+		FacturacionLogic logic = new FacturacionLogic();
+		ExternalContext tmpEC;
+		tmpEC = FacesContext.getCurrentInstance().getExternalContext();
+		String realPath = tmpEC.getRealPath("/resources/images/products/");
+		logic.facturar(listProd, clientebean.getCliente(),realPath);
 	}
-	
+
 	/**
-	 * metodo que exporta a excel
+	 * Metodo que solo llama el proceso de facturar
+	 */
+	public void registrar() {
+		facturar();
+		openBox();
+	}
+
+	public void facturarFactura() {
+		facturar();
+		
+	}
+
+	/**
+	 * metodo que exporta a pdf la factura
 	 */
 	
-	public void exportFact(){
-		File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/resources/images/Factura_1.jasper"));
-		try{
-		JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), null);
-		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-		response.addHeader("content-disposition", "attachment; filename = factura.pdf");
-		ServletOutputStream stream = response.getOutputStream();
-		JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
-		FacesContext.getCurrentInstance().responseComplete();
-		}catch(Exception e){
+	public void exportFact() {
+		
+	}
+
+//	public void exportFact() {
+//		try {
+//			FacturacionLogic logic = new FacturacionLogic();
+//			ExternalContext tmpEC;
+//			tmpEC = FacesContext.getCurrentInstance().getExternalContext();
+//			String realPath = tmpEC.getRealPath("/resources/images/products/");
+//			String result = logic.createPDF(realPath);
+//			if (result != "error") {
+//				System.out.println("si lo creo");
+//				try {
+//					Desktop.getDesktop().open(new File(result));
+//				} catch (Exception e) {
+//					System.out.println(e);
+//				}
+//			}
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
+
+	public void openBox() {
+
+	}
+
+	public Connection generarConexion() {
+		Connection con = null;
+		try {
+			Class.forName("org.postgresql.Driver");
+			String url = "jdbc:postgresql://127.0.0.1:5432/Sigemco";
+			con = DriverManager.getConnection(url, "postgres", "1234");
+		} catch (Exception e) {
+			System.out.println("Error al realizar la conexion...");
 			e.printStackTrace();
 		}
+		return con;
 	}
-	
-	
 
 }
