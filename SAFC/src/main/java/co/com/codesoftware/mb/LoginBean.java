@@ -5,24 +5,20 @@ import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-
-import org.primefaces.context.RequestContext;
 
 import co.com.codesoftware.entities.DatosSessionEntity;
 import co.com.codesoftware.logic.DataSessionLogic;
 import co.com.codesoftware.logic.LoginLogic;
-
+	
 @ManagedBean
 @SessionScoped
-public class LoginBean implements Serializable{
+public class LoginBean implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	private String user;
-	private String password;	
-	private DatosSessionEntity dataSession ;
-	
+	private static final long	serialVersionUID	= 1L;
+	private String				user;
+	private String				password;
+	private DatosSessionEntity	dataSession;
 
 	public DatosSessionEntity getDataSession() {
 		return dataSession;
@@ -51,25 +47,25 @@ public class LoginBean implements Serializable{
 	public String getMessageLogin() {
 		String redirection = "";
 		try {
-
-			RequestContext context = RequestContext.getCurrentInstance();
+			// RequestContext context = RequestContext.getCurrentInstance();
 			FacesMessage message = null;
 			LoginLogic logic = new LoginLogic();
 			if ("OK".equalsIgnoreCase(logic.login(this.user, this.password))) {
-				FacesContext.getCurrentInstance().getExternalContext()
-						.getSessionMap().put("user", this.user);
-				message = new FacesMessage(FacesMessage.SEVERITY_INFO,
-						"Bienvenido", this.user);
-				redirection = "/ACTIONS/inicio";
-				//Llena los datos de la session 
+				// Obtengo los datos que iran en la session
 				DatosSessionEntity entity = new DatosSessionEntity();
 				DataSessionLogic log = new DataSessionLogic();
 				entity.setDataCompany(log.getDataCompany());
 				entity.setDataUser(log.getDataUser(this.user));
+				// Obtengo la session de jsf y le añado los datos de usuario
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("dataSession", entity);
+				message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", this.user);
+				//No se para que sirve
 				this.dataSession = entity;
+				// Le doy la redireccion que quiero Inicio
+				redirection = "/ACTIONS/inicio?faces-redirect=false";
+				// redirection = "/ACTIONS/inicio";
 			} else {
-				message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error",
-						"Datos invalidos");
+				message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Datos invalidos");
 				redirection = "index";
 			}
 			FacesContext.getCurrentInstance().addMessage(null, message);

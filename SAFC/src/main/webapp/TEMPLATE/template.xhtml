@@ -9,6 +9,7 @@
 
 <h:head>
 	<h:outputStylesheet name="common-style.css" library="css" />
+	<f:event listener="#{interceptorSession.verificarSesion()}" type="preRenderView"></f:event>
 </h:head>
 
 <h:body>
