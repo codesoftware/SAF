@@ -21,7 +21,7 @@
 						<p:menuitem title="inserta clientes" value="Insertar Clientes" icon="/resources/images/clientes.png" onclick="PF('insertClient').show();" />
 						<p:menuitem value="Consultar Clientes" icon="/resources/images/searchClient.png" onclick="PF('searchCl').show();" actionListener="#{clienteBean.buscaClientes}"
 							update=":searchClients:tablaClientes" />
-						<p:menuitem value="Consultar Facturas" icon="/resources/images/searchbill.png" url="#" />
+						<p:menuitem value="Consultar Facturas" icon="/resources/images/searchbill.png" action="/ACTIONS/FACTURACION/buscaFacturas" />
 						<p:menuitem value="Cerrar Sesión" icon="/resources/images/logout.png" actionListener="#{loginBean.cerrarSesion()}" action="/index" />
 					</p:dock>
 				</div>
