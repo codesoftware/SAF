@@ -10,7 +10,7 @@ import javax.faces.context.FacesContext;
 import co.com.codesoftware.entities.DatosSessionEntity;
 import co.com.codesoftware.logic.DataSessionLogic;
 import co.com.codesoftware.logic.LoginLogic;
-	
+
 @ManagedBean
 @SessionScoped
 public class LoginBean implements Serializable {
@@ -44,6 +44,11 @@ public class LoginBean implements Serializable {
 		this.password = password;
 	}
 
+	/**
+	 * Funcion encargada de realizar el login de usuario
+	 * 
+	 * @return
+	 */
 	public String getMessageLogin() {
 		String redirection = "";
 		try {
@@ -59,7 +64,7 @@ public class LoginBean implements Serializable {
 				// Obtengo la session de jsf y le añado los datos de usuario
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("dataSession", entity);
 				message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", this.user);
-				//No se para que sirve
+				// No se para que sirve
 				this.dataSession = entity;
 				// Le doy la redireccion que quiero Inicio
 				redirection = "/ACTIONS/inicio?faces-redirect=false";
@@ -74,6 +79,15 @@ public class LoginBean implements Serializable {
 			e.printStackTrace();
 		}
 		return redirection;
+	}
+
+	/**
+	 * Funcion encargada de cerrar la session del usuario y redirigirlo a la
+	 * pagina de inicio
+	 */
+	public void cerrarSesion() {
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+
 	}
 
 }
