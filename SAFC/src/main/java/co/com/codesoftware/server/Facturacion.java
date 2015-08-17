@@ -50,6 +50,20 @@ public class Facturacion {
     @XmlElement(nillable = true)
     protected List<TemporalRecTable> recetas;
 
+    /**
+     * Obtiene el valor de la propiedad idCliente.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *     
+     */
+    
+    
+    public Long getIdCliente() {
+        return idCliente;
+    }
+
     public void setProductos(List<TemporalProdTable> productos) {
 		this.productos = productos;
 	}
@@ -59,18 +73,6 @@ public class Facturacion {
 	}
 
 	/**
-     * Obtiene el valor de la propiedad idCliente.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
-     */
-    public Long getIdCliente() {
-        return idCliente;
-    }
-
-    /**
      * Define el valor de la propiedad idCliente.
      * 
      * @param value

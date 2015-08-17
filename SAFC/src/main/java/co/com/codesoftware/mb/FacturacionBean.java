@@ -320,6 +320,13 @@ public class FacturacionBean implements Serializable {
 			tmpEC = FacesContext.getCurrentInstance().getExternalContext();
 			String realPath = tmpEC.getRealPath("/resources/images/products/");
 			String rta = logic.facturar(this.listProd, this.clientebean.getCliente(), realPath, this.loginBean.getDataSession(), type);
+			if("OK".equalsIgnoreCase(rta)){
+				this.enumer = ErrorEnum.ERROR;
+				messageBean("FACTURACIÓN REALIZADA CORRECTAMENTE");
+			}else{
+				this.enumer = ErrorEnum.ERROR;
+				messageBean(rta);
+			}
 
 		}
 	}
