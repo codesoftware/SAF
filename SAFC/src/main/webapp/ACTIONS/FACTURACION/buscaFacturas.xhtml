@@ -11,39 +11,42 @@
 
 <body>
 	<br />
-	<div class="row">
-		<div class="col-md-1 col-sm-0 col-xs-0"></div>
-		<div class="col-md-1 col-sm-12 col-xs-12 text-center">
-			<h:form id="formMenu">
-				<p:commandLink action="/ACTIONS/inicio">Facturar</p:commandLink>
-			</h:form>
-		</div>
-		<div class="col-md-9 col-sm-12 col-xs-12 text-center" style="border: 1px solid #D6E3E2;padding-left: 0px;padding-right: 0px;">
-			<div class="panel">
-				<div class="col-md-12 col-xs-12 col-sm-12 alert alert-success text-center">
-					<h3>Filtros de Facturación</h3>
-				</div>
-				<div class="col-md-4 col-xs-6 col-sm-6">
-					<div class="form-group">
-						<label for="calendario">Fecha Inicial:</label>
-						<p:calendar mode="popup" id="fechaInicial"></p:calendar>
+	<h:form>
+		<div class="row">
+			<div class="col-md-1 col-sm-0 col-xs-0"></div>
+			<div class="col-md-1 col-sm-12 col-xs-12 text-center">
+				<h:form id="formMenu">
+					<p:commandLink action="/ACTIONS/inicio">Facturar</p:commandLink>
+				</h:form>
+			</div>
+			<div class="col-md-9 col-sm-12 col-xs-12 text-center" style="border: 1px solid #D6E3E2; padding-left: 0px; padding-right: 0px;">
+				<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+				<div class="panel">
+					<div class="col-md-12 col-xs-12 col-sm-12 alert alert-success text-center">
+						<h3>Filtros de Facturación</h3>
 					</div>
-				</div>
-				<div class="col-md-4 col-xs-6 col-sm-6">
-					<div class="form-group">
-						<label for="calendario">Fecha Inicial:</label>
-						<p:calendar mode="popup" id="fechaFinal"></p:calendar>
+					<div class="col-md-4 col-xs-6 col-sm-6">
+						<div class="form-group">
+							<label for="calendario">Fecha Inicial:</label>
+							<p:calendar mode="popup" id="fechaInicial" value="#{consultaFacturacionBean.fechaInicio}"></p:calendar>
+						</div>
 					</div>
-				</div>
-				<div class="col-md-4 col-xs-12 col-sm-12">
-					<div class="form-group">
-						<p:commandButton styleClass="btn btn-primary" value="Consultar"></p:commandButton>
+					<div class="col-md-4 col-xs-6 col-sm-6">
+						<div class="form-group">
+							<label for="calendario">Fecha Final:</label>
+							<p:calendar mode="popup" id="fechaFinal" value="#{consultaFacturacionBean.fechaFinal}"></p:calendar>
+						</div>
+					</div>
+					<div class="col-md-4 col-xs-12 col-sm-12">
+						<div class="form-group">
+							<p:commandButton styleClass="btn btn-primary" value="Consultar" actionListener="#{consultaFacturacionBean.consultaFacturasXFechas}"></p:commandButton>
+						</div>
 					</div>
 				</div>
 			</div>
+			<div class="col-md-1 col-sm-0 col-xs-12"></div>
 		</div>
-		<div class="col-md-1 col-sm-0 col-xs-12"></div>
-	</div>
+	</h:form>
 	<br />
 	<br />
 </body>
