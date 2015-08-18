@@ -1,24 +1,53 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=yes" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=yes" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link rel="stylesheet" type="text/css"
-		href="/SAFC/BOOTSTRAP/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="/SAFC/BOOTSTRAP/bootstrap.css" />
 </h:head>
 
 <body>
-	<ui:composition template="/TEMPLATE/template.xhtml">
-		<ui:define name="content">
-			aqui hago todo
-		</ui:define>
-	</ui:composition>
+	<br />
+	<h:form>
+		<div class="row">
+			<div class="col-md-1 col-sm-0 col-xs-0"></div>
+			<div class="col-md-1 col-sm-12 col-xs-12 text-center">
+				<h:form id="formMenu">
+					<p:commandLink action="/ACTIONS/inicio">Facturar</p:commandLink>
+				</h:form>
+			</div>
+			<div class="col-md-9 col-sm-12 col-xs-12 text-center" style="border: 1px solid #D6E3E2; padding-left: 0px; padding-right: 0px;">
+				<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+				<div class="panel">
+					<div class="col-md-12 col-xs-12 col-sm-12 alert alert-success text-center">
+						<h3>Filtros de Facturación</h3>
+					</div>
+					<div class="col-md-4 col-xs-6 col-sm-6">
+						<div class="form-group">
+							<label for="calendario">Fecha Inicial:</label>
+							<p:calendar mode="popup" id="fechaInicial" value="#{consultaFacturacionBean.fechaInicio}"></p:calendar>
+						</div>
+					</div>
+					<div class="col-md-4 col-xs-6 col-sm-6">
+						<div class="form-group">
+							<label for="calendario">Fecha Final:</label>
+							<p:calendar mode="popup" id="fechaFinal" value="#{consultaFacturacionBean.fechaFinal}"></p:calendar>
+						</div>
+					</div>
+					<div class="col-md-4 col-xs-12 col-sm-12">
+						<div class="form-group">
+							<p:commandButton styleClass="btn btn-primary" value="Consultar" actionListener="#{consultaFacturacionBean.consultaFacturasXFechas}"></p:commandButton>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-1 col-sm-0 col-xs-12"></div>
+		</div>
+	</h:form>
+	<br />
+	<br />
 </body>
 </html>
