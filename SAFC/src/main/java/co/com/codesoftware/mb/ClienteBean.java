@@ -215,7 +215,15 @@ public class ClienteBean implements Serializable {
 		}
 	}
 	
-	public void searchProdId(){
-		
+	/**
+	 * metodo que consulta el cliente Generico
+	 */
+	
+	public void genericClient(){
+		this.cliente.setCedula(new Long(1));
+		this.cliente.setNombre("Generico");
+		this.cliente.setTelefono("0");
 	}
+	
+	
 }

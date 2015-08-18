@@ -133,6 +133,22 @@ public class FacturacionBean implements Serializable {
 	public void setLoginBean(LoginBean loginBean) {
 		this.loginBean = loginBean;
 	}
+	
+	/**
+	 * Metodo que ejecuta la facturacion
+	 */
+	
+	public void facturar(){
+		checkProducts("1");
+	}
+	/**
+	 * metodo que ejecuta la facturacion sin imprimir el pdf
+	 */
+	public void registrar(){
+		checkProducts("2");
+	}
+	
+	
 
 	/**
 	 * Funcion que valida que tipo de producto es y asi poderlo mostrar
@@ -302,12 +318,11 @@ public class FacturacionBean implements Serializable {
 
 	}
 
-	/**
-	 * Metodo que toma el tipo de mensaje que se quiere mostrar
-	 * 
-	 * @param message
-	 */
 
+	/**
+	 * Funcion que ejecuta la facturacion y envia el parametro dependiendo de la acción
+	 * @param type
+	 */
 	public void checkProducts(String type) {
 		FacturacionLogic logic = new FacturacionLogic();
 		// valida si no hay productos o si el cliente esta nulo
@@ -321,7 +336,7 @@ public class FacturacionBean implements Serializable {
 			String realPath = tmpEC.getRealPath("/resources/images/products/");
 			String rta = logic.facturar(this.listProd, this.clientebean.getCliente(), realPath, this.loginBean.getDataSession(), type);
 			if("OK".equalsIgnoreCase(rta)){
-				this.enumer = ErrorEnum.ERROR;
+				this.enumer = ErrorEnum.SUCCESS;
 				messageBean("FACTURACIÓN REALIZADA CORRECTAMENTE");
 			}else{
 				this.enumer = ErrorEnum.ERROR;
@@ -350,5 +365,6 @@ public class FacturacionBean implements Serializable {
 			break;
 		}
 	}
+
 
 }
