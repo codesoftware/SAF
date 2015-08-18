@@ -18,16 +18,16 @@
 	<ui:composition template="/TEMPLATE/template.xhtml">
 		<ui:define name="content">
 			<script type="text/javascript">
-			function mostrarPanelProd(a,b,c)
-				{
-				document.getElementsByClassName("oculto")[0].style.display = '';
-				document.getElementsByClassName("oculto")[1].style.display = '';
-				document.getElementsByClassName("oculto")[2].style.display = '';
-				
+				function mostrarPanelProd(a, b, c) {
+					document.getElementsByClassName("oculto")[0].style.display = '';
+					document.getElementsByClassName("oculto")[1].style.display = '';
+					document.getElementsByClassName("oculto")[2].style.display = '';
+
 				}
 			</script>
-			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"  />
-			<h:form id="formInicio">			
+			<p:messages id="messages" showDetail="true" autoUpdate="true"
+				closable="true" />
+			<h:form id="formInicio">
 				<p:remoteCommand name="test"
 					actionListener="#{facturacionBean.searchProdId}" update="product"
 					oncomplete="mostrarPanelProd();"
@@ -49,7 +49,8 @@
 										<p:graphicImage library="images/products"
 											name="#{panelRec.nombre}.#{panelRec.extension}" width="50"
 											height="50" />
-											<p:outputLabel value="#{panelRec.nombre}" style="font-size:8px"/>
+										<p:outputLabel value="#{panelRec.nombre}"
+											style="font-size:8px" />
 									</p:commandLink>
 								</p:panel>
 							</p:dataGrid>
@@ -67,7 +68,8 @@
 											<p:graphicImage library="images/products"
 												name="#{panelProd.nombre}.#{panelProd.extension}" width="50"
 												height="50" />
-											<p:outputLabel value="#{panelProd.nombre}" style="font-size:8px"/>	
+											<p:outputLabel value="#{panelProd.nombre}"
+												style="font-size:8px" />
 										</p:commandLink>
 									</h:panelGrid>
 								</p:panel>
@@ -76,7 +78,7 @@
 					</div>
 				</div>
 				<div class="col-md-6 col-sm-12 col-xs-12">
-									<h:panelGroup layout="block" id="product" styleClass="panel">
+					<h:panelGroup layout="block" id="product" styleClass="panel">
 						<div class="col-md-12 col-xs-12 col-sm-12 alert-info text-center"
 							style="padding: 2px;">
 							<h4>Busqueda de Productos</h4>
@@ -95,7 +97,7 @@
 								<p:inputText value="#{facturacionBean.cantidad}"
 									id="cantidadProductos" styleClass="form-control"
 									onkeypress="if (event.keyCode == 13){addProdFac(); return false;}">
-									</p:inputText>
+								</p:inputText>
 							</div>
 						</div>
 						<div class="col-md-2 col-xs-12 col-sm-12 oculto"
@@ -119,21 +121,35 @@
 						</div>
 					</h:panelGroup>
 					<p:panel header="Factura">
-						<p:commandButton value="Registrar" actionListener="#{facturacionBean.registrar}" />
-						<p:commandButton value="Facturar" actionListener="#{facturacionBean.facturar}" />
+						<p:commandButton value="Registrar"
+							update="listFact,formHeader:tablaClienteComprador"
+							actionListener="#{facturacionBean.registrar}" ajax="true" />
+						<p:commandButton value="Facturar"
+							actionListener="#{facturacionBean.facturar}" ajax="true" />
+						<p:spacer width="300" height="0" />	
+						<p:commandLink actionListener="#{facturacionBean.resetValuesBill}"
+							ajax="true" update="formInicio:listFact,formHeader:total">
+							<p:graphicImage library="images" name="nobill.png" width="40"
+								height="40" />
+						</p:commandLink>
+						<p:commandLink actionListener="#{facturacionBean.resetValuesClient}"
+							ajax="true" update="formHeader:tablaClienteComprador">
+							<p:graphicImage library="images" name="noclient.png" width="40"
+								height="40" />
+						</p:commandLink>
 						<p:dataTable var="factura" style="pading:0px;" id="listFact"
 							value="#{facturacionBean.listProd}">
 							<f:facet name="header">
 								Lista de Pedidos
 							</f:facet>
 							<p:column headerText="Cod" sortBy="#{factura.code}" width="10%">
-								<h:outputText value="#{factura.code}"  />
+								<h:outputText value="#{factura.code}" />
 							</p:column>
-							<p:column headerText="Nombre" width="45%" >
+							<p:column headerText="Nombre" width="45%">
 								<h:outputText value="#{factura.name}" />
 							</p:column>
 							<p:column headerText="#" width="5%">
-								<h:outputText value="#{factura.amount}"  />
+								<h:outputText value="#{factura.amount}" />
 							</p:column>
 							<p:column headerText="Valor" width="20%">
 								<h:outputText value="$#{factura.price}" />

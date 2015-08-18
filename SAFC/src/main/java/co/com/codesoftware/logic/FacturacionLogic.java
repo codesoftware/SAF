@@ -1,5 +1,7 @@
 package co.com.codesoftware.logic;
 
+import java.awt.Desktop;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -113,7 +115,10 @@ public class FacturacionLogic {
 				FacturaTable result = new FacturaTable();
 				result = getDataFact(res.getIdFacturacion());
 				if ("1".equalsIgnoreCase(type)) {
-					createPDF(path, result,cliente,session);
+					String valPdf=createPDF(path, result, cliente, session);
+					if("ERROR ABIRENDO PDF".equalsIgnoreCase(valPdf)){
+						rta = valPdf;
+					}
 					rta = "OK";
 				} else {
 					rta = "OK";
@@ -202,7 +207,7 @@ public class FacturacionLogic {
 		return prodTable;
 	}
 
-	public String createPDF(String path, FacturaTable factura,ClienteEntity cliente,DatosSessionEntity session) {
+	public String createPDF(String path, FacturaTable factura, ClienteEntity cliente, DatosSessionEntity session) {
 		Rectangle rec = new Rectangle(2.0F, 8.0F);
 		Document document = new Document();
 		path += "factura.pdf";
@@ -217,7 +222,10 @@ public class FacturacionLogic {
 				document.add(new Paragraph("Cantidad:" + factura.getDetalleProductos().get(i).getCantidad()));
 			}
 			document.close();
-			print(path);
+			System.out.println(path);
+			if(!openPDF(path)){
+				path = "ERROR ABIRENDO PDF";
+			}
 			return path;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -281,4 +289,27 @@ public class FacturacionLogic {
 
 	}
 
+	/**
+	 * Metodo que abre el PDF
+	 * @param path
+	 * @return
+	 */
+	public boolean openPDF(String path) {
+		File pdfFile = new File(path);
+		boolean result = false;
+		try {
+			if (pdfFile.exists()) {
+
+				if (Desktop.isDesktopSupported()) {
+					Desktop.getDesktop().open(pdfFile);
+					result = true;
+				} else {
+					System.out.println("Awt Desktop is not supported!");
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

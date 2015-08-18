@@ -40,6 +40,7 @@ public class ObjectFactory {
     private final static QName _GetFacturasResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getFacturasResponse");
     private final static QName _Facturar_QNAME = new QName("http://server.codesoftware.com.co/", "facturar");
     private final static QName _GetDishesPrincipalScreenResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getDishesPrincipalScreenResponse");
+    private final static QName _GetClienteXCedula_QNAME = new QName("http://server.codesoftware.com.co/", "getClienteXCedula");
     private final static QName _FindExistsForSede_QNAME = new QName("http://server.codesoftware.com.co/", "findExistsForSede");
     private final static QName _GetProductPrincipalScreen_QNAME = new QName("http://server.codesoftware.com.co/", "getProductPrincipalScreen");
     private final static QName _GetRecetasResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getRecetasResponse");
@@ -48,6 +49,7 @@ public class ObjectFactory {
     private final static QName _GetProductsResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getProductsResponse");
     private final static QName _GetParamsEmpresa_QNAME = new QName("http://server.codesoftware.com.co/", "getParamsEmpresa");
     private final static QName _FacturarResponse_QNAME = new QName("http://server.codesoftware.com.co/", "facturarResponse");
+    private final static QName _GetClienteXCedulaResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getClienteXCedulaResponse");
     private final static QName _GetUsers_QNAME = new QName("http://server.codesoftware.com.co/", "getUsers");
     private final static QName _AddCliente_QNAME = new QName("http://server.codesoftware.com.co/", "addCliente");
     private final static QName _GetFacturaForIdResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getFacturaForIdResponse");
@@ -88,6 +90,14 @@ public class ObjectFactory {
      */
     public FindExistsForSede createFindExistsForSede() {
         return new FindExistsForSede();
+    }
+
+    /**
+     * Create an instance of {@link GetClienteXCedula }
+     * 
+     */
+    public GetClienteXCedula createGetClienteXCedula() {
+        return new GetClienteXCedula();
     }
 
     /**
@@ -192,6 +202,14 @@ public class ObjectFactory {
      */
     public FacturarResponse createFacturarResponse() {
         return new FacturarResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetClienteXCedulaResponse }
+     * 
+     */
+    public GetClienteXCedulaResponse createGetClienteXCedulaResponse() {
+        return new GetClienteXCedulaResponse();
     }
 
     /**
@@ -611,6 +629,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetClienteXCedula }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getClienteXCedula")
+    public JAXBElement<GetClienteXCedula> createGetClienteXCedula(GetClienteXCedula value) {
+        return new JAXBElement<GetClienteXCedula>(_GetClienteXCedula_QNAME, GetClienteXCedula.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link FindExistsForSede }{@code >}}
      * 
      */
@@ -680,6 +707,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "facturarResponse")
     public JAXBElement<FacturarResponse> createFacturarResponse(FacturarResponse value) {
         return new JAXBElement<FacturarResponse>(_FacturarResponse_QNAME, FacturarResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetClienteXCedulaResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getClienteXCedulaResponse")
+    public JAXBElement<GetClienteXCedulaResponse> createGetClienteXCedulaResponse(GetClienteXCedulaResponse value) {
+        return new JAXBElement<GetClienteXCedulaResponse>(_GetClienteXCedulaResponse_QNAME, GetClienteXCedulaResponse.class, null, value);
     }
 
     /**

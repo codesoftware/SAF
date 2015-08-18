@@ -32,7 +32,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="fecha" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="idCierre" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
- *         &lt;element name="idCliente" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="idCliente" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
  *         &lt;element name="idSede" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="idTius" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="idVaucher" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -87,7 +87,7 @@ public class FacturaTable {
     protected XMLGregorianCalendar fecha;
     protected Integer id;
     protected Integer idCierre;
-    protected Integer idCliente;
+    protected Long idCliente;
     protected Integer idSede;
     protected Integer idTius;
     protected String idVaucher;
@@ -348,10 +348,10 @@ public class FacturaTable {
      * 
      * @return
      *     possible object is
-     *     {@link Integer }
+     *     {@link Long }
      *     
      */
-    public Integer getIdCliente() {
+    public Long getIdCliente() {
         return idCliente;
     }
 
@@ -360,10 +360,10 @@ public class FacturaTable {
      * 
      * @param value
      *     allowed object is
-     *     {@link Integer }
+     *     {@link Long }
      *     
      */
-    public void setIdCliente(Integer value) {
+    public void setIdCliente(Long value) {
         this.idCliente = value;
     }
 

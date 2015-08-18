@@ -338,12 +338,29 @@ public class FacturacionBean implements Serializable {
 			if("OK".equalsIgnoreCase(rta)){
 				this.enumer = ErrorEnum.SUCCESS;
 				messageBean("FACTURACIÓN REALIZADA CORRECTAMENTE");
+				resetValuesBill();
+				resetValuesClient();
 			}else{
 				this.enumer = ErrorEnum.ERROR;
 				messageBean(rta);
 			}
 
 		}
+	}
+	/**
+	 * Funcion 	que resetea los valores de la factura
+	 */
+	public void resetValuesBill(){
+		this.listProd = null;
+		this.listProd = new ArrayList<GenericProductEntity>();
+		this.total="0.0";
+	}
+	/**
+	 * funcion que resetea los valores del cliente
+	 */
+	public void resetValuesClient(){
+		this.clientebean.setCliente(null);
+		this.clientebean.setCliente(new ClienteEntity());
 	}
 	/**
 	 * Metodo generico para mostrar mensajes de error o advertencia
@@ -359,6 +376,10 @@ public class FacturacionBean implements Serializable {
 		case FATAL:
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!", "Error de sistema"));
+			break;
+		case SUCCESS:
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok!", message));
 			break;
 
 		default:

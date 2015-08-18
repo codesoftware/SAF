@@ -69,6 +69,21 @@ public interface SAFWS {
 
     /**
      * 
+     * @param cedula
+     * @return
+     *     returns co.com.codesoftware.server.Cliente
+     */
+    @WebMethod
+    @WebResult(name = "Cliente", targetNamespace = "")
+    @RequestWrapper(localName = "getClienteXCedula", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetClienteXCedula")
+    @ResponseWrapper(localName = "getClienteXCedulaResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetClienteXCedulaResponse")
+    @Action(input = "http://server.codesoftware.com.co/SAFWS/getClienteXCedulaRequest", output = "http://server.codesoftware.com.co/SAFWS/getClienteXCedulaResponse")
+    public Cliente getClienteXCedula(
+        @WebParam(name = "cedula", targetNamespace = "")
+        long cedula);
+
+    /**
+     * 
      * @param cliente
      * @return
      *     returns java.lang.Long

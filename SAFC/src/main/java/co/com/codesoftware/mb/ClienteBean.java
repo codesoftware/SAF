@@ -14,6 +14,7 @@ import org.primefaces.context.RequestContext;
 
 import co.com.codesoftware.entities.ClienteEntity;
 import co.com.codesoftware.entities.GenericProductEntity;
+import co.com.codesoftware.logic.ClienteLogic;
 import co.com.codesoftware.logic.ProductsLogic;
 import co.com.codesoftware.logic.RecetasLogic;
 import co.com.codesoftware.logic.SearchTopLogic;
@@ -220,9 +221,9 @@ public class ClienteBean implements Serializable {
 	 */
 	
 	public void genericClient(){
-		this.cliente.setCedula(new Long(1));
-		this.cliente.setNombre("Generico");
-		this.cliente.setTelefono("0");
+		ClienteLogic logic = new ClienteLogic();
+		this.cliente =setDataEntity(logic.getDefaultClient());
+		
 	}
 	
 	
