@@ -61,6 +61,7 @@ public class FacturacionLogic {
 	 * @param amount
 	 * @return
 	 */
+	
 	public String updatePrice(String price, int amount) {
 		String result = "";
 		if (price != null) {
