@@ -196,6 +196,9 @@ public class FacturacionLogic {
 	public TemporalRecTable addReceta(GenericProductEntity product) {
 		TemporalRecTable prodTable = new TemporalRecTable();
 		// Falta descripcion de recetas
+		prodTable.setCantidad(product.getAmount());
+		prodTable.setDescuento(0);
+		prodTable.setIdReceta(product.getId());
 		return prodTable;
 	}
 
