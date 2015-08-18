@@ -1,18 +1,23 @@
 package co.com.codesoftware.mb;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
+import co.com.codesoftware.logic.ConsultaFacturaLogic;
+import co.com.codesoftware.server.FacturaTable;
+
 @ManagedBean
 @RequestScoped
 public class ConsultaFacturacionBean {
 
-	private Date	fechaInicio;
-	private Date	fechaFinal;
+	private Date fechaInicio;
+	private Date fechaFinal;
+	private List<FacturaTable> facturas;
 
 	public Date getFechaInicio() {
 		return fechaInicio;
@@ -36,15 +41,20 @@ public class ConsultaFacturacionBean {
 	public void consultaFacturasXFechas() {
 		if (fechaInicio == null) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "La fecha inicial no puede ser nula"));
-			return; 
+			return;
 		}
 		if (fechaFinal == null) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "La fecha final no puede ser nula"));
-			return; 
+			return;
 		}
-		System.out.println("Paso por aqui");
-		System.out.println("Fecha inicial" + fechaInicio.toString());
-		System.out.println("Fecha final" + fechaFinal.toString());
+		ConsultaFacturaLogic logic = new ConsultaFacturaLogic();
+		this.facturas = logic.consultaFacturasRangoFechas(fechaInicio, fechaFinal);
+		if (this.facturas == null) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "La consulta no arrojo ningun resultado"));
+		}else{
+			System.out.println("aqui funciona");
+		}
+		
 	}
 
 }
