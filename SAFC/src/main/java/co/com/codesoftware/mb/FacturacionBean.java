@@ -1,8 +1,6 @@
 package co.com.codesoftware.mb;
 
 import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;

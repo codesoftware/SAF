@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,11 +19,15 @@ import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
 
 import com.lowagie.text.Document;
+import com.lowagie.text.Element;
+import com.lowagie.text.FontFactory;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Rectangle;
 import com.lowagie.text.pdf.PdfWriter;
 
 import co.com.codesoftware.entities.ClienteEntity;
+import co.com.codesoftware.entities.DataBillEntity;
+import co.com.codesoftware.entities.DataProductEntity;
 import co.com.codesoftware.entities.DatosSessionEntity;
 import co.com.codesoftware.entities.GenericProductEntity;
 import co.com.codesoftware.server.FacturaTable;
@@ -213,15 +218,56 @@ public class FacturacionLogic {
 		Document document = new Document();
 		path += "factura.pdf";
 		try {
-
+			
 			PdfWriter.getInstance(document, new FileOutputStream(path));
 			document.open();
-			document.add(new Paragraph("Fecha facturacion:" + factura.getFecha().toString()));
-			document.add(new Paragraph("Tipo Pago:" + factura.getTipoPago()));
-			for (int i = 0; i < factura.getDetalleProductos().size(); i++) {
-				document.add(new Paragraph("Cantidad:" + factura.getDetalleProductos().get(i).getCantidad()));
-				document.add(new Paragraph("Cantidad:" + factura.getDetalleProductos().get(i).getCantidad()));
+			DataBillEntity bill = new DataBillEntity();
+			bill= setDataGenericBill(session);
+			Paragraph para = new Paragraph(bill.getNombreEmpresa(),FontFactory.getFont("Arial", 18f));
+			para.setAlignment(Element.ALIGN_CENTER);
+			document.add(para);
+			para = new Paragraph(new Paragraph("NIT:"+bill.getNit(),FontFactory.getFont("Arial", 14f)));
+			para.setAlignment(Element.ALIGN_CENTER);
+			document.add(para);
+			para =new Paragraph("DIRECCIÓN:"+bill.getDireccion()+". TELS:"+bill.getTelefonos(),FontFactory.getFont("Arial", 14f));
+			para.setAlignment(Element.ALIGN_CENTER);
+			document.add(para);
+			para = new Paragraph(bill.getCiudad(),FontFactory.getFont("Arial", 14f));
+			para.setAlignment(Element.ALIGN_CENTER);
+			document.add(para);
+			para = new Paragraph("****************************************************************************************************************");
+			para.setAlignment(Element.ALIGN_CENTER);
+			document.add(para);
+			para =new Paragraph("Producto                           cantidad                valor unitario               valor total                ",FontFactory.getFont("Arial", 14f));
+			para.setAlignment(Element.ALIGN_CENTER);
+			document.add(para);
+		
+			ArrayList<DataProductEntity> product = new ArrayList<DataProductEntity>();
+			product = setDataProduct(factura);
+			for(int i=0;i<product.size();i++){
+				
+				para = new Paragraph(product.get(i).getNombreProducto()+product.get(i).getCantidad()+product.get(i).getValorUnitario()+product.get(i).getValorTotal());
+				para.setAlignment(Element.ALIGN_CENTER);
+				document.add(para);
 			}
+			para =new Paragraph("                                                                              TOTAL:"+factura.getValor(),FontFactory.getFont("Arial", 14f));
+			para.setAlignment(Element.ALIGN_CENTER);
+			document.add(para);
+			para =new Paragraph("----------------------------------------------------------------------------------------------------------------");
+			para.setAlignment(Element.ALIGN_CENTER);
+			document.add(para);
+			para =new Paragraph("Cliente : "+cliente.getApellido()+" "+cliente.getNombre());
+			para.setAlignment(Element.ALIGN_CENTER);
+			document.add(para);
+			para =new Paragraph("Usted Fue atendido por  : "+session.getDataUser().getPersona().get(0).getApellido()+" "+session.getDataUser().getPersona().get(0).getNombre()+".   Fecha:"+factura.getFecha());
+			para.setAlignment(Element.ALIGN_CENTER);
+			document.add(para);
+			para = new Paragraph(new Paragraph("GRACIAS POR SU COMPRA"));
+			para.setAlignment(Element.ALIGN_CENTER);
+			document.add(para);
+			para = new Paragraph("****************************************************************************************************************");
+			para.setAlignment(Element.ALIGN_CENTER);
+			document.add(para);
 			document.close();
 			System.out.println(path);
 			if(!openPDF(path)){
@@ -310,6 +356,50 @@ public class FacturacionLogic {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		return result;
+	}
+	/**
+	 * Funcion que setea los datos del objeto a un objeto generico para la factura
+	 * @param session
+	 * @return
+	 */
+	public DataBillEntity setDataGenericBill(DatosSessionEntity session){
+		DataBillEntity result = new DataBillEntity();
+		for(int i=0;i<session.getDataCompany().size();i++){
+			if("NOMBREEMPRESA".equalsIgnoreCase(session.getDataCompany().get(i).getClave())){
+				result.setNombreEmpresa(session.getDataCompany().get(i).getValor());
+			}
+			if("NIT".equalsIgnoreCase(session.getDataCompany().get(i).getClave())){
+				result.setNit(session.getDataCompany().get(i).getValor());
+			}
+			if("DIRECCION".equalsIgnoreCase(session.getDataCompany().get(i).getClave())){
+				result.setDireccion(session.getDataCompany().get(i).getValor());
+			}
+			if("TELEFONOS".equalsIgnoreCase(session.getDataCompany().get(i).getClave())){
+				result.setTelefonos(session.getDataCompany().get(i).getValor());
+			}
+			if("CIUDAD".equalsIgnoreCase(session.getDataCompany().get(i).getClave())){
+				result.setCiudad(session.getDataCompany().get(i).getValor());
+			}
+		}
+		result.setFacturador(session.getDataUser().getPersona().get(0).getApellido()+"  "+session.getDataUser().getPersona().get(0).getNombre());
+		return result;
+	}
+	
+	public ArrayList<DataProductEntity> setDataProduct(FacturaTable factura){
+		ArrayList<DataProductEntity> result = new ArrayList<DataProductEntity>();
+		for(int i= 0;i<factura.getDetalleProductos().size();i++){
+			DataProductEntity obj = new DataProductEntity();
+			String nameProduct = factura.getDetalleProductos().get(i).getProducto().getNombre().concat("                      ");
+			obj.setNombreProducto(nameProduct.substring(0, 20));
+			String cantidad = "   "+factura.getDetalleProductos().get(i).getCantidad()+"                        ";
+			obj.setCantidad(cantidad.substring(0,16));
+			String valorUnitario = factura.getDetalleProductos().get(i).getValorUnidad()+"                                     ";
+		    obj.setValorUnitario(valorUnitario.substring(0, 26));
+		    String valorTotal = ""+new BigDecimal(factura.getDetalleProductos().get(i).getCantidad()).multiply(factura.getDetalleProductos().get(i).getValorUnidad())+"                              ";
+		    obj.setValorTotal(valorTotal.substring(0,21));
+		    result.add(obj);
 		}
 		return result;
 	}
