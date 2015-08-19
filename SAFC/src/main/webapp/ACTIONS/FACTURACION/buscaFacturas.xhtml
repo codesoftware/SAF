@@ -52,36 +52,40 @@
 			<div class="col-md-1 col-sm-0 col-xs-0"></div>
 			<div class="col-md-10 col-sm-12 col-xs-12">
 				<p:dataTable var="factura" value="#{consultaFacturacionBean.facturas}" id="tablaFacturas" 
-					emptyMessage="No existen facturas" widgetVar="facturasConsulta" paginator="true" rows="20"  filteredValue="#{consultaFacturacionBean.facturasFiltradas}">
+					emptyMessage="No existen facturas" paginator="true" rows="20" >
 					<f:facet name="header">
 						<p:outputPanel>
 							<h:outputText value="Busqueda de Facturas" />
-							<p:inputText id="globalFilter" onkeyup="PF('facturasConsulta').filter()" style="width:150px" placeholder="Ingrese palabra" />
 						</p:outputPanel>
 					</f:facet>
-					<p:column headerText="Id" filterBy="#{factura.id}">
+					<p:column headerText="Id" width="10%">
 						<h:outputText value="#{factura.id}"></h:outputText>
 					</p:column>
-					<p:column headerText="Nombres">
+					<p:column headerText="Nombres" width="25%" >
 						<h:outputText value="#{factura.cliente.apellidos}"></h:outputText>
 						<h:outputText value="&#160;" />
 						<h:outputText value="#{factura.cliente.nombres}"></h:outputText>
 					</p:column>
-					<p:column headerText="Fecha Facturacion">
+					<p:column headerText="Fecha Facturacion" width="15%">
 						<h:outputText value="#{factura.fecha.toGregorianCalendar().time}">
 							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</p:column>
-					<p:column headerText="Tipo Pago">
+					<p:column headerText="Tipo Pago" width="20%">
 						<h:outputText value="Efectivo" rendered="#{factura.tipoPago == 'E'}" />
 						<h:outputText value="Tarjeta" rendered="#{factura.tipoPago != 'E'}" />
 					</p:column>
-					<p:column headerText="Valor">
+					<p:column headerText="Valor" width="20%">
 						<h:outputText value="$"></h:outputText>
 						<h:outputText value="&#160;"></h:outputText>
 						<h:outputText value="#{factura.valor}">
 							<f:convertNumber pattern="#,##0.00"></f:convertNumber>
 						</h:outputText>
+					</p:column>
+					<p:column headerText="Ver">
+						<p:commandButton icon="ui-icon-search" title="Ver factura Completa"
+							action="#{consultaFacturacionBean.buscaFacturaEspecifico}">
+						</p:commandButton>  
 					</p:column>
 				</p:dataTable>
 			</div>

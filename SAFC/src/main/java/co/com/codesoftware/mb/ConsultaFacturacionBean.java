@@ -15,10 +15,10 @@ import co.com.codesoftware.server.FacturaTable;
 @RequestScoped
 public class ConsultaFacturacionBean {
 
-	private Date				fechaInicio;
-	private Date				fechaFinal;
-	private List<FacturaTable>	facturas;
-	private List<FacturaTable>	facturasFiltradas;
+	private Date fechaInicio;
+	private Date fechaFinal;
+	private List<FacturaTable> facturas;
+	private List<FacturaTable> facturasFiltradas;
 
 	public Date getFechaInicio() {
 		return fechaInicio;
@@ -70,6 +70,16 @@ public class ConsultaFacturacionBean {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "La consulta no arrojo ningun resultado"));
 		}
 
+	}
+
+	/**
+	 * Funcion encargada de realizar la busqueda de una factura en especifico
+	 * 
+	 * @param obj
+	 */
+	public void buscaFacturaEspecifico() {
+		System.out.println("Paso por aqui");
+		//System.out.println("pasa por aqui" + obj.toString());
 	}
 
 }
