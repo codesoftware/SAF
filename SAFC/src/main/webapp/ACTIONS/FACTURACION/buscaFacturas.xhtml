@@ -39,12 +39,53 @@
 					</div>
 					<div class="col-md-4 col-xs-12 col-sm-12">
 						<div class="form-group">
-							<p:commandButton styleClass="btn btn-primary" value="Consultar" actionListener="#{consultaFacturacionBean.consultaFacturasXFechas}"></p:commandButton>
+							<p:commandButton styleClass="btn btn-primary" value="Consultar" actionListener="#{consultaFacturacionBean.consultaFacturasXFechas}" update="tablaFacturas"></p:commandButton>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-1 col-sm-0 col-xs-12"></div>
+		</div>
+		<br />
+		<br />
+		<div class="row">
+			<div class="col-md-1 col-sm-0 col-xs-0"></div>
+			<div class="col-md-10 col-sm-12 col-xs-12">
+				<p:dataTable var="factura" value="#{consultaFacturacionBean.facturas}" id="tablaFacturas" 
+					emptyMessage="No existen facturas" widgetVar="facturasConsulta" paginator="true" rows="20"  filteredValue="#{consultaFacturacionBean.facturasFiltradas}">
+					<f:facet name="header">
+						<p:outputPanel>
+							<h:outputText value="Busqueda de Facturas" />
+							<p:inputText id="globalFilter" onkeyup="PF('facturasConsulta').filter()" style="width:150px" placeholder="Ingrese palabra" />
+						</p:outputPanel>
+					</f:facet>
+					<p:column headerText="Id" filterBy="#{factura.id}">
+						<h:outputText value="#{factura.id}"></h:outputText>
+					</p:column>
+					<p:column headerText="Nombres">
+						<h:outputText value="#{factura.cliente.apellidos}"></h:outputText>
+						<h:outputText value="&#160;" />
+						<h:outputText value="#{factura.cliente.nombres}"></h:outputText>
+					</p:column>
+					<p:column headerText="Fecha Facturacion">
+						<h:outputText value="#{factura.fecha.toGregorianCalendar().time}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Tipo Pago">
+						<h:outputText value="Efectivo" rendered="#{factura.tipoPago == 'E'}" />
+						<h:outputText value="Tarjeta" rendered="#{factura.tipoPago != 'E'}" />
+					</p:column>
+					<p:column headerText="Valor">
+						<h:outputText value="$"></h:outputText>
+						<h:outputText value="&#160;"></h:outputText>
+						<h:outputText value="#{factura.valor}">
+							<f:convertNumber pattern="#,##0.00"></f:convertNumber>
+						</h:outputText>
+					</p:column>
+				</p:dataTable>
+			</div>
+			<div class="col-md-1 col-sm-0 col-xs-0"></div>
 		</div>
 	</h:form>
 	<br />

@@ -15,9 +15,10 @@ import co.com.codesoftware.server.FacturaTable;
 @RequestScoped
 public class ConsultaFacturacionBean {
 
-	private Date fechaInicio;
-	private Date fechaFinal;
-	private List<FacturaTable> facturas;
+	private Date				fechaInicio;
+	private Date				fechaFinal;
+	private List<FacturaTable>	facturas;
+	private List<FacturaTable>	facturasFiltradas;
 
 	public Date getFechaInicio() {
 		return fechaInicio;
@@ -33,6 +34,22 @@ public class ConsultaFacturacionBean {
 
 	public void setFechaFinal(Date fechaFinal) {
 		this.fechaFinal = fechaFinal;
+	}
+
+	public List<FacturaTable> getFacturas() {
+		return facturas;
+	}
+
+	public void setFacturas(List<FacturaTable> facturas) {
+		this.facturas = facturas;
+	}
+
+	public List<FacturaTable> getFacturasFiltradas() {
+		return facturasFiltradas;
+	}
+
+	public void setFacturasFiltradas(List<FacturaTable> facturasFiltradas) {
+		this.facturasFiltradas = facturasFiltradas;
 	}
 
 	/**
@@ -51,10 +68,8 @@ public class ConsultaFacturacionBean {
 		this.facturas = logic.consultaFacturasRangoFechas(fechaInicio, fechaFinal);
 		if (this.facturas == null) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "La consulta no arrojo ningun resultado"));
-		}else{
-			System.out.println("aqui funciona");
 		}
-		
+
 	}
 
 }
