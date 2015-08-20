@@ -6,13 +6,14 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import co.com.codesoftware.logic.ConsultaFacturaLogic;
 import co.com.codesoftware.server.FacturaTable;
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class ConsultaFacturacionBean {
 
 	private Date fechaInicio;
@@ -77,8 +78,8 @@ public class ConsultaFacturacionBean {
 	 * 
 	 * @param obj
 	 */
-	public void buscaFacturaEspecifico() {
-		System.out.println("Paso por aqui");
+	public void buscaFacturaEspecifico(FacturaTable obj) {
+		System.out.println("Paso por aqui" + obj.toString());
 		//System.out.println("pasa por aqui" + obj.toString());
 	}
 
