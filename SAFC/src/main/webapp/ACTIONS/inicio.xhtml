@@ -96,7 +96,7 @@
 								<p:outputLabel value="Cantidad:" />
 								<p:inputText value="#{facturacionBean.cantidad}"
 									id="cantidadProductos" styleClass="form-control"
-									onkeypress="if (event.keyCode == 13){addProdFac(); return false;}">
+									onkeypress="if (event.keyCode == 13){addProdFac(); return false;}"  >
 								</p:inputText>
 							</div>
 						</div>
@@ -122,9 +122,10 @@
 					</h:panelGroup>
 					<p:panel header="Factura">
 						<p:commandButton value="Registrar"
-							update="listFact,formHeader:tablaClienteComprador"
+							update="listFact,formHeader:tablaClienteComprador,formHeader:total"
 							actionListener="#{facturacionBean.registrar}" ajax="true" />
 						<p:commandButton value="Facturar"
+						update="listFact,formHeader:tablaClienteComprador,formHeader:total"
 							actionListener="#{facturacionBean.facturar}" ajax="true" />
 						<p:spacer width="300" height="0" />	
 						<p:commandLink actionListener="#{facturacionBean.resetValuesBill}"

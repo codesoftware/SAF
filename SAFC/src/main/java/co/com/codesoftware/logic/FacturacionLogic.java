@@ -6,8 +6,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.print.Doc;
 import javax.print.DocFlavor;
@@ -217,6 +219,8 @@ public class FacturacionLogic {
 		Rectangle rec = new Rectangle(2.0F, 8.0F);
 		Document document = new Document();
 		path += "factura.pdf";
+		Locale locale = new Locale("es", "CO");
+		NumberFormat nf = NumberFormat.getCurrencyInstance(locale);
 		try {
 			
 			PdfWriter.getInstance(document, new FileOutputStream(path));
@@ -238,7 +242,7 @@ public class FacturacionLogic {
 			para = new Paragraph("****************************************************************************************************************");
 			para.setAlignment(Element.ALIGN_CENTER);
 			document.add(para);
-			para =new Paragraph("Producto                           cantidad                valor unitario               valor total                ",FontFactory.getFont("Arial", 14f));
+			para =new Paragraph("Producto                                    cantidad                valor unitario               valor total                ",FontFactory.getFont("Arial", 14f));
 			para.setAlignment(Element.ALIGN_CENTER);
 			document.add(para);
 		
@@ -250,10 +254,10 @@ public class FacturacionLogic {
 				para.setAlignment(Element.ALIGN_CENTER);
 				document.add(para);
 			}
-			para =new Paragraph("                                                                              TOTAL:"+factura.getValor(),FontFactory.getFont("Arial", 14f));
+			para =new Paragraph("                                                                         TOTAL:"+nf.format(factura.getValor()),FontFactory.getFont("Arial", 18f));
 			para.setAlignment(Element.ALIGN_CENTER);
 			document.add(para);
-			para =new Paragraph("----------------------------------------------------------------------------------------------------------------");
+			para =new Paragraph("-----------------------------------------------------------------------------------------------------------------------------");
 			para.setAlignment(Element.ALIGN_CENTER);
 			document.add(para);
 			para =new Paragraph("Cliente : "+cliente.getApellido()+" "+cliente.getNombre());
@@ -388,17 +392,19 @@ public class FacturacionLogic {
 	}
 	
 	public ArrayList<DataProductEntity> setDataProduct(FacturaTable factura){
+		Locale locale = new Locale("es", "CO");
+		NumberFormat nf = NumberFormat.getCurrencyInstance(locale);
 		ArrayList<DataProductEntity> result = new ArrayList<DataProductEntity>();
 		for(int i= 0;i<factura.getDetalleProductos().size();i++){
 			DataProductEntity obj = new DataProductEntity();
-			String nameProduct = factura.getDetalleProductos().get(i).getProducto().getNombre().concat("                      ");
-			obj.setNombreProducto(nameProduct.substring(0, 20));
-			String cantidad = "   "+factura.getDetalleProductos().get(i).getCantidad()+"                        ";
-			obj.setCantidad(cantidad.substring(0,16));
-			String valorUnitario = factura.getDetalleProductos().get(i).getValorUnidad()+"                                     ";
+			String nameProduct = factura.getDetalleProductos().get(i).getProducto().getNombre().concat("                                                  ");
+			obj.setNombreProducto(nameProduct.substring(0, 30));
+			String cantidad = "   "+factura.getDetalleProductos().get(i).getCantidad()+"                                                                  ";
+			obj.setCantidad(cantidad.substring(0,30));
+			String valorUnitario = nf.format(factura.getDetalleProductos().get(i).getValorUnidad())+"                                                      ";
 		    obj.setValorUnitario(valorUnitario.substring(0, 26));
-		    String valorTotal = ""+new BigDecimal(factura.getDetalleProductos().get(i).getCantidad()).multiply(factura.getDetalleProductos().get(i).getValorUnidad())+"                              ";
-		    obj.setValorTotal(valorTotal.substring(0,21));
+		    String valorTotal = ""+nf.format(new BigDecimal(factura.getDetalleProductos().get(i).getCantidad()).multiply(factura.getDetalleProductos().get(i).getValorUnidad()))+"                                        ";
+		    obj.setValorTotal(valorTotal.substring(0,30));
 		    result.add(obj);
 		}
 		return result;

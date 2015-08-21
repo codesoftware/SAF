@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -34,7 +35,7 @@ public class FacturacionBean implements Serializable {
 	@ManagedProperty(value = "#{clienteBean}")
 	private ClienteBean clientebean;
 	private String codigoProducto;
-	private int cantidad = 1;
+	private int cantidad;
 	private List<GenericProductEntity> listProd;
 	private String codigoAdd;
 	private String total;
@@ -114,6 +115,7 @@ public class FacturacionBean implements Serializable {
 	}
 
 	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
 	}
 
 	public String getCodigoAdd() {
@@ -132,6 +134,11 @@ public class FacturacionBean implements Serializable {
 		this.loginBean = loginBean;
 	}
 	
+	  @PostConstruct
+	  public void init(){
+	       this.cantidad = 1;
+	       this.total = "0.0";
+	    }
 	/**
 	 * Metodo que ejecuta la facturacion
 	 */
@@ -191,6 +198,8 @@ public class FacturacionBean implements Serializable {
 								this.listProd.get(exist).getAmount()));
 					}
 				} else {
+					product.setAmount(this.cantidad);
+					product.setTotalPrice(String.valueOf(Double.parseDouble(product.getPrice())*this.cantidad));
 					this.listProd.add(product);
 				}
 				addTotal();
