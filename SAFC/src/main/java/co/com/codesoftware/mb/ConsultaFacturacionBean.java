@@ -16,10 +16,11 @@ import co.com.codesoftware.server.FacturaTable;
 @ViewScoped
 public class ConsultaFacturacionBean {
 
-	private Date fechaInicio;
-	private Date fechaFinal;
-	private List<FacturaTable> facturas;
-	private List<FacturaTable> facturasFiltradas;
+	private Date				fechaInicio;
+	private Date				fechaFinal;
+	private List<FacturaTable>	facturas;
+	private List<FacturaTable>	facturasFiltradas;
+	private FacturaTable		factComplete;
 
 	public Date getFechaInicio() {
 		return fechaInicio;
@@ -53,6 +54,14 @@ public class ConsultaFacturacionBean {
 		this.facturasFiltradas = facturasFiltradas;
 	}
 
+	public FacturaTable getFactComplete() {
+		return factComplete;
+	}
+
+	public void setFactComplete(FacturaTable factComplete) {
+		this.factComplete = factComplete;
+	}
+
 	/**
 	 * Funcion con la cual busco las facturas en un rango determinado de fechas
 	 */
@@ -79,8 +88,15 @@ public class ConsultaFacturacionBean {
 	 * @param obj
 	 */
 	public void buscaFacturaEspecifico(FacturaTable obj) {
-		System.out.println("Paso por aqui" + obj.toString());
-		//System.out.println("pasa por aqui" + obj.toString());
+		ConsultaFacturaLogic logic = new ConsultaFacturaLogic();
+		try {
+			this.factComplete = logic.consutlaFacturaXId(obj.getId());
+			if(this.factComplete == null){
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "La consulta de la factura especifica no arrojo ningun resultado"));				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

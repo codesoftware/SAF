@@ -27,4 +27,22 @@ public class ConsultaFacturaLogic {
 		return rta;
 	}
 
+	/**
+	 * Funcion con la cual busco una factura por su id
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public FacturaTable consutlaFacturaXId(int id) {
+		FacturaTable rta = null;
+		try {
+			SAFWSService service = new SAFWSService();
+			SAFWS port = service.getSAFWSPort();
+			rta = port.getFacturaForId(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rta;
+	}
+
 }
