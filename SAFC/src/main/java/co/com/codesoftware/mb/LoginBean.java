@@ -15,10 +15,10 @@ import co.com.codesoftware.logic.LoginLogic;
 @SessionScoped
 public class LoginBean implements Serializable {
 
-	private static final long	serialVersionUID	= 1L;
-	private String				user;
-	private String				password;
-	private DatosSessionEntity	dataSession;
+	private static final long serialVersionUID = 1L;
+	private String user;
+	private String password;
+	private DatosSessionEntity dataSession;
 
 	public DatosSessionEntity getDataSession() {
 		return dataSession;
@@ -55,7 +55,8 @@ public class LoginBean implements Serializable {
 			// RequestContext context = RequestContext.getCurrentInstance();
 			FacesMessage message = null;
 			LoginLogic logic = new LoginLogic();
-			if ("OK".equalsIgnoreCase(logic.login(this.user, this.password))) {
+			String rtaLogin = logic.login(this.user, this.password);
+			if ("OK".equalsIgnoreCase(rtaLogin)) {
 				// Obtengo los datos que iran en la session
 				DatosSessionEntity entity = new DatosSessionEntity();
 				DataSessionLogic log = new DataSessionLogic();
@@ -69,6 +70,8 @@ public class LoginBean implements Serializable {
 				// Le doy la redireccion que quiero Inicio
 				redirection = "/ACTIONS/inicio?faces-redirect=false";
 				// redirection = "/ACTIONS/inicio";
+			} else if ("UPD".equalsIgnoreCase(rtaLogin)) {
+				message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Debe actualizar la contraseña ya que tiene cambio obligatorio de contraseña", this.user);
 			} else {
 				message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Datos invalidos");
 				redirection = "index";
