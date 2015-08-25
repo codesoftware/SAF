@@ -14,9 +14,10 @@ import co.com.codesoftware.utilities.ImagesUtilities;
 public class ProductsLogic {
 	/**
 	 * Funcion que consulta los productos que apareceran en el home
+	 * 
 	 * @return
-	 */	
-	public List<PantallaPrincipalFacTable> getEspecialProduct(){
+	 */
+	public List<PantallaPrincipalFacTable> getEspecialProduct() {
 		List<PantallaPrincipalFacTable> list = new ArrayList<PantallaPrincipalFacTable>();
 		SAFWSService service = new SAFWSService();
 		SAFWS port = service.getSAFWSPort();
@@ -24,23 +25,25 @@ public class ProductsLogic {
 		list = getImage(list);
 		return list;
 	}
+
 	/**
 	 * Funcion que consulta un producto por codigo y devuelve la entidad de este
+	 * 
 	 * @param id
 	 * @return
 	 */
-	
-	public GenericProductEntity getProductXCode(String code,int cantidad){
+
+	public GenericProductEntity getProductXCode(String code, int cantidad) {
 		ProductoTable product = null;
 		GenericProductEntity result = new GenericProductEntity();
 		try {
 			product = new ProductoTable();
 			SAFWSService service = new SAFWSService();
 			SAFWS port = service.getSAFWSPort();
-			product = port.getProductForCode(code,1);
-			if(product!=null){
-				result = setGenericProduct(result, product,cantidad);
-			}else{
+			product = port.getProductForCode(code, 1);
+			if (product != null) {
+				result = setGenericProduct(result, product, cantidad);
+			} else {
 				result = null;
 			}
 
@@ -49,36 +52,51 @@ public class ProductsLogic {
 		}
 		return result;
 	}
-	
-	public GenericProductEntity setGenericProduct(GenericProductEntity result,ProductoTable product,int cantidad){
+
+	public GenericProductEntity setGenericProduct(GenericProductEntity result, ProductoTable product, int cantidad) {
 		result.setCode(product.getCodigo());
 		result.setId(product.getId());
-		result.setName(product.getNombre());	
+		result.setName(product.getNombre());
 		result.setAmount(cantidad);
 		result.setPrice(String.valueOf(product.getPrecios().get(0).getPrecio()));
 		result.setTotalPrice(String.valueOf(product.getPrecios().get(0).getPrecio()));
 		return result;
 	}
-	
-	public GenericProductEntity setGenericProduct(GenericProductEntity result,RecetaTable product,int cantidad){
+
+	public GenericProductEntity setGenericProduct(GenericProductEntity result, RecetaTable product, int cantidad) {
 		result.setCode(product.getCodigo());
 		result.setId(product.getId());
-		result.setName(product.getNombre());	
+		result.setName(product.getNombre());
 		result.setAmount(cantidad);
 		result.setPrice(String.valueOf(product.getPrecios().get(0).getPrecio()));
 		return result;
 	}
-	
-	public  List<PantallaPrincipalFacTable> getImage(List<PantallaPrincipalFacTable> list){
+
+	public List<PantallaPrincipalFacTable> getImage(List<PantallaPrincipalFacTable> list) {
 		ImagesUtilities ut = new ImagesUtilities();
-		for(PantallaPrincipalFacTable item: list){
-			if(ut.encodeB64ToImage(item.getImagen(),item.getNombre()+"." + item.getExtension())){
-				item.setRuta(item.getCodigo()+"." + item.getExtension());
+		for (PantallaPrincipalFacTable item : list) {
+			if (ut.encodeB64ToImage(item.getImagen(), item.getNombre() + "." + item.getExtension())) {
+				item.setRuta(item.getCodigo() + "." + item.getExtension());
 			}
-		}		
+		}
 		return list;
 	}
-	
-	
+
+	/**
+	 * Funcion la cual busca todos los productos activos de la aplicacion
+	 * 
+	 * @return
+	 */
+	public List<ProductoTable> buscaProductosAplicacion(Integer sede) {
+		List<ProductoTable> productos = null;
+		try {
+			SAFWSService service = new SAFWSService();
+			SAFWS port = service.getSAFWSPort();
+			productos = port.getProducts(sede);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return productos;
+	}
 
 }

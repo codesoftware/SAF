@@ -19,6 +19,7 @@ import co.com.codesoftware.entities.GenericProductEntity;
 import co.com.codesoftware.logic.FacturacionLogic;
 import co.com.codesoftware.logic.ProductsLogic;
 import co.com.codesoftware.server.PantallaPrincipalFacTable;
+import co.com.codesoftware.server.ProductoTable;
 import co.com.codesoftware.utilities.ErrorEnum;
 
 @ManagedBean(name = "facturacionBean")
@@ -40,6 +41,8 @@ public class FacturacionBean implements Serializable {
 	private String codigoAdd;
 	private String total;
 	private ErrorEnum enumer;
+	private List<ProductoTable> productos;
+	private List<ProductoTable> productosFilter;
 
 	public ErrorEnum getEnumer() {
 		return enumer;
@@ -133,27 +136,43 @@ public class FacturacionBean implements Serializable {
 	public void setLoginBean(LoginBean loginBean) {
 		this.loginBean = loginBean;
 	}
-	
-	  @PostConstruct
-	  public void init(){
-	       this.cantidad = 1;
-	       this.total = "0.0";
-	    }
+
+	@PostConstruct
+	public void init() {
+		this.cantidad = 1;
+		this.total = "0.0";
+	}
+
 	/**
 	 * Metodo que ejecuta la facturacion
 	 */
-	
-	public void facturar(){
+
+	public void facturar() {
 		checkProducts("1");
 	}
+
 	/**
 	 * metodo que ejecuta la facturacion sin imprimir el pdf
 	 */
-	public void registrar(){
+	public void registrar() {
 		checkProducts("2");
 	}
-	
-	
+
+	public List<ProductoTable> getProductos() {
+		return productos;
+	}
+
+	public void setProductos(List<ProductoTable> productos) {
+		this.productos = productos;
+	}
+
+	public List<ProductoTable> getProductosFilter() {
+		return productosFilter;
+	}
+
+	public void setProductosFilter(List<ProductoTable> productosFilter) {
+		this.productosFilter = productosFilter;
+	}
 
 	/**
 	 * Funcion que valida que tipo de producto es y asi poderlo mostrar
@@ -189,17 +208,15 @@ public class FacturacionBean implements Serializable {
 				int exist = existProduct();
 				if (exist > -1) {
 					this.listProd.get(exist).setAmount(this.listProd.get(exist).getAmount() + cantidad);
-					if (log.updatePrice(this.listProd.get(exist).getPrice(),
-							this.listProd.get(exist).getAmount()) == null) {
+					if (log.updatePrice(this.listProd.get(exist).getPrice(), this.listProd.get(exist).getAmount()) == null) {
 						this.setEnumer(ErrorEnum.ERROR);
 						messageBean("Al producto no se le ha parametrizado el precio");
 					} else {
-						this.listProd.get(exist).setTotalPrice(log.updatePrice(this.listProd.get(exist).getPrice(),
-								this.listProd.get(exist).getAmount()));
+						this.listProd.get(exist).setTotalPrice(log.updatePrice(this.listProd.get(exist).getPrice(), this.listProd.get(exist).getAmount()));
 					}
 				} else {
 					product.setAmount(this.cantidad);
-					product.setTotalPrice(String.valueOf(Double.parseDouble(product.getPrice())*this.cantidad));
+					product.setTotalPrice(String.valueOf(Double.parseDouble(product.getPrice()) * this.cantidad));
 					this.listProd.add(product);
 				}
 				addTotal();
@@ -230,9 +247,7 @@ public class FacturacionBean implements Serializable {
 			int exist = existProduct();
 			if (exist > -1) {
 				this.listProd.get(exist).setAmount(this.listProd.get(exist).getAmount() + cantidad);
-				this.listProd.get(exist)
-						.setTotalPrice(String.valueOf(Double.parseDouble(this.listProd.get(exist).getPrice())
-								* this.listProd.get(exist).getAmount()));
+				this.listProd.get(exist).setTotalPrice(String.valueOf(Double.parseDouble(this.listProd.get(exist).getPrice()) * this.listProd.get(exist).getAmount()));
 			} else {
 				this.listProd.add(product);
 			}
@@ -315,8 +330,7 @@ public class FacturacionBean implements Serializable {
 				this.setEnumer(ErrorEnum.ERROR);
 				messageBean("Producto sin parametrizar precio.");
 			} else {
-				result += Double.parseDouble(
-						log.updatePrice(this.listProd.get(i).getPrice(), this.listProd.get(i).getAmount()));
+				result += Double.parseDouble(log.updatePrice(this.listProd.get(i).getPrice(), this.listProd.get(i).getAmount()));
 				Locale locale = new Locale("es", "CO");
 				NumberFormat nf = NumberFormat.getCurrencyInstance(locale);
 				this.total = nf.format(result);
@@ -324,10 +338,22 @@ public class FacturacionBean implements Serializable {
 		}
 
 	}
-
+	/**
+	 * Funcion con la cual busco los productos del sistema
+	 */
+	public void buscaProductos() {
+		try {
+			ProductsLogic logic = new ProductsLogic();
+			this.productos = logic.buscaProductosAplicacion(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
-	 * Funcion que ejecuta la facturacion y envia el parametro dependiendo de la acción
+	 * Funcion que ejecuta la facturacion y envia el parametro dependiendo de la
+	 * acción
+	 * 
 	 * @param type
 	 */
 	public void checkProducts(String type) {
@@ -342,57 +368,57 @@ public class FacturacionBean implements Serializable {
 			tmpEC = FacesContext.getCurrentInstance().getExternalContext();
 			String realPath = tmpEC.getRealPath("/resources/images/products/");
 			String rta = logic.facturar(this.listProd, this.clientebean.getCliente(), realPath, this.loginBean.getDataSession(), type);
-			if("OK".equalsIgnoreCase(rta)){
+			if ("OK".equalsIgnoreCase(rta)) {
 				this.enumer = ErrorEnum.SUCCESS;
 				messageBean("FACTURACIÓN REALIZADA CORRECTAMENTE");
 				resetValuesBill();
 				resetValuesClient();
-			}else{
+			} else {
 				this.enumer = ErrorEnum.ERROR;
 				messageBean(rta);
 			}
 
 		}
 	}
+
 	/**
-	 * Funcion 	que resetea los valores de la factura
+	 * Funcion que resetea los valores de la factura
 	 */
-	public void resetValuesBill(){
+	public void resetValuesBill() {
 		this.listProd = null;
 		this.listProd = new ArrayList<GenericProductEntity>();
-		this.total="0.0";
+		this.total = "0.0";
 	}
+
 	/**
 	 * funcion que resetea los valores del cliente
 	 */
-	public void resetValuesClient(){
+	public void resetValuesClient() {
 		this.clientebean.setCliente(null);
 		this.clientebean.setCliente(new ClienteEntity());
 	}
+
 	/**
 	 * Metodo generico para mostrar mensajes de error o advertencia
+	 * 
 	 * @param message
 	 */
 
 	public void messageBean(String message) {
 		switch (this.enumer) {
 		case ERROR:
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", message));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", message));
 			break;
 		case FATAL:
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!", "Error de sistema"));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!", "Error de sistema"));
 			break;
 		case SUCCESS:
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok!", message));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok!", message));
 			break;
 
 		default:
 			break;
 		}
 	}
-
 
 }
