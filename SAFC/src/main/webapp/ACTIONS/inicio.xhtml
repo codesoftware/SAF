@@ -20,6 +20,52 @@
 
 				}
 			</script>
+			<br/>
+			<h:form id="formHeader">
+				<p:growl id="message" sticky="true" showDetail="true" life="3000" />
+				<div class="row">
+					<div class="col-md-3 col-sm-12 col-xs-12">
+						<p:dock position="top" itemWidth="40" maxWidth="45">
+							<p:menuitem title="inserta clientes" value="Insertar Clientes" icon="/resources/images/clientes.png" onclick="PF('insertClient').show();" />
+							<p:menuitem value="Consultar Clientes" icon="/resources/images/searchClient.png" onclick="PF('searchCl').show();"
+								actionListener="#{clienteBean.buscaClientes}" update=":searchClients:tablaClientes" />
+						</p:dock>
+					</div>
+					<div class="col-md-7 col-sm-12 col-xs-12">
+						<h:panelGroup layout="block" id="tablaClienteComprador" styleClass="panel">
+							<div class="col-md-12 col-xs-12 col-sm-12 alert-success text-center" style="padding: 2px;">
+								<h4>DATOS CLIENTE</h4>
+							</div>
+							<div class="col-md-4 col-xs-12 col-sm-12">
+								<div class="form-group">
+									<p:commandLink ajax="true" update="formHeader:tablaClienteComprador" actionListener="#{clienteBean.genericClient}">
+										<p:graphicImage library="images" name="user.png" width="20" height="20" />
+									</p:commandLink>
+									<p:outputLabel value="Cedula:" />
+									<p:outputLabel value="#{clienteBean.cliente.cedula}" styleClass="form-control" />
+								</div>
+							</div>
+							<div class="col-md-4 col-xs-12 col-sm-12">
+								<div class="form-group">
+									<p:outputLabel value="Nombres:" />
+									<p:outputLabel value="#{clienteBean.cliente.nombre}" styleClass="form-control" />
+								</div>
+							</div>
+							<div class="col-md-4 col-xs-12 col-sm-12">
+								<div class="form-group">
+									<p:outputLabel value="Telefono:" />
+									<p:outputLabel value="#{clienteBean.cliente.telefono}" styleClass="form-control" />
+								</div>
+							</div>
+						</h:panelGroup>
+					</div>
+					<div class="col-md-2 col-sm-12 col-xs-12">
+						<p:panel style="text-align:center">
+							<h:outputText value="#{facturacionBean.total}" id="total" style="font-size:38px;font-weight: bold;" />
+						</p:panel>
+					</div>
+				</div>
+			</h:form>
 			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 			<h:form id="formInicio">
 				<p:remoteCommand name="test" actionListener="#{facturacionBean.searchProdId}" update="product" oncomplete="mostrarPanelProd();"

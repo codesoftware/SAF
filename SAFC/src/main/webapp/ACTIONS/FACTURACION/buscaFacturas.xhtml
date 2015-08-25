@@ -1,7 +1,7 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=yes" />
@@ -10,16 +10,23 @@
 </h:head>
 
 <body>
+	<h:form id="formBanner">
+		<p:toolbar>
+			<f:facet name="left">
+				<p:commandButton type="push" title="generación de facturas" value="FACTURACION" action="/ACTIONS/inicio"></p:commandButton>
+				<p:commandButton type="push" title="consulta facturacion" value="FACTURAS" action="/ACTIONS/FACTURACION/buscaFacturas"></p:commandButton>
+			</f:facet>
+			<f:facet name="right">
+				<p:commandButton type="push" title="cambio contraseña" value="CONTRASEÑA" action="/ACTIONS/USUARIO/cambioCont"></p:commandButton>
+				<p:commandButton type="push" title="cerrar sesión" value="SALIR" actionListener="#{loginBean.cerrarSesion}" action="/index" icon="ui-icon-power"></p:commandButton>
+			</f:facet>
+		</p:toolbar>
+	</h:form>
 	<br />
 	<h:form id="consultaForm">
 		<div class="row">
-			<div class="col-md-1 col-sm-0 col-xs-0"></div>
-			<div class="col-md-1 col-sm-12 col-xs-12 text-center">
-				<h:form id="formMenu">
-					<p:commandLink action="/ACTIONS/inicio">Facturar</p:commandLink>
-				</h:form>
-			</div>
-			<div class="col-md-9 col-sm-12 col-xs-12 text-center" style="border: 1px solid #D6E3E2; padding-left: 0px; padding-right: 0px;">
+			<div class="col-md-1 col-sm-0 col-xs-0"></div>			
+			<div class="col-md-10 col-sm-12 col-xs-12 text-center" style="border: 1px solid #D6E3E2; padding-left: 0px; padding-right: 0px;">
 				<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 				<div class="panel">
 					<div class="col-md-12 col-xs-12 col-sm-12 alert alert-success text-center">
@@ -39,7 +46,8 @@
 					</div>
 					<div class="col-md-4 col-xs-12 col-sm-12">
 						<div class="form-group">
-							<p:commandButton styleClass="btn btn-primary" value="Consultar" actionListener="#{consultaFacturacionBean.consultaFacturasXFechas}" update="tablaFacturas"></p:commandButton>
+							<p:commandButton styleClass="btn btn-primary" value="Consultar" actionListener="#{consultaFacturacionBean.consultaFacturasXFechas}"
+								update="tablaFacturas"></p:commandButton>
 						</div>
 					</div>
 				</div>
@@ -51,8 +59,8 @@
 		<div class="row">
 			<div class="col-md-1 col-sm-0 col-xs-0"></div>
 			<div class="col-md-10 col-sm-12 col-xs-12">
-				<p:dataTable var="factura" value="#{consultaFacturacionBean.facturas}" id="tablaFacturas" emptyMessage="No existen facturas" paginator="true" rows="20" reflow="true"
-					filteredValue="#{consultaFacturacionBean.facturasFiltradas}">
+				<p:dataTable var="factura" value="#{consultaFacturacionBean.facturas}" id="tablaFacturas" emptyMessage="No existen facturas" paginator="true"
+					rows="20" reflow="true" filteredValue="#{consultaFacturacionBean.facturasFiltradas}">
 					<f:facet name="header">
 						<p:outputPanel>
 							<h:outputText value="Busqueda de Facturas" />
@@ -83,8 +91,8 @@
 						</h:outputText>
 					</p:column>
 					<p:column headerText="Ver">
-						<p:commandButton icon="ui-icon-search" title="Ver factura Completa" actionListener="#{consultaFacturacionBean.buscaFacturaEspecifico(factura)}" oncomplete="PF('detalleFacturaDialog').show();"
-							update="resultadoFact:tablaFacturaComplete">
+						<p:commandButton icon="ui-icon-search" title="Ver factura Completa" actionListener="#{consultaFacturacionBean.buscaFacturaEspecifico(factura)}"
+							oncomplete="PF('detalleFacturaDialog').show();" update="resultadoFact:tablaFacturaComplete">
 						</p:commandButton>
 					</p:column>
 				</p:dataTable>
@@ -93,7 +101,8 @@
 		</div>
 	</h:form>
 	<h:form id="resultadoFact">
-		<p:dialog widgetVar="detalleFacturaDialog" header="Factura" modal="true" position="center" id="tablaFacturaComplete" width="80%" style="text-align:center;">
+		<p:dialog widgetVar="detalleFacturaDialog" header="Factura" modal="true" position="center" id="tablaFacturaComplete" width="80%"
+			style="text-align:center;">
 			<p:messages id="mess" />
 			<p:panelGrid columns="4" style="width:90%;">
 				<f:facet name="header">
@@ -134,23 +143,23 @@
 				</p:column>
 			</p:panelGrid>
 			<br />
-			<p:dataTable var="detalleFactura" value="#{consultaFacturacionBean.factComplete.detalleProductos}" emptyMessage="Factura sin detalle de productos" >
+			<p:dataTable var="detalleFactura" value="#{consultaFacturacionBean.factComplete.detalleProductos}" emptyMessage="Factura sin detalle de productos">
 				<f:facet name="header">
 					<p:outputPanel>
 						<h:outputText value="DETALLE FACTURA" />
 					</p:outputPanel>
 				</f:facet>
 				<p:column headerText="CODIGO" width="15%">
-					<h:outputText value="#{detalleFactura.producto.codigo}"  />
+					<h:outputText value="#{detalleFactura.producto.codigo}" />
 				</p:column>
 				<p:column headerText="NOMB. PRODUCTO" width="40%">
-					<h:outputText value="#{detalleFactura.producto.nombre}"  />
+					<h:outputText value="#{detalleFactura.producto.nombre}" />
 				</p:column>
 				<p:column headerText="CANTIDAD" width="15%">
-					<h:outputText value="#{detalleFactura.cantidad}"  />
+					<h:outputText value="#{detalleFactura.cantidad}" />
 				</p:column>
 				<p:column headerText="VALOR" width="30%">
-					<h:outputText value="#{detalleFactura.valorIvaTotal}"  />
+					<h:outputText value="#{detalleFactura.valorIvaTotal}" />
 				</p:column>
 			</p:dataTable>
 		</p:dialog>

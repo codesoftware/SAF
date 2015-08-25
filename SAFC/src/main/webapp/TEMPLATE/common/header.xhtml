@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<style>
 .ui-dock-container-top {
@@ -15,71 +12,17 @@
 </h:head>
 <body>
 	<ui:composition>
-
-		<h:form id="formHeader">
-			<p:growl id="message" sticky="true" showDetail="true" life="3000" />
-			<div class="row">
-				<div class="col-md-3 col-sm-12 col-xs-12">
-					<p:dock position="top" itemWidth="40" maxWidth="45">
-						<p:menuitem title="inserta clientes" value="Insertar Clientes"
-							icon="/resources/images/clientes.png"
-							onclick="PF('insertClient').show();" />
-						<p:menuitem value="Consultar Clientes"
-							icon="/resources/images/searchClient.png"
-							onclick="PF('searchCl').show();"
-							actionListener="#{clienteBean.buscaClientes}"
-							update=":searchClients:tablaClientes" />
-						<p:menuitem value="Consultar Facturas"
-							icon="/resources/images/searchbill.png"
-							action="/ACTIONS/FACTURACION/buscaFacturas" />
-						<p:menuitem value="Cerrar Sesión"
-							icon="/resources/images/logout.png"
-							actionListener="#{loginBean.cerrarSesion()}" action="/index" />
-					</p:dock>
-				</div>
-				<div class="col-md-7 col-sm-12 col-xs-12">
-					<h:panelGroup layout="block" id="tablaClienteComprador"
-						styleClass="panel">
-						<div
-							class="col-md-12 col-xs-12 col-sm-12 alert-success text-center"
-							style="padding: 2px;">
-							<h4>DATOS CLIENTE</h4>
-						</div>
-						<div class="col-md-4 col-xs-12 col-sm-12">
-							<div class="form-group">
-								<p:commandLink ajax="true"
-									update="formHeader:tablaClienteComprador" actionListener="#{clienteBean.genericClient}">
-									<p:graphicImage library="images" name="user.png" width="20"
-										height="20" />
-								</p:commandLink>
-								<p:outputLabel value="Cedula:" />
-								<p:outputLabel value="#{clienteBean.cliente.cedula}"
-									styleClass="form-control" />
-							</div>
-						</div>
-						<div class="col-md-4 col-xs-12 col-sm-12">
-							<div class="form-group">
-								<p:outputLabel value="Nombres:" />
-								<p:outputLabel value="#{clienteBean.cliente.nombre}"
-									styleClass="form-control" />
-							</div>
-						</div>
-						<div class="col-md-4 col-xs-12 col-sm-12">
-							<div class="form-group">
-								<p:outputLabel value="Telefono:" />
-								<p:outputLabel value="#{clienteBean.cliente.telefono}"
-									styleClass="form-control" />
-							</div>
-						</div>
-					</h:panelGroup>
-				</div>
-				<div class="col-md-2 col-sm-12 col-xs-12">
-					<p:panel style="text-align:center">
-						<h:outputText value="#{facturacionBean.total}" id="total"
-							style="font-size:38px;font-weight: bold;" />
-					</p:panel>
-				</div>
-			</div>
+		<h:form id="formBanner">
+			<p:toolbar>
+				<f:facet name="left">
+					<p:commandButton type="push" title="generación de facturas" value="FACTURACION" action="/ACTIONS/inicio"></p:commandButton>
+					<p:commandButton type="push" title="consulta facturacion" value="FACTURAS" action="/ACTIONS/FACTURACION/buscaFacturas"></p:commandButton>
+				</f:facet>
+				<f:facet name="right">
+					<p:commandButton type="push" title="cambio contraseña" value="CONTRASEÑA" action="/ACTIONS/USUARIO/cambioCont"></p:commandButton>
+					<p:commandButton type="push" title="cerrar sesión" value="SALIR" actionListener="#{loginBean.cerrarSesion}" action="/index" icon="ui-icon-power"></p:commandButton>
+				</f:facet>
+			</p:toolbar>
 		</h:form>
 	</ui:composition>
 </body>
