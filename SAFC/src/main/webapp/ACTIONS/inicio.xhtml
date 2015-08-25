@@ -1,17 +1,12 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=yes" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=yes" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link rel="stylesheet" type="text/css"
-		href="/SAFC/BOOTSTRAP/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="/SAFC/BOOTSTRAP/bootstrap.css" />
 </h:head>
 
 <body>
@@ -25,51 +20,34 @@
 
 				}
 			</script>
-			<p:messages id="messages" showDetail="true" autoUpdate="true"
-				closable="true" />
+			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 			<h:form id="formInicio">
-				<p:remoteCommand name="test"
-					actionListener="#{facturacionBean.searchProdId}" update="product"
-					oncomplete="mostrarPanelProd();"
+				<p:remoteCommand name="test" actionListener="#{facturacionBean.searchProdId}" update="product" oncomplete="mostrarPanelProd();"
 					onsuccess="document.getElementById('formInicio:cantidadProductos').focus(); " />
-				<p:remoteCommand name="addProdFac"
-					actionListener="#{facturacionBean.addProductFact}"
-					update="listFact,formHeader:total" />
+				<p:remoteCommand name="addProdFac" actionListener="#{facturacionBean.addProductFact}" update="listFact,formHeader:total" />
 				<div class="col-md-6 col-sm-12 col-xs-12">
 
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
-							<p:dataGrid var="panelRec" columns="7" layout="grid"
-								value="#{clienteBean.recetas}">
+							<p:dataGrid var="panelRec" columns="7" layout="grid" value="#{clienteBean.recetas}">
 								<f:facet name="header">Platos(Recetas)</f:facet>
 								<p:panel header="#{panelRec.codigo}" style="text-align:center">
-									<p:commandLink
-										actionListener="#{facturacionBean.addProductPanel(panelRec)}"
-										ajax="true" update="formInicio:listFact,formHeader:total">
-										<p:graphicImage library="images/products"
-											name="#{panelRec.nombre}.#{panelRec.extension}" width="50"
-											height="50" />
-										<p:outputLabel value="#{panelRec.nombre}"
-											style="font-size:8px" />
+									<p:commandLink actionListener="#{facturacionBean.addProductPanel(panelRec)}" ajax="true" update="formInicio:listFact,formHeader:total">
+										<p:graphicImage library="images/products" name="#{panelRec.nombre}.#{panelRec.extension}" width="50" height="50" />
+										<p:outputLabel value="#{panelRec.nombre}" style="font-size:8px" />
 									</p:commandLink>
 								</p:panel>
 							</p:dataGrid>
 							<br />
-							<p:dataGrid var="panelProd" columns="7" layout="grid"
-								style="width:100%" value="#{clienteBean.productos}">
+							<p:dataGrid var="panelProd" columns="7" layout="grid" style="width:100%" value="#{clienteBean.productos}">
 								<f:facet name="header">
 									Productos 
 								</f:facet>
 								<p:panel header="#{panelProd.codigo}" style="text-align:center">
 									<h:panelGrid columns="1">
-										<p:commandLink
-											actionListener="#{facturacionBean.addProductPanel(panelProd)}"
-											ajax="true" update="formInicio:listFact,formHeader:total">
-											<p:graphicImage library="images/products"
-												name="#{panelProd.nombre}.#{panelProd.extension}" width="50"
-												height="50" />
-											<p:outputLabel value="#{panelProd.nombre}"
-												style="font-size:8px" />
+										<p:commandLink actionListener="#{facturacionBean.addProductPanel(panelProd)}" ajax="true" update="formInicio:listFact,formHeader:total">
+											<p:graphicImage library="images/products" name="#{panelProd.nombre}.#{panelProd.extension}" width="50" height="50" />
+											<p:outputLabel value="#{panelProd.nombre}" style="font-size:8px" />
 										</p:commandLink>
 									</h:panelGrid>
 								</p:panel>
@@ -79,67 +57,54 @@
 				</div>
 				<div class="col-md-6 col-sm-12 col-xs-12">
 					<h:panelGroup layout="block" id="product" styleClass="panel">
-						<div class="col-md-12 col-xs-12 col-sm-12 alert-info text-center"
-							style="padding: 2px;">
+						<div class="col-md-12 col-xs-12 col-sm-12 alert-info text-center" style="padding: 2px;">
 							<h4>Busqueda de Productos</h4>
 						</div>
 						<div class="col-md-6 col-xs-12 col-sm-12">
 							<div class="form-group">
 								<p:outputLabel value="Codigo:" />
-								<p:inputText value="#{facturacionBean.codigoAdd}"
-									styleClass="form-control" onkeyup=""
+								<p:inputText value="#{facturacionBean.codigoAdd}" styleClass="form-control" onkeyup=""
 									onkeypress="if (event.keyCode == 13){test(); return false;}" />
 							</div>
 						</div>
 						<div class="col-md-6 col-xs-12 col-sm-12">
 							<div class="form-group">
 								<p:outputLabel value="Cantidad:" />
-								<p:inputText value="#{facturacionBean.cantidad}"
-									id="cantidadProductos" styleClass="form-control"
-									onkeypress="if (event.keyCode == 13){addProdFac(); return false;}"  >
+								<p:inputText value="#{facturacionBean.cantidad}" id="cantidadProductos" styleClass="form-control"
+									onkeypress="if (event.keyCode == 13){addProdFac(); return false;}">
 								</p:inputText>
 							</div>
 						</div>
-						<div class="col-md-2 col-xs-12 col-sm-12 oculto"
-							style="display: none;">
+						<div class="col-md-2 col-xs-12 col-sm-12 oculto" style="display: none;">
 							<div class="form-group">
 								<p:outputLabel value="#{facturacionBean.product.code}" />
 
 							</div>
 						</div>
-						<div class="col-md-5 col-xs-12 col-sm-12 oculto"
-							style="display: none;">
+						<div class="col-md-5 col-xs-12 col-sm-12 oculto" style="display: none;">
 							<div class="form-group">
 								<p:outputLabel value="#{facturacionBean.product.name}" />
 							</div>
 						</div>
-						<div class="col-md-5 col-xs-12 col-sm-12 oculto"
-							style="display: none;">
+						<div class="col-md-5 col-xs-12 col-sm-12 oculto" style="display: none;">
 							<div class="form-group">
 								<p:outputLabel value="#{facturacionBean.product.price}" />
 							</div>
 						</div>
 					</h:panelGroup>
 					<p:panel header="Factura">
-						<p:commandButton value="Registrar"
-							update="listFact,formHeader:tablaClienteComprador,formHeader:total"
+						<p:commandButton value="Registrar" update="listFact,formHeader:tablaClienteComprador,formHeader:total"
 							actionListener="#{facturacionBean.registrar}" ajax="true" />
-						<p:commandButton value="Facturar"
-						update="listFact,formHeader:tablaClienteComprador,formHeader:total"
+						<p:commandButton value="Facturar" update="listFact,formHeader:tablaClienteComprador,formHeader:total"
 							actionListener="#{facturacionBean.facturar}" ajax="true" />
-						<p:spacer width="300" height="0" />	
-						<p:commandLink actionListener="#{facturacionBean.resetValuesBill}"
-							ajax="true" update="formInicio:listFact,formHeader:total">
-							<p:graphicImage library="images" name="nobill.png" width="40"
-								height="40" />
+						<p:spacer width="300" height="0" />
+						<p:commandLink actionListener="#{facturacionBean.resetValuesBill}" ajax="true" update="formInicio:listFact,formHeader:total">
+							<p:graphicImage library="images" name="nobill.png" width="40" height="40" />
 						</p:commandLink>
-						<p:commandLink actionListener="#{facturacionBean.resetValuesClient}"
-							ajax="true" update="formHeader:tablaClienteComprador">
-							<p:graphicImage library="images" name="noclient.png" width="40"
-								height="40" />
+						<p:commandLink actionListener="#{facturacionBean.resetValuesClient}" ajax="true" update="formHeader:tablaClienteComprador">
+							<p:graphicImage library="images" name="noclient.png" width="40" height="40" />
 						</p:commandLink>
-						<p:dataTable var="factura" style="pading:0px;" id="listFact"
-							value="#{facturacionBean.listProd}">
+						<p:dataTable var="factura" style="pading:0px;" id="listFact" value="#{facturacionBean.listProd}">
 							<f:facet name="header">
 								Lista de Pedidos
 							</f:facet>
@@ -160,12 +125,10 @@
 							</p:column>
 							<p:column headerText="Eliminar" width="10%">
 
-								<p:commandButton icon="ui-icon-closethick" title="Borrar"
-									ajax="true" update="listFact,formHeader:total"
+								<p:commandButton icon="ui-icon-closethick" title="Borrar" ajax="true" update="listFact,formHeader:total"
 									actionListener="#{facturacionBean.deleteRow(factura)}">
 								</p:commandButton>
-								<p:commandButton icon="ui-icon-minus" title="Descontar"
-									ajax="true" update="listFact,formHeader:total"
+								<p:commandButton icon="ui-icon-minus" title="Descontar" ajax="true" update="listFact,formHeader:total"
 									actionListener="#{facturacionBean.updateRow(factura)}">
 								</p:commandButton>
 
