@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "SAFWSService", targetNamespace = "http://server.codesoftware.com.co/", wsdlLocation = "http://localhost:9080/SAFWS/SAFWS?wsdl")
+@WebServiceClient(name = "SAFWSService", targetNamespace = "http://server.codesoftware.com.co/", wsdlLocation = "http://localhost:7080/SAFWS/SAFWS?wsdl")
 public class SAFWSService
     extends Service
 {
@@ -30,7 +30,7 @@ public class SAFWSService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://localhost:9080/SAFWS/SAFWS?wsdl");
+            url = new URL("http://localhost:7080/SAFWS/SAFWS?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

@@ -47,6 +47,23 @@
 				</h:panelGrid>
 			</p:dialog>
 		</h:form>
+		
+		
+	     <h:form id="viewPrice">
+			<p:dialog header="Pago de Factura" widgetVar="viewPrice"
+				modal="true" position="center" width="500">
+				<p:messages id="mess" />
+				<h:panelGrid columns="1" styleClass="table table-bordered">
+					<h:outputText value="Valor a pagar:#{facturacionBean.total}" id="totalSum" style="font-size:28px;font-weight: bold;" />
+					<p:inputText id="priceTotal" value="#{facturacionBean.totalCliente}" styleClass="form-control"
+						 required="true"
+						requiredMessage="Es obligatorio el valor que da el cliente"  label="precio cliente"  style="font-size:18px;" size="30">
+						 <p:ajax event="keyup" update="totalCambio" listener="#{facturacionBean.getCambio}"  />
+					</p:inputText>
+					<h:outputText value="Cambio:#{facturacionBean.totalChange}" id="totalCambio" style="font-size:28px;font-weight: bold;" />
+				</h:panelGrid>
+			</p:dialog>
+		</h:form>
 
 
 		<h:form id="searchClients">

@@ -40,9 +40,37 @@ public class FacturacionBean implements Serializable {
 	private List<GenericProductEntity> listProd;
 	private String codigoAdd;
 	private String total;
+	private String priceTotal;
 	private ErrorEnum enumer;
 	private List<ProductoTable> productos;
 	private List<ProductoTable> productosFilter;
+	private String totalChange;
+	private String totalCliente;
+
+	
+	public String getPriceTotal() {
+		return priceTotal;
+	}
+
+	public void setPriceTotal(String priceTotal) {
+		this.priceTotal = priceTotal;
+	}
+
+	public String getTotalChange() {
+		return totalChange;
+	}
+
+	public void setTotalChange(String totalChange) {
+		this.totalChange = totalChange;
+	}
+
+	public String getTotalCliente() {
+		return totalCliente;
+	}
+
+	public void setTotalCliente(String totalCliente) {
+		this.totalCliente = totalCliente;
+	}
 
 	public ErrorEnum getEnumer() {
 		return enumer;
@@ -136,6 +164,7 @@ public class FacturacionBean implements Serializable {
 	public void setLoginBean(LoginBean loginBean) {
 		this.loginBean = loginBean;
 	}
+	
 
 	@PostConstruct
 	public void init() {
@@ -338,7 +367,7 @@ public class FacturacionBean implements Serializable {
 						log.updatePrice(this.listProd.get(i).getPrice(), this.listProd.get(i).getAmount()));
 				Locale locale = new Locale("es", "CO");
 				NumberFormat nf = NumberFormat.getCurrencyInstance(locale);
-				this.total = nf.format(result);
+				this.total = result.toString();
 			}
 		}
 
@@ -442,6 +471,15 @@ public class FacturacionBean implements Serializable {
 	public void resetValuesClient() {
 		this.clientebean.setCliente(null);
 		this.clientebean.setCliente(new ClienteEntity());
+	}
+	
+	public void getCambio(){
+		double result= (Double.parseDouble(this.totalCliente)-Double.parseDouble(this.total));
+		if(Double.parseDouble(this.totalCliente)<=Double.parseDouble(this.total)){
+			this.totalChange="0.0";
+		}else{
+		this.totalChange =String.valueOf(result);
+		}
 	}
 
 	/**

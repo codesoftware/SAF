@@ -30,7 +30,7 @@
 							<p:menuitem value="Consultar Clientes" icon="/resources/images/searchClient.png" onclick="PF('searchCl').show();"
 								actionListener="#{clienteBean.buscaClientes}" update=":searchClients:tablaClientes" />
 							<p:menuitem value="Consultar Productos" icon="/resources/images/product.png" onclick="PF('searchProductos').show();"
-								action="#{facturacionBean.buscaProductos}" update=":searchProd:tablaProductos"/>
+								action="#{facturacionBean.buscaProductos}" update=":searchProd:tablaProductos" />
 						</p:dock>
 					</div>
 					<div class="col-md-7 col-sm-12 col-xs-12">
@@ -63,7 +63,9 @@
 					</div>
 					<div class="col-md-2 col-sm-12 col-xs-12">
 						<p:panel style="text-align:center">
-							<h:outputText value="#{facturacionBean.total}" id="total" style="font-size:38px;font-weight: bold;" />
+							<h:outputText value="#{facturacionBean.total}" id="total" style="font-size:38px;font-weight: bold;">
+			                 <f:convertNumber pattern="#,##0.00"></f:convertNumber>
+							</h:outputText>
 						</p:panel>
 					</div>
 				</div>
@@ -93,7 +95,7 @@
 								</f:facet>
 								<p:panel header="#{panelProd.codigo}" style="text-align:center">
 									<h:panelGrid columns="1">
-										<p:commandLink actionListener="#{facturacionBean.addProductPanel(panelProd)}" ajax="true" update="formInicio:listFact,formHeader:total">
+										<p:commandLink actionListener="#{facturacionBean.addProductPanel(panelProd)}" ajax="true" update="formInicio:listFact,formHeader:total,:viewPrice:totalSum">
 											<p:graphicImage library="images/products" name="#{panelProd.nombre}.#{panelProd.extension}" width="50" height="50" />
 											<p:outputLabel value="#{panelProd.nombre}" style="font-size:8px" />
 										</p:commandLink>
@@ -142,7 +144,8 @@
 					</h:panelGroup>
 					<p:panel header="Factura">
 						<p:commandButton value="Registrar" update="listFact,formHeader:tablaClienteComprador,formHeader:total"
-							actionListener="#{facturacionBean.registrar}" ajax="true" />
+							 ajax="true" onclick="PF('viewPrice').show();">							
+						</p:commandButton>
 						<p:commandButton value="Facturar" update="listFact,formHeader:tablaClienteComprador,formHeader:total"
 							actionListener="#{facturacionBean.facturar}" ajax="true" />
 						<p:spacer width="300" height="0" />

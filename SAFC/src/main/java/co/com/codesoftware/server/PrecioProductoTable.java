@@ -45,7 +45,7 @@ public class PrecioProductoTable {
     protected Integer id;
     protected Integer idProducto;
     protected Integer idSede;
-    public String precio;
+    protected String precio;
     protected Integer usuarioCrea;
 
     /**
