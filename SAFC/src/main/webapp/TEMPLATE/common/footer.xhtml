@@ -1,36 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <body>
 	<ui:composition>
-		<link rel="stylesheet" type="text/css" href="/SAFC/BOOTSTRAP/bootstrap.css" />
+		<link rel="stylesheet" type="text/css"
+			href="/SAFC/BOOTSTRAP/bootstrap.css" />
 		<script type="text/javascript">
 			function limpiarForm() {
 				document.getElementById("insertClient").reset();
 			}
 		</script>
 		<h:form id="insertClient">
-			<p:dialog header="Insercion de Clientes" widgetVar="insertClient" modal="true" position="center" width="500">
+			<p:dialog header="Insercion de Clientes" widgetVar="insertClient"
+				modal="true" position="center" width="500">
 				<p:messages id="mess" />
 				<h:panelGrid columns="2" styleClass="table table-bordered">
 					<h:outputLabel value="Cedula*:" for="cedula" />
-					<p:inputText id="cedula" styleClass="form-control" value="#{clienteBean.cliente.cedula}" required="true" requiredMessage="Cedula es obligatorio"
-						label="cedula">
+					<p:inputText id="cedula" styleClass="form-control"
+						value="#{clienteBean.cliente.cedula}" required="true"
+						requiredMessage="Cedula es obligatorio" label="cedula">
 					</p:inputText>
 
 					<h:outputLabel value="Nombres*:" for="nombres" />
-					<p:inputText id="nombres" styleClass="form-control" value="#{clienteBean.cliente.nombre}" required="true" requiredMessage="Nombre es obligatorio"
-						label="nombres" />
+					<p:inputText id="nombres" styleClass="form-control"
+						value="#{clienteBean.cliente.nombre}" required="true"
+						requiredMessage="Nombre es obligatorio" label="nombres" />
 					<h:outputLabel value="Apellidos:" for="apellidos" />
-					<p:inputText id="apellidos" styleClass="form-control" value="#{clienteBean.cliente.apellido}" />
+					<p:inputText id="apellidos" styleClass="form-control"
+						value="#{clienteBean.cliente.apellido}" />
 					<h:outputLabel value="Correo:" for="correo" />
-					<p:inputText id="correo" styleClass="form-control" value="#{clienteBean.cliente.correo}" />
+					<p:inputText id="correo" styleClass="form-control"
+						value="#{clienteBean.cliente.correo}" />
 					<h:outputLabel value="Telefono:" for="telefono" />
-					<p:inputText id="telefono" styleClass="form-control" value="#{clienteBean.cliente.telefono}" />
+					<p:inputText id="telefono" styleClass="form-control"
+						value="#{clienteBean.cliente.telefono}" />
 					<!-- Boton para generar la accion -->
-					<p:commandButton id="botonInsertar" value="Insertar" oncomplete="limpiarForm()" action="#{clienteBean.addCliente}"
+					<p:commandButton id="botonInsertar" value="Insertar"
+						oncomplete="limpiarForm()" action="#{clienteBean.addCliente}"
 						update="mess,:formHeader:tablaClienteComprador" ajax="true">
 					</p:commandButton>
 				</h:panelGrid>
@@ -39,13 +50,18 @@
 
 
 		<h:form id="searchClients">
-			<p:dialog header="Consulta de clientes" widgetVar="searchCl" modal="true" position="center">
-				<p:dataTable var="listClient" value="#{clienteBean.clientes}" reflow="true" rows="5" widgetVar="clienteTable" paginator="true"
-					emptyMessage="No hay clientes que coincidan con la busqueda" filteredValue="#{clienteBean.clientesFilter}" id="tablaClientes">
+			<p:dialog header="Consulta de clientes" widgetVar="searchCl"
+				modal="true" position="center">
+				<p:dataTable var="listClient" value="#{clienteBean.clientes}"
+					reflow="true" rows="5" widgetVar="clienteTable" paginator="true"
+					emptyMessage="No hay clientes que coincidan con la busqueda"
+					filteredValue="#{clienteBean.clientesFilter}" id="tablaClientes">
 					<f:facet name="header">
 						<p:outputPanel>
 							<h:outputText value="Busqueda de clientes:" />
-							<p:inputText id="globalFilter" onkeyup="PF('clienteTable').filter()" style="width:150px" placeholder="Ingrese palabra" />
+							<p:inputText id="globalFilter"
+								onkeyup="PF('clienteTable').filter()" style="width:150px"
+								placeholder="Ingrese palabra" />
 						</p:outputPanel>
 					</f:facet>
 					<!--  <p:column headerText="Id">
@@ -71,9 +87,12 @@
 					<p:column headerText="Telefono" filterBy="#{listClient.telefono}">
 						<h:outputText value="#{listClient.telefono}" />
 					</p:column>
-					<p:column headerText="Adicionar" style="width:100px;text-align: center">
-						<p:commandButton icon="ui-icon-search" title="Seleccion" ajax="true" oncomplete="PF('searchCl').hide()"
-							update=":formHeader:tablaClienteComprador" actionListener="#{clienteBean.seleccionarCliente(listClient)}">
+					<p:column headerText="Adicionar"
+						style="width:100px;text-align: center">
+						<p:commandButton icon="ui-icon-search" title="Seleccion"
+							ajax="true" oncomplete="PF('searchCl').hide()"
+							update=":formHeader:tablaClienteComprador"
+							actionListener="#{clienteBean.seleccionarCliente(listClient)}">
 						</p:commandButton>
 					</p:column>
 				</p:dataTable>
@@ -81,26 +100,53 @@
 		</h:form>
 
 		<h:form id="searchProd">
-			<p:dialog header="Consulta de Productos" modal="true" position="center" widgetVar="searchProductos" >
-				<p:dataTable var="listProductos" value="#{facturacionBean.productos}" reflow="true" rows="5" widgetVar="productosTable" paginator="true"
-					emptyMessage="No hay productos que coincidan con la busqueda" filteredValue="#{facturacionBean.productosFilter}" id="tablaProductos">
-					<p:column>
+			<p:dialog header="Consulta de Productos" modal="true"
+				position="center" widgetVar="searchProductos">
+				<p:dataTable var="listProductos"
+					value="#{facturacionBean.productos}" reflow="true" rows="5"
+					widgetVar="productosTable" paginator="true"
+					emptyMessage="No hay productos que coincidan con la busqueda"
+					filteredValue="#{facturacionBean.productosFilter}"
+					id="tablaProductos">
+					<p:column filterBy="#{listProductos.codigo}" headerText="Código">
 						<h:outputText value="#{listProductos.codigo}" />
+					</p:column>
+					<p:column filterBy="#{listProductos.nombre}" headerText="Nombre:">
+						<h:outputText value="#{listProductos.nombre}" />
+					</p:column>
+					<p:column filterBy="#{listProductos.precios[0].precio}"
+						headerText="Precio:">
+						<h:outputText value="#{listProductos.precios[0].precio}">
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Adicionar"
+						style="width:100px;text-align: center">
+						<p:commandButton icon="ui-icon-search" title="Seleccion"
+							ajax="true" oncomplete="PF('searchProductos').hide()"
+							update=":formInicio:listFact,formHeader:total"
+							actionListener="#{facturacionBean.seleccionarProducto(listProductos)}">
+						</p:commandButton>
 					</p:column>
 				</p:dataTable>
 			</p:dialog>
 		</h:form>
 
 		<h:form id="searchDishes">
-			<p:dialog header="Consulta de Recetas" widgetVar="searchRec" modal="true" position="center">
-				<p:dataTable var="listDishes" value="#{clienteBean.dishes}" reflow="true" rows="5" widgetVar="dishesTable" paginator="true"
-					emptyMessage="No hay recetas que coincidan con la busqueda" filteredValue="#{clienteBean.dishesFilter}" id="tablaDishes">
+			<p:dialog header="Consulta de Recetas" widgetVar="searchRec"
+				modal="true" position="center">
+				<p:dataTable var="listDishes" value="#{clienteBean.dishes}"
+					reflow="true" rows="5" widgetVar="dishesTable" paginator="true"
+					emptyMessage="No hay recetas que coincidan con la busqueda"
+					filteredValue="#{clienteBean.dishesFilter}" id="tablaDishes">
 					<f:facet name="header">
 						<p:outputPanel>
-							<p:commandButton id="toggler" type="button" value="Columns" style="float:right" icon="ui-icon-calculator" />
+							<p:commandButton id="toggler" type="button" value="Columns"
+								style="float:right" icon="ui-icon-calculator" />
 							<p:columnToggler datasource="tablaDishes" trigger="toggler" />
 							<h:outputText value="Busqueda de recetas:" />
-							<p:inputText id="globalFilter" onkeyup="PF('dishesTable').filter()" style="width:150px" placeholder="Ingrese palabra" />
+							<p:inputText id="globalFilter"
+								onkeyup="PF('dishesTable').filter()" style="width:150px"
+								placeholder="Ingrese palabra" />
 						</p:outputPanel>
 					</f:facet>
 					<!--  <p:column headerText="Id">
@@ -115,9 +161,11 @@
 						<h:outputText value="#{listDishes.nombre}" />
 					</p:column>
 
-					<p:column headerText="Precio" filterBy="#{listDishes.precios.precio}">
+					<p:column headerText="Precio"
+						filterBy="#{listDishes.precios.precio}">
 						<h:outputText value="#{listDishes.precios.precio}">
-							<f:convertNumber maxFractionDigits="15" minFractionDigits="15" groupingUsed="false" />
+							<f:convertNumber maxFractionDigits="15" minFractionDigits="15"
+								groupingUsed="false" />
 						</h:outputText>
 					</p:column>
 

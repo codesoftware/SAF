@@ -16,7 +16,7 @@ public class UsuarioLogic {
 		try {
 			SAFWSService service = new SAFWSService();
 			SAFWS port = service.getSAFWSPort();
-			rta = port.cambiaClaveUsuario(usuario);
+			//rta = port.cambiaClaveUsuario(usuario);
 		} catch (Exception e) {
 			return false;
 		}

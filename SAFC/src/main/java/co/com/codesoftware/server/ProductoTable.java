@@ -52,7 +52,7 @@ public class ProductoTable {
     protected Integer id;
     protected String nombre;
     @XmlElement(nillable = true)
-    protected List<PrecioProductoTable> precios;
+    public List<PrecioProductoTable> precios;
     protected Integer referenciaId;
 
     /**

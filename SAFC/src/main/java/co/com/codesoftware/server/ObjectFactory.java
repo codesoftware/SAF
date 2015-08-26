@@ -32,14 +32,12 @@ public class ObjectFactory {
     private final static QName _GetParamsEmpresaResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getParamsEmpresaResponse");
     private final static QName _GetSedes_QNAME = new QName("http://server.codesoftware.com.co/", "getSedes");
     private final static QName _GetClientesResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getClientesResponse");
-    private final static QName _CambiaClaveUsuario_QNAME = new QName("http://server.codesoftware.com.co/", "cambiaClaveUsuario");
     private final static QName _GetProductForCode_QNAME = new QName("http://server.codesoftware.com.co/", "getProductForCode");
     private final static QName _GetProductForCodeResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getProductForCodeResponse");
     private final static QName _GetRecetas_QNAME = new QName("http://server.codesoftware.com.co/", "getRecetas");
     private final static QName _AddClienteResponse_QNAME = new QName("http://server.codesoftware.com.co/", "addClienteResponse");
     private final static QName _GetUsersResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getUsersResponse");
     private final static QName _GetFacturasResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getFacturasResponse");
-    private final static QName _CambiaClaveUsuarioResponse_QNAME = new QName("http://server.codesoftware.com.co/", "cambiaClaveUsuarioResponse");
     private final static QName _Facturar_QNAME = new QName("http://server.codesoftware.com.co/", "facturar");
     private final static QName _GetDishesPrincipalScreenResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getDishesPrincipalScreenResponse");
     private final static QName _GetClienteXCedula_QNAME = new QName("http://server.codesoftware.com.co/", "getClienteXCedula");
@@ -263,14 +261,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link CambiaClaveUsuario }
-     * 
-     */
-    public CambiaClaveUsuario createCambiaClaveUsuario() {
-        return new CambiaClaveUsuario();
-    }
-
-    /**
      * Create an instance of {@link GetClientesResponse }
      * 
      */
@@ -348,14 +338,6 @@ public class ObjectFactory {
      */
     public GetProductForCode createGetProductForCode() {
         return new GetProductForCode();
-    }
-
-    /**
-     * Create an instance of {@link CambiaClaveUsuarioResponse }
-     * 
-     */
-    public CambiaClaveUsuarioResponse createCambiaClaveUsuarioResponse() {
-        return new CambiaClaveUsuarioResponse();
     }
 
     /**
@@ -575,15 +557,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CambiaClaveUsuario }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "cambiaClaveUsuario")
-    public JAXBElement<CambiaClaveUsuario> createCambiaClaveUsuario(CambiaClaveUsuario value) {
-        return new JAXBElement<CambiaClaveUsuario>(_CambiaClaveUsuario_QNAME, CambiaClaveUsuario.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetProductForCode }{@code >}}
      * 
      */
@@ -635,15 +608,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getFacturasResponse")
     public JAXBElement<GetFacturasResponse> createGetFacturasResponse(GetFacturasResponse value) {
         return new JAXBElement<GetFacturasResponse>(_GetFacturasResponse_QNAME, GetFacturasResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CambiaClaveUsuarioResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "cambiaClaveUsuarioResponse")
-    public JAXBElement<CambiaClaveUsuarioResponse> createCambiaClaveUsuarioResponse(CambiaClaveUsuarioResponse value) {
-        return new JAXBElement<CambiaClaveUsuarioResponse>(_CambiaClaveUsuarioResponse_QNAME, CambiaClaveUsuarioResponse.class, null, value);
     }
 
     /**

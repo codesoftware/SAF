@@ -208,11 +208,13 @@ public class FacturacionBean implements Serializable {
 				int exist = existProduct();
 				if (exist > -1) {
 					this.listProd.get(exist).setAmount(this.listProd.get(exist).getAmount() + cantidad);
-					if (log.updatePrice(this.listProd.get(exist).getPrice(), this.listProd.get(exist).getAmount()) == null) {
+					if (log.updatePrice(this.listProd.get(exist).getPrice(),
+							this.listProd.get(exist).getAmount()) == null) {
 						this.setEnumer(ErrorEnum.ERROR);
 						messageBean("Al producto no se le ha parametrizado el precio");
 					} else {
-						this.listProd.get(exist).setTotalPrice(log.updatePrice(this.listProd.get(exist).getPrice(), this.listProd.get(exist).getAmount()));
+						this.listProd.get(exist).setTotalPrice(log.updatePrice(this.listProd.get(exist).getPrice(),
+								this.listProd.get(exist).getAmount()));
 					}
 				} else {
 					product.setAmount(this.cantidad);
@@ -247,7 +249,9 @@ public class FacturacionBean implements Serializable {
 			int exist = existProduct();
 			if (exist > -1) {
 				this.listProd.get(exist).setAmount(this.listProd.get(exist).getAmount() + cantidad);
-				this.listProd.get(exist).setTotalPrice(String.valueOf(Double.parseDouble(this.listProd.get(exist).getPrice()) * this.listProd.get(exist).getAmount()));
+				this.listProd.get(exist)
+						.setTotalPrice(String.valueOf(Double.parseDouble(this.listProd.get(exist).getPrice())
+								* this.listProd.get(exist).getAmount()));
 			} else {
 				this.listProd.add(product);
 			}
@@ -330,7 +334,8 @@ public class FacturacionBean implements Serializable {
 				this.setEnumer(ErrorEnum.ERROR);
 				messageBean("Producto sin parametrizar precio.");
 			} else {
-				result += Double.parseDouble(log.updatePrice(this.listProd.get(i).getPrice(), this.listProd.get(i).getAmount()));
+				result += Double.parseDouble(
+						log.updatePrice(this.listProd.get(i).getPrice(), this.listProd.get(i).getAmount()));
 				Locale locale = new Locale("es", "CO");
 				NumberFormat nf = NumberFormat.getCurrencyInstance(locale);
 				this.total = nf.format(result);
@@ -338,6 +343,7 @@ public class FacturacionBean implements Serializable {
 		}
 
 	}
+
 	/**
 	 * Funcion con la cual busco los productos del sistema
 	 */
@@ -367,7 +373,8 @@ public class FacturacionBean implements Serializable {
 			ExternalContext tmpEC;
 			tmpEC = FacesContext.getCurrentInstance().getExternalContext();
 			String realPath = tmpEC.getRealPath("/resources/images/products/");
-			String rta = logic.facturar(this.listProd, this.clientebean.getCliente(), realPath, this.loginBean.getDataSession(), type);
+			String rta = logic.facturar(this.listProd, this.clientebean.getCliente(), realPath,
+					this.loginBean.getDataSession(), type);
 			if ("OK".equalsIgnoreCase(rta)) {
 				this.enumer = ErrorEnum.SUCCESS;
 				messageBean("FACTURACIÓN REALIZADA CORRECTAMENTE");
@@ -379,6 +386,45 @@ public class FacturacionBean implements Serializable {
 			}
 
 		}
+	}
+	/**
+	 * Metodo el cual añade el producto a la lista de productos
+	 * @param productTable
+	 */
+
+	public void seleccionarProducto(ProductoTable productTable) {
+		try {
+			this.product = new GenericProductEntity();
+			if (this.listProd == null) {
+				this.listProd = new ArrayList<GenericProductEntity>();
+			}
+			this.product = setDataEntity(productTable);
+			int exist = existProduct();
+
+			if (exist > -1) {
+				this.listProd.get(exist).setAmount(this.listProd.get(exist).getAmount() + 1);
+				this.listProd.get(exist)
+						.setTotalPrice(String.valueOf(Double.parseDouble(this.listProd.get(exist).getPrice())
+								* this.listProd.get(exist).getAmount()));
+			} else {
+				this.listProd.add(product);
+			}
+			addTotal();
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public GenericProductEntity setDataEntity(ProductoTable prod) {
+		GenericProductEntity genProduct = new GenericProductEntity();
+		genProduct.setAmount(1);
+		genProduct.setCode(prod.getCodigo());
+		genProduct.setId(prod.getId());
+		genProduct.setName(prod.getNombre());
+		genProduct.setPrice(prod.getPrecios().get(0).getPrecio());
+		return genProduct;
 	}
 
 	/**
@@ -407,13 +453,16 @@ public class FacturacionBean implements Serializable {
 	public void messageBean(String message) {
 		switch (this.enumer) {
 		case ERROR:
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", message));
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", message));
 			break;
 		case FATAL:
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!", "Error de sistema"));
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!", "Error de sistema"));
 			break;
 		case SUCCESS:
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok!", message));
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok!", message));
 			break;
 
 		default:
