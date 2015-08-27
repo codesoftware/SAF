@@ -403,12 +403,14 @@ public class FacturacionBean implements Serializable {
 			tmpEC = FacesContext.getCurrentInstance().getExternalContext();
 			String realPath = tmpEC.getRealPath("/resources/images/products/");
 			String rta = logic.facturar(this.listProd, this.clientebean.getCliente(), realPath,
-					this.loginBean.getDataSession(), type);
+					this.loginBean.getDataSession(), type,this.totalChange, this.totalCliente);
 			if ("OK".equalsIgnoreCase(rta)) {
 				this.enumer = ErrorEnum.SUCCESS;
 				messageBean("FACTURACIÓN REALIZADA CORRECTAMENTE");
 				resetValuesBill();
 				resetValuesClient();
+				resetValuesCambio();
+				
 			} else {
 				this.enumer = ErrorEnum.ERROR;
 				messageBean(rta);
@@ -464,6 +466,11 @@ public class FacturacionBean implements Serializable {
 		this.listProd = new ArrayList<GenericProductEntity>();
 		this.total = "0.0";
 	}
+	public void resetValuesCambio(){
+		this.totalChange="0.0";
+		this.totalCliente="";
+		
+	}
 
 	/**
 	 * funcion que resetea los valores del cliente
@@ -474,13 +481,17 @@ public class FacturacionBean implements Serializable {
 	}
 	
 	public void getCambio(){
+		Locale locale = new Locale("es", "CO");
+		NumberFormat nf = NumberFormat.getCurrencyInstance(locale);
 		double result= (Double.parseDouble(this.totalCliente)-Double.parseDouble(this.total));
 		if(Double.parseDouble(this.totalCliente)<=Double.parseDouble(this.total)){
 			this.totalChange="0.0";
 		}else{
-		this.totalChange =String.valueOf(result);
+			
+		this.totalChange =nf.format(result);
 		}
 	}
+
 
 	/**
 	 * Metodo generico para mostrar mensajes de error o advertencia

@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -103,7 +104,7 @@ public class FacturacionLogic {
 	 */
 
 	public String facturar(List<GenericProductEntity> list, ClienteEntity cliente, String path,
-			DatosSessionEntity session, String type) {
+			DatosSessionEntity session, String type,String cambio,String pago) {
 		String rta = "";
 		Facturacion fact = new Facturacion();
 		RespuestaFacturacion res = new RespuestaFacturacion();
@@ -123,12 +124,13 @@ public class FacturacionLogic {
 				FacturaTable result = new FacturaTable();
 				result = getDataFact(res.getIdFacturacion());
 				if ("1".equalsIgnoreCase(type)) {
-					String valPdf=createPDF(path, result, cliente, session);
+					String valPdf=createPDF(path, result, cliente, session,cambio,pago);
 					if("ERROR ABIRENDO PDF".equalsIgnoreCase(valPdf)){
 						rta = valPdf;
 					}
 					rta = "OK";
 				} else {
+					openBox();
 					rta = "OK";
 				}
 			}
@@ -144,6 +146,20 @@ public class FacturacionLogic {
 	 * 
 	 * @return
 	 */
+	
+	/**
+	 * Funcion que abre la caja monedera
+	 */
+	
+	public void openBox(){
+		try {
+			String cmd = "/home/john/abrir.sh"; //Comando de apagado en linux
+			Runtime.getRuntime().exec(cmd); 
+			System.out.println("prueba");
+		} catch (IOException ioe) {
+			System.out.println (ioe);
+		}
+	}
 
 	public FacturaTable getDataFact(String idFactura) {
 		FacturaTable table = new FacturaTable();
@@ -215,7 +231,7 @@ public class FacturacionLogic {
 		return prodTable;
 	}
 
-	public String createPDF(String path, FacturaTable factura, ClienteEntity cliente, DatosSessionEntity session) {
+	public String createPDF(String path, FacturaTable factura, ClienteEntity cliente, DatosSessionEntity session,String cambio,String pago) {
 		Rectangle rec = new Rectangle(2.0F, 8.0F);
 		Document document = new Document();
 		path += "factura.pdf";
@@ -255,6 +271,12 @@ public class FacturacionLogic {
 				document.add(para);
 			}
 			para =new Paragraph("                                                                         TOTAL:"+nf.format(factura.getValor()),FontFactory.getFont("Arial", 18f));
+			para.setAlignment(Element.ALIGN_CENTER);
+			document.add(para);
+			para =new Paragraph("                                                                         Efectivo:"+nf.format(pago),FontFactory.getFont("Arial", 18f));
+			para.setAlignment(Element.ALIGN_CENTER);
+			document.add(para);
+			para =new Paragraph("                                                                         Cambio:"+nf.format(cambio),FontFactory.getFont("Arial", 18f));
 			para.setAlignment(Element.ALIGN_CENTER);
 			document.add(para);
 			para =new Paragraph("-----------------------------------------------------------------------------------------------------------------------------");
