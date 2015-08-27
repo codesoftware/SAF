@@ -15,6 +15,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import co.com.codesoftware.entities.ClienteEntity;
+import co.com.codesoftware.entities.DatosSessionEntity;
 import co.com.codesoftware.entities.GenericProductEntity;
 import co.com.codesoftware.logic.FacturacionLogic;
 import co.com.codesoftware.logic.ProductsLogic;
@@ -32,8 +33,7 @@ public class FacturacionBean implements Serializable {
 	private ClienteEntity cliente;
 	private GenericProductEntity product;
 	private PantallaPrincipalFacTable prod;
-	@ManagedProperty(value = "#{loginBean}")
-	private LoginBean loginBean;
+	private DatosSessionEntity entitySession;
 	@ManagedProperty(value = "#{clienteBean}")
 	private ClienteBean clientebean;
 	private String codigoProducto;
@@ -158,12 +158,12 @@ public class FacturacionBean implements Serializable {
 		this.codigoAdd = codigoAdd;
 	}
 
-	public LoginBean getLoginBean() {
-		return loginBean;
+	public DatosSessionEntity getEntitySession() {
+		return entitySession;
 	}
 
-	public void setLoginBean(LoginBean loginBean) {
-		this.loginBean = loginBean;
+	public void setEntitySession(DatosSessionEntity entitySession) {
+		this.entitySession = entitySession;
 	}
 
 	public List<ProductoGenericoEntity> getProductosGenericos() {
@@ -176,8 +176,20 @@ public class FacturacionBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		this.cantidad = 1;
-		this.total = "0.0";
+		try {
+			this.cantidad = 1;
+			this.total = "0.0";
+			FacesMessage message = null;
+			FacesContext context = FacesContext.getCurrentInstance();
+			DatosSessionEntity entity = (DatosSessionEntity) context.getExternalContext().getSessionMap().get("dataSession");
+			if (entity == null) {
+				message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Esta intentando a un sitio no permitido porfavor realice el login primero");
+				context.getExternalContext().redirect("../index.jsf");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -417,7 +429,7 @@ public class FacturacionBean implements Serializable {
 			ExternalContext tmpEC;
 			tmpEC = FacesContext.getCurrentInstance().getExternalContext();
 			String realPath = tmpEC.getRealPath("/resources/images/products/");
-			String rta = logic.facturar(this.listProd, this.clientebean.getCliente(), realPath, this.loginBean.getDataSession(), type, this.totalChange, this.totalCliente);
+			String rta = logic.facturar(this.listProd, this.clientebean.getCliente(), realPath, this.entitySession, type, this.totalChange, this.totalCliente);
 			if ("OK".equalsIgnoreCase(rta)) {
 				this.enumer = ErrorEnum.SUCCESS;
 				messageBean("FACTURACIÓN REALIZADA CORRECTAMENTE");
@@ -503,7 +515,7 @@ public class FacturacionBean implements Serializable {
 		genProduct.setPrice(prod.getPrecios().get(0).getPrecio());
 		return genProduct;
 	}
-	
+
 	/**
 	 * Funcion con la cual convierte un objeto producto table y lo convierte en
 	 * un objeto generico
