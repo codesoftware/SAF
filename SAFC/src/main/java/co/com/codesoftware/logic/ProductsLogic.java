@@ -5,6 +5,7 @@ import java.util.List;
 
 import co.com.codesoftware.entities.GenericProductEntity;
 import co.com.codesoftware.server.PantallaPrincipalFacTable;
+import co.com.codesoftware.server.ProductoGenericoEntity;
 import co.com.codesoftware.server.ProductoTable;
 import co.com.codesoftware.server.RecetaTable;
 import co.com.codesoftware.server.SAFWS;
@@ -97,6 +98,25 @@ public class ProductsLogic {
 			e.printStackTrace();
 		}
 		return productos;
+	}
+
+	/**
+	 * Funcion con la cual obtengo todos los productos y recetas del sistema
+	 * 
+	 * @param sede_sede
+	 * @return
+	 */
+	public List<ProductoGenericoEntity> buscaProductosAplicacionGenericos(Integer sede_sede) {
+		List<ProductoGenericoEntity> productosGenericos = null;
+		try {
+			SAFWSService service = new SAFWSService();
+			SAFWS port = service.getSAFWSPort();
+			productosGenericos = port.findProductosAndDishes(sede_sede);						
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return productosGenericos;
+
 	}
 
 }
