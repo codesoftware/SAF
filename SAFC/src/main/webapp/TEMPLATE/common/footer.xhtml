@@ -83,7 +83,7 @@
 		</h:form>
 
 		<h:form id="searchProd">
-			<p:dialog header="Consulta de Productos" modal="true" position="center" widgetVar="searchProductos">
+			<p:dialog header="Consulta de Productos" modal="true" widgetVar="searchProductos">
 				<p:dataTable var="listProductos" value="#{facturacionBean.productosGenericos}" reflow="true" rows="5" widgetVar="productosTable" paginator="true"
 					emptyMessage="No hay productos que coincidan con la busqueda" filteredValue="#{facturacionBean.productosFilter}" id="tablaProductos">
 					<p:column filterBy="#{listProductos.codigo}" headerText="Código">
@@ -99,52 +99,38 @@
 					</p:column>
 					<p:column headerText="Adicionar" style="width:100px;text-align: center">
 						<p:commandButton icon="ui-icon-search" title="Seleccion" ajax="true" oncomplete="PF('searchProductos').hide()"
-							update=":formInicio:listFact,formHeader:total" actionListener="#{facturacionBean.seleccionarProductoGenerico(listProductos)}">
+							update=":formInicio:listFact,formHeader:total,:viewPrice:totalSum"
+							actionListener="#{facturacionBean.seleccionarProductoGenerico(listProductos)}">
 						</p:commandButton>
 					</p:column>
 				</p:dataTable>
 			</p:dialog>
 		</h:form>
-
-		<h:form id="searchDishes">
-			<p:dialog header="Consulta de Recetas" widgetVar="searchRec" modal="true" position="center">
-				<p:dataTable var="listDishes" value="#{clienteBean.dishes}" reflow="true" rows="5" widgetVar="dishesTable" paginator="true"
-					emptyMessage="No hay recetas que coincidan con la busqueda" filteredValue="#{clienteBean.dishesFilter}" id="tablaDishes">
-					<f:facet name="header">
-						<p:outputPanel>
-							<p:commandButton id="toggler" type="button" value="Columns" style="float:right" icon="ui-icon-calculator" />
-							<p:columnToggler datasource="tablaDishes" trigger="toggler" />
-							<h:outputText value="Busqueda de recetas:" />
-							<p:inputText id="globalFilter" onkeyup="PF('dishesTable').filter()" style="width:150px" placeholder="Ingrese palabra" />
-						</p:outputPanel>
-					</f:facet>
-					<!--  <p:column headerText="Id">
-						<h:outputText value="#{listDishes.id}" />
-					</p:column>-->
-
-					<p:column filterBy="#{listDishes.codigo}" headerText="Codigo">
-						<h:outputText value="#{listDishes.codigo}" />
-					</p:column>
-
-					<p:column headerText="Nombre" filterBy="#{listDishes.nombre}">
-						<h:outputText value="#{listDishes.nombre}" />
-					</p:column>
-
-					<p:column headerText="Precio" filterBy="#{listDishes.precios.precio}">
-						<h:outputText value="#{listDishes.precios.precio}">
-							<f:convertNumber maxFractionDigits="15" minFractionDigits="15" groupingUsed="false" />
-						</h:outputText>
-					</p:column>
-
-					<!-- 					<p:column headerText="Adicionar" -->
-					<!-- 						style="width:100px;text-align: center"> -->
-					<!-- 						<p:commandButton icon="ui-icon-search" title="Seleccion" -->
-					<!-- 							ajax="true" oncomplete="PF('searchRec').hide()" -->
-					<!-- 							update=":formHeader:tablaClienteComprador" -->
-					<!-- 							actionListener="#{clienteBean.seleccionarCliente(listClient)}"> -->
-					<!-- 						</p:commandButton> -->
-					<!-- 					</p:column> -->
-				</p:dataTable>
+		<h:form id="viewPrice">
+			<p:dialog header="Pago de Factura" widgetVar="viewPrice" modal="true" width="500">
+				<p:messages id="messagesPagoFactura" />
+				<h:panelGrid columns="2" styleClass="table table-bordered">
+					<h:outputText value="Valor a pagar:" />
+					<h:outputText value="#{facturacionBean.total}" id="totalSum" style="font-size:28px;font-weight: bold;">
+						<f:convertNumber pattern="#,##0.00"></f:convertNumber>
+					</h:outputText>
+					<h:outputText value="Pago con:" />
+					<p:inputText id="priceTotal" value="#{facturacionBean.totalCliente}" styleClass="form-control" required="true"
+						requiredMessage="Es obligatorio el valor que da el cliente" style="font-size:18px;" size="30">
+						<p:ajax event="keyup" update="totalCambio,messagesPagoFactura" listener="#{facturacionBean.getCambio}" />
+					</p:inputText>
+					<h:outputText value="Cambio: $ " />
+					<h:outputText value="#{facturacionBean.totalChange}" id="totalCambio" style="font-size:28px;font-weight: bold;">
+						<f:convertNumber pattern="#,##0.00"></f:convertNumber>
+					</h:outputText>
+					<p:commandButton value="Registrar sin Factura" update="formInicio:listFact,formHeader:tablaClienteComprador,formHeader:total,viewPrice:totalSum"
+						ajax="true" actionListener="#{facturacionBean.registrar}" onclick="PF('viewPrice').hide();">
+					</p:commandButton>
+					<p:commandButton value="Registrar e imprimir Factura"
+						update="formInicio:listFact,formHeader:tablaClienteComprador,formHeader:total,viewPrice:totalSum" actionListener="#{facturacionBean.facturar}"
+						ajax="true" onclick="PF('viewPrice').hide();" />
+					<p:commandButton value="Cancelar" type="button" onclick="PF('viewPrice').hide();" />
+				</h:panelGrid>
 			</p:dialog>
 		</h:form>
 	</ui:composition>

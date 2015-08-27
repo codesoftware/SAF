@@ -1,6 +1,7 @@
 package co.com.codesoftware.mb;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,14 +41,14 @@ public class FacturacionBean implements Serializable {
 	private int cantidad;
 	private List<GenericProductEntity> listProd;
 	private String codigoAdd;
-	private String total;
+	private BigDecimal total;
 	private String priceTotal;
 	private ErrorEnum enumer;
 	private List<ProductoTable> productos;
 	private List<ProductoGenericoEntity> productosGenericos;
 	private List<ProductoGenericoEntity> productosFilter;
-	private String totalChange;
-	private String totalCliente;
+	private BigDecimal totalChange;
+	private BigDecimal totalCliente;
 
 	public String getPriceTotal() {
 		return priceTotal;
@@ -57,19 +58,19 @@ public class FacturacionBean implements Serializable {
 		this.priceTotal = priceTotal;
 	}
 
-	public String getTotalChange() {
+	public BigDecimal getTotalChange() {
 		return totalChange;
 	}
 
-	public void setTotalChange(String totalChange) {
+	public void setTotalChange(BigDecimal totalChange) {
 		this.totalChange = totalChange;
 	}
 
-	public String getTotalCliente() {
+	public BigDecimal getTotalCliente() {
 		return totalCliente;
 	}
 
-	public void setTotalCliente(String totalCliente) {
+	public void setTotalCliente(BigDecimal totalCliente) {
 		this.totalCliente = totalCliente;
 	}
 
@@ -86,11 +87,11 @@ public class FacturacionBean implements Serializable {
 		this.product = new GenericProductEntity();
 	}
 
-	public String getTotal() {
+	public BigDecimal getTotal() {
 		return total;
 	}
 
-	public void setTotal(String total) {
+	public void setTotal(BigDecimal total) {
 		this.total = total;
 	}
 
@@ -177,8 +178,9 @@ public class FacturacionBean implements Serializable {
 	@PostConstruct
 	public void init() {
 		try {
+			this.totalChange = new BigDecimal("0");
 			this.cantidad = 1;
-			this.total = "0.0";
+			this.total = new BigDecimal("0");
 			FacesMessage message = null;
 			FacesContext context = FacesContext.getCurrentInstance();
 			DatosSessionEntity entity = (DatosSessionEntity) context.getExternalContext().getSessionMap().get("dataSession");
@@ -186,7 +188,7 @@ public class FacturacionBean implements Serializable {
 				message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Esta intentando a un sitio no permitido porfavor realice el login primero");
 				context.getExternalContext().redirect("../index.jsf");
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -331,7 +333,6 @@ public class FacturacionBean implements Serializable {
 	 */
 
 	public void setData(PantallaPrincipalFacTable table) {
-		System.out.println(table.getId());
 		this.product = new GenericProductEntity();
 		this.product.setAmount(1);
 		this.product.setPrice(table.getPrecio());
@@ -369,20 +370,19 @@ public class FacturacionBean implements Serializable {
 
 	/**
 	 * Funcion que actualiza el total de la factura
+	 * 
 	 */
-
 	public void addTotal() {
-		Double result = 0.0;
+		BigDecimal result = new BigDecimal("0");
 		for (int i = 0; i < this.listProd.size(); i++) {
-			FacturacionLogic log = new FacturacionLogic();
-			if (log.updatePrice(this.listProd.get(i).getPrice(), this.listProd.get(i).getAmount()) == null) {
+			FacturacionLogic factuacionLogic = new FacturacionLogic();
+			BigDecimal aux = factuacionLogic.updatePrice(new BigDecimal(this.listProd.get(i).getPrice()), this.listProd.get(i).getAmount());
+			if (aux.intValue() == 0) {
 				this.setEnumer(ErrorEnum.ERROR);
 				messageBean("Producto sin parametrizar precio.");
 			} else {
-				result += Double.parseDouble(log.updatePrice(this.listProd.get(i).getPrice(), this.listProd.get(i).getAmount()));
-				Locale locale = new Locale("es", "CO");
-				NumberFormat nf = NumberFormat.getCurrencyInstance(locale);
-				this.total = result.toString();
+				result = result.add(aux);
+				this.total = result;
 			}
 		}
 
@@ -429,7 +429,7 @@ public class FacturacionBean implements Serializable {
 			ExternalContext tmpEC;
 			tmpEC = FacesContext.getCurrentInstance().getExternalContext();
 			String realPath = tmpEC.getRealPath("/resources/images/products/");
-			String rta = logic.facturar(this.listProd, this.clientebean.getCliente(), realPath, this.entitySession, type, this.totalChange, this.totalCliente);
+			String rta = logic.facturar(this.listProd, this.clientebean.getCliente(), realPath, this.entitySession, type, this.totalChange.toString(), this.totalCliente.toString());
 			if ("OK".equalsIgnoreCase(rta)) {
 				this.enumer = ErrorEnum.SUCCESS;
 				messageBean("FACTURACIÓN REALIZADA CORRECTAMENTE");
@@ -539,13 +539,12 @@ public class FacturacionBean implements Serializable {
 	public void resetValuesBill() {
 		this.listProd = null;
 		this.listProd = new ArrayList<GenericProductEntity>();
-		this.total = "0.0";
+		this.total = new BigDecimal(0);
 	}
 
 	public void resetValuesCambio() {
-		this.totalChange = "0.0";
-		this.totalCliente = "";
-
+		this.totalChange = new BigDecimal(0);
+		this.totalCliente = new BigDecimal(0);
 	}
 
 	/**
@@ -556,15 +555,13 @@ public class FacturacionBean implements Serializable {
 		this.clientebean.setCliente(new ClienteEntity());
 	}
 
+	/**
+	 * Funcion con la cual se calcula el cambio que se tiene que dar al cliente
+	 */
 	public void getCambio() {
-		Locale locale = new Locale("es", "CO");
-		NumberFormat nf = NumberFormat.getCurrencyInstance(locale);
-		double result = (Double.parseDouble(this.totalCliente) - Double.parseDouble(this.total));
-		if (Double.parseDouble(this.totalCliente) <= Double.parseDouble(this.total)) {
-			this.totalChange = "0.0";
-		} else {
-
-			this.totalChange = nf.format(result);
+		this.totalChange = totalCliente.subtract(this.total);
+		if (totalChange.doubleValue() < 0) {
+			this.totalChange = new BigDecimal(0);
 		}
 	}
 

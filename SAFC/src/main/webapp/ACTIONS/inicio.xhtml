@@ -70,28 +70,6 @@
 					</div>
 				</div>
 			</h:form>
-			<h:form id="viewPrice">
-				<p:dialog header="Pago de Factura" widgetVar="viewPrice" modal="true" position="center" width="500">
-					<p:messages id="messages" />
-					<h:panelGrid columns="1" styleClass="table table-bordered">
-						<h:outputText value="Valor a pagar:$#{facturacionBean.total}" id="totalSum" style="font-size:28px;font-weight: bold;" />
-						<p:inputText id="priceTotal" value="#{facturacionBean.totalCliente}" styleClass="form-control" required="true"
-							requiredMessage="Es obligatorio el valor que da el cliente" label="precio cliente" style="font-size:18px;" size="30">
-							<p:ajax event="keyup" update="totalCambio" listener="#{facturacionBean.getCambio}" />
-
-						</p:inputText>
-						<h:outputText value="Cambio:#{facturacionBean.totalChange}" id="totalCambio" style="font-size:28px;font-weight: bold;" />
-						<p:commandButton value="Registrar sin Factura" update="formInicio:listFact,formHeader:tablaClienteComprador,formHeader:total,viewPrice:totalSum"
-							ajax="true" actionListener="#{facturacionBean.registrar}" onclick="PF('viewPrice').hide();">
-						</p:commandButton>
-						<p:commandButton value="Registrar e imprimir Factura"
-							update="formInicio:listFact,formHeader:tablaClienteComprador,formHeader:total,viewPrice:totalSum" actionListener="#{facturacionBean.facturar}"
-							ajax="true" onclick="PF('viewPrice').hide();" />
-						<p:commandButton value="Cancelar" type="button" onclick="PF('viewPrice').hide();" />
-					</h:panelGrid>
-				</p:dialog>
-			</h:form>
-
 			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 			<h:form id="formInicio">
 				<p:remoteCommand name="test" actionListener="#{facturacionBean.searchProdId}" update="product" oncomplete="mostrarPanelProd();"
@@ -212,6 +190,7 @@
 
 				</div>
 			</h:form>
+			
 		</ui:define>
 	</ui:composition>
 </body>
