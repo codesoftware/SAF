@@ -2,10 +2,8 @@ package co.com.codesoftware.mb;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -183,8 +181,8 @@ public class FacturacionBean implements Serializable {
 			this.total = new BigDecimal("0");
 			FacesMessage message = null;
 			FacesContext context = FacesContext.getCurrentInstance();
-			DatosSessionEntity entity = (DatosSessionEntity) context.getExternalContext().getSessionMap().get("dataSession");
-			if (entity == null) {
+			this.entitySession	= (DatosSessionEntity) context.getExternalContext().getSessionMap().get("dataSession");
+			if (entitySession == null) {
 				message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Esta intentando a un sitio no permitido porfavor realice el login primero");
 				context.getExternalContext().redirect("../index.jsf");
 			}

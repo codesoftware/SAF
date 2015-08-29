@@ -131,8 +131,8 @@ public class FacturacionLogic {
 			fact.setIdSede(new Long(1));
 			fact.setIdTius(session.getDataUser().getId());
 			fact.setIdCliente(cliente.getId());
-			// fact.setProductos(this.products);
-			// fact.setRecetas(this.receta);
+			fact.setProductos(this.products);
+			fact.setRecetas(this.receta);
 			SAFWSService service = new SAFWSService();
 			SAFWS port = service.getSAFWSPort();
 			res = port.facturar(fact);
