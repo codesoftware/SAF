@@ -49,8 +49,17 @@ public class Facturacion {
     protected List<TemporalProdTable> productos;
     @XmlElement(nillable = true)
     protected List<TemporalRecTable> recetas;
+    
 
-    /**
+    public void setProductos(List<TemporalProdTable> productos) {
+		this.productos = productos;
+	}
+
+	public void setRecetas(List<TemporalRecTable> recetas) {
+		this.recetas = recetas;
+	}
+
+	/**
      * Obtiene el valor de la propiedad idCliente.
      * 
      * @return
@@ -179,15 +188,5 @@ public class Facturacion {
         }
         return this.recetas;
     }
-
-	public void setProductos(List<TemporalProdTable> productos) {
-		this.productos = productos;
-	}
-
-	public void setRecetas(List<TemporalRecTable> recetas) {
-		this.recetas = recetas;
-	}
-    
-    
 
 }
