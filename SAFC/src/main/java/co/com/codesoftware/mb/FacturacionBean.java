@@ -337,7 +337,7 @@ public class FacturacionBean implements Serializable {
 		this.product.setCode(table.getCodigo());
 		this.product.setName(table.getNombre());
 		this.product.setTotalPrice(table.getPrecio());
-		this.product.setId(table.getId());
+		this.product.setId(table.getIdReceta());
 	}
 
 	/**

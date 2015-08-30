@@ -25,7 +25,7 @@
 	<br />
 	<h:form id="consultaForm">
 		<div class="row">
-			<div class="col-md-1 col-sm-0 col-xs-0"></div>			
+			<div class="col-md-1 col-sm-0 col-xs-0"></div>
 			<div class="col-md-10 col-sm-12 col-xs-12 text-center" style="border: 1px solid #D6E3E2; padding-left: 0px; padding-right: 0px;">
 				<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 				<div class="panel">
@@ -35,7 +35,7 @@
 					<div class="col-md-4 col-xs-6 col-sm-6">
 						<div class="form-group">
 							<label for="calendario">Fecha Inicial:</label>
-							<p:calendar mode="popup" id="fechaInicial" value="#{consultaFacturacionBean.fechaInicio}"></p:calendar>
+							<p:calendar mode="popup" id="fechaInicial" value="#{consultaFacturacionBean.fechaInicio}" ></p:calendar>
 						</div>
 					</div>
 					<div class="col-md-4 col-xs-6 col-sm-6">
@@ -66,7 +66,7 @@
 							<h:outputText value="Busqueda de Facturas" />
 						</p:outputPanel>
 					</f:facet>
-					<p:column headerText="Id" width="10%" filterBy="#{factura.id}">
+					<p:column headerText="Id" width="10%">
 						<h:outputText value="#{factura.id}"></h:outputText>
 					</p:column>
 					<p:column headerText="Nombres" width="25%">
@@ -104,46 +104,61 @@
 		<p:dialog widgetVar="detalleFacturaDialog" header="Factura" modal="true" position="center" id="tablaFacturaComplete" width="80%"
 			style="text-align:center;">
 			<p:messages id="mess" />
-			<p:panelGrid columns="4" style="width:90%;">
-				<f:facet name="header">
-				DATOS DEL CLIENTE
-				</f:facet>
-				<p:column>
-				NOMBRE:
-				</p:column>
-				<p:column>
-					<h:outputText value="#{consultaFacturacionBean.factComplete.cliente.apellidos}"></h:outputText>
-					<h:outputText value="&#160;" />
-					<h:outputText value="#{consultaFacturacionBean.factComplete.cliente.nombres}"></h:outputText>
-				</p:column>
-				<p:column>
-			 	DOCUMENTO
-			</p:column>
-				<p:column>
-					<h:outputText value="#{consultaFacturacionBean.factComplete.cliente.cedula}"></h:outputText>
-				</p:column>
-			</p:panelGrid>
+			<div class="row">
+				<div class="col-md-1 col-sm-0 col-xs-0"></div>
+				<div class="col-md-10 col-sm-12 col-xs-12 text-center" style="border: 1px solid #D6E3E2; padding-left: 0px; padding-right: 0px;">
+					<div class="panel">
+						<div class="col-md-12 col-xs-12 col-sm-12 alert alert-success text-center">
+							<h5 style="margin-top: 0px; margin-bottom: 0px;">DATOS DEL CLIENTE</h5>
+						</div>
+						<div class="col-md-6 col-xs-12 col-sm-12">
+							<div class="form-group">
+								<label for="nombre">NOMBRE:</label>&nbsp;&nbsp;
+								<h:outputText value="#{consultaFacturacionBean.factComplete.cliente.apellidos}"></h:outputText>
+								<h:outputText value="&#160;" />
+								<h:outputText value="#{consultaFacturacionBean.factComplete.cliente.nombres}"></h:outputText>
+							</div>
+						</div>
+						<div class="col-md-6 col-xs-12 col-sm-12">
+							<div class="form-group">
+								<label for="documento">DOCUMENTO</label>&nbsp;&nbsp;&nbsp;&nbsp;$&nbsp;
+								<h:outputText value="#{consultaFacturacionBean.factComplete.cliente.cedula}"></h:outputText>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-1 col-sm-0 col-xs-0"></div>
+			</div>
 			<br />
-			<p:panelGrid columns="4" style="width:90%;">
-				<f:facet name="header">
-					DATOS FACTURA
-				</f:facet>
-				<p:column>
-						TIPO DE PAGO					
-					</p:column>
-				<p:column>
-					<h:outputText value="Efectivo" rendered="#{factura.tipoPago == 'E'}" />
-					<h:outputText value="Tarjeta" rendered="#{factura.tipoPago != 'E'}" />
-				</p:column>
-				<p:column>
-						VALOR TOTAL:
-					</p:column>
-				<p:column>
-					<h:outputText value="#{consultaFacturacionBean.factComplete.valor}"></h:outputText>
-				</p:column>
-			</p:panelGrid>
+			<div class="row">
+				<div class="col-md-1 col-sm-0 col-xs-0"></div>
+				<div class="col-md-10 col-sm-12 col-xs-12 text-center" style="border: 1px solid #D6E3E2; padding-left: 0px; padding-right: 0px;">
+					<div class="panel">
+						<div class="col-md-12 col-xs-12 col-sm-12 alert alert-success text-center">
+							<h5 style="margin-top: 0px; margin-bottom: 0px;">DATOS FACTURA</h5>
+						</div>
+						<div class="col-md-6 col-xs-12 col-sm-12">
+							<div class="form-group">
+								<label for="tipoPago">TIPO DE PAGO:</label>&nbsp;&nbsp;
+								<h:outputText value="Efectivo" rendered="#{factura.tipoPago == 'E'}" />
+								<h:outputText value="Tarjeta" rendered="#{factura.tipoPago != 'E'}" />
+							</div>
+						</div>
+						<div class="col-md-6 col-xs-12 col-sm-12">
+							<div class="form-group">
+								<label for="vlrTotal">VALOR TOTAL:</label>&nbsp;&nbsp;&nbsp;&nbsp;$&nbsp;
+								<h:outputText value="#{consultaFacturacionBean.factComplete.valor}">
+									<f:convertNumber pattern="#,##0.00"></f:convertNumber>
+								</h:outputText>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-1 col-sm-0 col-xs-0"></div>
+			</div>
 			<br />
-			<p:dataTable var="detalleFactura" value="#{consultaFacturacionBean.factComplete.detalleProductos}" emptyMessage="Factura sin detalle de productos">
+			<p:dataTable var="detalleFactura" value="#{consultaFacturacionBean.factComplete.detalleProductos}" emptyMessage="Factura sin detalle de productos"
+				styleClass="table table-bordered">
 				<f:facet name="header">
 					<p:outputPanel>
 						<h:outputText value="DETALLE FACTURA" />
@@ -159,9 +174,36 @@
 					<h:outputText value="#{detalleFactura.cantidad}" />
 				</p:column>
 				<p:column headerText="VALOR" width="30%">
-					<h:outputText value="#{detalleFactura.valorIvaTotal}" />
+					$&nbsp;
+					<h:outputText value="#{detalleFactura.valorTotal}">
+						<f:convertNumber pattern="#,##0.00"></f:convertNumber>
+					</h:outputText>
 				</p:column>
 			</p:dataTable>
+			<p:dataTable var="detalleFacturaRec" value="#{consultaFacturacionBean.factComplete.detalleRecetas}" emptyMessage="Factura sin detalle de Recetas o Platos"
+				styleClass="table table-bordered">
+				<f:facet name="header">
+					<p:outputPanel>
+						<h:outputText value="DETALLE DE RECETAS" />
+					</p:outputPanel>
+				</f:facet>
+				<p:column headerText="CODIGO" width="15%">
+					<h:outputText value="#{detalleFacturaRec.receta.codigo}" />
+				</p:column>
+				<p:column headerText="NOMB. PRODUCTO" width="40%">
+					<h:outputText value="#{detalleFacturaRec.receta.nombre}" />
+				</p:column>
+				<p:column headerText="CANTIDAD" width="15%">
+					<h:outputText value="#{detalleFacturaRec.cantidad}" />
+				</p:column>
+				<p:column headerText="VALOR" width="30%">
+					$&nbsp;
+					<h:outputText value="#{detalleFacturaRec.total}">
+						<f:convertNumber pattern="#,##0.00"></f:convertNumber>
+					</h:outputText>
+				</p:column>
+			</p:dataTable>
+			<p:commandLink onclick="PF('detalleFacturaDialog').hide();" styleClass="btn btn-primary" style="color:white">CERRAR VENTANA</p:commandLink>
 		</p:dialog>
 	</h:form>
 	<br />

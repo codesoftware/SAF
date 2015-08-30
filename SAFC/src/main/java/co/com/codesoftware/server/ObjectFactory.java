@@ -425,6 +425,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link DetReceFacturacionTable }
+     * 
+     */
+    public DetReceFacturacionTable createDetReceFacturacionTable() {
+        return new DetReceFacturacionTable();
+    }
+
+    /**
      * Create an instance of {@link RecetaTable }
      * 
      */

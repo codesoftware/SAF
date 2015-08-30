@@ -16,7 +16,7 @@
 			<p:toolbar>
 				<f:facet name="left">
 					<p:commandButton type="push" title="generación de facturas" value="FACTURACION" action="/ACTIONS/inicio"></p:commandButton>
-					<p:commandButton type="push" title="consulta facturacion" value="FACTURAS" action="/ACTIONS/FACTURACION/buscaFacturas"></p:commandButton>
+					<p:commandButton type="push" title="consulta facturacion" value="FACTURAS" action="#{consultaFacturacionBean.redireccionConsultaFacturacion}"></p:commandButton>
 				</f:facet>
 				<f:facet name="right">
 					<p:commandButton type="push" title="cambio contraseña" value="CONTRASEÑA" action="/ACTIONS/USUARIO/cambioCont"></p:commandButton>

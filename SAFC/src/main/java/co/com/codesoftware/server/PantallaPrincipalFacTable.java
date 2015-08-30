@@ -19,6 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="codigo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="extension" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="idReceta" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="imagen" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="nombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="posicion" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
@@ -38,6 +39,7 @@ import javax.xml.bind.annotation.XmlType;
     "codigo",
     "extension",
     "id",
+    "idReceta",
     "imagen",
     "nombre",
     "posicion",
@@ -50,6 +52,7 @@ public class PantallaPrincipalFacTable {
     protected String codigo;
     protected String extension;
     protected Integer id;
+    protected Integer idReceta;
     protected String imagen;
     protected String nombre;
     protected Integer posicion;
@@ -127,6 +130,30 @@ public class PantallaPrincipalFacTable {
      */
     public void setId(Integer value) {
         this.id = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad idReceta.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getIdReceta() {
+        return idReceta;
+    }
+
+    /**
+     * Define el valor de la propiedad idReceta.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setIdReceta(Integer value) {
+        this.idReceta = value;
     }
 
     /**

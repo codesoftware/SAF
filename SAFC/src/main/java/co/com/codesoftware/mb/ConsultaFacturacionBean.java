@@ -1,5 +1,6 @@
 package co.com.codesoftware.mb;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -97,6 +98,10 @@ public class ConsultaFacturacionBean {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public String redireccionConsultaFacturacion(){
+		return "/ACTIONS/FACTURACION/buscaFacturas";
 	}
 
 }

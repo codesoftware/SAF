@@ -26,6 +26,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="comentarios" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="descuento" type="{http://www.w3.org/2001/XMLSchema}decimal" minOccurs="0"/>
  *         &lt;element name="detalleProductos" type="{http://server.codesoftware.com.co/}detProdFacturaTable" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="detalleRecetas" type="{http://server.codesoftware.com.co/}detReceFacturacionTable" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="devolucion" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="efectivo" type="{http://www.w3.org/2001/XMLSchema}decimal" minOccurs="0"/>
  *         &lt;element name="estado" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -56,6 +57,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "comentarios",
     "descuento",
     "detalleProductos",
+    "detalleRecetas",
     "devolucion",
     "efectivo",
     "estado",
@@ -80,6 +82,8 @@ public class FacturaTable {
     protected BigDecimal descuento;
     @XmlElement(nillable = true)
     protected List<DetProdFacturaTable> detalleProductos;
+    @XmlElement(nillable = true)
+    protected List<DetReceFacturacionTable> detalleRecetas;
     protected String devolucion;
     protected BigDecimal efectivo;
     protected String estado;
@@ -197,6 +201,35 @@ public class FacturaTable {
             detalleProductos = new ArrayList<DetProdFacturaTable>();
         }
         return this.detalleProductos;
+    }
+
+    /**
+     * Gets the value of the detalleRecetas property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the detalleRecetas property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getDetalleRecetas().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link DetReceFacturacionTable }
+     * 
+     * 
+     */
+    public List<DetReceFacturacionTable> getDetalleRecetas() {
+        if (detalleRecetas == null) {
+            detalleRecetas = new ArrayList<DetReceFacturacionTable>();
+        }
+        return this.detalleRecetas;
     }
 
     /**
