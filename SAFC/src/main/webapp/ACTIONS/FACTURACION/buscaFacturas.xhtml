@@ -158,10 +158,10 @@
 			</div>
 			<br />
 			<p:dataTable var="detalleFactura" value="#{consultaFacturacionBean.factComplete.detalleProductos}" emptyMessage="Factura sin detalle de productos"
-				styleClass="table table-bordered">
+				styleClass="table table-bordered" rendered="#{consultaFacturacionBean.factComplete.detalleProductos.size() > 0}">
 				<f:facet name="header">
 					<p:outputPanel>
-						<h:outputText value="DETALLE FACTURA" />
+						<h:outputText value="DETALLE DE PRODUCTOS" />
 					</p:outputPanel>
 				</f:facet>
 				<p:column headerText="CODIGO" width="15%">
@@ -181,7 +181,7 @@
 				</p:column>
 			</p:dataTable>
 			<p:dataTable var="detalleFacturaRec" value="#{consultaFacturacionBean.factComplete.detalleRecetas}" emptyMessage="Factura sin detalle de Recetas o Platos"
-				styleClass="table table-bordered">
+				styleClass="table table-bordered" rendered="#{consultaFacturacionBean.factComplete.detalleRecetas.size() > 0}">
 				<f:facet name="header">
 					<p:outputPanel>
 						<h:outputText value="DETALLE DE RECETAS" />

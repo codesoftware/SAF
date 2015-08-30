@@ -85,6 +85,7 @@
 									<p:commandLink actionListener="#{facturacionBean.addProductPanel(panelRec)}" ajax="true"
 										update="formInicio:listFact,formHeader:total,viewPrice:totalSum">
 										<p:graphicImage library="images/products" name="#{panelRec.nombre}.#{panelRec.extension}" width="50" height="50" />
+										<br/>
 										<p:outputLabel value="#{panelRec.nombre}" style="font-size:8px" />
 									</p:commandLink>
 								</p:panel>
@@ -99,6 +100,7 @@
 										<p:commandLink actionListener="#{facturacionBean.addProductPanel(panelProd)}" ajax="true"
 											update="formInicio:listFact,formHeader:total,:viewPrice:totalSum">
 											<p:graphicImage library="images/products" name="#{panelProd.nombre}.#{panelProd.extension}" width="50" height="50" />
+											<br/>
 											<p:outputLabel value="#{panelProd.nombre}" style="font-size:8px" />
 										</p:commandLink>
 									</h:panelGrid>
