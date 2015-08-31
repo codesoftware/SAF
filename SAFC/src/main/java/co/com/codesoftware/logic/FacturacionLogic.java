@@ -291,10 +291,10 @@ public class FacturacionLogic {
 			para = new Paragraph("                                                                         TOTAL:" + nf.format(factura.getValor()), FontFactory.getFont("Arial", 18f));
 			para.setAlignment(Element.ALIGN_CENTER);
 			document.add(para);
-			para = new Paragraph("                                                                         Efectivo:" + nf.format(pago), FontFactory.getFont("Arial", 18f));
+			para = new Paragraph("                                                                         Efectivo:" + nf.format(Double.parseDouble(pago)), FontFactory.getFont("Arial", 18f));
 			para.setAlignment(Element.ALIGN_CENTER);
 			document.add(para);
-			para = new Paragraph("                                                                         Cambio:" + nf.format(cambio), FontFactory.getFont("Arial", 18f));
+			para = new Paragraph("                                                                         Cambio:" + nf.format(Double.parseDouble(cambio)), FontFactory.getFont("Arial", 18f));
 			para.setAlignment(Element.ALIGN_CENTER);
 			document.add(para);
 			para = new Paragraph("-----------------------------------------------------------------------------------------------------------------------------");

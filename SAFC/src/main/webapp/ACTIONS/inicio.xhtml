@@ -120,6 +120,13 @@
 											height="50" />
 										<p:outputLabel value="#{panelRec.nombre}"
 											style="font-size:8px" />
+
+										<p:graphicImage library="images/products"
+											name="#{panelRec.nombre}.#{panelRec.extension}" width="50"
+											height="50" />
+										<br />
+										<p:outputLabel value="#{panelRec.nombre}"
+											style="font-size:8px" />
 									</p:commandLink>
 								</p:panel>
 							</p:dataGrid>
@@ -140,6 +147,13 @@
 												height="50" />
 											<p:outputLabel value="#{panelProd.nombre}"
 												style="font-size:8px" />
+											<p:graphicImage library="images/products"
+												name="#{panelProd.nombre}.#{panelProd.extension}" width="50"
+												height="50" />
+											<br />
+											<p:outputLabel value="#{panelProd.nombre}"
+												style="font-size:8px" />
+
 										</p:commandLink>
 									</h:panelGrid>
 								</p:panel>
@@ -249,7 +263,6 @@
 					</p:panel>
 
 				</div>
-					<p:commandLink value="Registrar sin Factura" update="viewBill:tableName" actionListener="#{facturacionBean.checkProducts2}"/>
 			</h:form>
 			<h:form id="viewPrice">
 				<p:dialog header="Pago de Factura" widgetVar="viewPrice"
@@ -288,7 +301,7 @@
 							</div>
 							<div class="col-md-5 col-sm-4 col-xs-4">
 								<p:commandLink value="Registrar sin Factura"
-									update="formInicio:listFact,formHeader:tablaClienteComprador,formHeader:total,viewPrice:totalSum"
+									update="formInicio:listFact,formHeader:tablaClienteComprador,formHeader:total,viewPrice:totalSum,viewBill:totResFac,viewBill:tableName,viewBill:totalResEfectivo,viewBill:totalResCambio"
 									ajax="true" actionListener="#{facturacionBean.registrar}"
 									onclick="PF('viewPrice').hide();" styleClass="btn btn-primary"
 									style="color:white;">
@@ -304,20 +317,40 @@
 				</p:dialog>
 			</h:form>
 			<h:form id="viewBill">
-				<p:dialog header="Factura" widgetVar="viewBill" modal="true"
-					width="500">
+				<p:dialog header="Resumen Factura" widgetVar="viewBill" modal="true"
+					width="500" closable="false">
 					<h:panelGrid styleClass="table table-bordered">
-						<h:dataTable id="tableName" value="#{facturacionBean.listProd}" var="listproduct">
-							<h:column>
-							<p:outputLabel value="#{listproduct.name}"/>
-							</h:column>
-							<h:column>
-							<p:outputLabel value="#{listproduct.amount}"/>
-							</h:column>
-							<h:column>
-							<p:outputLabel value="#{listproduct.totalPrice}"/>
-							</h:column>
-						</h:dataTable>
+						<p:dataTable id="tableName" value="#{facturacionBean.listProd}"
+							reflow="true" var="listproduct">
+							<p:column headerText="Nombre Producto">
+								<p:outputLabel value="#{listproduct.name}" />
+							</p:column>
+							<p:column headerText="Cantidad">
+								<p:outputLabel value="#{listproduct.amount}" />
+							</p:column>
+							<p:column headerText="Precio total">
+								<p:outputLabel value="#{listproduct.totalPrice}" />
+							</p:column>
+						</p:dataTable>
+						<p:outputLabel id="totResFac"
+							value="Total :$#{facturacionBean.total}">
+							<f:convertNumber pattern="#,##0.00"></f:convertNumber>
+						</p:outputLabel>
+						<p:outputLabel id="totalResEfectivo"
+							value="Efectivo:$#{facturacionBean.totalCliente}">
+							<f:convertNumber pattern="#,##0.00"></f:convertNumber>
+						</p:outputLabel>
+						<p:outputLabel id="totalResCambio"
+							value="Cambio :$#{facturacionBean.totalChange}">
+							<f:convertNumber pattern="#,##0.00"></f:convertNumber>
+						</p:outputLabel>
+						<div class="col-md-4 col-sm-4 col-xs-4">
+							<p:commandLink value="Aceptar"
+								update="formInicio:listFact,formHeader:tablaClienteComprador,formHeader:total,viewPrice:totalSum,viewBill:totResFac,viewBill:tableName,viewBill:totalResEfectivo,viewBill:totalResCambio"
+								actionListener="#{facturacionBean.cerrarFacturaProv}"
+								ajax="true" onclick="PF('viewBill').hide();"
+								styleClass="btn btn-primary" style="color:white;" />
+						</div>
 					</h:panelGrid>
 				</p:dialog>
 			</h:form>

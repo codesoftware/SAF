@@ -22,7 +22,7 @@ public class ProductsLogic {
 		List<PantallaPrincipalFacTable> list = new ArrayList<PantallaPrincipalFacTable>();
 		SAFWSService service = new SAFWSService();
 		SAFWS port = service.getSAFWSPort();
-		list = port.getProductPrincipalScreen(1);
+		list = port.getProductPrincipalScreen(2);
 		list = getImage(list);
 		return list;
 	}

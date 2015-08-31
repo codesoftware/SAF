@@ -447,8 +447,9 @@ public class FacturacionBean implements Serializable {
 				}
 				// Pop up de factura cuando no se imprime
 				else {
-					RequestContext context = RequestContext.getCurrentInstance();
-					context.execute("PF('viewBill').show();");
+					this.enumer = ErrorEnum.SUCCESS;
+					messageBean("FACTURACIÓN REALIZADA CORRECTAMENTE");
+					viewResumeBill();
 				}
 			} else {
 				this.enumer = ErrorEnum.ERROR;
@@ -457,22 +458,21 @@ public class FacturacionBean implements Serializable {
 
 		}
 	}
-	public void checkProducts2(){
+
+	public void viewResumeBill() {
 		System.out.println("hi");
-		this.listProd = new ArrayList<GenericProductEntity>();
-		GenericProductEntity ge = new GenericProductEntity();
-		ge.setAmount(2);
-		ge.setTotalPrice("10000");
-		ge.setName("Champiñon");
-		listProd.add(ge);
-		ge.setAmount(2);
-		ge.setTotalPrice("10000");
-		ge.setName("Champiñon3s");
-		listProd.add(ge);
 		RequestContext context = RequestContext.getCurrentInstance();
 		context.execute("PF('viewBill').show();");
 
-		
+	}
+	/**
+	 * Metodo para cerrar el pop up del resumen de la factura
+	 */
+
+	public void cerrarFacturaProv() {
+		resetValuesBill();
+		resetValuesClient();
+		resetValuesCambio();
 	}
 
 	/**

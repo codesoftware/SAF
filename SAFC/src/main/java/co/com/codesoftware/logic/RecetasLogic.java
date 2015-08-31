@@ -22,7 +22,7 @@ public class RecetasLogic {
 		List<PantallaPrincipalFacTable> list = new ArrayList<PantallaPrincipalFacTable>();
 		SAFWSService service = new SAFWSService();
 		SAFWS port = service.getSAFWSPort();
-		list = port.getDishesPrincipalScreen(1);
+		list = port.getDishesPrincipalScreen(2);
 		list = getImage(list);
 		return list;
 	}
