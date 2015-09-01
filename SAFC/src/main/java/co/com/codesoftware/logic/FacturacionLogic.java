@@ -8,7 +8,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -20,6 +22,7 @@ import javax.print.PrintServiceLookup;
 import javax.print.SimpleDoc;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.Element;
@@ -122,7 +125,7 @@ public class FacturacionLogic {
 	 * @return
 	 */
 
-	public String facturar(List<GenericProductEntity> list, ClienteEntity cliente, String path, DatosSessionEntity session, String type, String cambio, String pago) {
+	public String facturar(List<GenericProductEntity> list, ClienteEntity cliente, String path, DatosSessionEntity session, String type, String cambio, String pago,String domicilio) {
 		String rta = "";
 		Facturacion fact = new Facturacion();
 		RespuestaFacturacion res = new RespuestaFacturacion();
@@ -142,7 +145,7 @@ public class FacturacionLogic {
 				FacturaTable result = new FacturaTable();
 				result = getDataFact(res.getIdFacturacion());
 				if ("1".equalsIgnoreCase(type)) {
-					String valPdf = createPDF(path, result, cliente, session, cambio, pago);
+					String valPdf = createPDF(path, result, cliente, session, cambio, pago,domicilio);
 					if ("ERROR ABIRENDO PDF".equalsIgnoreCase(valPdf)) {
 						rta = valPdf;
 					}
@@ -249,7 +252,18 @@ public class FacturacionLogic {
 		return prodTable;
 	}
 
-	public String createPDF(String path, FacturaTable factura, ClienteEntity cliente, DatosSessionEntity session, String cambio, String pago) {
+	/**
+	 * Funcion que crea PDF 
+	 * @param path
+	 * @param factura
+	 * @param cliente
+	 * @param session
+	 * @param cambio
+	 * @param pago
+	 * @param domicilio
+	 * @return
+	 */
+	public String createPDF(String path, FacturaTable factura, ClienteEntity cliente, DatosSessionEntity session, String cambio, String pago,String domicilio) {
 		Rectangle rec = new Rectangle(2.0F, 8.0F);
 		Document document = new Document();
 		path += "factura.pdf";
@@ -276,6 +290,9 @@ public class FacturacionLogic {
 			para = new Paragraph("****************************************************************************************************************");
 			para.setAlignment(Element.ALIGN_CENTER);
 			document.add(para);
+			para = new Paragraph("FACTURA No "+factura.getId(),FontFactory.getFont("Arial", 14f));
+			para.setAlignment(Element.ALIGN_CENTER);
+			document.add(para);
 			para = new Paragraph("Producto                                    cantidad                valor unitario               valor total                ", FontFactory.getFont("Arial", 14f));
 			para.setAlignment(Element.ALIGN_CENTER);
 			document.add(para);
@@ -300,10 +317,21 @@ public class FacturacionLogic {
 			para = new Paragraph("-----------------------------------------------------------------------------------------------------------------------------");
 			para.setAlignment(Element.ALIGN_CENTER);
 			document.add(para);
-			para = new Paragraph("Cliente : " + cliente.getApellido() + " " + cliente.getNombre());
-			para.setAlignment(Element.ALIGN_CENTER);
-			document.add(para);
-			para = new Paragraph("Usted Fue atendido por  : " + session.getDataUser().getPersona().get(0).getApellido() + " " + session.getDataUser().getPersona().get(0).getNombre() + ".   Fecha:" + factura.getFecha());
+			if("Checked".equalsIgnoreCase(domicilio)){
+				para = new Paragraph("Domicilio",FontFactory.getFont("Arial", 14f));
+				para.setAlignment(Element.ALIGN_CENTER);
+				document.add(para);
+				para = new Paragraph("Cliente : " + cliente.getApellido() + " " + cliente.getNombre()+"--Direccion:"+cliente.getCorreo()+"--Telefono:"+cliente.getTelefono());
+				para.setAlignment(Element.ALIGN_CENTER);
+				document.add(para);
+			}else{
+				para = new Paragraph("Cliente : " + cliente.getApellido() + " " + cliente.getNombre());
+				para.setAlignment(Element.ALIGN_CENTER);
+				document.add(para);
+			}
+			Date date = toDate(factura.getFecha());
+			SimpleDateFormat dt1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+			para = new Paragraph("Usted Fue atendido por  : " + session.getDataUser().getPersona().get(0).getApellido() + " " + session.getDataUser().getPersona().get(0).getNombre() + ".   Fecha:" +dt1.format(date));
 			para.setAlignment(Element.ALIGN_CENTER);
 			document.add(para);
 			para = new Paragraph(new Paragraph("GRACIAS POR SU COMPRA"));
@@ -364,13 +392,19 @@ public class FacturacionLogic {
 
 	}
 
-	public String validaDatos(List<GenericProductEntity> list, ClienteEntity cliente) {
+	public String validaDatos(List<GenericProductEntity> list, ClienteEntity cliente,String domicilio) {
 		String rta = "OK";
 		try {
 			if (list == null || list.size() <= 0) {
 				rta = "No puede facturar si no añade algún producto";
 			} else if (cliente.getNombre() == null) {
 				rta = "Debe añadir por lo menos un cliente";
+			}else if("Checked".equalsIgnoreCase(domicilio)){
+				if(cliente.getCedula()==0){
+					rta = "Para domicilios, es necesario insertar el cliente.";
+				}else if(cliente.getCorreo().equalsIgnoreCase("")){
+					rta = "El cliente debe tener la dirección.";
+				}
 			}
 		} catch (Exception e) {
 			rta = "ERROR";
@@ -453,4 +487,13 @@ public class FacturacionLogic {
 		}
 		return result;
 	}
+	
+    public static Date toDate(XMLGregorianCalendar calendar){
+        if(calendar == null) {
+            return null;
+        }
+        return calendar.toGregorianCalendar().getTime();
+    }
+
+
 }

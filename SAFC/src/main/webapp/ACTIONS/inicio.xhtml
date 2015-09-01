@@ -118,12 +118,6 @@
 										<p:graphicImage library="images/products"
 											name="#{panelRec.nombre}.#{panelRec.extension}" width="50"
 											height="50" />
-										<p:outputLabel value="#{panelRec.nombre}"
-											style="font-size:8px" />
-
-										<p:graphicImage library="images/products"
-											name="#{panelRec.nombre}.#{panelRec.extension}" width="50"
-											height="50" />
 										<br />
 										<p:outputLabel value="#{panelRec.nombre}"
 											style="font-size:8px" />
@@ -142,11 +136,6 @@
 											actionListener="#{facturacionBean.addProductPanel(panelProd)}"
 											ajax="true"
 											update="formInicio:listFact,formHeader:total,:viewPrice:totalSum">
-											<p:graphicImage library="images/products"
-												name="#{panelProd.nombre}.#{panelProd.extension}" width="50"
-												height="50" />
-											<p:outputLabel value="#{panelProd.nombre}"
-												style="font-size:8px" />
 											<p:graphicImage library="images/products"
 												name="#{panelProd.nombre}.#{panelProd.extension}" width="50"
 												height="50" />
@@ -206,9 +195,9 @@
 					</h:panelGroup>
 					<p:panel header="Factura">
 						<p:commandLink ajax="true"
-							update="formHeader:tablaClienteComprador">
+							update="formHeader:tablaClienteComprador" actionListener="#{facturacionBean.viewTotalPrice}">
 							<p:graphicImage library="images"
-								onclick="PF('viewPrice').show();" name="bill.png" width="40"
+								 name="bill.png" width="40"
 								height="40" />
 						</p:commandLink>
 						<p:spacer width="300" height="0" />

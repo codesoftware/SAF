@@ -49,6 +49,18 @@ public class FacturacionBean implements Serializable {
 	private List<ProductoGenericoEntity> productosFilter;
 	private BigDecimal totalChange;
 	private BigDecimal totalCliente;
+	private boolean domicilio;
+	private String summary;
+	
+	
+
+	public String getSummary() {
+		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
 
 	public String getPriceTotal() {
 		return priceTotal;
@@ -60,6 +72,14 @@ public class FacturacionBean implements Serializable {
 
 	public BigDecimal getTotalChange() {
 		return totalChange;
+	}
+
+	public boolean isDomicilio() {
+		return domicilio;
+	}
+
+	public void setDomicilio(boolean domicilio) {
+		this.domicilio = domicilio;
 	}
 
 	public void setTotalChange(BigDecimal totalChange) {
@@ -427,7 +447,7 @@ public class FacturacionBean implements Serializable {
 	public void checkProducts(String type) {
 		FacturacionLogic logic = new FacturacionLogic();
 		// valida si no hay productos o si el cliente esta nulo
-		String validate = logic.validaDatos(this.listProd, clientebean.getCliente());
+		String validate = logic.validaDatos(this.listProd, clientebean.getCliente(),this.summary);
 		if (!"OK".equalsIgnoreCase(validate)) {
 			this.setEnumer(ErrorEnum.ERROR);
 			messageBean(validate);
@@ -436,7 +456,7 @@ public class FacturacionBean implements Serializable {
 			tmpEC = FacesContext.getCurrentInstance().getExternalContext();
 			String realPath = tmpEC.getRealPath("/resources/images/products/");
 			String rta = logic.facturar(this.listProd, this.clientebean.getCliente(), realPath, this.entitySession,
-					type, this.totalChange.toString(), this.totalCliente.toString());
+					type, this.totalChange.toString(), this.totalCliente.toString(),this.summary);
 			if ("OK".equalsIgnoreCase(rta)) {
 				if ("1".equalsIgnoreCase(type)) {
 					this.enumer = ErrorEnum.SUCCESS;
@@ -460,11 +480,11 @@ public class FacturacionBean implements Serializable {
 	}
 
 	public void viewResumeBill() {
-		System.out.println("hi");
 		RequestContext context = RequestContext.getCurrentInstance();
 		context.execute("PF('viewBill').show();");
 
 	}
+
 	/**
 	 * Metodo para cerrar el pop up del resumen de la factura
 	 */
@@ -597,6 +617,31 @@ public class FacturacionBean implements Serializable {
 		if (totalChange.doubleValue() < 0) {
 			this.totalChange = new BigDecimal(0);
 		}
+	}
+	
+	/**
+	 * Funcion donde se controla que la factura este lista para mostrar el pop up de facturacion donde el cliente 
+	 * ingresa el valor a pagar
+	 */
+
+	public void viewTotalPrice() {
+		FacturacionLogic logic = new FacturacionLogic();
+		// valida si no hay productos o si el cliente esta nulo;
+		String validate = logic.validaDatos(this.listProd, clientebean.getCliente(),this.summary);
+		if("Ok".equalsIgnoreCase(validate)){
+		RequestContext context = RequestContext.getCurrentInstance();
+		context.execute("PF('viewPrice').show();");
+		}else{
+			this.setEnumer(ErrorEnum.ERROR);
+			messageBean(validate);
+		}
+	}
+	
+	/**
+	 * Funcion que controla el check de domicilios
+	 */
+	public void addAjaxCheck(){
+		this.summary = this.domicilio ? "Checked" : "Unchecked";
 	}
 
 	/**

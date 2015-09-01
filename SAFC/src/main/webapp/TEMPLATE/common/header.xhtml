@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<style>
 .ui-dock-container-top {
@@ -15,12 +18,25 @@
 		<h:form id="formBanner">
 			<p:toolbar>
 				<f:facet name="left">
-					<p:commandButton type="push" title="generación de facturas" value="FACTURACION" action="/ACTIONS/inicio"></p:commandButton>
-					<p:commandButton type="push" title="consulta facturacion" value="FACTURAS" action="#{consultaFacturacionBean.redireccionConsultaFacturacion}"></p:commandButton>
+					<p:commandButton type="push" title="generación de facturas"
+						value="FACTURACION" action="/ACTIONS/inicio"></p:commandButton>
+					<p:commandButton type="push" title="consulta facturacion"
+						value="FACTURAS"
+						action="#{consultaFacturacionBean.redireccionConsultaFacturacion}"></p:commandButton>
+						<p:spacer width="300" height="0"/>
+					<h:outputText value="Domicilios: " />
+					<p:selectBooleanCheckbox value="#{facturacionBean.domicilio}" >
+					<p:ajax listener="#{facturacionBean.addAjaxCheck}" />
+					</p:selectBooleanCheckbox>
+					<p:graphicImage library="images" name="domicilios.png" width="20"
+						height="20" />
 				</f:facet>
 				<f:facet name="right">
-					<p:commandButton type="push" title="cambio contraseña" value="CONTRASEÑA" action="/ACTIONS/USUARIO/cambioCont"></p:commandButton>
-					<p:commandButton type="push" title="cerrar sesión" value="SALIR" actionListener="#{loginBean.cerrarSesion}" action="/index" icon="ui-icon-power"></p:commandButton>
+					<p:commandButton type="push" title="cambio contraseña"
+						value="CONTRASEÑA" action="/ACTIONS/USUARIO/cambioCont"></p:commandButton>
+					<p:commandButton type="push" title="cerrar sesión" value="SALIR"
+						actionListener="#{loginBean.cerrarSesion}" action="/index"
+						icon="ui-icon-power"></p:commandButton>
 				</f:facet>
 			</p:toolbar>
 		</h:form>
