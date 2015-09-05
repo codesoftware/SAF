@@ -13,6 +13,7 @@ import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
 
 import co.com.codesoftware.entities.ClienteEntity;
+import co.com.codesoftware.entities.DatosSessionEntity;
 import co.com.codesoftware.entities.GenericProductEntity;
 import co.com.codesoftware.logic.ClienteLogic;
 import co.com.codesoftware.logic.ProductsLogic;
@@ -39,16 +40,29 @@ public class ClienteBean implements Serializable {
 	private List<RecetaTable> dishes;
 	private List<RecetaTable> dishesFilter;
 	private GenericProductEntity prod;
+	private DatosSessionEntity entitySession;
 
 	@PostConstruct
 	/*
 	 * Metodo en el cual carga todo lo que se necesita al inicio
 	 */
 	public void init() {
-		RecetasLogic logic = new RecetasLogic();
-		ProductsLogic logicPrd = new ProductsLogic();
-		this.productos = logicPrd.getEspecialProduct();
-		this.recetas = logic.getEspecialReceta();
+		try {
+			FacesMessage message = null;
+			FacesContext context = FacesContext.getCurrentInstance();
+			this.entitySession = (DatosSessionEntity) context.getExternalContext().getSessionMap().get("dataSession");
+			if (entitySession == null) {
+				message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Esta intentando a un sitio no permitido porfavor realice el login primero");
+				context.getExternalContext().redirect("../index.jsf");
+			} else {
+				RecetasLogic logic = new RecetasLogic();
+				ProductsLogic logicPrd = new ProductsLogic();
+				this.productos = logicPrd.getEspecialProduct(entitySession.getDataUser().getSede());
+				this.recetas = logic.getEspecialReceta(entitySession.getDataUser().getSede());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public List<RecetaTable> getDishesFilter() {
@@ -155,7 +169,7 @@ public class ClienteBean implements Serializable {
 		cliente.setDireccion(entity.getDireccion());
 		return cliente;
 	}
-	
+
 	public Cliente setDataWithId(ClienteEntity entity) {
 		Cliente cliente = new Cliente();
 		cliente.setId(entity.getId());
@@ -245,18 +259,25 @@ public class ClienteBean implements Serializable {
 		try {
 			ClienteLogic logic = new ClienteLogic();
 			boolean valida = logic.updateCliente(setDataWithId(this.cliente));
-			if(valida){
-				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok","Cliente Actualizado correctamente" );
+			if (valida) {
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", "Cliente Actualizado correctamente");
 				FacesContext.getCurrentInstance().addMessage(null, message);
 				RequestContext.getCurrentInstance().execute("PF('actualizarClient').hide()");
-			}else{
+			} else {
 				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al actualizar el Cliente", "Error");
 				FacesContext.getCurrentInstance().addMessage(null, message);
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+	public DatosSessionEntity getEntitySession() {
+		return entitySession;
+	}
+
+	public void setEntitySession(DatosSessionEntity entitySession) {
+		this.entitySession = entitySession;
+	}
 }

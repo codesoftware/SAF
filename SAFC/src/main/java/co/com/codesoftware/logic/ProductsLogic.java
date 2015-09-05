@@ -19,12 +19,17 @@ public class ProductsLogic {
 	 * 
 	 * @return
 	 */
-	public List<PantallaPrincipalFacTable> getEspecialProduct() {
+	public List<PantallaPrincipalFacTable> getEspecialProduct(Integer sede_sede) {
 		List<PantallaPrincipalFacTable> list = new ArrayList<PantallaPrincipalFacTable>();
-		SAFWSService service = new SAFWSService();
-		SAFWS port = service.getSAFWSPort();
-		list = port.getProductPrincipalScreen(2);
-		list = getImage(list);
+		try {
+			System.out.println("Esta es la sede " +sede_sede );
+			SAFWSService service = new SAFWSService();
+			SAFWS port = service.getSAFWSPort();
+			list = port.getProductPrincipalScreen(sede_sede);
+			list = getImage(list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return list;
 	}
 

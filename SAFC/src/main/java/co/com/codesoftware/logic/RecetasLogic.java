@@ -17,13 +17,16 @@ public class RecetasLogic {
 	 * Metodo que consulta las recetas de la pantalla principal
 	 * @return
 	 */
-	public List<PantallaPrincipalFacTable> getEspecialReceta() {
-
+	public List<PantallaPrincipalFacTable> getEspecialReceta(Integer sede_sede) {
 		List<PantallaPrincipalFacTable> list = new ArrayList<PantallaPrincipalFacTable>();
-		SAFWSService service = new SAFWSService();
-		SAFWS port = service.getSAFWSPort();
-		list = port.getDishesPrincipalScreen(2);
-		list = getImage(list);
+		try {
+			SAFWSService service = new SAFWSService();
+			SAFWS port = service.getSAFWSPort();
+			list = port.getDishesPrincipalScreen(sede_sede);
+			list = getImage(list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return list;
 	}
 
