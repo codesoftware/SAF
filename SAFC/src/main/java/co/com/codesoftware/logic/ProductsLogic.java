@@ -3,6 +3,7 @@ package co.com.codesoftware.logic;
 import java.util.ArrayList;
 import java.util.List;
 
+import co.com.codesoftware.entities.DatosSessionEntity;
 import co.com.codesoftware.entities.GenericProductEntity;
 import co.com.codesoftware.server.PantallaPrincipalFacTable;
 import co.com.codesoftware.server.ProductoGenericoEntity;
@@ -22,7 +23,7 @@ public class ProductsLogic {
 		List<PantallaPrincipalFacTable> list = new ArrayList<PantallaPrincipalFacTable>();
 		SAFWSService service = new SAFWSService();
 		SAFWS port = service.getSAFWSPort();
-		list = port.getProductPrincipalScreen(1);
+		list = port.getProductPrincipalScreen(2);
 		list = getImage(list);
 		return list;
 	}
@@ -34,14 +35,14 @@ public class ProductsLogic {
 	 * @return
 	 */
 
-	public GenericProductEntity getProductXCode(String code, int cantidad) {
+	public GenericProductEntity getProductXCode(String code, int cantidad,DatosSessionEntity session) {
 		ProductoTable product = null;
 		GenericProductEntity result = new GenericProductEntity();
 		try {
 			product = new ProductoTable();
 			SAFWSService service = new SAFWSService();
 			SAFWS port = service.getSAFWSPort();
-			product = port.getProductForCode(code, 1);
+			product = port.getProductForCode(code, session.getDataUser().getSede());
 			if (product != null) {
 				result = setGenericProduct(result, product, cantidad);
 			} else {
@@ -52,6 +53,32 @@ public class ProductsLogic {
 			e.printStackTrace();
 		}
 		return result;
+	}
+	/**
+	 * Consulta recetas por el codigo
+	 * @param code
+	 * @param cantidad
+	 * @param session
+	 * @return
+	 */
+	public GenericProductEntity getRecetaForCode(String code, int cantidad,DatosSessionEntity session){
+		RecetaTable receta = null;
+		GenericProductEntity result = new GenericProductEntity();
+		try {
+			SAFWSService service = new SAFWSService();
+			SAFWS port = service.getSAFWSPort();
+			receta = port.getRecetaForcode(code, session.getDataUser().getSede());
+			if (receta != null) {
+				result = setGenericReceta(result, receta, cantidad);
+			} else {
+				result = null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+
+		
 	}
 
 	public GenericProductEntity setGenericProduct(GenericProductEntity result, ProductoTable product, int cantidad) {
@@ -64,7 +91,7 @@ public class ProductsLogic {
 		return result;
 	}
 
-	public GenericProductEntity setGenericProduct(GenericProductEntity result, RecetaTable product, int cantidad) {
+	public GenericProductEntity setGenericReceta(GenericProductEntity result, RecetaTable product, int cantidad) {
 		result.setCode(product.getCodigo());
 		result.setId(product.getId());
 		result.setName(product.getNombre());

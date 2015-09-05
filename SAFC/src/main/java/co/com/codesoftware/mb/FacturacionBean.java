@@ -253,7 +253,11 @@ public class FacturacionBean implements Serializable {
 		FacturacionLogic log = new FacturacionLogic();
 		if (log.validateCodigo(codigoAdd)) {
 			ProductsLogic prod = new ProductsLogic();
-			product = prod.getProductXCode(codigoAdd, cantidad);
+			if(codigoAdd.startsWith("1-")){
+			product = prod.getProductXCode(codigoAdd, cantidad,this.entitySession);
+			}else if(codigoAdd.startsWith("3-")){
+				product = prod.getRecetaForCode(codigoAdd, cantidad, this.entitySession);
+			}
 			if (product == null) {
 				this.setEnumer(ErrorEnum.ERROR);
 				messageBean("Producto inexistente.");
@@ -432,7 +436,7 @@ public class FacturacionBean implements Serializable {
 	public void buscaProductosGenericos() {
 		try {
 			ProductsLogic logic = new ProductsLogic();
-			this.productosGenericos = logic.buscaProductosAplicacionGenericos(1);
+			this.productosGenericos = logic.buscaProductosAplicacionGenericos(this.entitySession.getDataUser().getSede());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

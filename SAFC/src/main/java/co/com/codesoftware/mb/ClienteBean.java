@@ -40,6 +40,9 @@ public class ClienteBean implements Serializable {
 	private List<RecetaTable> dishesFilter;
 	private GenericProductEntity prod ;
 
+
+
+
 	@PostConstruct
 	/*
 	 * Metodo en el cual carga todo lo que se necesita al inicio
@@ -94,7 +97,7 @@ public class ClienteBean implements Serializable {
 
 
 	public ClienteBean() {
-		super();
+
 		cliente = new ClienteEntity();
 	}
 

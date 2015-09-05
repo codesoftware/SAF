@@ -49,7 +49,6 @@ public class Facturacion {
     protected List<TemporalProdTable> productos;
     @XmlElement(nillable = true)
     protected List<TemporalRecTable> recetas;
-    
 
     public void setProductos(List<TemporalProdTable> productos) {
 		this.productos = productos;

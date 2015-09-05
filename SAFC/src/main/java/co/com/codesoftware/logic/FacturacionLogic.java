@@ -131,7 +131,7 @@ public class FacturacionLogic {
 		RespuestaFacturacion res = new RespuestaFacturacion();
 		recorreLista(list);
 		try {
-			fact.setIdSede(new Long(1));
+			fact.setIdSede(new Long(session.getDataUser().getSede()));
 			fact.setIdTius(session.getDataUser().getId());
 			fact.setIdCliente(cliente.getId());
 			fact.setProductos(this.products);

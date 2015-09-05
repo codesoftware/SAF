@@ -37,6 +37,7 @@ public class ObjectFactory {
     private final static QName _GetProductForCodeResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getProductForCodeResponse");
     private final static QName _GetRecetas_QNAME = new QName("http://server.codesoftware.com.co/", "getRecetas");
     private final static QName _AddClienteResponse_QNAME = new QName("http://server.codesoftware.com.co/", "addClienteResponse");
+    private final static QName _GetRecetaForcode_QNAME = new QName("http://server.codesoftware.com.co/", "getRecetaForcode");
     private final static QName _GetUsersResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getUsersResponse");
     private final static QName _GetFacturasResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getFacturasResponse");
     private final static QName _CambiaClaveUsuarioResponse_QNAME = new QName("http://server.codesoftware.com.co/", "cambiaClaveUsuarioResponse");
@@ -47,6 +48,7 @@ public class ObjectFactory {
     private final static QName _GetProductPrincipalScreen_QNAME = new QName("http://server.codesoftware.com.co/", "getProductPrincipalScreen");
     private final static QName _GetRecetasResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getRecetasResponse");
     private final static QName _GetProductPrincipalScreenResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getProductPrincipalScreenResponse");
+    private final static QName _GetRecetaForcodeResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getRecetaForcodeResponse");
     private final static QName _Login_QNAME = new QName("http://server.codesoftware.com.co/", "login");
     private final static QName _GetProductsResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getProductsResponse");
     private final static QName _GetParamsEmpresa_QNAME = new QName("http://server.codesoftware.com.co/", "getParamsEmpresa");
@@ -142,6 +144,14 @@ public class ObjectFactory {
      */
     public Login createLogin() {
         return new Login();
+    }
+
+    /**
+     * Create an instance of {@link GetRecetaForcodeResponse }
+     * 
+     */
+    public GetRecetaForcodeResponse createGetRecetaForcodeResponse() {
+        return new GetRecetaForcodeResponse();
     }
 
     /**
@@ -390,6 +400,14 @@ public class ObjectFactory {
      */
     public GetUsersResponse createGetUsersResponse() {
         return new GetUsersResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetRecetaForcode }
+     * 
+     */
+    public GetRecetaForcode createGetRecetaForcode() {
+        return new GetRecetaForcode();
     }
 
     /**
@@ -654,6 +672,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetRecetaForcode }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getRecetaForcode")
+    public JAXBElement<GetRecetaForcode> createGetRecetaForcode(GetRecetaForcode value) {
+        return new JAXBElement<GetRecetaForcode>(_GetRecetaForcode_QNAME, GetRecetaForcode.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetUsersResponse }{@code >}}
      * 
      */
@@ -741,6 +768,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getProductPrincipalScreenResponse")
     public JAXBElement<GetProductPrincipalScreenResponse> createGetProductPrincipalScreenResponse(GetProductPrincipalScreenResponse value) {
         return new JAXBElement<GetProductPrincipalScreenResponse>(_GetProductPrincipalScreenResponse_QNAME, GetProductPrincipalScreenResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetRecetaForcodeResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getRecetaForcodeResponse")
+    public JAXBElement<GetRecetaForcodeResponse> createGetRecetaForcodeResponse(GetRecetaForcodeResponse value) {
+        return new JAXBElement<GetRecetaForcodeResponse>(_GetRecetaForcodeResponse_QNAME, GetRecetaForcodeResponse.class, null, value);
     }
 
     /**

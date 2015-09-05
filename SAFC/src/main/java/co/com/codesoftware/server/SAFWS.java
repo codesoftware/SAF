@@ -27,18 +27,75 @@ public interface SAFWS {
 
     /**
      * 
-     * @param facturacion
+     * @param receCodigo
+     * @param receSede
      * @return
-     *     returns co.com.codesoftware.server.RespuestaFacturacion
+     *     returns co.com.codesoftware.server.RecetaTable
      */
     @WebMethod
-    @WebResult(name = "respuestaFacturacon", targetNamespace = "")
-    @RequestWrapper(localName = "facturar", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.Facturar")
-    @ResponseWrapper(localName = "facturarResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.FacturarResponse")
-    @Action(input = "http://server.codesoftware.com.co/SAFWS/facturarRequest", output = "http://server.codesoftware.com.co/SAFWS/facturarResponse")
-    public RespuestaFacturacion facturar(
-        @WebParam(name = "Facturacion", targetNamespace = "")
-        Facturacion facturacion);
+    @WebResult(name = "RecetaTable", targetNamespace = "")
+    @RequestWrapper(localName = "getRecetaForcode", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetRecetaForcode")
+    @ResponseWrapper(localName = "getRecetaForcodeResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetRecetaForcodeResponse")
+    @Action(input = "http://server.codesoftware.com.co/SAFWS/getRecetaForcodeRequest", output = "http://server.codesoftware.com.co/SAFWS/getRecetaForcodeResponse")
+    public RecetaTable getRecetaForcode(
+        @WebParam(name = "rece_codigo", targetNamespace = "")
+        String receCodigo,
+        @WebParam(name = "rece_sede", targetNamespace = "")
+        int receSede);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns boolean
+     */
+    @WebMethod
+    @WebResult(name = "respuesta", targetNamespace = "")
+    @RequestWrapper(localName = "cambiaClaveUsuario", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.CambiaClaveUsuario")
+    @ResponseWrapper(localName = "cambiaClaveUsuarioResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.CambiaClaveUsuarioResponse")
+    @Action(input = "http://server.codesoftware.com.co/SAFWS/cambiaClaveUsuarioRequest", output = "http://server.codesoftware.com.co/SAFWS/cambiaClaveUsuarioResponse")
+    public boolean cambiaClaveUsuario(
+        @WebParam(name = "arg0", targetNamespace = "")
+        UsuarioTable arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns java.util.List<co.com.codesoftware.server.ProductoGenericoEntity>
+     */
+    @WebMethod
+    @WebResult(name = "ListGeneric", targetNamespace = "")
+    @RequestWrapper(localName = "findProductosAndDishes", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.FindProductosAndDishes")
+    @ResponseWrapper(localName = "findProductosAndDishesResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.FindProductosAndDishesResponse")
+    @Action(input = "http://server.codesoftware.com.co/SAFWS/findProductosAndDishesRequest", output = "http://server.codesoftware.com.co/SAFWS/findProductosAndDishesResponse")
+    public List<ProductoGenericoEntity> findProductosAndDishes(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Integer arg0);
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<co.com.codesoftware.server.Sede>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getSedes", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetSedes")
+    @ResponseWrapper(localName = "getSedesResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetSedesResponse")
+    @Action(input = "http://server.codesoftware.com.co/SAFWS/getSedesRequest", output = "http://server.codesoftware.com.co/SAFWS/getSedesResponse")
+    public List<Sede> getSedes();
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<co.com.codesoftware.server.Cliente>
+     */
+    @WebMethod
+    @WebResult(name = "Cliente", targetNamespace = "")
+    @RequestWrapper(localName = "getClientes", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetClientes")
+    @ResponseWrapper(localName = "getClientesResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetClientesResponse")
+    @Action(input = "http://server.codesoftware.com.co/SAFWS/getClientesRequest", output = "http://server.codesoftware.com.co/SAFWS/getClientesResponse")
+    public List<Cliente> getClientes();
 
     /**
      * 
@@ -78,69 +135,6 @@ public interface SAFWS {
     @ResponseWrapper(localName = "getParamsEmpresaResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetParamsEmpresaResponse")
     @Action(input = "http://server.codesoftware.com.co/SAFWS/getParamsEmpresaRequest", output = "http://server.codesoftware.com.co/SAFWS/getParamsEmpresaResponse")
     public List<ParametrosEmpresaTable> getParamsEmpresa();
-
-    /**
-     * 
-     * @param arg0
-     * @return
-     *     returns boolean
-     */
-    @WebMethod
-    @WebResult(name = "respuesta", targetNamespace = "")
-    @RequestWrapper(localName = "cambiaClaveUsuario", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.CambiaClaveUsuario")
-    @ResponseWrapper(localName = "cambiaClaveUsuarioResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.CambiaClaveUsuarioResponse")
-    @Action(input = "http://server.codesoftware.com.co/SAFWS/cambiaClaveUsuarioRequest", output = "http://server.codesoftware.com.co/SAFWS/cambiaClaveUsuarioResponse")
-    public boolean cambiaClaveUsuario(
-        @WebParam(name = "arg0", targetNamespace = "")
-        UsuarioTable arg0);
-
-    /**
-     * 
-     * @param arg0
-     * @return
-     *     returns java.util.List<co.com.codesoftware.server.ProductoGenericoEntity>
-     */
-    @WebMethod
-    @WebResult(name = "ListGeneric", targetNamespace = "")
-    @RequestWrapper(localName = "findProductosAndDishes", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.FindProductosAndDishes")
-    @ResponseWrapper(localName = "findProductosAndDishesResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.FindProductosAndDishesResponse")
-    @Action(input = "http://server.codesoftware.com.co/SAFWS/findProductosAndDishesRequest", output = "http://server.codesoftware.com.co/SAFWS/findProductosAndDishesResponse")
-    public List<ProductoGenericoEntity> findProductosAndDishes(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Integer arg0);
-
-    /**
-     * 
-     * @param sedeSede
-     * @return
-     *     returns java.util.List<co.com.codesoftware.server.ProductoTable>
-     */
-    @WebMethod
-    @WebResult(name = "ProductoTable", targetNamespace = "")
-    @RequestWrapper(localName = "getProducts", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetProducts")
-    @ResponseWrapper(localName = "getProductsResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetProductsResponse")
-    @Action(input = "http://server.codesoftware.com.co/SAFWS/getProductsRequest", output = "http://server.codesoftware.com.co/SAFWS/getProductsResponse")
-    public List<ProductoTable> getProducts(
-        @WebParam(name = "sede_sede", targetNamespace = "")
-        Integer sedeSede);
-
-    /**
-     * 
-     * @param sedeSede
-     * @param dskaCod
-     * @return
-     *     returns co.com.codesoftware.server.ProductoTable
-     */
-    @WebMethod
-    @WebResult(name = "ProductoTable", targetNamespace = "")
-    @RequestWrapper(localName = "getProductForCode", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetProductForCode")
-    @ResponseWrapper(localName = "getProductForCodeResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetProductForCodeResponse")
-    @Action(input = "http://server.codesoftware.com.co/SAFWS/getProductForCodeRequest", output = "http://server.codesoftware.com.co/SAFWS/getProductForCodeResponse")
-    public ProductoTable getProductForCode(
-        @WebParam(name = "dska_cod", targetNamespace = "")
-        String dskaCod,
-        @WebParam(name = "sede_sede", targetNamespace = "")
-        Integer sedeSede);
 
     /**
      * 
@@ -207,27 +201,48 @@ public interface SAFWS {
 
     /**
      * 
+     * @param facturacion
      * @return
-     *     returns java.util.List<co.com.codesoftware.server.Cliente>
+     *     returns co.com.codesoftware.server.RespuestaFacturacion
      */
     @WebMethod
-    @WebResult(name = "Cliente", targetNamespace = "")
-    @RequestWrapper(localName = "getClientes", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetClientes")
-    @ResponseWrapper(localName = "getClientesResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetClientesResponse")
-    @Action(input = "http://server.codesoftware.com.co/SAFWS/getClientesRequest", output = "http://server.codesoftware.com.co/SAFWS/getClientesResponse")
-    public List<Cliente> getClientes();
+    @WebResult(name = "respuestaFacturacon", targetNamespace = "")
+    @RequestWrapper(localName = "facturar", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.Facturar")
+    @ResponseWrapper(localName = "facturarResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.FacturarResponse")
+    @Action(input = "http://server.codesoftware.com.co/SAFWS/facturarRequest", output = "http://server.codesoftware.com.co/SAFWS/facturarResponse")
+    public RespuestaFacturacion facturar(
+        @WebParam(name = "Facturacion", targetNamespace = "")
+        Facturacion facturacion);
 
     /**
      * 
+     * @param sedeSede
      * @return
-     *     returns java.util.List<co.com.codesoftware.server.Sede>
+     *     returns java.util.List<co.com.codesoftware.server.RecetaTable>
      */
     @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getSedes", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetSedes")
-    @ResponseWrapper(localName = "getSedesResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetSedesResponse")
-    @Action(input = "http://server.codesoftware.com.co/SAFWS/getSedesRequest", output = "http://server.codesoftware.com.co/SAFWS/getSedesResponse")
-    public List<Sede> getSedes();
+    @WebResult(name = "RecetaTable", targetNamespace = "")
+    @RequestWrapper(localName = "getRecetas", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetRecetas")
+    @ResponseWrapper(localName = "getRecetasResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetRecetasResponse")
+    @Action(input = "http://server.codesoftware.com.co/SAFWS/getRecetasRequest", output = "http://server.codesoftware.com.co/SAFWS/getRecetasResponse")
+    public List<RecetaTable> getRecetas(
+        @WebParam(name = "sede_sede", targetNamespace = "")
+        Integer sedeSede);
+
+    /**
+     * 
+     * @param sedeSede
+     * @return
+     *     returns java.util.List<co.com.codesoftware.server.ProductoTable>
+     */
+    @WebMethod
+    @WebResult(name = "ProductoTable", targetNamespace = "")
+    @RequestWrapper(localName = "getProducts", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetProducts")
+    @ResponseWrapper(localName = "getProductsResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetProductsResponse")
+    @Action(input = "http://server.codesoftware.com.co/SAFWS/getProductsRequest", output = "http://server.codesoftware.com.co/SAFWS/getProductsResponse")
+    public List<ProductoTable> getProducts(
+        @WebParam(name = "sede_sede", targetNamespace = "")
+        Integer sedeSede);
 
     /**
      * 
@@ -277,15 +292,18 @@ public interface SAFWS {
     /**
      * 
      * @param sedeSede
+     * @param dskaCod
      * @return
-     *     returns java.util.List<co.com.codesoftware.server.RecetaTable>
+     *     returns co.com.codesoftware.server.ProductoTable
      */
     @WebMethod
-    @WebResult(name = "RecetaTable", targetNamespace = "")
-    @RequestWrapper(localName = "getRecetas", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetRecetas")
-    @ResponseWrapper(localName = "getRecetasResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetRecetasResponse")
-    @Action(input = "http://server.codesoftware.com.co/SAFWS/getRecetasRequest", output = "http://server.codesoftware.com.co/SAFWS/getRecetasResponse")
-    public List<RecetaTable> getRecetas(
+    @WebResult(name = "ProductoTable", targetNamespace = "")
+    @RequestWrapper(localName = "getProductForCode", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetProductForCode")
+    @ResponseWrapper(localName = "getProductForCodeResponse", targetNamespace = "http://server.codesoftware.com.co/", className = "co.com.codesoftware.server.GetProductForCodeResponse")
+    @Action(input = "http://server.codesoftware.com.co/SAFWS/getProductForCodeRequest", output = "http://server.codesoftware.com.co/SAFWS/getProductForCodeResponse")
+    public ProductoTable getProductForCode(
+        @WebParam(name = "dska_cod", targetNamespace = "")
+        String dskaCod,
         @WebParam(name = "sede_sede", targetNamespace = "")
         Integer sedeSede);
 
