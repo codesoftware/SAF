@@ -321,7 +321,7 @@ public class FacturacionLogic {
 				para = new Paragraph("Domicilio",FontFactory.getFont("Arial", 14f));
 				para.setAlignment(Element.ALIGN_CENTER);
 				document.add(para);
-				para = new Paragraph("Cliente : " + cliente.getApellido() + " " + cliente.getNombre()+"--Direccion:"+cliente.getCorreo()+"--Telefono:"+cliente.getTelefono());
+				para = new Paragraph("Cliente : " + cliente.getApellido() + " " + cliente.getNombre()+"--Direccion:"+cliente.getDireccion()+"--Telefono:"+cliente.getTelefono());
 				para.setAlignment(Element.ALIGN_CENTER);
 				document.add(para);
 			}else{
@@ -402,12 +402,12 @@ public class FacturacionLogic {
 			}else if("Checked".equalsIgnoreCase(domicilio)){
 				if(cliente.getCedula()==0){
 					rta = "Para domicilios, es necesario insertar el cliente.";
-				}else if(cliente.getCorreo().equalsIgnoreCase("")){
-					rta = "El cliente debe tener la dirección.";
+				}else if("".equalsIgnoreCase(cliente.getDireccion()) || cliente.getDireccion() == null){
+					rta = "El cliente debe tener la dirección para poder realizar el domicilio.";
 				}
 			}
 		} catch (Exception e) {
-			rta = "ERROR";
+			rta = "ERROR " + e;
 
 		}
 		return rta;

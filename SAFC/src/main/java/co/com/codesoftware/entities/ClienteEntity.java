@@ -2,14 +2,15 @@ package co.com.codesoftware.entities;
 
 import java.io.Serializable;
 
-public class ClienteEntity implements Serializable{
-	
+public class ClienteEntity implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 	private Long cedula;
 	private String nombre;
 	private String apellido;
 	private String correo;
 	private String telefono;
+	private String direccion;
 	private Long id;
 
 	public Long getCedula() {
@@ -58,6 +59,14 @@ public class ClienteEntity implements Serializable{
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
 
 }

@@ -171,6 +171,7 @@ public class ClienteBean implements Serializable {
 		cliente.setCorreo(entity.getCorreo());
 		cliente.setNombres(entity.getNombre());
 		cliente.setTelefono(entity.getTelefono());
+		cliente.setDireccion(entity.getDireccion());
 		return cliente;
 	}
 
@@ -182,6 +183,7 @@ public class ClienteBean implements Serializable {
 		cliente.setCorreo(entity.getCorreo());
 		cliente.setNombre(entity.getNombres());
 		cliente.setTelefono(entity.getTelefono());
+		cliente.setDireccion(entity.getDireccion());
 		return cliente;
 	}
 
