@@ -19,6 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="apellidos" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="cedula" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
  *         &lt;element name="correo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="direccion" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
  *         &lt;element name="nombres" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="telefono" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -35,6 +36,7 @@ import javax.xml.bind.annotation.XmlType;
     "apellidos",
     "cedula",
     "correo",
+    "direccion",
     "id",
     "nombres",
     "telefono"
@@ -44,6 +46,7 @@ public class Cliente {
     protected String apellidos;
     protected Long cedula;
     protected String correo;
+    protected String direccion;
     protected Long id;
     protected String nombres;
     protected String telefono;
@@ -118,6 +121,30 @@ public class Cliente {
      */
     public void setCorreo(String value) {
         this.correo = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad direccion.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getDireccion() {
+        return direccion;
+    }
+
+    /**
+     * Define el valor de la propiedad direccion.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDireccion(String value) {
+        this.direccion = value;
     }
 
     /**

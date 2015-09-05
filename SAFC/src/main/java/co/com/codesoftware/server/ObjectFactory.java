@@ -32,6 +32,7 @@ public class ObjectFactory {
     private final static QName _GetParamsEmpresaResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getParamsEmpresaResponse");
     private final static QName _GetSedes_QNAME = new QName("http://server.codesoftware.com.co/", "getSedes");
     private final static QName _GetClientesResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getClientesResponse");
+    private final static QName _ValidaUsuarioFacturadorResponse_QNAME = new QName("http://server.codesoftware.com.co/", "validaUsuarioFacturadorResponse");
     private final static QName _CambiaClaveUsuario_QNAME = new QName("http://server.codesoftware.com.co/", "cambiaClaveUsuario");
     private final static QName _GetProductForCode_QNAME = new QName("http://server.codesoftware.com.co/", "getProductForCode");
     private final static QName _GetProductForCodeResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getProductForCodeResponse");
@@ -62,6 +63,7 @@ public class ObjectFactory {
     private final static QName _GetClientes_QNAME = new QName("http://server.codesoftware.com.co/", "getClientes");
     private final static QName _GetDishesPrincipalScreen_QNAME = new QName("http://server.codesoftware.com.co/", "getDishesPrincipalScreen");
     private final static QName _UpdateCliente_QNAME = new QName("http://server.codesoftware.com.co/", "updateCliente");
+    private final static QName _ValidaUsuarioFacturador_QNAME = new QName("http://server.codesoftware.com.co/", "validaUsuarioFacturador");
     private final static QName _GetUserForUser_QNAME = new QName("http://server.codesoftware.com.co/", "getUserForUser");
     private final static QName _GetProducts_QNAME = new QName("http://server.codesoftware.com.co/", "getProducts");
     private final static QName _GetSedesResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getSedesResponse");
@@ -187,6 +189,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ValidaUsuarioFacturador }
+     * 
+     */
+    public ValidaUsuarioFacturador createValidaUsuarioFacturador() {
+        return new ValidaUsuarioFacturador();
+    }
+
+    /**
      * Create an instance of {@link AddCliente }
      * 
      */
@@ -304,6 +314,14 @@ public class ObjectFactory {
      */
     public GetClientesResponse createGetClientesResponse() {
         return new GetClientesResponse();
+    }
+
+    /**
+     * Create an instance of {@link ValidaUsuarioFacturadorResponse }
+     * 
+     */
+    public ValidaUsuarioFacturadorResponse createValidaUsuarioFacturadorResponse() {
+        return new ValidaUsuarioFacturadorResponse();
     }
 
     /**
@@ -627,6 +645,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ValidaUsuarioFacturadorResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "validaUsuarioFacturadorResponse")
+    public JAXBElement<ValidaUsuarioFacturadorResponse> createValidaUsuarioFacturadorResponse(ValidaUsuarioFacturadorResponse value) {
+        return new JAXBElement<ValidaUsuarioFacturadorResponse>(_ValidaUsuarioFacturadorResponse_QNAME, ValidaUsuarioFacturadorResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link CambiaClaveUsuario }{@code >}}
      * 
      */
@@ -894,6 +921,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "updateCliente")
     public JAXBElement<UpdateCliente> createUpdateCliente(UpdateCliente value) {
         return new JAXBElement<UpdateCliente>(_UpdateCliente_QNAME, UpdateCliente.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ValidaUsuarioFacturador }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "validaUsuarioFacturador")
+    public JAXBElement<ValidaUsuarioFacturador> createValidaUsuarioFacturador(ValidaUsuarioFacturador value) {
+        return new JAXBElement<ValidaUsuarioFacturador>(_ValidaUsuarioFacturador_QNAME, ValidaUsuarioFacturador.class, null, value);
     }
 
     /**
