@@ -38,10 +38,7 @@ public class ClienteBean implements Serializable {
 	private List<PantallaPrincipalFacTable> productos;
 	private List<RecetaTable> dishes;
 	private List<RecetaTable> dishesFilter;
-	private GenericProductEntity prod ;
-
-
-
+	private GenericProductEntity prod;
 
 	@PostConstruct
 	/*
@@ -53,17 +50,14 @@ public class ClienteBean implements Serializable {
 		this.productos = logicPrd.getEspecialProduct();
 		this.recetas = logic.getEspecialReceta();
 	}
-	
 
 	public List<RecetaTable> getDishesFilter() {
 		return dishesFilter;
 	}
 
-
 	public void setDishesFilter(List<RecetaTable> dishesFilter) {
 		this.dishesFilter = dishesFilter;
 	}
-
 
 	public List<RecetaTable> getDishes() {
 		return dishes;
@@ -73,28 +67,21 @@ public class ClienteBean implements Serializable {
 		this.dishes = dishes;
 	}
 
-
-
-
 	public List<PantallaPrincipalFacTable> getProductos() {
 		return productos;
 	}
-
 
 	public void setProductos(List<PantallaPrincipalFacTable> productos) {
 		this.productos = productos;
 	}
 
-
 	public List<PantallaPrincipalFacTable> getRecetas() {
 		return recetas;
 	}
 
-
 	public void setRecetas(List<PantallaPrincipalFacTable> recetas) {
 		this.recetas = recetas;
 	}
-
 
 	public ClienteBean() {
 
@@ -132,17 +119,14 @@ public class ClienteBean implements Serializable {
 	public void setClientesFilter(List<Cliente> clientesFilter) {
 		this.clientesFilter = clientesFilter;
 	}
-	
 
 	public GenericProductEntity getProd() {
 		return prod;
 	}
 
-
 	public void setProd(GenericProductEntity prod) {
 		this.prod = prod;
 	}
-
 
 	/**
 	 * Funcion encargada de insertar un cliente en la base de datos del sistema
@@ -152,12 +136,9 @@ public class ClienteBean implements Serializable {
 		this.clienteId = logic.getLogicAddClient(setData(cliente));
 		if (this.clienteId != null) {
 			this.cliente.setId(clienteId);
-			RequestContext.getCurrentInstance().execute(
-					"PF('insertClient').hide()");
+			RequestContext.getCurrentInstance().execute("PF('insertClient').hide()");
 		} else {
-			FacesMessage message = new FacesMessage(
-					FacesMessage.SEVERITY_ERROR, "No Inserto Correctamente",
-					"Error");
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "No Inserto Correctamente", "Error");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
 
@@ -166,6 +147,18 @@ public class ClienteBean implements Serializable {
 	public Cliente setData(ClienteEntity entity) {
 		Cliente cliente = new Cliente();
 		cliente.setId(null);
+		cliente.setApellidos(entity.getApellido());
+		cliente.setCedula(entity.getCedula());
+		cliente.setCorreo(entity.getCorreo());
+		cliente.setNombres(entity.getNombre());
+		cliente.setTelefono(entity.getTelefono());
+		cliente.setDireccion(entity.getDireccion());
+		return cliente;
+	}
+	
+	public Cliente setDataWithId(ClienteEntity entity) {
+		Cliente cliente = new Cliente();
+		cliente.setId(entity.getId());
 		cliente.setApellidos(entity.getApellido());
 		cliente.setCedula(entity.getCedula());
 		cliente.setCorreo(entity.getCorreo());
@@ -192,7 +185,6 @@ public class ClienteBean implements Serializable {
 	 */
 	public void buscaClientes() {
 		try {
-			System.out.println("Entro por aqui");
 			clientes = new ArrayList<Cliente>();
 			SearchTopLogic logic = new SearchTopLogic();
 			clientes = logic.searchClient();
@@ -220,16 +212,51 @@ public class ClienteBean implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * metodo que consulta el cliente Generico
 	 */
-	
-	public void genericClient(){
+
+	public void genericClient() {
 		ClienteLogic logic = new ClienteLogic();
-		this.cliente =setDataEntity(logic.getDefaultClient());
-		
+		this.cliente = setDataEntity(logic.getDefaultClient());
+
 	}
-	
-	
+
+	/**
+	 * Funcion con la cual se setea el cliente para prepararlo para actualizarlo
+	 * 
+	 * @param cliente
+	 */
+	public void preUpdCliente(Cliente cliente) {
+		try {
+			this.cliente = setDataEntity(cliente);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Funcion con la cual actualizo el cliente
+	 * 
+	 * @param cliente
+	 */
+	public void updatecliente() {
+		try {
+			ClienteLogic logic = new ClienteLogic();
+			boolean valida = logic.updateCliente(setDataWithId(this.cliente));
+			if(valida){
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok","Cliente Actualizado correctamente" );
+				FacesContext.getCurrentInstance().addMessage(null, message);
+				RequestContext.getCurrentInstance().execute("PF('actualizarClient').hide()");
+			}else{
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al actualizar el Cliente", "Error");
+				FacesContext.getCurrentInstance().addMessage(null, message);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }

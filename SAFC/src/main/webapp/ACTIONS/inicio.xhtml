@@ -22,7 +22,39 @@
 				function limpiarForm() {
 					document.getElementById("insertClient").reset();
 				}
+				
+				function limpiarFormUpd() {
+					document.getElementById("updateClient").reset();
+				}
 			</script>
+
+			<h:form id="updateClient">
+				<p:dialog header="Actualizacion Cliente" widgetVar="actualizarClient" modal="true" position="center" width="500">
+					<p:messages id="messUpd" />
+					<h:panelGrid columns="2" styleClass="table table-bordered">
+						<h:outputLabel value="Cedula*:" for="cedula" />
+						<p:inputText id="cedula" styleClass="form-control" value="#{clienteBean.cliente.cedula}" required="true" requiredMessage="Cedula es obligatorio"
+							label="cedula">
+						</p:inputText>
+
+						<h:outputLabel value="Nombres*:" for="nombres" />
+						<p:inputText id="nombres" styleClass="form-control" value="#{clienteBean.cliente.nombre}" required="true"
+							requiredMessage="Nombre es obligatorio" label="nombres" />
+						<h:outputLabel value="Apellidos:" for="apellidos" />
+						<p:inputText id="apellidos" styleClass="form-control" value="#{clienteBean.cliente.apellido}" />
+						<h:outputLabel value="Direccion:" for="direccion" />
+						<p:inputText id="direccion" styleClass="form-control" value="#{clienteBean.cliente.direccion}" />
+						<h:outputLabel value="Correo:" for="correo" />
+						<p:inputText id="correo" styleClass="form-control" value="#{clienteBean.cliente.correo}" />
+						<h:outputLabel value="Telefono:" for="telefono" />
+						<p:inputText id="telefono" styleClass="form-control" value="#{clienteBean.cliente.telefono}" />
+						<!-- Boton para generar la accion -->
+						<p:commandButton id="botonUpdate" value="Actualizar" oncomplete="limpiarForm()" action="#{clienteBean.updatecliente}"
+							 ajax="true" styleClass="btn btn-primary" update="messUpd,:formHeader:messages">
+						</p:commandButton>
+					</h:panelGrid>
+				</p:dialog>
+			</h:form>
 
 			<h:form id="insertClient">
 				<p:dialog header="Insercion de Clientes" widgetVar="insertClient" modal="true" position="center" width="500">
@@ -61,11 +93,12 @@
 								<h:outputText value="Busqueda de clientes:" />
 								<p:inputText id="globalFilter" onkeyup="PF('clienteTable').filter()" style="width:150px" placeholder="Ingrese palabra" />
 							</p:outputPanel>
-						</f:facet>					
-
-						<p:column filterBy="#{listClient.cedula}" headerText="Cedula">
-							<h:outputText value="#{listClient.cedula}" />
-						</p:column>
+						</f:facet>
+						<p:column headerText="Cedula" style="text-align: center" filterBy="#{listClient.cedula}">
+							<p:commandButton styleClass="btn btn-primary" value="#{listClient.cedula}" title="Actualizar Cliente" ajax="true" oncomplete="PF('searchCl').hide(),PF('actualizarClient').show()"
+								actionListener="#{clienteBean.preUpdCliente(listClient)}" update=":updateClient" style="width:90%;">
+							</p:commandButton>
+						</p:column>						
 
 						<p:column headerText="Nombres" filterBy="#{listClient.nombres}">
 							<h:outputText value="#{listClient.nombres}" />
@@ -74,7 +107,7 @@
 						<p:column headerText="Apellidos" filterBy="#{listClient.apellidos}">
 							<h:outputText value="#{listClient.apellidos}" />
 						</p:column>
-						
+
 						<p:column headerText="Dirección" filterBy="#{listClient.direccion}">
 							<h:outputText value="#{listClient.direccion}" />
 						</p:column>
@@ -91,6 +124,7 @@
 								update=":formHeader:tablaClienteComprador" actionListener="#{clienteBean.seleccionarCliente(listClient)}">
 							</p:commandButton>
 						</p:column>
+						
 					</p:dataTable>
 				</p:dialog>
 			</h:form>

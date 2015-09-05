@@ -17,5 +17,22 @@ public class ClienteLogic {
 		cliente=port.getClienteXCedula(0);
 		return cliente;
 	}
+	/**
+	 * Funcion con la cual actualizo un cliente
+	 * @param cliente
+	 * @return
+	 */
+	public boolean updateCliente(Cliente cliente){
+		boolean valida;
+		try {
+			SAFWSService service = new SAFWSService();
+			SAFWS port = service.getSAFWSPort();
+			valida = port.updateCliente(cliente);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return valida;
+	}
 
 }
