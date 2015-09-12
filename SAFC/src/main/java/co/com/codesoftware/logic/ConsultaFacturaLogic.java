@@ -6,6 +6,7 @@ import java.util.List;
 import co.com.codesoftware.server.FacturaTable;
 import co.com.codesoftware.server.SAFWS;
 import co.com.codesoftware.server.SAFWSService;
+import co.com.codesoftware.utilities.Conversions;
 
 public class ConsultaFacturaLogic {
 	/**
@@ -18,9 +19,10 @@ public class ConsultaFacturaLogic {
 	public List<FacturaTable> consultaFacturasRangoFechas(Date fechaIni, Date fechaFin) {
 		List<FacturaTable> rta = null;
 		try {
+			Conversions cn = new Conversions();;
 			SAFWSService service = new SAFWSService();
 			SAFWS port = service.getSAFWSPort();
-			rta = port.getFacturas();
+			rta = port.getFacturas(cn.dateToXMLGC(fechaIni),cn.dateToXMLGC(fechaFin));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

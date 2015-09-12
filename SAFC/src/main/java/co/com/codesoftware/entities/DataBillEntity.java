@@ -7,6 +7,7 @@ private String direccion;//DIRECCION
 private String telefonos;//TELEFONOS
 private String ciudad; //CIUDAD
 private String facturador;
+private String resolucion; //Resolucion de la factura
 public String getNombreEmpresa() {
 	return nombreEmpresa;
 }
@@ -42,6 +43,12 @@ public String getFacturador() {
 }
 public void setFacturador(String facturador) {
 	this.facturador = facturador;
+}
+public String getResolucion() {
+	return resolucion;
+}
+public void setResolucion(String resolucion) {
+	this.resolucion = resolucion;
 } 
 
 

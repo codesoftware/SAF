@@ -174,7 +174,7 @@ public class FacturacionLogic {
 
 	public void openBox() {
 		try {
-			String cmd = "/home/john/abrir.sh"; // Comando de apagado en linux
+			String cmd = "/home/mexicaprichos/abrir.sh"; // Comando de apagado en linux
 			Runtime.getRuntime().exec(cmd);
 			System.out.println("prueba");
 		} catch (IOException ioe) {
@@ -282,6 +282,9 @@ public class FacturacionLogic {
 			para.setAlignment(Element.ALIGN_CENTER);
 			document.add(para);
 			para = new Paragraph("DIRECCIÓN:" + bill.getDireccion() + ". TELS:" + bill.getTelefonos(), FontFactory.getFont("Arial", 14f));
+			para.setAlignment(Element.ALIGN_CENTER);
+			document.add(para);
+			para = new Paragraph("RESOLUCIÓN DE FACTURACIÓN NO:" + bill.getResolucion(), FontFactory.getFont("Arial", 14f));
 			para.setAlignment(Element.ALIGN_CENTER);
 			document.add(para);
 			para = new Paragraph(bill.getCiudad(), FontFactory.getFont("Arial", 14f));
@@ -464,6 +467,10 @@ public class FacturacionLogic {
 			if ("CIUDAD".equalsIgnoreCase(session.getDataCompany().get(i).getClave())) {
 				result.setCiudad(session.getDataCompany().get(i).getValor());
 			}
+			if ("RESOLUCION".equalsIgnoreCase(session.getDataCompany().get(i).getClave())) {
+				result.setResolucion(session.getDataCompany().get(i).getValor());
+			}
+			
 		}
 		result.setFacturador(session.getDataUser().getPersona().get(0).getApellido() + "  " + session.getDataUser().getPersona().get(0).getNombre());
 		return result;
