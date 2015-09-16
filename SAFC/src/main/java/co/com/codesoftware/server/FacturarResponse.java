@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="respuestaFacturacon" type="{http://server.codesoftware.com.co/}respuestaFacturacion" minOccurs="0"/>
+ *         &lt;element name="respuestaFacturacion" type="{http://server.codesoftware.com.co/}respuestaFacturacion" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,34 +27,34 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "facturarResponse", propOrder = {
-    "respuestaFacturacon"
+    "respuestaFacturacion"
 })
 public class FacturarResponse {
 
-    protected RespuestaFacturacion respuestaFacturacon;
+    protected RespuestaFacturacion respuestaFacturacion;
 
     /**
-     * Obtiene el valor de la propiedad respuestaFacturacon.
+     * Obtiene el valor de la propiedad respuestaFacturacion.
      * 
      * @return
      *     possible object is
      *     {@link RespuestaFacturacion }
      *     
      */
-    public RespuestaFacturacion getRespuestaFacturacon() {
-        return respuestaFacturacon;
+    public RespuestaFacturacion getRespuestaFacturacion() {
+        return respuestaFacturacion;
     }
 
     /**
-     * Define el valor de la propiedad respuestaFacturacon.
+     * Define el valor de la propiedad respuestaFacturacion.
      * 
      * @param value
      *     allowed object is
      *     {@link RespuestaFacturacion }
      *     
      */
-    public void setRespuestaFacturacon(RespuestaFacturacion value) {
-        this.respuestaFacturacon = value;
+    public void setRespuestaFacturacion(RespuestaFacturacion value) {
+        this.respuestaFacturacion = value;
     }
 
 }

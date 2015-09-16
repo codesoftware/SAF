@@ -480,6 +480,20 @@ public class FacturacionLogic {
 		Locale locale = new Locale("es", "CO");
 		NumberFormat nf = NumberFormat.getCurrencyInstance(locale);
 		ArrayList<DataProductEntity> result = new ArrayList<DataProductEntity>();
+		//recetas
+		for (int i = 0; i < factura.getDetalleRecetas().size(); i++) {
+			DataProductEntity obj = new DataProductEntity();
+			String nameProduct = factura.getDetalleRecetas().get(i).getReceta().getNombre().concat("                                                  ");
+			obj.setNombreProducto(nameProduct.substring(0, 30));
+			String cantidad = "   " + factura.getDetalleRecetas().get(i).getCantidad() + "                                                                  ";
+			obj.setCantidad(cantidad.substring(0, 30));
+			String valorUnitario = nf.format(factura.getDetalleRecetas().get(i).getVlrVentaUni()) + "                                                      ";
+			obj.setValorUnitario(valorUnitario.substring(0, 26));
+			String valorTotal = "" + nf.format(new BigDecimal(factura.getDetalleRecetas().get(i).getCantidad()).multiply(factura.getDetalleRecetas().get(i).getVlrVentaUni())) + "                                        ";
+			obj.setValorTotal(valorTotal.substring(0, 30));
+			result.add(obj);
+		}
+		//Productos
 		for (int i = 0; i < factura.getDetalleProductos().size(); i++) {
 			DataProductEntity obj = new DataProductEntity();
 			String nameProduct = factura.getDetalleProductos().get(i).getProducto().getNombre().concat("                                                  ");

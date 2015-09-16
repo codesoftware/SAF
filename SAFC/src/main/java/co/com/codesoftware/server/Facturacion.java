@@ -19,6 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
+ *         &lt;element name="domicilio" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *         &lt;element name="idCliente" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
  *         &lt;element name="idSede" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
  *         &lt;element name="idTius" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
@@ -34,6 +35,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "facturacion", propOrder = {
+    "domicilio",
     "idCliente",
     "idSede",
     "idTius",
@@ -42,6 +44,7 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class Facturacion {
 
+    protected boolean domicilio;
     protected Long idCliente;
     protected Long idSede;
     protected Long idTius;
@@ -49,6 +52,7 @@ public class Facturacion {
     protected List<TemporalProdTable> productos;
     @XmlElement(nillable = true)
     protected List<TemporalRecTable> recetas;
+    
 
     public void setProductos(List<TemporalProdTable> productos) {
 		this.productos = productos;
@@ -59,6 +63,22 @@ public class Facturacion {
 	}
 
 	/**
+     * Obtiene el valor de la propiedad domicilio.
+     * 
+     */
+    public boolean isDomicilio() {
+        return domicilio;
+    }
+
+    /**
+     * Define el valor de la propiedad domicilio.
+     * 
+     */
+    public void setDomicilio(boolean value) {
+        this.domicilio = value;
+    }
+
+    /**
      * Obtiene el valor de la propiedad idCliente.
      * 
      * @return
