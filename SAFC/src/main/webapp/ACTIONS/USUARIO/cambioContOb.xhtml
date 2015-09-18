@@ -46,8 +46,8 @@
 		</div>
 	</h:form>
 	<script type="text/javascript">
-		document.getElementsByClassName("usuarioActualizarNuevo")[0].value = document
-				.getElementsByClassName("usuarioActualiza")[0].value;
+		var usuario = document.getElementsByClassName("usuarioActualiza")[0].value;
+		document.getElementsByClassName("usuarioActualizarNuevo")[0].value = usuario;
 	</script>
 </body>
 </html>

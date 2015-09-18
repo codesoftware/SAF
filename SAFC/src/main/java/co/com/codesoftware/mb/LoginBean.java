@@ -80,6 +80,9 @@ public class LoginBean implements Serializable {
 			} else if ("UPD".equalsIgnoreCase(rtaLogin)) {
 				message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Debe actualizar la contraseña ya que tiene cambio obligatorio de contraseña", this.user);
 				redirection = "/ACTIONS/USUARIO/cambioContOb";
+			}else if("Error_conexion".equalsIgnoreCase(rtaLogin)){
+				message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Error de conexion con el servidor por favor contacte al administrador");
+				redirection = "/index";					
 			} else {
 				message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Datos invalidos");
 				redirection = "/index";

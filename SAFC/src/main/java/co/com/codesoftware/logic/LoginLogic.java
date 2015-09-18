@@ -15,9 +15,15 @@ public class LoginLogic {
 	 * @return
 	 */
 	public String login(String user, String password) {
-		SAFWSService service = new SAFWSService();
-		SAFWS port = service.getSAFWSPort();
-		List<String> listResponse = port.login(user, password);
+		List<String> listResponse = null;
+		try {
+			SAFWSService service = new SAFWSService();
+			SAFWS port = service.getSAFWSPort();
+			listResponse = port.login(user, password);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "Error_conexion";
+		}
 		return listResponse.get(0);
 	}
 	/**
