@@ -212,7 +212,7 @@
 				<p:remoteCommand name="addProdFac" actionListener="#{facturacionBean.addProductFact}" update="listFact,formHeader:total,viewPrice:totalSum" />
 				<div class="col-md-6 col-sm-12 col-xs-12">
 					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12">							
+						<div class="col-md-12 col-sm-12 col-xs-12">
 							<p:dataGrid var="recetas" value="#{clienteBean.recetas}" columns="6">
 								<f:facet name="header">
 									RECETAS (PLATOS) 
@@ -226,20 +226,13 @@
 								</p:panel>
 							</p:dataGrid>
 							<br />
-							<p:dataGrid var="panelProd" columns="6" rows="2" layout="grid" style="width:100%" value="#{clienteBean.productos}">
-								<f:facet name="header">
-									Productos 
-								</f:facet>
-								<p:panel header="#{panelProd.codigo}" style="text-align:center">
-									<h:panelGrid columns="1">
-										<p:commandLink action="#{facturacionBean.addProductPanel(panelProd)}" ajax="true"
-											update="formInicio:listFact,formHeader:total,:viewPrice:totalSum">
-											<p:graphicImage library="images/products" name="#{panelProd.nombre}.#{panelProd.extension}" width="50" height="50" />
-											<br />
-											<p:outputLabel value="#{panelProd.nombre}" style="font-size:8px" />
-
-										</p:commandLink>
-									</h:panelGrid>
+							<p:dataGrid var="productos" value="#{clienteBean.productos}" columns="6">
+								<p:panel header="#{productos.codigo}">
+									<p:commandLink action="#{facturacionBean.pruebaSlider(productos)}" update="formInicio:listFact,formHeader:total,viewPrice:totalSum">
+										<p:graphicImage library="images/products" name="#{productos.nombre}.#{productos.extension}" width="50" height="50" />
+										<br />
+										<p:outputLabel value="#{productos.nombre}" style="font-size:8px" />
+									</p:commandLink>
 								</p:panel>
 							</p:dataGrid>
 						</div>
