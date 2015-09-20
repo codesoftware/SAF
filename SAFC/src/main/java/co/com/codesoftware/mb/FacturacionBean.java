@@ -663,5 +663,29 @@ public class FacturacionBean implements Serializable {
 			break;
 		}
 	}
+	
+	public void pruebaSlider(PantallaPrincipalFacTable producto){
+		try {
+			if (this.listProd == null) {
+				this.listProd = new ArrayList<GenericProductEntity>();
+			}
+			if (producto.getPrecio() == null) {
+				this.setEnumer(ErrorEnum.ERROR);
+				messageBean("Al producto no se le ha parametrizado el precio");
+			} else {
+				setData(producto);
+				int exist = existProduct();
+				if (exist > -1) {
+					this.listProd.get(exist).setAmount(this.listProd.get(exist).getAmount() + cantidad);
+					this.listProd.get(exist).setTotalPrice(this.listProd.get(exist).getPrice().multiply(new BigDecimal(listProd.get(exist).getAmount()), mc));
+				} else {
+					this.listProd.add(product);
+				}
+				addTotal();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }

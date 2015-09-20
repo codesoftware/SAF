@@ -212,15 +212,16 @@
 				<p:remoteCommand name="addProdFac" actionListener="#{facturacionBean.addProductFact}" update="listFact,formHeader:total,viewPrice:totalSum" />
 				<div class="col-md-6 col-sm-12 col-xs-12">
 					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12">
-							<p:dataGrid var="panelRec" columns="6" rows="2" layout="grid" value="#{clienteBean.recetas}">
-								<f:facet name="header">Platos(Recetas)</f:facet>
-								<p:panel header="#{panelRec.codigo}" style="text-align:center">
-									<p:commandLink actionListener="#{facturacionBean.addProductPanel(panelRec)}" ajax="true"
-										update="formInicio:listFact,formHeader:total,viewPrice:totalSum">
-										<p:graphicImage library="images/products" name="#{panelRec.nombre}.#{panelRec.extension}" width="50" height="50" />
+						<div class="col-md-12 col-sm-12 col-xs-12">							
+							<p:dataGrid var="recetas" value="#{clienteBean.recetas}" columns="6">
+								<f:facet name="header">
+									RECETAS (PLATOS) 
+								</f:facet>
+								<p:panel header="#{recetas.codigo}">
+									<p:commandLink action="#{facturacionBean.pruebaSlider(recetas)}" update="formInicio:listFact,formHeader:total,viewPrice:totalSum">
+										<p:graphicImage name="images/products/#{recetas.nombre}.#{recetas.extension}" width="50" height="50" />
 										<br />
-										<p:outputLabel value="#{panelRec.nombre}" style="font-size:8px" />
+										<p:outputLabel value="#{recetas.nombre}" style="font-size:8px" />
 									</p:commandLink>
 								</p:panel>
 							</p:dataGrid>
@@ -231,7 +232,7 @@
 								</f:facet>
 								<p:panel header="#{panelProd.codigo}" style="text-align:center">
 									<h:panelGrid columns="1">
-										<p:commandLink actionListener="#{facturacionBean.addProductPanel(panelProd)}" ajax="true"
+										<p:commandLink action="#{facturacionBean.addProductPanel(panelProd)}" ajax="true"
 											update="formInicio:listFact,formHeader:total,:viewPrice:totalSum">
 											<p:graphicImage library="images/products" name="#{panelProd.nombre}.#{panelProd.extension}" width="50" height="50" />
 											<br />
@@ -376,7 +377,7 @@
 			</h:form>
 			<h:form id="viewBill">
 				<p:dialog header="Resumen Factura" widgetVar="viewBill" modal="true" width="600" closable="false">
-					<div class="row"  style="overflow: scroll; height: 350px;">
+					<div class="row" style="overflow: scroll; height: 350px;">
 						<h:panelGrid styleClass="table table-bordered">
 							<p:dataTable id="tableName" value="#{facturacionBean.listProd}" reflow="true" var="listproduct">
 								<p:column headerText="Nombre Producto" width="50%">
