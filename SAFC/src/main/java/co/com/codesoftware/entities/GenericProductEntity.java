@@ -1,6 +1,7 @@
 package co.com.codesoftware.entities;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 public class GenericProductEntity implements Serializable {
 
@@ -8,8 +9,8 @@ public class GenericProductEntity implements Serializable {
 	private String code;
 	private int amount;
 	private String name;
-	private String price;
-	private String totalPrice;
+	private BigDecimal price;
+	private BigDecimal totalPrice;
 	private int id;
 	private int type;
 	private String routImage;
@@ -38,14 +39,6 @@ public class GenericProductEntity implements Serializable {
 		this.name = name;
 	}
 
-	public String getPrice() {
-		return price;
-	}
-
-	public void setPrice(String price) {
-		this.price = price;
-	}
-
 	public int getId() {
 		return id;
 	}
@@ -70,12 +63,20 @@ public class GenericProductEntity implements Serializable {
 		this.routImage = routImage;
 	}
 
-	public String getTotalPrice() {
+	public BigDecimal getTotalPrice() {
 		return totalPrice;
 	}
 
-	public void setTotalPrice(String totalPrice) {
+	public void setTotalPrice(BigDecimal totalPrice) {
 		this.totalPrice = totalPrice;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
 	}
 
 }

@@ -22,7 +22,7 @@
 				function limpiarForm() {
 					document.getElementById("insertClient").reset();
 				}
-				
+
 				function limpiarFormUpd() {
 					document.getElementById("updateClient").reset();
 				}
@@ -49,8 +49,8 @@
 						<h:outputLabel value="Telefono:" for="telefono" />
 						<p:inputText id="telefono" styleClass="form-control" value="#{clienteBean.cliente.telefono}" />
 						<!-- Boton para generar la accion -->
-						<p:commandButton id="botonUpdate" value="Actualizar" oncomplete="limpiarForm()" action="#{clienteBean.updatecliente}"
-							 ajax="true" styleClass="btn btn-primary" update="messUpd,:formHeader:messages">
+						<p:commandButton id="botonUpdate" value="Actualizar" oncomplete="limpiarForm()" action="#{clienteBean.updatecliente}" ajax="true"
+							styleClass="btn btn-primary" update="messUpd,:formHeader:messages">
 						</p:commandButton>
 					</h:panelGrid>
 				</p:dialog>
@@ -95,10 +95,11 @@
 							</p:outputPanel>
 						</f:facet>
 						<p:column headerText="Cedula" style="text-align: center" filterBy="#{listClient.cedula}">
-							<p:commandButton styleClass="btn btn-primary" value="#{listClient.cedula}" title="Actualizar Cliente" ajax="true" oncomplete="PF('searchCl').hide(),PF('actualizarClient').show()"
-								actionListener="#{clienteBean.preUpdCliente(listClient)}" update=":updateClient" style="width:90%;">
+							<p:commandButton styleClass="btn btn-primary" value="#{listClient.cedula}" title="Actualizar Cliente" ajax="true"
+								oncomplete="PF('searchCl').hide(),PF('actualizarClient').show()" actionListener="#{clienteBean.preUpdCliente(listClient)}"
+								update=":updateClient" style="width:90%;">
 							</p:commandButton>
-						</p:column>						
+						</p:column>
 
 						<p:column headerText="Nombres" filterBy="#{listClient.nombres}">
 							<h:outputText value="#{listClient.nombres}" />
@@ -124,7 +125,7 @@
 								update=":formHeader:tablaClienteComprador" actionListener="#{clienteBean.seleccionarCliente(listClient)}">
 							</p:commandButton>
 						</p:column>
-						
+
 					</p:dataTable>
 				</p:dialog>
 			</h:form>
@@ -156,7 +157,7 @@
 
 			<br />
 			<h:form id="formHeader">
-				<p:growl id="messages" sticky="true" showDetail="true" life="3000" />
+				<p:growl id="messages" sticky="false" showDetail="true" life="3000" />
 				<div class="row">
 					<div class="col-md-3 col-sm-12 col-xs-12">
 						<p:dock position="top" itemWidth="40" maxWidth="45">
@@ -210,7 +211,6 @@
 					onsuccess="document.getElementById('formInicio:cantidadProductos').focus(); " />
 				<p:remoteCommand name="addProdFac" actionListener="#{facturacionBean.addProductFact}" update="listFact,formHeader:total,viewPrice:totalSum" />
 				<div class="col-md-6 col-sm-12 col-xs-12">
-
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<p:dataGrid var="panelRec" columns="6" rows="2" layout="grid" value="#{clienteBean.recetas}">
@@ -276,7 +276,11 @@
 						</div>
 						<div class="col-md-5 col-xs-12 col-sm-12 oculto" style="display: none;">
 							<div class="form-group">
-								<p:outputLabel value="#{facturacionBean.product.price}" />
+								<h:outputText value="$" />
+								&nbsp;
+								<p:outputLabel value="#{facturacionBean.product.price}">
+									<f:convertNumber pattern="#,##0.00"></f:convertNumber>
+								</p:outputLabel>
 							</div>
 						</div>
 					</h:panelGroup>
@@ -299,20 +303,25 @@
 							<p:column headerText="Cod" sortBy="#{factura.code}" width="10%">
 								<h:outputText value="#{factura.code}" />
 							</p:column>
-							<p:column headerText="Nombre" width="45%">
+							<p:column headerText="Nombre" width="32%">
 								<h:outputText value="#{factura.name}" />
 							</p:column>
 							<p:column headerText="#" width="5%">
 								<h:outputText value="#{factura.amount}" />
 							</p:column>
-							<p:column headerText="Valor" width="20%">
-								<h:outputText value="$#{factura.price}" />
+							<p:column headerText="Valor" width="18%">								
+								$
+								<h:outputText value="#{factura.price}">
+									<f:convertNumber pattern="#,##0.00"></f:convertNumber>
+								</h:outputText>
 							</p:column>
 							<p:column headerText="Valor total" width="20%">
-								<h:outputText value="$#{factura.totalPrice}" />
+								$
+								<h:outputText value="#{factura.totalPrice}">
+									<f:convertNumber pattern="#,##0.00"></f:convertNumber>
+								</h:outputText>
 							</p:column>
-							<p:column headerText="Eliminar" width="10%">
-
+							<p:column headerText="Acción" width="15%">
 								<p:commandButton icon="ui-icon-closethick" title="Borrar" ajax="true" update="listFact,formHeader:total,viewPrice:totalSum"
 									actionListener="#{facturacionBean.deleteRow(factura)}">
 								</p:commandButton>
@@ -366,35 +375,53 @@
 				</p:dialog>
 			</h:form>
 			<h:form id="viewBill">
-				<p:dialog header="Resumen Factura" widgetVar="viewBill" modal="true" width="500" closable="false">
-					<h:panelGrid styleClass="table table-bordered">
-						<p:dataTable id="tableName" value="#{facturacionBean.listProd}" reflow="true" var="listproduct">
-							<p:column headerText="Nombre Producto">
-								<p:outputLabel value="#{listproduct.name}" />
-							</p:column>
-							<p:column headerText="Cantidad">
-								<p:outputLabel value="#{listproduct.amount}" />
-							</p:column>
-							<p:column headerText="Precio total">
-								<p:outputLabel value="#{listproduct.totalPrice}" />
-							</p:column>
-						</p:dataTable>
-						<p:outputLabel id="totResFac" value="Total :$#{facturacionBean.total}">
-							<f:convertNumber pattern="#,##0.00"></f:convertNumber>
-						</p:outputLabel>
-						<p:outputLabel id="totalResEfectivo" value="Efectivo:$#{facturacionBean.totalCliente}">
-							<f:convertNumber pattern="#,##0.00"></f:convertNumber>
-						</p:outputLabel>
-						<p:outputLabel id="totalResCambio" value="Cambio :$#{facturacionBean.totalChange}">
-							<f:convertNumber pattern="#,##0.00"></f:convertNumber>
-						</p:outputLabel>
-						<div class="col-md-4 col-sm-4 col-xs-4">
-							<p:commandLink value="Aceptar"
-								update="formInicio:listFact,formHeader:tablaClienteComprador,formHeader:total,viewPrice:totalSum,viewBill:totResFac,viewBill:tableName,viewBill:totalResEfectivo,viewBill:totalResCambio"
-								actionListener="#{facturacionBean.cerrarFacturaProv}" ajax="true" onclick="PF('viewBill').hide();" styleClass="btn btn-primary"
-								style="color:white;" />
+				<p:dialog header="Resumen Factura" widgetVar="viewBill" modal="true" width="600" closable="false">
+					<div class="row"  style="overflow: scroll; height: 350px;">
+						<h:panelGrid styleClass="table table-bordered">
+							<p:dataTable id="tableName" value="#{facturacionBean.listProd}" reflow="true" var="listproduct">
+								<p:column headerText="Nombre Producto" width="50%">
+									<p:outputLabel value="#{listproduct.name}" />
+								</p:column>
+								<p:column headerText="Cantidad" width="20%">
+									<p:outputLabel value="#{listproduct.amount}" />
+								</p:column>
+								<p:column headerText="Precio total" width="30%">
+									<p:outputLabel value="#{listproduct.totalPrice}" />
+								</p:column>
+							</p:dataTable>
+						</h:panelGrid>
+						<table class="table table-bordered">
+							<tr>
+								<td class="alert alert-success text-center" colspan="4">TOTALES</td>
+							</tr>
+							<tr>
+								<td style="width: 20%">TOTAL A PAGAR:</td>
+								<td style="width: 30%"><p:outputLabel id="totResFac" value="#{facturacionBean.total}">
+										<f:convertNumber pattern="#,##0.00"></f:convertNumber>
+									</p:outputLabel></td>
+								<td style="width: 20%">TOTAL EFECTIVO</td>
+								<td style="width: 30%"><p:outputLabel id="totalResEfectivo" value="#{facturacionBean.totalCliente}">
+										<f:convertNumber pattern="#,##0.00"></f:convertNumber>
+									</p:outputLabel></td>
+							</tr>
+							<tr>
+								<td style="width: 20%">CAMBIO</td>
+								<td colspan="3"><p:outputLabel id="totalResCambio" value="#{facturacionBean.totalChange}">
+										<f:convertNumber pattern="#,##0.00"></f:convertNumber>
+									</p:outputLabel></td>
+							</tr>
+						</table>
+						<div class="row">
+							<div class="col-md-4 col-sm-4 col-xs-4"></div>
+							<div class="col-md-4 col-sm-4 col-xs-4">
+								<p:commandLink value="Aceptar"
+									update="formInicio:listFact,formHeader:tablaClienteComprador,formHeader:total,viewPrice:totalSum,viewBill:totResFac,viewBill:tableName,viewBill:totalResEfectivo,viewBill:totalResCambio"
+									actionListener="#{facturacionBean.cerrarFacturaProv}" ajax="true" onclick="PF('viewBill').hide();" styleClass="btn btn-primary"
+									style="color:white;" />
+							</div>
+							<div class="col-md-4 col-sm-4 col-xs-4"></div>
 						</div>
-					</h:panelGrid>
+					</div>
 				</p:dialog>
 			</h:form>
 		</ui:define>

@@ -1,5 +1,6 @@
 package co.com.codesoftware.logic;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,8 +92,8 @@ public class ProductsLogic {
 		result.setId(product.getId());
 		result.setName(product.getNombre());
 		result.setAmount(cantidad);
-		result.setPrice(String.valueOf(product.getPrecios().get(0).getPrecio()));
-		result.setTotalPrice(String.valueOf(product.getPrecios().get(0).getPrecio()));
+		result.setPrice(new BigDecimal(product.getPrecios().get(0).getPrecio()));
+		result.setTotalPrice(new BigDecimal(product.getPrecios().get(0).getPrecio()));
 		return result;
 	}
 
@@ -101,7 +102,7 @@ public class ProductsLogic {
 		result.setId(product.getId());
 		result.setName(product.getNombre());
 		result.setAmount(cantidad);
-		result.setPrice(String.valueOf(product.getPrecios().get(0).getPrecio()));
+		result.setPrice(product.getPrecios().get(0).getPrecio());
 		return result;
 	}
 
