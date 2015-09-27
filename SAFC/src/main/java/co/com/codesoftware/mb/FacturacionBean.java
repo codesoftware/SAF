@@ -31,7 +31,7 @@ import co.com.codesoftware.utilities.ErrorEnum;
 public class FacturacionBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	private String bandera;
 	private ClienteEntity cliente;
 	private GenericProductEntity product;
 	private PantallaPrincipalFacTable prod;
@@ -445,12 +445,14 @@ public class FacturacionBean implements Serializable {
 	 * @param type
 	 */
 	public void checkProducts(String type) {
+		bandera = "no";
 		FacturacionLogic logic = new FacturacionLogic();
 		// valida si no hay productos o si el cliente esta nulo
 		String validate = logic.validaDatos(this.listProd, clientebean.getCliente(), this.summary);
 		if (!"OK".equalsIgnoreCase(validate)) {
 			this.setEnumer(ErrorEnum.ERROR);
 			messageBean(validate);
+			bandera = "no";
 		} else {
 			ExternalContext tmpEC;
 			tmpEC = FacesContext.getCurrentInstance().getExternalContext();
@@ -463,16 +465,19 @@ public class FacturacionBean implements Serializable {
 					resetValuesBill();
 					resetValuesClient();
 					resetValuesCambio();
+					bandera = "si";
 				}
 				// Pop up de factura cuando no se imprime
 				else {
 					this.enumer = ErrorEnum.SUCCESS;
 					messageBean("FACTURACIÓN REALIZADA CORRECTAMENTE");
 					viewResumeBill();
+					bandera = "no";
 				}
 			} else {
 				this.enumer = ErrorEnum.ERROR;
 				messageBean(rta);
+				bandera = "no";
 			}
 
 		}
@@ -687,5 +692,17 @@ public class FacturacionBean implements Serializable {
 			e.printStackTrace();
 		}
 	}
+
+	public String getBandera() {
+		return bandera;
+	}
+
+	public void setBandera(String bandera) {
+		this.bandera = bandera;
+	}
+	
+	
+	
+	
 
 }
