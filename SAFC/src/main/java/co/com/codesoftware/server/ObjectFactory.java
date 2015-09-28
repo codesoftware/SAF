@@ -45,6 +45,7 @@ public class ObjectFactory {
     private final static QName _Facturar_QNAME = new QName("http://server.codesoftware.com.co/", "facturar");
     private final static QName _GetDishesPrincipalScreenResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getDishesPrincipalScreenResponse");
     private final static QName _GetClienteXCedula_QNAME = new QName("http://server.codesoftware.com.co/", "getClienteXCedula");
+    private final static QName _FindBillForId_QNAME = new QName("http://server.codesoftware.com.co/", "findBillForId");
     private final static QName _FindExistsForSede_QNAME = new QName("http://server.codesoftware.com.co/", "findExistsForSede");
     private final static QName _GetProductPrincipalScreen_QNAME = new QName("http://server.codesoftware.com.co/", "getProductPrincipalScreen");
     private final static QName _GetRecetasResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getRecetasResponse");
@@ -57,6 +58,7 @@ public class ObjectFactory {
     private final static QName _GetClienteXCedulaResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getClienteXCedulaResponse");
     private final static QName _GetUsers_QNAME = new QName("http://server.codesoftware.com.co/", "getUsers");
     private final static QName _FindProductosAndDishesResponse_QNAME = new QName("http://server.codesoftware.com.co/", "findProductosAndDishesResponse");
+    private final static QName _FindBillForIdResponse_QNAME = new QName("http://server.codesoftware.com.co/", "findBillForIdResponse");
     private final static QName _AddCliente_QNAME = new QName("http://server.codesoftware.com.co/", "addCliente");
     private final static QName _FindProductosAndDishes_QNAME = new QName("http://server.codesoftware.com.co/", "findProductosAndDishes");
     private final static QName _GetFacturaForIdResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getFacturaForIdResponse");
@@ -98,6 +100,14 @@ public class ObjectFactory {
      */
     public FindExistsForSede createFindExistsForSede() {
         return new FindExistsForSede();
+    }
+
+    /**
+     * Create an instance of {@link FindBillForId }
+     * 
+     */
+    public FindBillForId createFindBillForId() {
+        return new FindBillForId();
     }
 
     /**
@@ -218,6 +228,14 @@ public class ObjectFactory {
      */
     public GetFacturaForIdResponse createGetFacturaForIdResponse() {
         return new GetFacturaForIdResponse();
+    }
+
+    /**
+     * Create an instance of {@link FindBillForIdResponse }
+     * 
+     */
+    public FindBillForIdResponse createFindBillForIdResponse() {
+        return new FindBillForIdResponse();
     }
 
     /**
@@ -762,6 +780,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link FindBillForId }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "findBillForId")
+    public JAXBElement<FindBillForId> createFindBillForId(FindBillForId value) {
+        return new JAXBElement<FindBillForId>(_FindBillForId_QNAME, FindBillForId.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link FindExistsForSede }{@code >}}
      * 
      */
@@ -867,6 +894,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "findProductosAndDishesResponse")
     public JAXBElement<FindProductosAndDishesResponse> createFindProductosAndDishesResponse(FindProductosAndDishesResponse value) {
         return new JAXBElement<FindProductosAndDishesResponse>(_FindProductosAndDishesResponse_QNAME, FindProductosAndDishesResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link FindBillForIdResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "findBillForIdResponse")
+    public JAXBElement<FindBillForIdResponse> createFindBillForIdResponse(FindBillForIdResponse value) {
+        return new JAXBElement<FindBillForIdResponse>(_FindBillForIdResponse_QNAME, FindBillForIdResponse.class, null, value);
     }
 
     /**
