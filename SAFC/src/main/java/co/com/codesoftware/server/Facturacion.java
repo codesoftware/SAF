@@ -53,7 +53,15 @@ public class Facturacion {
     @XmlElement(nillable = true)
     protected List<TemporalRecTable> recetas;
 
-    /**
+    public void setProductos(List<TemporalProdTable> productos) {
+		this.productos = productos;
+	}
+
+	public void setRecetas(List<TemporalRecTable> recetas) {
+		this.recetas = recetas;
+	}
+
+	/**
      * Obtiene el valor de la propiedad domicilio.
      * 
      */

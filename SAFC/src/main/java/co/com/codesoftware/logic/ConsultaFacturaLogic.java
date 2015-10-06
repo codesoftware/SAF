@@ -1,7 +1,10 @@
 package co.com.codesoftware.logic;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+
+import org.eclipse.jdt.core.dom.IBinding;
 
 import co.com.codesoftware.server.FacturaTable;
 import co.com.codesoftware.server.SAFWS;
@@ -41,6 +44,22 @@ public class ConsultaFacturaLogic {
 			SAFWSService service = new SAFWSService();
 			SAFWS port = service.getSAFWSPort();
 			rta = port.getFacturaForId(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rta;
+	}
+	/**
+	 * Metodo en el cual se consulta la existencia de caja por sede
+	 * @param sede
+	 * @return
+	 */
+	public BigDecimal consultaCajaXSede(Integer sede){
+		BigDecimal rta = null;
+		try {
+			SAFWSService service = new SAFWSService();
+			SAFWS port = service.getSAFWSPort();
+			rta = port.searchBoxNow(sede);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
