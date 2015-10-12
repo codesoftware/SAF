@@ -38,6 +38,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "facturacion", propOrder = { "domicilio", "idCliente", "idSede", "idTius", "productos", "recetas" })
 public class Facturacion {
 
+<<<<<<< HEAD
 	protected boolean domicilio;
 	protected Long idCliente;
 	protected Long idSede;
@@ -187,6 +188,18 @@ public class Facturacion {
 	}
 
 	public void setProductos(List<TemporalProdTable> productos) {
+=======
+    protected boolean domicilio;
+    protected Long idCliente;
+    protected Long idSede;
+    protected Long idTius;
+    @XmlElement(nillable = true)
+    protected List<TemporalProdTable> productos;
+    @XmlElement(nillable = true)
+    protected List<TemporalRecTable> recetas;
+
+    public void setProductos(List<TemporalProdTable> productos) {
+>>>>>>> origin/master
 		this.productos = productos;
 	}
 
