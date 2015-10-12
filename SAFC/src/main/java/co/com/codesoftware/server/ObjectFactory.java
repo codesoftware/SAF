@@ -36,15 +36,18 @@ public class ObjectFactory {
     private final static QName _CambiaClaveUsuario_QNAME = new QName("http://server.codesoftware.com.co/", "cambiaClaveUsuario");
     private final static QName _GetProductForCode_QNAME = new QName("http://server.codesoftware.com.co/", "getProductForCode");
     private final static QName _GetProductForCodeResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getProductForCodeResponse");
+    private final static QName _SearchBoxNow_QNAME = new QName("http://server.codesoftware.com.co/", "searchBoxNow");
     private final static QName _GetRecetas_QNAME = new QName("http://server.codesoftware.com.co/", "getRecetas");
     private final static QName _AddClienteResponse_QNAME = new QName("http://server.codesoftware.com.co/", "addClienteResponse");
     private final static QName _GetRecetaForcode_QNAME = new QName("http://server.codesoftware.com.co/", "getRecetaForcode");
     private final static QName _GetUsersResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getUsersResponse");
     private final static QName _GetFacturasResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getFacturasResponse");
+    private final static QName _SearchBoxNowResponse_QNAME = new QName("http://server.codesoftware.com.co/", "searchBoxNowResponse");
     private final static QName _CambiaClaveUsuarioResponse_QNAME = new QName("http://server.codesoftware.com.co/", "cambiaClaveUsuarioResponse");
     private final static QName _Facturar_QNAME = new QName("http://server.codesoftware.com.co/", "facturar");
     private final static QName _GetDishesPrincipalScreenResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getDishesPrincipalScreenResponse");
     private final static QName _GetClienteXCedula_QNAME = new QName("http://server.codesoftware.com.co/", "getClienteXCedula");
+    private final static QName _FindBillForId_QNAME = new QName("http://server.codesoftware.com.co/", "findBillForId");
     private final static QName _FindExistsForSede_QNAME = new QName("http://server.codesoftware.com.co/", "findExistsForSede");
     private final static QName _GetProductPrincipalScreen_QNAME = new QName("http://server.codesoftware.com.co/", "getProductPrincipalScreen");
     private final static QName _GetRecetasResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getRecetasResponse");
@@ -57,6 +60,7 @@ public class ObjectFactory {
     private final static QName _GetClienteXCedulaResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getClienteXCedulaResponse");
     private final static QName _GetUsers_QNAME = new QName("http://server.codesoftware.com.co/", "getUsers");
     private final static QName _FindProductosAndDishesResponse_QNAME = new QName("http://server.codesoftware.com.co/", "findProductosAndDishesResponse");
+    private final static QName _FindBillForIdResponse_QNAME = new QName("http://server.codesoftware.com.co/", "findBillForIdResponse");
     private final static QName _AddCliente_QNAME = new QName("http://server.codesoftware.com.co/", "addCliente");
     private final static QName _FindProductosAndDishes_QNAME = new QName("http://server.codesoftware.com.co/", "findProductosAndDishes");
     private final static QName _GetFacturaForIdResponse_QNAME = new QName("http://server.codesoftware.com.co/", "getFacturaForIdResponse");
@@ -98,6 +102,14 @@ public class ObjectFactory {
      */
     public FindExistsForSede createFindExistsForSede() {
         return new FindExistsForSede();
+    }
+
+    /**
+     * Create an instance of {@link FindBillForId }
+     * 
+     */
+    public FindBillForId createFindBillForId() {
+        return new FindBillForId();
     }
 
     /**
@@ -218,6 +230,14 @@ public class ObjectFactory {
      */
     public GetFacturaForIdResponse createGetFacturaForIdResponse() {
         return new GetFacturaForIdResponse();
+    }
+
+    /**
+     * Create an instance of {@link FindBillForIdResponse }
+     * 
+     */
+    public FindBillForIdResponse createFindBillForIdResponse() {
+        return new FindBillForIdResponse();
     }
 
     /**
@@ -389,6 +409,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link SearchBoxNow }
+     * 
+     */
+    public SearchBoxNow createSearchBoxNow() {
+        return new SearchBoxNow();
+    }
+
+    /**
      * Create an instance of {@link GetProductForCode }
      * 
      */
@@ -402,6 +430,14 @@ public class ObjectFactory {
      */
     public CambiaClaveUsuarioResponse createCambiaClaveUsuarioResponse() {
         return new CambiaClaveUsuarioResponse();
+    }
+
+    /**
+     * Create an instance of {@link SearchBoxNowResponse }
+     * 
+     */
+    public SearchBoxNowResponse createSearchBoxNowResponse() {
+        return new SearchBoxNowResponse();
     }
 
     /**
@@ -681,6 +717,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SearchBoxNow }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "searchBoxNow")
+    public JAXBElement<SearchBoxNow> createSearchBoxNow(SearchBoxNow value) {
+        return new JAXBElement<SearchBoxNow>(_SearchBoxNow_QNAME, SearchBoxNow.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetRecetas }{@code >}}
      * 
      */
@@ -726,6 +771,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SearchBoxNowResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "searchBoxNowResponse")
+    public JAXBElement<SearchBoxNowResponse> createSearchBoxNowResponse(SearchBoxNowResponse value) {
+        return new JAXBElement<SearchBoxNowResponse>(_SearchBoxNowResponse_QNAME, SearchBoxNowResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link CambiaClaveUsuarioResponse }{@code >}}
      * 
      */
@@ -759,6 +813,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "getClienteXCedula")
     public JAXBElement<GetClienteXCedula> createGetClienteXCedula(GetClienteXCedula value) {
         return new JAXBElement<GetClienteXCedula>(_GetClienteXCedula_QNAME, GetClienteXCedula.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link FindBillForId }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "findBillForId")
+    public JAXBElement<FindBillForId> createFindBillForId(FindBillForId value) {
+        return new JAXBElement<FindBillForId>(_FindBillForId_QNAME, FindBillForId.class, null, value);
     }
 
     /**
@@ -867,6 +930,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "findProductosAndDishesResponse")
     public JAXBElement<FindProductosAndDishesResponse> createFindProductosAndDishesResponse(FindProductosAndDishesResponse value) {
         return new JAXBElement<FindProductosAndDishesResponse>(_FindProductosAndDishesResponse_QNAME, FindProductosAndDishesResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link FindBillForIdResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.codesoftware.com.co/", name = "findBillForIdResponse")
+    public JAXBElement<FindBillForIdResponse> createFindBillForIdResponse(FindBillForIdResponse value) {
+        return new JAXBElement<FindBillForIdResponse>(_FindBillForIdResponse_QNAME, FindBillForIdResponse.class, null, value);
     }
 
     /**

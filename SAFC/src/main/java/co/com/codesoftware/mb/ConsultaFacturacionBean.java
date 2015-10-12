@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
@@ -17,11 +16,12 @@ import co.com.codesoftware.server.FacturaTable;
 @ViewScoped
 public class ConsultaFacturacionBean {
 
-	private Date				fechaInicio;
-	private Date				fechaFinal;
-	private List<FacturaTable>	facturas;
-	private List<FacturaTable>	facturasFiltradas;
-	private FacturaTable		factComplete;
+	private Date fechaInicio;
+	private Date fechaFinal;
+	private List<FacturaTable> facturas;
+	private List<FacturaTable> facturasFiltradas;
+	private FacturaTable factComplete;
+	private Date fechaExacta;
 
 	public Date getFechaInicio() {
 		return fechaInicio;
@@ -92,16 +92,25 @@ public class ConsultaFacturacionBean {
 		ConsultaFacturaLogic logic = new ConsultaFacturaLogic();
 		try {
 			this.factComplete = logic.consutlaFacturaXId(obj.getId());
-			if(this.factComplete == null){
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "La consulta de la factura especifica no arrojo ningun resultado"));				
+			this.fechaExacta = factComplete.getFechaExacta().toGregorianCalendar().getTime();
+			if (this.factComplete == null) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "La consulta de la factura especifica no arrojo ningun resultado"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public String redireccionConsultaFacturacion(){
+
+	public String redireccionConsultaFacturacion() {
 		return "/ACTIONS/FACTURACION/buscaFacturas";
+	}
+
+	public Date getFechaExacta() {
+		return fechaExacta;
+	}
+
+	public void setFechaExacta(Date fechaExacta) {
+		this.fechaExacta = fechaExacta;
 	}
 
 }

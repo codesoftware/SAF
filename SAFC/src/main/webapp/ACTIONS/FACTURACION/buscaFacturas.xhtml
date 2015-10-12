@@ -138,18 +138,26 @@
 							<div class="col-md-12 col-xs-12 col-sm-12 alert alert-success text-center">
 								<h5 style="margin-top: 0px; margin-bottom: 0px;">DATOS FACTURA</h5>
 							</div>
-							<div class="col-md-6 col-xs-12 col-sm-12">
+							<div class="col-md-4 col-xs-12 col-sm-12">
 								<div class="form-group">
 									<label for="tipoPago">TIPO DE PAGO:</label>&nbsp;&nbsp;
 									<h:outputText value="Efectivo" rendered="#{factura.tipoPago == 'E'}" />
 									<h:outputText value="Tarjeta" rendered="#{factura.tipoPago != 'E'}" />
 								</div>
 							</div>
-							<div class="col-md-6 col-xs-12 col-sm-12">
+							<div class="col-md-4 col-xs-12 col-sm-12">
 								<div class="form-group">
 									<label for="vlrTotal">VALOR TOTAL:</label>&nbsp;&nbsp;&nbsp;&nbsp;$&nbsp;
 									<h:outputText value="#{consultaFacturacionBean.factComplete.valor}">
 										<f:convertNumber pattern="#,##0.00"></f:convertNumber>
+									</h:outputText>
+								</div>
+							</div>
+							<div class="col-md-4 col-xs-12 col-sm-12">
+								<div class="form-group">
+									<label for="vlrTotal">FECHA HORA:</label>
+									<h:outputText value="#{consultaFacturacionBean.fechaExacta}">
+										<f:convertDateTime pattern="dd/MM/yyyy HH:mm"  />
 									</h:outputText>
 								</div>
 							</div>
