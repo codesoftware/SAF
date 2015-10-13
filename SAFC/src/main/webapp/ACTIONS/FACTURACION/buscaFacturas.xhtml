@@ -12,6 +12,16 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" type="text/css"
 		href="/SAFC/BOOTSTRAP/bootstrap.css" />
+		<script type="text/javascript">
+				function abrirPdf(){
+					var banderaFacturacion = document.getElementsByClassName("banderaPdfFactura")[0].value;
+					if(banderaFacturacion.trim() == 'Ok'){
+						var idFact = document.getElementsByClassName("idPdfAbrir")[0].value;
+						window.open("/SAFC/resources/images/facturas/factura_"+idFact+".pdf", "_blank","resizable,scrollbars" );	
+					}	
+				}
+			</script>
+		
 </h:head>
 
 <body>
@@ -259,7 +269,10 @@
 					</p:column>
 				</p:dataTable>
 				<p:commandLink onclick="PF('detalleFacturaDialog').hide();"
-					styleClass="btn btn-primary" style="color:white">CERRAR VENTANA</p:commandLink>
+					styleClass="btn btn-primary" style="color:white">CERRAR VENTANA</p:commandLink> &nbsp;&nbsp;&nbsp;
+				<p:commandLink actionListener="#{consultaFacturacionBean.generaFacturacion}" update="banderaPdf,idPdfAbrir" oncomplete="abrirPdf()" styleClass="btn btn-default">GENERAR PDF</p:commandLink>
+				<p:inputText styleClass="banderaPdfFactura" value="#{consultaFacturacionBean.bandera}" id="banderaPdf" style="display:none"></p:inputText>
+				<p:inputText styleClass="idPdfAbrir" value="#{consultaFacturacionBean.idFacturaAbrir}" id="idPdfAbrir" style="display:none"></p:inputText>
 			</div>
 		</p:dialog>
 	</h:form>

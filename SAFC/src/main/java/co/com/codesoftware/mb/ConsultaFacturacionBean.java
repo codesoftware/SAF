@@ -12,6 +12,7 @@ import javax.faces.context.FacesContext;
 
 import co.com.codesoftware.entities.DatosSessionEntity;
 import co.com.codesoftware.logic.ConsultaFacturaLogic;
+import co.com.codesoftware.logic.FacturacionLogic;
 import co.com.codesoftware.server.FacturaTable;
 
 @ManagedBean
@@ -26,6 +27,8 @@ public class ConsultaFacturacionBean {
 	private Date fechaExacta;
 	private DatosSessionEntity entitySession;
 	private BigDecimal totalCaja;
+	private String bandera = "Error";
+	private String idFacturaAbrir;
 
 	public DatosSessionEntity getEntitySession() {
 		return entitySession;
@@ -157,5 +160,38 @@ public class ConsultaFacturacionBean {
 	public void setFechaExacta(Date fechaExacta) {
 		this.fechaExacta = fechaExacta;
 	}
+	/**
+	 * Funcion con la cual genero el pdf de la factura indicada
+	 */
+	public void generaFacturacion(){
+		try {
+			FacturacionLogic objLogic = new FacturacionLogic();
+			String rta = objLogic.generarPdfXIdFact(factComplete.getId());
+			if ("Ok".equalsIgnoreCase(rta)){
+				idFacturaAbrir = ""+factComplete.getId();
+				bandera = "Ok";
+			}else{
+				bandera = "Error";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
+	public String getBandera() {
+		return bandera;
+	}
+
+	public void setBandera(String bandera) {
+		this.bandera = bandera;
+	}
+
+	public String getIdFacturaAbrir() {
+		return idFacturaAbrir;
+	}
+
+	public void setIdFacturaAbrir(String idFacturaAbrir) {
+		this.idFacturaAbrir = idFacturaAbrir;
+	}
+	
 }
