@@ -14,6 +14,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.print.Doc;
 import javax.print.DocFlavor;
 import javax.print.DocPrintJob;
@@ -125,7 +127,7 @@ public class FacturacionLogic {
 	 * @return
 	 */
 
-	public String facturar(List<GenericProductEntity> list, ClienteEntity cliente, String path, DatosSessionEntity session, String type, String cambio, String pago,String domicilio) {
+	public String facturar(List<GenericProductEntity> list, ClienteEntity cliente, String path, DatosSessionEntity session, String type, String cambio, String pago, String domicilio) {
 		String rta = "";
 		Facturacion fact = new Facturacion();
 		RespuestaFacturacion res = new RespuestaFacturacion();
@@ -145,7 +147,7 @@ public class FacturacionLogic {
 				FacturaTable result = new FacturaTable();
 				result = getDataFact(res.getIdFacturacion());
 				if ("1".equalsIgnoreCase(type)) {
-					String valPdf = createPDF(path, result, cliente, session, cambio, pago,domicilio);
+					String valPdf = createPDF(path, result, cliente, session, cambio, pago, domicilio);
 					if ("ERROR ABIRENDO PDF".equalsIgnoreCase(valPdf)) {
 						rta = valPdf;
 					}
@@ -174,7 +176,8 @@ public class FacturacionLogic {
 
 	public void openBox() {
 		try {
-			String cmd = "/home/mexicaprichos/abrir.sh"; // Comando de apagado en linux
+			String cmd = "/home/mexicaprichos/abrir.sh"; // Comando de apagado
+															// en linux
 			Runtime.getRuntime().exec(cmd);
 			System.out.println("prueba");
 		} catch (IOException ioe) {
@@ -253,7 +256,8 @@ public class FacturacionLogic {
 	}
 
 	/**
-	 * Funcion que crea PDF 
+	 * Funcion que crea PDF
+	 * 
 	 * @param path
 	 * @param factura
 	 * @param cliente
@@ -263,7 +267,7 @@ public class FacturacionLogic {
 	 * @param domicilio
 	 * @return
 	 */
-	public String createPDF(String path, FacturaTable factura, ClienteEntity cliente, DatosSessionEntity session, String cambio, String pago,String domicilio) {
+	public String createPDF(String path, FacturaTable factura, ClienteEntity cliente, DatosSessionEntity session, String cambio, String pago, String domicilio) {
 		Rectangle rec = new Rectangle(2.0F, 8.0F);
 		Document document = new Document();
 		path += "factura.pdf";
@@ -293,7 +297,7 @@ public class FacturacionLogic {
 			para = new Paragraph("****************************************************************************************************************");
 			para.setAlignment(Element.ALIGN_CENTER);
 			document.add(para);
-			para = new Paragraph("FACTURA No "+factura.getId(),FontFactory.getFont("Arial", 14f));
+			para = new Paragraph("FACTURA No " + factura.getId(), FontFactory.getFont("Arial", 14f));
 			para.setAlignment(Element.ALIGN_CENTER);
 			document.add(para);
 			para = new Paragraph("Producto                                    cantidad                valor unitario               valor total                ", FontFactory.getFont("Arial", 14f));
@@ -320,21 +324,21 @@ public class FacturacionLogic {
 			para = new Paragraph("-----------------------------------------------------------------------------------------------------------------------------");
 			para.setAlignment(Element.ALIGN_CENTER);
 			document.add(para);
-			if("Checked".equalsIgnoreCase(domicilio)){
-				para = new Paragraph("Domicilio",FontFactory.getFont("Arial", 14f));
+			if ("Checked".equalsIgnoreCase(domicilio)) {
+				para = new Paragraph("Domicilio", FontFactory.getFont("Arial", 14f));
 				para.setAlignment(Element.ALIGN_CENTER);
 				document.add(para);
-				para = new Paragraph("Cliente : " + cliente.getApellido() + " " + cliente.getNombre()+"--Direccion:"+cliente.getDireccion()+"--Telefono:"+cliente.getTelefono());
+				para = new Paragraph("Cliente : " + cliente.getApellido() + " " + cliente.getNombre() + "--Direccion:" + cliente.getDireccion() + "--Telefono:" + cliente.getTelefono());
 				para.setAlignment(Element.ALIGN_CENTER);
 				document.add(para);
-			}else{
+			} else {
 				para = new Paragraph("Cliente : " + cliente.getApellido() + " " + cliente.getNombre());
 				para.setAlignment(Element.ALIGN_CENTER);
 				document.add(para);
 			}
 			Date date = toDate(factura.getFecha());
 			SimpleDateFormat dt1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
-			para = new Paragraph("Usted Fue atendido por  : " + session.getDataUser().getPersona().get(0).getApellido() + " " + session.getDataUser().getPersona().get(0).getNombre() + ".   Fecha:" +dt1.format(date));
+			para = new Paragraph("Usted Fue atendido por  : " + session.getDataUser().getPersona().get(0).getApellido() + " " + session.getDataUser().getPersona().get(0).getNombre() + ".   Fecha:" + dt1.format(date));
 			para.setAlignment(Element.ALIGN_CENTER);
 			document.add(para);
 			para = new Paragraph(new Paragraph("GRACIAS POR SU COMPRA"));
@@ -395,17 +399,17 @@ public class FacturacionLogic {
 
 	}
 
-	public String validaDatos(List<GenericProductEntity> list, ClienteEntity cliente,String domicilio) {
+	public String validaDatos(List<GenericProductEntity> list, ClienteEntity cliente, String domicilio) {
 		String rta = "OK";
 		try {
 			if (list == null || list.size() <= 0) {
 				rta = "No puede facturar si no añade algún producto";
 			} else if (cliente.getNombre() == null) {
 				rta = "Debe añadir por lo menos un cliente";
-			}else if("Checked".equalsIgnoreCase(domicilio)){
-				if(cliente.getCedula()==0){
+			} else if ("Checked".equalsIgnoreCase(domicilio)) {
+				if (cliente.getCedula() == 0) {
 					rta = "Para domicilios, es necesario insertar el cliente.";
-				}else if("".equalsIgnoreCase(cliente.getDireccion()) || cliente.getDireccion() == null){
+				} else if ("".equalsIgnoreCase(cliente.getDireccion()) || cliente.getDireccion() == null) {
 					rta = "El cliente debe tener la dirección para poder realizar el domicilio.";
 				}
 			}
@@ -470,7 +474,7 @@ public class FacturacionLogic {
 			if ("RESOLUCION".equalsIgnoreCase(session.getDataCompany().get(i).getClave())) {
 				result.setResolucion(session.getDataCompany().get(i).getValor());
 			}
-			
+
 		}
 		result.setFacturador(session.getDataUser().getPersona().get(0).getApellido() + "  " + session.getDataUser().getPersona().get(0).getNombre());
 		return result;
@@ -480,7 +484,7 @@ public class FacturacionLogic {
 		Locale locale = new Locale("es", "CO");
 		NumberFormat nf = NumberFormat.getCurrencyInstance(locale);
 		ArrayList<DataProductEntity> result = new ArrayList<DataProductEntity>();
-		//recetas
+		// recetas
 		for (int i = 0; i < factura.getDetalleRecetas().size(); i++) {
 			DataProductEntity obj = new DataProductEntity();
 			String nameProduct = factura.getDetalleRecetas().get(i).getReceta().getNombre().concat("                                                  ");
@@ -493,7 +497,7 @@ public class FacturacionLogic {
 			obj.setValorTotal(valorTotal.substring(0, 30));
 			result.add(obj);
 		}
-		//Productos
+		// Productos
 		for (int i = 0; i < factura.getDetalleProductos().size(); i++) {
 			DataProductEntity obj = new DataProductEntity();
 			String nameProduct = factura.getDetalleProductos().get(i).getProducto().getNombre().concat("                                                  ");
@@ -508,13 +512,41 @@ public class FacturacionLogic {
 		}
 		return result;
 	}
-	
-    public static Date toDate(XMLGregorianCalendar calendar){
-        if(calendar == null) {
-            return null;
-        }
-        return calendar.toGregorianCalendar().getTime();
-    }
 
+	public static Date toDate(XMLGregorianCalendar calendar) {
+		if (calendar == null) {
+			return null;
+		}
+		return calendar.toGregorianCalendar().getTime();
+	}
+
+	/**
+	 * Funcion en la cual creo el pdf de la factura para mostrarlo en el sistema
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public String generarPdfXIdFact(Integer id) {
+		String rta = "";
+		try {
+			SAFWSService service = new SAFWSService();
+			SAFWS port = service.getSAFWSPort();
+			String imagen = port.findBillForId(""+id);
+			ExternalContext tmpEC;
+			tmpEC = FacesContext.getCurrentInstance().getExternalContext();
+			String realPath = tmpEC.getRealPath("/resources/images/facturas/");
+			CodificaBase64 codifica64 = new CodificaBase64();
+			codifica64.setDocumento(imagen);
+			boolean valida = codifica64.decodificaBase64(realPath, "factura_"+id + ".pdf");
+			if(valida){
+				System.out.println("Codifico la imagen: " + realPath+"factura_"+id + ".pdf");
+				rta = "Ok";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			rta = "Error";
+		}
+		return rta;
+	}
 
 }

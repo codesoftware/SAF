@@ -12,6 +12,16 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" type="text/css"
 		href="/SAFC/BOOTSTRAP/bootstrap.css" />
+		<script type="text/javascript">
+				function abrirPdf(){
+					var banderaFacturacion = document.getElementsByClassName("banderaPdfFactura")[0].value;
+					if(banderaFacturacion.trim() == 'Ok'){
+						var idFact = document.getElementsByClassName("idPdfAbrir")[0].value;
+						window.open("/SAFC/resources/images/facturas/factura_"+idFact+".pdf", "_blank","resizable,scrollbars" );	
+					}	
+				}
+			</script>
+		
 </h:head>
 
 <body>
@@ -175,7 +185,7 @@
 								<h5 style="margin-top: 0px; margin-bottom: 0px;">DATOS
 									FACTURA</h5>
 							</div>
-							<div class="col-md-6 col-xs-12 col-sm-12">
+							<div class="col-md-4 col-xs-12 col-sm-12">
 								<div class="form-group">
 									<label for="tipoPago">TIPO DE PAGO:</label>&nbsp;&nbsp;
 									<h:outputText value="Efectivo"
@@ -184,12 +194,20 @@
 										rendered="#{factura.tipoPago != 'E'}" />
 								</div>
 							</div>
-							<div class="col-md-6 col-xs-12 col-sm-12">
+							<div class="col-md-4 col-xs-12 col-sm-12">
 								<div class="form-group">
 									<label for="vlrTotal">VALOR TOTAL:</label>&nbsp;&nbsp;&nbsp;&nbsp;$&nbsp;
 									<h:outputText
 										value="#{consultaFacturacionBean.factComplete.valor}">
 										<f:convertNumber pattern="#,##0.00"></f:convertNumber>
+									</h:outputText>
+								</div>
+							</div>
+							<div class="col-md-4 col-xs-12 col-sm-12">
+								<div class="form-group">
+									<label for="vlrTotal">FECHA HORA:</label>
+									<h:outputText value="#{consultaFacturacionBean.fechaExacta}">
+										<f:convertDateTime pattern="dd/MM/yyyy HH:mm"  />
 									</h:outputText>
 								</div>
 							</div>
@@ -251,7 +269,10 @@
 					</p:column>
 				</p:dataTable>
 				<p:commandLink onclick="PF('detalleFacturaDialog').hide();"
-					styleClass="btn btn-primary" style="color:white">CERRAR VENTANA</p:commandLink>
+					styleClass="btn btn-primary" style="color:white">CERRAR VENTANA</p:commandLink> &nbsp;&nbsp;&nbsp;
+				<p:commandLink actionListener="#{consultaFacturacionBean.generaFacturacion}" update="banderaPdf,idPdfAbrir" oncomplete="abrirPdf()" styleClass="btn btn-default">GENERAR PDF</p:commandLink>
+				<p:inputText styleClass="banderaPdfFactura" value="#{consultaFacturacionBean.bandera}" id="banderaPdf" style="display:none"></p:inputText>
+				<p:inputText styleClass="idPdfAbrir" value="#{consultaFacturacionBean.idFacturaAbrir}" id="idPdfAbrir" style="display:none"></p:inputText>
 			</div>
 		</p:dialog>
 	</h:form>

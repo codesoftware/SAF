@@ -31,6 +31,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="efectivo" type="{http://www.w3.org/2001/XMLSchema}decimal" minOccurs="0"/>
  *         &lt;element name="estado" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="fecha" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
+ *         &lt;element name="fechaExacta" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="idCierre" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="idCliente" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
@@ -62,6 +63,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "efectivo",
     "estado",
     "fecha",
+    "fechaExacta",
     "id",
     "idCierre",
     "idCliente",
@@ -89,6 +91,8 @@ public class FacturaTable {
     protected String estado;
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar fecha;
+    @XmlSchemaType(name = "dateTime")
+    protected XMLGregorianCalendar fechaExacta;
     protected Integer id;
     protected Integer idCierre;
     protected Long idCliente;
@@ -326,6 +330,30 @@ public class FacturaTable {
      */
     public void setFecha(XMLGregorianCalendar value) {
         this.fecha = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad fechaExacta.
+     * 
+     * @return
+     *     possible object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public XMLGregorianCalendar getFechaExacta() {
+        return fechaExacta;
+    }
+
+    /**
+     * Define el valor de la propiedad fechaExacta.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public void setFechaExacta(XMLGregorianCalendar value) {
+        this.fechaExacta = value;
     }
 
     /**

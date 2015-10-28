@@ -1,20 +1,18 @@
 package co.com.codesoftware.mb;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import co.com.codesoftware.entities.DatosSessionEntity;
 import co.com.codesoftware.logic.ConsultaFacturaLogic;
+import co.com.codesoftware.logic.FacturacionLogic;
 import co.com.codesoftware.server.FacturaTable;
 
 @ManagedBean
@@ -26,8 +24,11 @@ public class ConsultaFacturacionBean {
 	private List<FacturaTable> facturas;
 	private List<FacturaTable> facturasFiltradas;
 	private FacturaTable factComplete;
+	private Date fechaExacta;
 	private DatosSessionEntity entitySession;
 	private BigDecimal totalCaja;
+	private String bandera = "Error";
+	private String idFacturaAbrir;
 
 	public DatosSessionEntity getEntitySession() {
 		return entitySession;
@@ -139,9 +140,9 @@ public class ConsultaFacturacionBean {
 		ConsultaFacturaLogic logic = new ConsultaFacturaLogic();
 		try {
 			this.factComplete = logic.consutlaFacturaXId(obj.getId());
+			this.fechaExacta = factComplete.getFechaExacta().toGregorianCalendar().getTime();
 			if (this.factComplete == null) {
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-						"Error!", "La consulta de la factura especifica no arrojo ningun resultado"));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error!", "La consulta de la factura especifica no arrojo ningun resultado"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -152,4 +153,45 @@ public class ConsultaFacturacionBean {
 		return "/ACTIONS/FACTURACION/buscaFacturas";
 	}
 
+	public Date getFechaExacta() {
+		return fechaExacta;
+	}
+
+	public void setFechaExacta(Date fechaExacta) {
+		this.fechaExacta = fechaExacta;
+	}
+	/**
+	 * Funcion con la cual genero el pdf de la factura indicada
+	 */
+	public void generaFacturacion(){
+		try {
+			FacturacionLogic objLogic = new FacturacionLogic();
+			String rta = objLogic.generarPdfXIdFact(factComplete.getId());
+			if ("Ok".equalsIgnoreCase(rta)){
+				idFacturaAbrir = ""+factComplete.getId();
+				bandera = "Ok";
+			}else{
+				bandera = "Error";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public String getBandera() {
+		return bandera;
+	}
+
+	public void setBandera(String bandera) {
+		this.bandera = bandera;
+	}
+
+	public String getIdFacturaAbrir() {
+		return idFacturaAbrir;
+	}
+
+	public void setIdFacturaAbrir(String idFacturaAbrir) {
+		this.idFacturaAbrir = idFacturaAbrir;
+	}
+	
 }
