@@ -61,7 +61,7 @@ public class CodificaBase64 {
     public boolean decodificaBase64(String rutaDestino, String nombreImg) {
         StringBuilder path = new StringBuilder();
         path.append(rutaDestino);
-        path.append("\\");
+//        path.append("\\");
         path.append(nombreImg);
         try {
             BASE64Decoder decoder = new BASE64Decoder();

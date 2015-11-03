@@ -53,6 +53,25 @@ public class FacturacionBean implements Serializable {
 	private boolean domicilio;
 	private String summary;
 	private MathContext mc;
+	private String idFacturaAbrir;
+	private String banderaPDF = "Error";
+	
+
+	public String getBanderaPDF() {
+		return banderaPDF;
+	}
+
+	public void setBanderaPDF(String banderaPDF) {
+		this.banderaPDF = banderaPDF;
+	}
+
+	public String getIdFacturaAbrir() {
+		return idFacturaAbrir;
+	}
+
+	public void setIdFacturaAbrir(String idFacturaAbrir) {
+		this.idFacturaAbrir = idFacturaAbrir;
+	}
 
 	public String getSummary() {
 		return summary;
@@ -466,6 +485,9 @@ public class FacturacionBean implements Serializable {
 					resetValuesClient();
 					resetValuesCambio();
 					bandera = "si";
+						idFacturaAbrir = ""+logic.getFactID();
+						System.out.println(idFacturaAbrir);
+						banderaPDF = "Ok";					
 				}
 				// Pop up de factura cuando no se imprime
 				else {

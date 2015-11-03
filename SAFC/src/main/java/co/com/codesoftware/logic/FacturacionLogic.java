@@ -49,6 +49,17 @@ import co.com.codesoftware.server.TemporalRecTable;
 public class FacturacionLogic {
 	private List<TemporalProdTable> products;
 	private List<TemporalRecTable> receta;
+	private String factID ;
+	
+
+
+	public String getFactID() {
+		return factID;
+	}
+
+	public void setFactID(String factID) {
+		this.factID = factID;
+	}
 
 	public List<TemporalProdTable> getProducts() {
 		return products;
@@ -146,8 +157,11 @@ public class FacturacionLogic {
 			} else {
 				FacturaTable result = new FacturaTable();
 				result = getDataFact(res.getIdFacturacion());
+				factID = res.getIdFacturacion();
 				if ("1".equalsIgnoreCase(type)) {
-					String valPdf = createPDF(path, result, cliente, session, cambio, pago, domicilio);
+					String valPdf = generarPdfXIdFact(Integer.parseInt(res.getIdFacturacion()));
+					
+					System.out.println(valPdf);
 					if ("ERROR ABIRENDO PDF".equalsIgnoreCase(valPdf)) {
 						rta = valPdf;
 					}
